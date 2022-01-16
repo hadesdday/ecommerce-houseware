@@ -100,69 +100,62 @@
                             <h2>Sửa thông tin sản phẩm</h2>
                         </div>
                         <div class="custom-modal-body">
-                            <label>Mã sản phẩm</label>
+                            <%--                            <label>Mã sản phẩm</label>--%>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="editormaSP">
+                                <input type="hidden" class="form-control" name="editMaSP" disabled>
                             </div>
 
                             <label>Tên sản phẩm</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="editortenSP">
-
+                                <input type="text" class="form-control" name="editTenSP">
                             </div>
 
                             <label>Loại sản phẩm</label>
                             <div class="input-group mb-3">
-                                <select class="custom-select " name="editorloaiSP">
-                                    <option selected hidden disabled>Chọn loại sản phẩm</option>
-                                    <option value="1">Gia dụng nhà bếp</option>
-                                    <option value="2">Máy xay, vắt, ép</option>
-                                    <option value="3">Dụng cụ nhà bếp</option>
-                                    <option value="4">Nồi chiên không dầu</option>
-                                    <option value="5">Nồi cơm</option>
-                                    <option value="6">Máy xay sinh tố</option>
-                                    <option value="7">Nồi áp suất</option>
+                                <select class="custom-select" name="editLoaiSP">
+                                    <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
+                                    <option value="Gia dụng nhà bếp">Gia dụng nhà bếp</option>
+                                    <option value="Máy xay, vắt, ép">Máy xay, vắt, ép</option>
+                                    <option value="Dụng cụ nhà bếp">Dụng cụ nhà bếp</option>
+                                    <option value="Nồi chiên không dầu">Nồi chiên không dầu</option>
+                                    <option value="Nồi cơm">Nồi cơm</option>
+                                    <option value="Máy xay sinh tố">Máy xay sinh tố</option>
+                                    <option value="Nồi áp suất">Nồi áp suất</option>
                                 </select>
                             </div>
 
-                            <%--                            <label>Màu sắc</label>--%>
-                            <%--                            <div class="input-group mb-3">--%>
-                            <%--                                <input type="text" class="form-control" name="editormauSP">--%>
-                            <%--                            </div>--%>
-
                             <label>Giá</label>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" name="editorgiaSP" min="0">
+                                <input type="number" class="form-control" name="editGiaSP" min="0">
                             </div>
 
                             <label>Khuyến mãi</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="editorkmSP">
+                                <input type="text" class="form-control" name="editKmSP">
                             </div>
 
                             <label>Thương hiệu</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="editorhangSP">
-                            </div>
-
-                            <label>Thông tin sản phẩm</label>
-                            <div class="input group mb-3">
-                                <input type="text" class="form-control" name="editorctSP">
+                                <input type="text" class="form-control" name="editHangSP">
                             </div>
 
                             <label>Số lượng tồn kho</label>
                             <div class="input-group mb-3">
-                                <input type="number" class="form-control" name="editorslSP" min="0">
+                                <input type="number" class="form-control" name="editSlSP" min="0">
                             </div>
 
                             <label>Active</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="editoractive">
+                                <select class="custom-select" name="editActive">
+                                    <option selected hidden disabled value="0">Chọn trạng thái cho sản phẩm</option>
+                                    <option value="1">Có</option>
+                                    <option value="2">Không</option>
+                                </select>
                             </div>
                         </div>
                         <div class="custom-modal-footer">
                             <button type="button" class="btn btn-secondary close-btn">Hủy</button>
-                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <button type="button" class="btn btn-primary" id="editAction">Lưu</button>
                         </div>
                     </div>
                 </div>
@@ -214,8 +207,7 @@
                                                 <td>${item.tenSP}</td>
                                                 <td>${item.maLoaiSP}</td>
                                                 <td>
-<%--                                                    vi-VN--%>
-                                                    <fmt:setLocale value="en-US"/>
+                                                    <fmt:setLocale value="vi-VN"/>
                                                     <fmt:formatNumber value="${item.gia}" type="currency"/>
                                                 </td>
                                                 <td>${item.maKM}</td>
@@ -223,10 +215,9 @@
                                                 <td>${item.soLuongTon}</td>
                                                 <td>${item.active}</td>
                                                 <td>
-                                                    <a href="${pageContext.request.contextPath}/product/edit?maSP=${item.maSP}"
-                                                       class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="showEditModal()">
-                                                        <i class="ti-pencil"></i>
+                                                    <a class="btn rounded bg-warning" id="editBtn"
+                                                       onclick="onEdit(this)" pid="${item.maSP}">
+                                                        <i class="ti-pencil text-white"></i>
                                                     </a>
                                                     <a class="btn rounded bg-danger delAct" id="deleteAction"
                                                        onclick="onDelete(this)" pid="${item.maSP}">
@@ -386,6 +377,85 @@
     })
 </script>
 <%--end delete product--%>
+
+<script>
+    function setEditModalValue(data) {
+        $("input[name='editMaSP']").val(data.maSP);
+        $("input[name='editTenSP']").val(data.tenSP);
+        $("select[name='editLoaiSP']").val(data.maLoaiSP);
+        $("input[name='editGiaSP']").val(data.gia);
+        $("input[name='editKmSP']").val(data.maKM);
+        $("input[name='editHangSP']").val(data.thuongHieu);
+        $("input[name='editSlSP']").val(data.soLuongTon);
+        $("select[name='editActive']").val(data.active);
+    }
+</script>
+<%--edit product--%>
+<script>
+    var editRow;
+
+    function onEdit(element) {
+        editRow = $(element).parents("tr").children();
+        var pid = $(element).attr('pid');
+        $.ajax({
+            url: "${pageContext.request.contextPath}/product/edit",
+            method: "GET",
+            data: {
+                maSP: pid
+            },
+            success: function (data) {
+                setEditModalValue(data);
+                showEditModal();
+            },
+            error: function (data) {
+                swal("Thất bại", "Không tìm thấy sản phẩm", "error");
+            }
+        })
+    }
+
+    $("#editAction").click(() => {
+        var maSP = $("input[name='editMaSP']").val();
+        var tenSP = $("input[name='editTenSP']").val();
+        var loaiSP = $("select[name='editLoaiSP'] option:selected").val();
+        var giaSP = $("input[name='editGiaSP']").val();
+        var kmSP = $("input[name='editKmSP']").val();
+        var hangSP = $("input[name='editHangSP']").val();
+        var slSP = $("input[name='editSlSP']").val();
+        var active = $("select[name='editActive'] option:selected").val();
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/product/edit",
+            method: "POST",
+            data: {
+                maSP: maSP,
+                tenSP: tenSP,
+                loaiSP: loaiSP,
+                giaSP: giaSP,
+                kmSP: kmSP,
+                hangSP: hangSP,
+                slSP: slSP,
+                active: active
+            },
+            success: (data) => {
+                swal("Thành công", "Cập nhật sản phẩm thành công", "success");
+                closeModal();
+                clearValue();
+                editRow.eq(1).text(tenSP);
+                editRow.eq(2).text(loaiSP);
+                editRow.eq(3).text(giaSP);
+                editRow.eq(4).text(kmSP);
+                editRow.eq(5).text(hangSP);
+                editRow.eq(6).text(slSP);
+                editRow.eq(7).text(active);
+            },
+            error: (data) => {
+                swal("Thất bại", "Cập nhật sản phẩm thất bại do sai dữ liệu đầu vào", "error");
+            }
+        });
+    });
+</script>
+
+<%--end edit product--%>
 <script src="assets/js/lib/sweetalert/sweetalert.min.js"></script>
 <script src="assets/js/lib/data-table/currency.js"></script>
 </body>

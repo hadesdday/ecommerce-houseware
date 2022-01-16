@@ -1,6 +1,7 @@
 package controller.admin.product;
 
 import beans.Product;
+import com.google.gson.Gson;
 import db.DbConnector;
 import services.ProductServices;
 
@@ -8,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,16 +21,26 @@ public class Show extends HttpServlet {
     }
 
     private void renderPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<beans.Product> productList = DbConnector.get().withHandle(h ->
-                h.createQuery("select * from sanpham")
-                        .mapToBean(Product.class).stream().collect(Collectors.toList())
-        );
+        List<beans.Product> productList = ProductServices.getInstance().getProduct();
+//        Gson gson = new Gson();
+//        PrintWriter writer = response.getWriter();
+//        if (productList.size() > 0) {
+//            response.setContentType("application/json");
+//            writer.write(gson.toJson(productList));
+//            writer.close();
+//            request.getRequestDispatcher("/admin/product").forward(request, response);
+//        } else {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//            response.setContentType("application/json");
+//            writer.write("Trống");
+//            writer.close();
+//        }
         request.setAttribute("productList", productList);
         request.getRequestDispatcher("sanpham.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+
     }
 }

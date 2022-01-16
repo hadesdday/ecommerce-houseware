@@ -21,8 +21,11 @@
         ],
         buttons: ["copy", "csv", "excel", "pdf", "print"],
         language: {
-            "url": "./vi.json"
-        }
+            "url": "./assets/js/lib/data-table/vi.json"
+        },
+        columnDefs: [
+            {type: 'currency', targets: 3}
+        ],
     });
 
     $("#row-select").DataTable({
