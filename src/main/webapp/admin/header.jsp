@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%@include file="stylesheets.jsp" %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
 <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
@@ -20,7 +21,7 @@
                 </li>
                 <li class="label">Quản Lý</li>
                 <li><a href="${pageContext.request.contextPath}/admin/product"><i class="ti-desktop"></i> Sản phẩm</a>
-                <li><a href="hoadon.html"><i class="ti-bag"></i> Hóa đơn</a>
+                <li><a href="${pageContext.request.contextPath}/admin/hoadon"><i class="ti-bag"></i> Hóa đơn</a>
                 <li><a href="${pageContext.request.contextPath}/admin/user"><i class="ti-user"></i>Người dùng</a>
                 </li>
                 <li><a href="thongtin-sanpham.html"><i class="ti-clipboard"></i>Thông tin sản phẩm</a>
