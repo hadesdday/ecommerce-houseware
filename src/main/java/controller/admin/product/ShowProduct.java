@@ -13,8 +13,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "Show", value = "/admin/product")
-public class Show extends HttpServlet {
+@WebServlet(name = "ShowProduct", value = "/admin/product")
+public class ShowProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         renderPage(request, response);

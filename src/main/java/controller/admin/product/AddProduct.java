@@ -1,36 +1,21 @@
 package controller.admin.product;
 
 import beans.Product;
-import com.google.gson.Gson;
+import properties.AssetsProperties;
+import properties.DBProperties;
 import services.ProductServices;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Locale;
+import java.util.Properties;
 
-@WebServlet(name = "Action", value = "/product/edit")
-public class Edit extends HttpServlet {
+@WebServlet(name = "AddOrder", value = "/product/add")
+public class AddProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String maSP = (String) request.getParameter("maSP");
-        Product product = ProductServices.getInstance().getProduct(maSP);
-        PrintWriter writer = response.getWriter();
-        Gson gson = new Gson();
-
-        if (product != null) {
-            response.setContentType("application/json");
-            writer.write(gson.toJson(product));
-            writer.close();
-            request.getRequestDispatcher("/admin/product").forward(request, response);
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            response.setContentType("application/json");
-            writer.write("Sản phẩm không tồn tại");
-            writer.close();
-        }
+        doPost(request, response);
     }
 
     @Override
@@ -59,10 +44,10 @@ public class Edit extends HttpServlet {
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST); // data is not valid with schema from database
         } else {
-            if (ProductServices.getInstance().editProduct(product)) {
-                request.getRequestDispatcher("/admin/product").forward(request, response);
+            if (ProductServices.getInstance().addProduct(product)) {
+                response.sendRedirect(AssetsProperties.getBaseURL("admin/product"));
             } else {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }
         }
     }

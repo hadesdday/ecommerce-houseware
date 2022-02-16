@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="houseware_nlu" target="1.8" />
+      <module name="houseware_nlu" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

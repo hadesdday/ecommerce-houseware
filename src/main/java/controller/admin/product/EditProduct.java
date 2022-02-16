@@ -1,21 +1,36 @@
 package controller.admin.product;
 
 import beans.Product;
-import properties.AssetsProperties;
-import properties.DBProperties;
+import com.google.gson.Gson;
 import services.ProductServices;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.Properties;
+import java.io.PrintWriter;
+import java.util.Locale;
 
-@WebServlet(name = "Add", value = "/product/add")
-public class Add extends HttpServlet {
+@WebServlet(name = "EditProduct", value = "/product/edit")
+public class EditProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+        String maSP = (String) request.getParameter("maSP");
+        Product product = ProductServices.getInstance().getProduct(maSP);
+        PrintWriter writer = response.getWriter();
+        Gson gson = new Gson();
+
+        if (product != null) {
+            response.setContentType("application/json");
+            writer.write(gson.toJson(product));
+            writer.close();
+            request.getRequestDispatcher("/admin/product").forward(request, response);
+        } else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            response.setContentType("application/json");
+            writer.write("Sản phẩm không tồn tại");
+            writer.close();
+        }
     }
 
     @Override
@@ -44,10 +59,10 @@ public class Add extends HttpServlet {
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST); // data is not valid with schema from database
         } else {
-            if (ProductServices.getInstance().addProduct(product)) {
-                response.sendRedirect(AssetsProperties.getBaseURL("admin/product"));
+            if (ProductServices.getInstance().editProduct(product)) {
+                request.getRequestDispatcher("/admin/product").forward(request, response);
             } else {
-                response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
             }
         }
     }
