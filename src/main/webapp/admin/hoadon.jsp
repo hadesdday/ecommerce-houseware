@@ -39,7 +39,7 @@
 
                             <label>Ngày lập hóa đơn</label>
                             <div class="input-group mb-3">
-                                <input type="date" class="form-control" name="ngayMua">
+                                <input type="datetime-local" class="form-control" name="ngayMua">
                             </div>
 
                             <label>Mã giảm giá</label>
