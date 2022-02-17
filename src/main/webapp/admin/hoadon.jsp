@@ -183,7 +183,7 @@
                                                 <td>${item.ID_KHACHHANG}</td>
                                                 <td>${item.NGAYLAPHD}</td>
                                                 <td>${item.ID_MAGG}</td>
-                                                <td>${item.MAPTTTT}</td>
+                                                <td>${item.MAPTTT}</td>
                                                 <td>
                                                     <fmt:setLocale value="vi-VN"/>
                                                     <fmt:formatNumber value="${item.TRIGIA}" type="currency"/>
