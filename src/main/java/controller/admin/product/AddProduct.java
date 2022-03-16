@@ -11,7 +11,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.Properties;
 
-@WebServlet(name = "AddOrder", value = "/product/add")
+@WebServlet(name = "AddProduct", value = "/product/add")
 public class AddProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

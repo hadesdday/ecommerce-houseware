@@ -27,6 +27,19 @@ public class OrderDAO {
         return re;
     }
 
+    public Order getOrderById(String maHD) {
+        try {
+            List<Order> re = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT * FROM hoadon WHERE ID_HOADON = ?")
+                            .bind(0, maHD)
+                            .mapToBean(Order.class).stream().collect(Collectors.toList())
+            );
+            return re.get(0);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public boolean addOrder(Order o) {
         try {
             int rowInserted = DbConnector.get().withHandle(h ->
@@ -41,6 +54,38 @@ public class OrderDAO {
                             .execute()
             );
             return rowInserted == 1;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean deleteOrder(String maHD) {
+        try {
+            int rowAffected = DbConnector.get().withHandle(h ->
+                    h.createUpdate("DELETE FROM hoadon WHERE ID_HOADON = ?")
+                            .bind(0, maHD)
+                            .execute()
+            );
+            return rowAffected == 1;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean updateOrder(Order o) {
+        try {
+            int rowAffected = DbConnector.get().withHandle(h ->
+                    h.createUpdate("UPDATE hoadon SET ID_KHACHHANG=?,NGAYLAPHD=?,ID_MAGG=?,MAPTTT=?,TRIGIA=?,TRANGTHAI=? WHERE ID_HOADON = ?")
+                            .bind(0, o.getID_KHACHHANG())
+                            .bind(1, o.getNGAYLAPHD())
+                            .bind(2, o.getID_MAGG())
+                            .bind(3, o.getMAPTTT())
+                            .bind(4, o.getTRIGIA())
+                            .bind(5, o.getTRANGTHAI())
+                            .bind(6, o.getID_HOADON())
+                            .execute()
+            );
+            return rowAffected == 1;
         } catch (Exception e) {
             return false;
         }

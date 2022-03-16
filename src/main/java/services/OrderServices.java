@@ -19,7 +19,19 @@ public class OrderServices {
         return OrderDAO.getInstance().getOrders();
     }
 
+    public Order getOrderById(String maHD) {
+        return OrderDAO.getInstance().getOrderById(maHD);
+    }
+
     public boolean addOrder(Order o) {
         return OrderDAO.getInstance().addOrder(o);
+    }
+
+    public boolean deleteOrder(String maHD) {
+        return OrderDAO.getInstance().deleteOrder(maHD);
+    }
+
+    public boolean updateOrder(Order o) {
+        return OrderDAO.getInstance().updateOrder(o);
     }
 }
