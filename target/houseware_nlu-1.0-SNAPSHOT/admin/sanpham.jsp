@@ -307,11 +307,10 @@
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm sản phẩm mới thành công", "success");
-                    var editCls = 'class="btn rounded bg-warning" id="editBtn" onclick="showEditModal()">' + '<i class="ti-pencil"></i></a>';
-                    var editElm = "<a href='" + "${pageContext.request.contextPath}/product/edit?maSP=" + maSP + "'" + editCls;
-
-                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(' + maSP + ')">' +
-                        '<i class="ti-trash text-white"></i></a>';
+                    var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' pid='" + maSP + "'>"
+                        + "<i class='ti-pencil text-white'></i></a>";
+                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" pid="' + maSP + '">' +
+                        "<i class='ti-trash text-white'></i></a>";
                     $('#bootstrap-data-table-export').DataTable().row.add(
                         [
                             maSP,

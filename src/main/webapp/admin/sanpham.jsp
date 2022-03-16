@@ -309,7 +309,7 @@
                     swal("Thành công", "Thêm sản phẩm mới thành công", "success");
                     var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' pid='" + maSP + "'>"
                         + "<i class='ti-pencil text-white'></i></a>";
-                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this) pid="' + maSP + '">' +
+                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" pid="' + maSP + '">' +
                         "<i class='ti-trash text-white'></i></a>";
                     $('#bootstrap-data-table-export').DataTable().row.add(
                         [
