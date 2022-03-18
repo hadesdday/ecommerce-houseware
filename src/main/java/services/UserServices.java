@@ -54,4 +54,20 @@ public class UserServices {
     public List<User> getUsers() {
         return UserDAO.getInstance().getUsers();
     }
+
+    public boolean add(User u) {
+        return UserDAO.getInstance().add(u);
+    }
+
+    public User getUser(String username) {
+        return UserDAO.getInstance().getUser(username);
+    }
+
+    public boolean deleteUser(String username) {
+        return UserDAO.getInstance().deleteUser(username);
+    }
+
+    public boolean editUser(User u) {
+        return UserDAO.getInstance().editUser(u);
+    }
 }

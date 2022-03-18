@@ -80,13 +80,31 @@ public class UserDAO {
     public boolean register(String username, String password, String fullname, String email, String phone, String address) {
         try {
             int insertedRecord = DbConnector.get().withHandle(h ->
-                    h.createUpdate("INSERT INTO Account (username,password,fullname,email,phone,address) VALUES(?,?,?,?,?,?)")
+                    h.createUpdate("INSERT INTO Account (username,password,fullname,email,phone,address,role) VALUES(?,?,?,?,?,?)")
                             .bind(0, username)
                             .bind(1, hashPassword(password))
                             .bind(2, fullname)
                             .bind(3, email)
                             .bind(4, phone)
                             .bind(5, address)
+                            .execute());
+            return insertedRecord == 1;
+        } catch (Exception err) {
+            return false;
+        }
+    }
+
+    public boolean add(User u) {
+        try {
+            int insertedRecord = DbConnector.get().withHandle(h ->
+                    h.createUpdate("INSERT INTO Account (username,password,fullname,email,phone,address,role) VALUES(?,?,?,?,?,?,?)")
+                            .bind(0, u.getUsername())
+                            .bind(1, hashPassword(u.getPassword()))
+                            .bind(2, u.getFullname())
+                            .bind(3, u.getEmail())
+                            .bind(4, u.getPhone())
+                            .bind(5, u.getAddress())
+                            .bind(6, u.getRole())
                             .execute());
             return insertedRecord == 1;
         } catch (Exception err) {
@@ -194,4 +212,49 @@ public class UserDAO {
         );
         return users;
     }
+
+    public User getUser(String username) {
+        try {
+            List<User> users = DbConnector.get().withHandle(h ->
+                    h.createQuery("select * from account where username = ?")
+                            .bind(0, username)
+                            .mapToBean(User.class).stream().collect(Collectors.toList())
+            );
+            return users.get(0);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean deleteUser(String username) {
+        try {
+            int rowAffected = DbConnector.get().withHandle(h ->
+                    h.createUpdate("delete from account where username = ?")
+                            .bind(0, username)
+                            .execute()
+            );
+            return rowAffected == 1;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean editUser(User u) {
+        try {
+            int insertedRecord = DbConnector.get().withHandle(h ->
+                    h.createUpdate("UPDATE Account SET fullname=?,email=?,phone=?,address=?,role=? where username = ?")
+                            .bind(0, u.getFullname())
+                            .bind(1, u.getEmail())
+                            .bind(2, u.getPhone())
+                            .bind(3, u.getAddress())
+                            .bind(4, u.getRole())
+                            .bind(5, u.getUsername())
+                            .execute());
+            return insertedRecord == 1;
+        } catch (Exception err) {
+            return false;
+        }
+    }
+
+
 }

@@ -426,7 +426,7 @@
                 editRow.eq(6).text(status);
             },
             error: (data) => {
-                swal("Thất bại", "Cập nhật sản phẩm thất bại do sai dữ liệu đầu vào", "error");
+                swal("Thất bại", "Cập nhật hóa đơn thất bại do sai dữ liệu đầu vào", "error");
             }
         });
     });

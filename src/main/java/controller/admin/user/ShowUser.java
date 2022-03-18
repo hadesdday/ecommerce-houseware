@@ -9,8 +9,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UserManagement", value = "/admin/user")
-public class UserManagement extends HttpServlet {
+@WebServlet(name = "ShowUser", value = "/admin/user")
+public class ShowUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users = UserServices.getInstance().getUsers();

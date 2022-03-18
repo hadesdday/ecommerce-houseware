@@ -98,9 +98,8 @@
                             <h2>Sửa thông tin hóa đơn</h2>
                         </div>
                         <div class="custom-modal-body">
-                            <label>Mã hóa đơn</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="editmaHD">
+                                <input type="hidden" class="form-control" name="editmaHD">
                             </div>
 
                             <label>Mã khách hàng</label>
@@ -155,7 +154,7 @@
 
                         <div class="custom-modal-footer">
                             <button type="button" class="btn btn-secondary close-btn">Hủy</button>
-                            <button type="submit" class="btn btn-primary" id="editOrder">Lưu</button>
+                            <button type="submit" class="btn btn-primary" id="editAction">Lưu</button>
                         </div>
                     </div>
                 </div>
@@ -277,16 +276,16 @@
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm hóa đơn mới thành công", "success");
-                    var editCls = 'class="btn rounded bg-warning" id="editBtn" onclick="showEditModal()">' + '<i class="ti-pencil"></i></a>';
-                    var editElm = "<a href='" + "${pageContext.request.contextPath}/order/edit?maHD=" + maHD + "'" + editCls;
+                    var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' oid='" + maHD + "'>"
+                        + "<i class='ti-pencil text-white'></i></a>";
+                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" oid="' + maHD + '">' +
+                        "<i class='ti-trash text-white'></i></a>";
 
-                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(' + maHD + ')">' +
-                        '<i class="ti-trash text-white"></i></a>';
                     $('#bootstrap-data-table-export').DataTable().row.add(
                         [
                             maHD,
                             maKH,
-                            ngayMua,
+                            ngayMua.replace("T", " "),
                             coupon,
                             paymentMethod,
                             totalPrice,
@@ -394,46 +393,43 @@
         })
     }
 
-    <%--$("#editAction").click(() => {--%>
-    <%--    var maSP = $("input[name='editMaSP']").val();--%>
-    <%--    var tenSP = $("input[name='editTenSP']").val();--%>
-    <%--    var loaiSP = $("select[name='editLoaiSP'] option:selected").val();--%>
-    <%--    var giaSP = $("input[name='editGiaSP']").val();--%>
-    <%--    var kmSP = $("input[name='editKmSP']").val();--%>
-    <%--    var hangSP = $("input[name='editHangSP']").val();--%>
-    <%--    var slSP = $("input[name='editSlSP']").val();--%>
-    <%--    var active = $("select[name='editActive'] option:selected").val();--%>
+    $("#editAction").click(() => {
+        var maHD = $("input[name='editmaHD']").val();
+        var maKH = $("input[name='editmaKH']").val();
+        var ngayMua = $("input[name='editngayMua']").val();
+        var coupon = $("input[name='editcoupon']").val();
+        var paymentMethod = $("select[name='editpaymentMethod'] option:selected").val();
+        var totalPrice = $("input[name='edittotalPrice']").val();
+        var status = $("select[name='editstatus'] option:selected").val();
 
-    <%--    $.ajax({--%>
-    <%--        url: "${pageContext.request.contextPath}/product/edit",--%>
-    <%--        method: "POST",--%>
-    <%--        data: {--%>
-    <%--            maSP: maSP,--%>
-    <%--            tenSP: tenSP,--%>
-    <%--            loaiSP: loaiSP,--%>
-    <%--            giaSP: giaSP,--%>
-    <%--            kmSP: kmSP,--%>
-    <%--            hangSP: hangSP,--%>
-    <%--            slSP: slSP,--%>
-    <%--            active: active--%>
-    <%--        },--%>
-    <%--        success: (data) => {--%>
-    <%--            swal("Thành công", "Cập nhật sản phẩm thành công", "success");--%>
-    <%--            closeModal();--%>
-    <%--            clearValue();--%>
-    <%--            editRow.eq(1).text(tenSP);--%>
-    <%--            editRow.eq(2).text(loaiSP);--%>
-    <%--            editRow.eq(3).text(giaSP);--%>
-    <%--            editRow.eq(4).text(kmSP);--%>
-    <%--            editRow.eq(5).text(hangSP);--%>
-    <%--            editRow.eq(6).text(slSP);--%>
-    <%--            editRow.eq(7).text(active);--%>
-    <%--        },--%>
-    <%--        error: (data) => {--%>
-    <%--            swal("Thất bại", "Cập nhật sản phẩm thất bại do sai dữ liệu đầu vào", "error");--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
+        $.ajax({
+            url: "${pageContext.request.contextPath}/order/update",
+            method: "POST",
+            data: {
+                maHD: maHD,
+                maKH: maKH,
+                ngayMua: ngayMua,
+                coupon: coupon,
+                paymentMethod: paymentMethod,
+                totalPrice: totalPrice,
+                status: status
+            },
+            success: (data) => {
+                swal("Thành công", "Cập nhật hóa đơn thành công", "success");
+                closeModal();
+                clearValue();
+                editRow.eq(1).text(maKH);
+                editRow.eq(2).text(ngayMua.replace("T", " "));
+                editRow.eq(3).text(coupon);
+                editRow.eq(4).text(paymentMethod);
+                editRow.eq(5).text(totalPrice);
+                editRow.eq(6).text(status);
+            },
+            error: (data) => {
+                swal("Thất bại", "Cập nhật hóa đơn thất bại do sai dữ liệu đầu vào", "error");
+            }
+        });
+    });
 
 </script>
 
