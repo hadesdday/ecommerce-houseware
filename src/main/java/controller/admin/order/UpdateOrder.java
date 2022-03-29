@@ -24,7 +24,7 @@ public class UpdateOrder extends HttpServlet {
             response.setContentType("application/json");
             writer.write(gson.toJson(o));
             writer.close();
-            request.getRequestDispatcher("/admin/hoadon").forward(request, response);
+            request.getRequestDispatcher("/admin/order").forward(request, response);
         } else {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             response.setContentType("application/json");
@@ -58,7 +58,7 @@ public class UpdateOrder extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             if (OrderServices.getInstance().updateOrder(order)) {
-                response.sendRedirect(AssetsProperties.getBaseURL("admin/hoadon"));
+                response.sendRedirect(AssetsProperties.getBaseURL("admin/order"));
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }

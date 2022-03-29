@@ -7,4 +7,9 @@
         <error-code>404</error-code>
         <location>/404.jsp</location>
     </error-page>
+
+    <context-param>
+        <param-name>tempfile.dir</param-name>
+        <param-value>houseware_nlu\assets\images\upload</param-value>
+    </context-param>
 </web-app>

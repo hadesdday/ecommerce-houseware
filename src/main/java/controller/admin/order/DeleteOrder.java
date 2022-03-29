@@ -19,7 +19,7 @@ public class DeleteOrder extends HttpServlet {
         String maHD = request.getParameter("maHD");
 
         if (OrderServices.getInstance().deleteOrder(maHD)) {
-            response.sendRedirect(AssetsProperties.getBaseURL("admin/hoadon"));
+            response.sendRedirect(AssetsProperties.getBaseURL("admin/order"));
         } else {
             response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
         }

@@ -41,7 +41,7 @@ public class AddOrder extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             if (OrderServices.getInstance().addOrder(newOrder)) {
-                response.sendRedirect(AssetsProperties.getBaseURL("admin/hoadon"));
+                response.sendRedirect(AssetsProperties.getBaseURL("admin/order"));
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }

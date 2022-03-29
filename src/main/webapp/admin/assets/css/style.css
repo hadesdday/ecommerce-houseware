@@ -5420,3 +5420,26 @@ h6.h1 {
     color: black;
     border-top: 1px solid #f1f1f1;
 }
+
+#uploadSubmit {
+    padding: 10px 20px;
+    background: #e6e6e8;
+    margin: 15px 0;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #c5c5c9;
+    transition: all ease-in-out 0.2s;
+}
+
+#uploadSubmit:hover {
+    transform: translateY(5px);
+    box-shadow: 0 2px #c5c5c9;
+}
+
+::-webkit-file-upload-button {
+    padding: 10px 16px;
+    background: #e6e6e8;
+    margin: 15px 0;
+    border: none;
+    border-radius: 15px;
+}

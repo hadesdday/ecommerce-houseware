@@ -1,7 +1,6 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Product implements Serializable {
     private String maSP;

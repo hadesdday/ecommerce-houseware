@@ -17,26 +17,42 @@
                 <div class="logo"><a href="index.jsp">
                     <span>NLU</span></a></div>
                 <li class="label">Trang chủ</li>
-                <li><a href="index.jsp"><i class="ti-home"></i> Trang chủ </a>
+                <li>
+                    <a href="index.jsp"><i class="ti-home"></i> Trang chủ </a>
                 </li>
                 <li class="label">Quản Lý</li>
-                <li><a href="${pageContext.request.contextPath}/admin/product"><i class="ti-desktop"></i> Sản phẩm</a>
-                <li><a href="${pageContext.request.contextPath}/admin/hoadon"><i class="ti-bag"></i> Hóa đơn</a>
-                <li><a href="${pageContext.request.contextPath}/admin/user"><i class="ti-user"></i>Người dùng</a>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/product"><i class="ti-desktop"></i> Sản phẩm</a>
                 </li>
-                <li><a href="thongtin-sanpham.html"><i class="ti-clipboard"></i>Thông tin sản phẩm</a>
+                <li>
+                    <a href="thongtin-sanpham.html"><i class="ti-clipboard"></i>Thông tin sản phẩm</a>
                 </li>
-                <li><a href="khachhang.html"><i class="ti-user"></i>Khách hàng</a>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/image"><i class="ti-clipboard"></i>Hình ảnh</a>
                 </li>
-                <li><a href="loai-sp.html"><i class="ti-user"></i>Loại sản phẩm</a>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/order"><i class="ti-bag"></i> Hóa đơn</a>
                 </li>
-                <li><a href="khuyenmai.html"><i class="ti-star"></i>Khuyến mãi</a>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/user"><i class="ti-user"></i>Người dùng</a>
                 </li>
-                <li><a href="review.html"><i class="ti-star"></i>Đánh giá sản phẩm</a>
+                <li>
+                    <a href="khachhang.html"><i class="ti-user"></i>Khách hàng</a>
                 </li>
-                <li><a href="chitiet-hoadon.html"><i class="ti-clipboard"></i>Chi tiết hóa đơn</a>
+                <li>
+                    <a href="loai-sp.html"><i class="ti-user"></i>Loại sản phẩm</a>
                 </li>
-                <li><a href="payment.html"><i class="ti-clipboard"></i>Đánh giá sản phẩm</a>
+                <li>
+                    <a href="khuyenmai.html"><i class="ti-star"></i>Khuyến mãi</a>
+                </li>
+                <li>
+                    <a href="review.html"><i class="ti-star"></i>Đánh giá sản phẩm</a>
+                </li>
+                <li>
+                    <a href="chitiet-hoadon.html"><i class="ti-clipboard"></i>Chi tiết hóa đơn</a>
+                </li>
+                <li>
+                    <a href="payment.html"><i class="ti-clipboard"></i>Phương thức thanh toán</a>
                 </li>
             </ul>
         </div>
