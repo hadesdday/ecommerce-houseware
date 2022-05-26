@@ -581,4 +581,109 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
             order: [[0, "asc"]],
         });
     });
+    /*----------------------------------------*/
+    /* 27. add cart
+
+     */
+    /*----------------------------------------*/
+    $(".add-cart").click(function () {
+        alert("click");
+
+        var maSP = $(this).attr("pid");
+        var path = $(this).attr("path")
+        alert(path);
+        alert(maSP);
+        $.ajax({
+            url: "http://localhost:8080" + path,
+            method: "GET",
+            data: {
+                id: maSP,
+                quantitySold: 1,
+            },
+            success: function (data, textStatus, xhr) {
+                alert("added")
+
+
+            },
+            error: function (data, textStatus, xhr) {
+            }
+        })
+
+    });
+    $(".qtybutton").click(function () {
+
+        var input = $(this).closest(".cart-plus-minus").find(".changeQuantity");
+        var id = input.attr("pid");
+
+        var oldQuantity = input.attr("oldQuantity");
+        var quantity = input.val();
+        if (oldQuantity != quantity) {
+            $.ajax({
+                url: "/houseware_nlu_war_exploded/Update-quantity",
+                method: "POST",
+                data: {
+                    id: id,
+                    quantity: quantity
+                },
+                success: function (data) {
+                    console.log("success");
+                },
+                error: function (data) {
+                    if (data.status === 404) {
+                        alert("sp ko ton tai");
+                    } else if (data.status === 405) {
+                        alert("vuot qua luong hang ton");
+                    }
+                }
+            });
+        }
+    })
+
+    $(".changeQuantity").change(function () {
+        var id = $(this).attr("pid");
+        var tr = $(this).closest("tr");
+        var oldQuantity = $(this).attr("oldQuantity");
+        var quantity = $(this).val();
+
+        $.ajax({
+            url: "/houseware_nlu_war_exploded/Update-quantity",
+            method: "POST",
+            data: {
+                id: id,
+                quantity: quantity
+            },
+            success: function (data) {
+                console.log("success");
+            },
+            error: function (data) {
+                if (data.status === 404) {
+                    alert("sp ko ton tai");
+                } else if (data.status === 405) {
+                    alert("vuot qua luong hang ton");
+                }
+            }
+        });
+    })
+
+    $(".remove-product").click(function () {
+        var id = $(this).attr("pid");
+        var tr = $(this).closest("tr");
+        console.log(id)
+        $.ajax({
+            url: "/houseware_nlu_war_exploded/product-remove",
+            method: "POST",
+            data: {
+                id: id
+            },
+            success: function (data) {
+                tr.remove();
+            },
+            error: function (data, textStatus, errorThrown) {
+                if (data.status === 404) {
+
+                    alert(errorThrown)
+                }
+            }
+        });
+    })
 })(jQuery);
