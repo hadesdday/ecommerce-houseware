@@ -12,6 +12,7 @@ public class Product implements Serializable {
     private int soluongton;
     private String active;
     private int quantitySold;
+    private String imageMain;
     public Product() {
     }
 
@@ -99,5 +100,13 @@ public class Product implements Serializable {
     }
     public double total() {
         return quantitySold * gia;
+    }
+
+    public String getImageMain() {
+        return imageMain;
+    }
+
+    public void setImageMain(String imageMain) {
+        this.imageMain = imageMain;
     }
 }

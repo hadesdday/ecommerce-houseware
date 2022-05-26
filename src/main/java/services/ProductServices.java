@@ -27,7 +27,9 @@ public class ProductServices {
     public List<Product> getProduct() {
         return ProductDAO.getInstance().getProduct();
     }
-
+    public String getMainImageProduct(String masp){
+        return ProductDAO.getInstance().getMainImageProduct(masp);
+    }
     public Product getProduct(String maSP) {
         return ProductDAO.getInstance().getProduct(maSP);
     }

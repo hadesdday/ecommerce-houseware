@@ -449,8 +449,9 @@
                                                 <!-- single-product-wrap start -->
                                                 <div class="single-product-wrap">
                                                     <div class="product-image">
-                                                        <a href="single-product.html">
-                                                            <img src="images/product/large-size/1.jpg"
+                                                        <a href="">
+                                                            <img src="${p.getImageMain()}"
+<%--                                                            <img src="images/product/noi-com/noi-com-dien-cuckoo-1-8-lit-cp-0661.png"--%>
                                                                  alt="Li's Product Image">
                                                         </a>
                                                         <span class="sticker">New</span>

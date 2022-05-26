@@ -32,7 +32,18 @@ public class ProductDAO {
 
         }
     }
-
+    public String getMainImageProduct(String masp){
+        try {
+            List<String> re = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT link_anh FROM hinhanh where id_sanpham=?")
+                            .bind(0, masp)
+                            .mapTo(String.class).stream().collect(Collectors.toList())
+            );
+            return re.get(0);
+        } catch (Exception exception) {
+            return null;
+        }
+    }
     public List<Product> getProduct() {
         try {
             List<Product> re = DbConnector.get().withHandle(h ->
