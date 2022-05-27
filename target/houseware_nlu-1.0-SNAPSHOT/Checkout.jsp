@@ -496,7 +496,7 @@
                                     <div id="accordion">
                                         <div class="card">
                                             <div class="card-header" id="#payment-1">
-                                                <input type="radio" name="payment" value="bank" id="bank"
+                                                <input type="radio" name="payment" value="BANK" id="bank"
                                                        class="checkbox-payment1" checked>
                                                 <label for="bank">
                                                     <h5 class="panel-title collapsed" data-toggle="collapse"
@@ -519,7 +519,7 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-header" id="#payment-2">
-                                                <input type="radio" name="payment" value="cod" id="cod"
+                                                <input type="radio" name="payment" value="COD" id="cod"
                                                        class="checkbox-payment1">
                                                 <label for="cod">
                                                     <h5 class="panel-title collapsed" data-toggle="collapse"
@@ -539,7 +539,7 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-header" id="#payment-3">
-                                                <input type="radio" name="payment" value="paypal" id="paypal"
+                                                <input type="radio" name="payment" value="PP" id="paypal"
                                                        class="checkbox-payment">
                                                 <label for="paypal" data-toggle="collapse"
                                                        data-target="#collapsePaypal" aria-expanded="true"
@@ -548,7 +548,7 @@
                                                             src="images/payment/paypal.png"></i>
 
                                                 </label>
-                                                <input type="radio" name="payment" value="momo" id="momo"
+                                                <input type="radio" name="payment" value="MOMO" id="momo"
                                                        class="checkbox-payment">
                                                 <label for="momo" class="momo" data-toggle="collapse"
                                                        data-target="#collapseMomo" aria-expanded="true"

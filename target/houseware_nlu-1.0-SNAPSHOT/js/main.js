@@ -587,12 +587,9 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
      */
     /*----------------------------------------*/
     $(".add-cart").click(function () {
-        alert("click");
 
         var maSP = $(this).attr("pid");
         var path = $(this).attr("path")
-        alert(path);
-        alert(maSP);
         $.ajax({
             url: "http://localhost:8080" + path,
             method: "GET",
@@ -601,8 +598,25 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
                 quantitySold: 1,
             },
             success: function (data, textStatus, xhr) {
-                alert("added")
+                Command: toastr["success"]("Sản phẩm đã được thêm vào giỏ hàng!")
 
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
 
             },
             error: function (data, textStatus, xhr) {

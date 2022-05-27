@@ -31,7 +31,7 @@ public class CompleteCheckoutController extends HttpServlet {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String trigia = request.getParameter("trigia");
-//            String pttt = request.getParameter("pttt");
+            String pttt = request.getParameter("payment");
 //            String maGG = request.getParameter("maGG");
 
             Boolean fullnameError = false;
@@ -74,12 +74,12 @@ public class CompleteCheckoutController extends HttpServlet {
             int authenticated = (int) session.getAttribute("authenticated");
             if (authenticated == 1) {
                 User user = (User) session.getAttribute("user");
-                CheckoutService.getInstance().checkBill(1,Integer.parseInt(user.getId_user()),fullname,email,phone,address,"COD","",100);
+                CheckoutService.getInstance().checkBill(1,Integer.parseInt(user.getId_user()),fullname,email,phone,address,pttt,"",100);
             }else{
                 System.out.println("adaslkfhdsakjfdsbvkdgkhjdsfgkhjsgfhkjhk");
-                CheckoutService.getInstance().checkBill(0,0,fullname,email,phone,address,"COD","",100);
+                CheckoutService.getInstance().checkBill(0,0,fullname,email,phone,address,pttt,"",100);
             }
-                response.sendRedirect("success.jsp");
+                response.sendRedirect("success-checkout.jsp");
             }
         }
     }

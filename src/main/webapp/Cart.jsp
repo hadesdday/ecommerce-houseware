@@ -396,7 +396,7 @@
                                     <tr>
                                         <td class="li-product-remove"><a class="remove-product" pid="${item.id_sanpham}" href="#"><i class="fa fa-times"></i></a></td>
                                         <td class="li-product-thumbnail"><a href="#"><img
-                                                src="" alt="Li's Product Image"></a></td>
+                                                src="${item.getImageMain()}" alt="${item.getImageMain()}"></a></td>
                                         <td class="li-product-name"><a href="#">${item.ten_sp}</a></td>
                                         <td class="li-product-price"><span class="amount">${item.gia}</span></td>
                                         <td class="quantity">

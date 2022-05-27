@@ -60,7 +60,9 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Helper CSS -->
     <link rel="stylesheet" href="css/helper.css">
+
     <!-- Main Style CSS -->
+    <link rel="stylesheet" href="admin/assets/css/lib/toastr/toastr.min.css">
     <link rel="stylesheet" href="style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -224,26 +226,26 @@
                                             <c:forEach items="${list}" var="item">
                                                 <li>
                                                     <a href="single-product.html" class="minicart-product-image">
-                                                        <img src="${item.img}" alt="cart products">
+                                                        <img src="${item.imageMain}" alt="cart products">
                                                     </a>
                                                     <div class="minicart-product-details">
-                                                        <h6><a href="single-product.html">${item.tensp}</a></h6>
+                                                        <h6><a href="single-product.html">${item.ten_sp}</a></h6>
                                                         <span class="price">${item.gia}</span><span>VND x</span><span
                                                             class="quantity">${item.quantitySold}</span>
                                                     </div>
-                                                    <button class="close" title="Remove" pid="${item.id}">
+                                                    <button class="close" title="Remove" pid="${item.id_sanpham}">
                                                         <i class="fa fa-close"></i>
                                                     </button>
                                                 </li>
                                             </c:forEach>
                                         </ul>
-                                        <p class="minicart-total">SUBTOTAL: <span>£160</span></p>
+                                        <p class="minicart-total">SUBTOTAL: <span>${cart.total()}</span></p>
                                         <div class="minicart-button">
-                                            <a href="shopping-cart.html"
+                                            <a href="${pageContext.request.contextPath}/Cart"
                                                class="li-button li-button-dark li-button-fullwidth li-button-sm">
                                                 <span>Xem giỏ hàng</span>
                                             </a>
-                                            <a href="checkout.html"
+                                            <a href="${pageContext.request.contextPath}/Checkout"
                                                class="li-button li-button-fullwidth li-button-sm">
                                                 <span>Thanh toán</span>
                                             </a>
@@ -1802,33 +1804,11 @@
 <script src="js/jquery.nice-select.min.js"></script>
 <!-- ScrollUp js -->
 <script src="js/scrollUp.min.js"></script>
+
+<script src="admin/assets/js/lib/toastr/toastr.min.js"></script>
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
 
-<script>
-
-    function addCart(e) {
-        alert("click");
-
-        var maSP = $(e).attr("pid");
-        alert(maSP);
-        $.ajax({
-            url: "${pageContext.request.contextPath}/AddToCart",
-            method: "GET",
-            data: {
-                id: maSP,
-                quantitySold: 1,
-            },
-            success: function (data, textStatus, xhr) {
-                alert("added")
-
-            },
-            error: function (data, textStatus, xhr) {
-            }
-        })
-    }
-
-</script>
 </body>
 
 <!-- shop-right-sidebar31:48-->

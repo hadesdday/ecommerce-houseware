@@ -23,6 +23,8 @@ public class AddToCartController extends HttpServlet {
         if (cart == null)
             cart = Cart.getInstance();
         Product p = ProductServices.getInstance().getProduct(id);
+        String imageMain=ProductServices.getInstance().getMainImageProduct(id);
+        p.setImageMain(imageMain);
         if (cart.isContain(id)) {
             int newQuantitySold= (cart.get(id).getQuantitySold())+1;
             p.setQuantitySold(newQuantitySold);

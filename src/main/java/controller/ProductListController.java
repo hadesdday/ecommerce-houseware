@@ -19,9 +19,9 @@ public class ProductListController extends HttpServlet {
         String category = request.getParameter("category");
         List<Product> products = ProductServices.getInstance().getByCategory(category);
 //        String imageMain=ProductServices.getInstance().getMainImageProduct();
-        for (Product p : products) {
-            String imageMain=ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
-            p.setImageMain(imageMain);
+        for (int i=0;i<products.size();i++) {
+            String imageMain=ProductServices.getInstance().getMainImageProduct(products.get(i).getId_sanpham());
+            products.get(i).setImageMain(imageMain);
         }
 //        HttpSession session=request.getSession();
 //        Cart cart =(Cart) session.getAttribute("cart");

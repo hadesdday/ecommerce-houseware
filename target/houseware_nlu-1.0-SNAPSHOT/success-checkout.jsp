@@ -1,29 +1,17 @@
-<%@ page import="beans.Cart" %><%--
-  Created by IntelliJ IDEA.
-  User: hoang
-  Date: 12/16/2021
-  Time: 9:47 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <%
-    request.setCharacterEncoding("UTF-8");
-    response.setCharacterEncoding("UTF-8");
-
+    String email = (String) request.getAttribute("email");
 %>
-<jsp:useBean id="cart" scope="request" type="beans.Cart"/>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
-<!-- shopping-cart31:32-->
+<!-- login-register31:27-->
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Shopping Cart || limupa - Digital Products Store eCommerce Bootstrap 4 Template</title>
+    <title>Thành công || NLU</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -63,9 +51,6 @@
 </head>
 
 <body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 <!-- Begin Body Wrapper -->
 <div class="body-wrapper">
     <!-- Begin Header Area -->
@@ -78,7 +63,7 @@
                     <div class="col-lg-3 col-md-4">
                         <div class="header-top-left">
                             <ul class="phone-wrap">
-                                <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
+                                <li><span>Telephone Enquiry:</span><a href="#">(+84) 769 833 185</a></li>
                             </ul>
                         </div>
                     </div>
@@ -89,46 +74,24 @@
                             <ul class="ht-menu">
                                 <!-- Begin Setting Area -->
                                 <li>
-                                    <div>
-                                        <span class="mr-3"><a href="register.html">Đăng Ký</a></span>
-                                        <span class="mr-3"><a href="login.html">Đăng Nhập</a></span>
-                                    </div>
-                                    <!-- <div class="ht-setting-trigger"><span>Setting</span></div> -->
-                                    <div class="setting ht-setting">
-                                        <ul class="ht-setting-list">
-                                            <li><a href="login-register.html">My Account</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="login-register.html">Sign In</a></li>
-                                        </ul>
-                                    </div>
+                                    <c:if test="${sessionScope.user == null}">
+                                        <div>
+                                            <span class="mr-3"><a href="register.jsp">Đăng Ký</a></span>
+                                            <span class="mr-3"><a href="login.jsp">Đăng Nhập</a></span>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user != null}">
+                                        <div class="ht-setting-trigger">
+                                            <span>Chào, ${sessionScope.user.fullname}</span></div>
+                                        <div class="setting ht-setting">
+                                            <ul class="ht-setting-list">
+                                                <li><a href="#">My Account</a></li>
+                                                <li><a href="#">Checkout</a></li>
+                                                <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </c:if>
                                 </li>
-                                <!-- Setting Area End Here -->
-                                <!-- Begin Currency Area -->
-                                <li>
-                                    <span class="currency-selector-wrapper">Currency :</span>
-                                    <div class="ht-currency-trigger"><span>USD $</span></div>
-                                    <div class="currency ht-currency">
-                                        <ul class="ht-setting-list">
-                                            <li><a href="#">EUR €</a></li>
-                                            <li class="active"><a href="#">USD $</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <!-- Currency Area End Here -->
-                                <!-- Begin Language Area -->
-                                <li>
-                                    <span class="language-selector-wrapper">Language :</span>
-                                    <div class="ht-language-trigger"><span>English</span></div>
-                                    <div class="language ht-language">
-                                        <ul class="ht-setting-list">
-                                            <li class="active"><a href="#"><img src="images/menu/flag-icon/1.jpg"
-                                                                                alt="">English</a></li>
-                                            <li><a href="#"><img src="images/menu/flag-icon/2.jpg"
-                                                                 alt="">Français</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <!-- Language Area End Here -->
                             </ul>
                         </div>
                     </div>
@@ -144,8 +107,8 @@
                     <!-- Begin Header Logo Area -->
                     <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="index.html">
-                                <img src="images/menu/logo/1.jpg" alt="">
+                            <a href="index.jsp">
+                                <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
                             </a>
                         </div>
                     </div>
@@ -160,7 +123,7 @@
                                 <option value="21">- - - - Nồi cơm điện</option>
                                 <option value="22">- - - - Máy rửa chén</option>
                                 <option value="23">- - - - Máy xay thịt</option>
-                                <option value="24">- - - - Máy pha cà phê </option>
+                                <option value="24">- - - - Máy pha cà phê</option>
                                 <option value="25">- - - - Bếp từ hồng ngoại</option>
                                 <option value="26">- - - - Lò nướng bánh mì</option>
                                 <option value="27">- - - - Bình siêu tốc</option>
@@ -169,11 +132,11 @@
                                 <option value="29">- - - - Bếp ga &amp; Bếp ga mini</option>
                                 <option value="30">- - - - Lò vi sóng</option>
                                 <option value="31">- - - - Nồi cơm mini</option>
-                                <option value="32">- - - - Dụng cụ nhà bếp </option>
+                                <option value="32">- - - - Dụng cụ nhà bếp</option>
                                 <option value="33">- - - - Nồi chiên không dầu</option>
 
                             </select>
-                            <input type="text" placeholder="Enter your search key ...">
+                            <input type="text" placeholder="Nhập từ khóa cần tìm">
                             <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                         <!-- Header Middle Searchbox Area End Here -->
@@ -201,7 +164,8 @@
                                         <ul class="minicart-product-list">
                                             <li>
                                                 <a href="single-product.html" class="minicart-product-image">
-                                                    <img src="images/product/small-size/3.jpg" alt="cart products">
+                                                    <img loading="lazy" src="images/product/small-size/3.jpg"
+                                                         alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
                                                     <h6><a href="single-product.html">Aenean eu tristique</a></h6>
@@ -213,7 +177,8 @@
                                             </li>
                                             <li>
                                                 <a href="single-product.html" class="minicart-product-image">
-                                                    <img src="images/product/small-size/4.jpg" alt="cart products">
+                                                    <img loading="lazy" src="images/product/small-size/4.jpg"
+                                                         alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
                                                     <h6><a href="single-product.html">Aenean eu tristique</a></h6>
@@ -256,7 +221,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="index.html">Trang chủ</a>
+                                    <li class=""><a href="index.jsp">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
@@ -327,17 +292,13 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="megamenu-static-holder"><a href="blog-list.html">Blog</a>
 
-                                    </li>
                                     <!-- <li><a href="about-us.html">About Us</a></li> -->
                                     <li><a href="contact.html">Liên hệ</a></li>
 
                                     </li>
                                     <!-- Begin Header Bottom Menu Information Area -->
-                                    <li class="hb-info f-right p-0 d-sm-none d-lg-block">
-                                        <span>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</span>
-                                    </li>
+
                                     <!-- Header Bottom Menu Information Area End Here -->
                                 </ul>
                             </nav>
@@ -365,77 +326,49 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active">Giỏ hàng</li>
+                    <li><a href="index.jsp">Trang chủ</a></li>
+                    <li class="active">Thanh toán</li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- Li's Breadcrumb Area End Here -->
-    <!--Shopping Cart Area Strat-->
-    <div class="Shopping-cart-area pt-60 pb-60">
+    <!-- Begin Login Content Area -->
+    <div class="page-section mb-60 mt-60">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
+                    <!-- Login Form s-->
                     <form action="#">
-                        <div class="table-content table-responsive">
-                            <table class="table cart-table">
-                                <thead>
-                                <tr>
-                                    <th class="li-product-remove">Loại bỏ</th>
-                                    <th class="li-product-thumbnail">Hình ảnh</th>
-                                    <th class="cart-product-name">Tên sản phẩm</th>
-                                    <th class="li-product-price">Giá sản phẩm</th>
-                                    <th class="li-product-quantity">Số lượng</th>
-                                    <th class="li-product-subtotal">Tổng cộng</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:set var="list" value="${cart.products}"/>
-                                <c:forEach items="${list}" var="item">
-                                    <tr>
-                                        <td class="li-product-remove"><a class="remove-product" pid="${item.id_sanpham}" href="#"><i class="fa fa-times"></i></a></td>
-                                        <td class="li-product-thumbnail"><a href="#"><img
-                                                src="${item.getImageMain()}" alt="${item.getImageMain()}"></a></td>
-                                        <td class="li-product-name"><a href="#">${item.ten_sp}</a></td>
-                                        <td class="li-product-price"><span class="amount">${item.gia}</span></td>
-                                        <td class="quantity">
-                                            <label> Quantity</label>
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box changeQuantity" oldQuantity="${item.quantitySold}" pid="${item.id_sanpham}" value="${item.quantitySold}" type="text">
-                                                <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal"><span class="amount">${item.total()}</span></td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="coupon-all">
-                                    <div class="coupon">
-                                        <input id="coupon_code" class="input-text" name="coupon_code" value=""
-                                               placeholder="Mã khuyến mãi" type="text">
-                                        <input class="button" name="apply_coupon" value="Áp dụng" type="submit">
-                                    </div>
-                                    <div class="coupon2">
-                                        <input class="button" name="update_cart" value="cập nhật giỏ hàng"
-                                               type="submit">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 ml-auto">
-                                <div class="cart-page-total">
-                                    <h2>Tổng giá trị giỏ hàng</h2>
-                                    <ul>
-                                        <li>Tổng cộng <span>${cart.total()}</span></li>
-                                    </ul>
-                                    <a href="checkout.html">Thanh toán</a>
+                        <div class="sent-mail-form">
+                            <h4 class="sent-mail-title text-center">
+                                <i class="fa fa-4x fa-check-circle"></i>
+                            </h4>
+                            <div class="row">
+<%--                                <c:if test="${requestScope.tokenSent.length() > 1}">--%>
+<%--                                    <div class="col-md-12 col-12 mb-20">--%>
+<%--                                        <h1 class="text-center">Đặt lại mật khẩu</h1>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="col-md-12">--%>
+<%--                                        <p class="text-center">${requestScope.tokenSent} <%=email%>--%>
+<%--                                        </p>--%>
+<%--                                        <p class="text-center">Vui lòng kiểm tra trong thư rác nếu như không tìm thấy--%>
+<%--                                            trong--%>
+<%--                                            hộp thư đến</p>--%>
+<%--                                    </div>--%>
+<%--                                </c:if>--%>
+<%--                                <c:if test="${requestScope.resetSuccess.length() > 1}">--%>
+<%--                                    <div class="col-md-12 col-12 mb-20">--%>
+<%--                                        <h1 class="text-center">${requestScope.resetSuccess}</h1>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="col-md-12">--%>
+<%--                                        <p class="text-center">Bạn đã thành công đặt lại mật khẩu cho tài khoản bằng--%>
+<%--                                            email <%=email%>--%>
+<%--                                        </p>--%>
+<%--                                    </div>--%>
+<%--                                </c:if>--%>
+                                <div class="col-md-12 d-flex justify-content-center mt-20">
+                                    <a href="index.jsp"><i class="fa fa-arrow-left pr-2"></i> Trở về trang chủ</a>
                                 </div>
                             </div>
                         </div>
@@ -444,7 +377,7 @@
             </div>
         </div>
     </div>
-    <!--Shopping Cart Area End-->
+    <!-- Login Content Area End Here -->
     <!-- Begin Footer Area -->
     <div class="footer">
         <!-- Begin Footer Static Top Area -->
@@ -457,12 +390,12 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img src="images/shipping-icon/1.png" alt="Shipping Icon">
+                                    <img loading="lazy" src="images/shipping-icon/1.png" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Miễn phí vận chuyển</h2>
-                                    <p>Và miễn phí tiền vận chuyển khi trả lại hàng. Kiểm tra ngày giao hàng trong
-                                        thủ tục thanh toán.</p>
+                                    <p>Miễn phí giao hàng trên mọi miền của tổ quốc.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -471,7 +404,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img src="images/shipping-icon/2.png" alt="Shipping Icon">
+                                    <img loading="lazy" src="images/shipping-icon/2.png" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Phương thức thanh toán an toàn</h2>
@@ -484,7 +417,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img src="images/shipping-icon/3.png" alt="Shipping Icon">
+                                    <img loading="lazy" src="images/shipping-icon/3.png" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Mua hàng với trải nghiệm tốt nhất</h2>
@@ -498,11 +431,11 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img src="images/shipping-icon/4.png" alt="Shipping Icon">
+                                    <img loading="lazy" src="images/shipping-icon/4.png" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Trung tâm hỗ trợ 24/7</h2>
-                                    <p>có thắc mắc xin vui lòng gọi chuyên gia hoặc chat online.</p>
+                                    <p>Đội ngũ chuyên gia hỗ trợ nhiệt tình</p>
                                 </div>
                             </div>
                         </div>
@@ -521,7 +454,7 @@
                         <!-- Begin Footer Logo Area -->
                         <div class="col-lg-4 col-md-6">
                             <div class="footer-logo">
-                                <img src="images/menu/logo/1.jpg" alt="Footer Logo">
+                                <img loading="lazy" src="images/menu/logo/1.jpg" alt="Footer Logo">
                                 <p class="info">
                                     Chúng tôi có sản phẩm tốt nhất cho ngôi nhà của bạn.
                                 </p>
@@ -529,7 +462,7 @@
                             <ul class="des">
                                 <li>
                                     <span>Địa chỉ: </span>
-                                    Tp.Hồ Chí Minh, Việt Nam
+                                    Khu Phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh
                                 </li>
                                 <li>
                                     <span>Số điện thoại: </span>
@@ -547,9 +480,9 @@
                             <div class="footer-block">
                                 <h3 class="footer-block-title">Sản phẩm</h3>
                                 <ul>
-                                    <li><a href="#">Giảm giá</a></li>
-                                    <li><a href="#">Sản phẩm mới</a></li>
-                                    <li><a href="#">Bán chạy</a></li>
+                                    <li><a href="san-pham-giam-gia.html">Giảm giá</a></li>
+                                    <li><a href="san-pham-mua-nhieu.html">Sản phẩm mua nhiều</a></li>
+                                    <li><a href="san-pham-noi-bat.html">Sản phẩm nổi bật</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -559,8 +492,8 @@
                             <div class="footer-block">
                                 <h3 class="footer-block-title">Về công ty</h3>
                                 <ul>
-                                    <li><a href="#">Giao hàng</a></li>
-                                    <li><a href="#">Legal Notice</a></li>
+
+                                    <li><a href="faq.html">FAQs</a></li>
                                     <li><a href="about-us.html">Về chúng tôi</a></li>
                                     <li><a href="contact.html">Liên hệ</a></li>
                                 </ul>
@@ -586,7 +519,7 @@
                                     </li>
                                     <li class="google-plus">
                                         <a href="https://www.plus.google.com/discover" data-toggle="tooltip"
-                                           target="_blank" title="Google Plus">
+                                           target="_blank" title="Google +">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
@@ -619,7 +552,7 @@
                                     <div id="mc_embed_signup_scroll">
                                         <div id="mc-form" class="mc-form subscribe-form form-group">
                                             <input id="mc-email" type="email" autocomplete="off"
-                                                   placeholder="Nhập email của bạn" />
+                                                   placeholder="Nhập email của bạn"/>
                                             <button class="btn" id="mc-submit">Đăng kí</button>
                                         </div>
                                     </div>
@@ -641,7 +574,7 @@
                         <!-- Begin Footer Payment Area -->
                         <div class="copyright text-center">
                             <a href="#">
-                                <img src="images/payment/1.png" alt="">
+                                <img loading="lazy" src="images/payment/1.png" alt="">
                             </a>
                         </div>
                         <!-- Footer Payment Area End Here -->
@@ -702,7 +635,5 @@
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
 </body>
-
-<!-- shopping-cart31:32-->
 
 </html>
