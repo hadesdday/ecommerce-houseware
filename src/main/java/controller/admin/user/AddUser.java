@@ -91,7 +91,7 @@ public class AddUser extends HttpServlet {
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
-            User u = new User(username, password, fullname, email, phone, address, "", role);
+            User u = new User("", username, password, fullname, email, phone, address, "", role);
             boolean isExistedUsername = UserServices.getInstance().isExistedUsername(username);
             boolean isExistedEmail = UserServices.getInstance().isExistedEmail(email);
 

@@ -4,6 +4,7 @@ import beans.Product;
 import dao.ProductDAO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductServices {
     private static ProductServices instance;
@@ -15,14 +16,24 @@ public class ProductServices {
         return instance;
     }
 
+    public List<Product> getAll() {
+        return ProductDAO.getInstance().getAll();
+    }
+
+    public List<Product> getByCategory(String cat) {
+        return ProductDAO.getInstance().getProductByCategory(cat);
+    }
+
     public List<Product> getProduct() {
         return ProductDAO.getInstance().getProduct();
     }
-
+    public String getMainImageProduct(String masp){
+        return ProductDAO.getInstance().getMainImageProduct(masp);
+    }
     public Product getProduct(String maSP) {
         return ProductDAO.getInstance().getProduct(maSP);
     }
-
+//
     public boolean addProduct(Product product) {
         return ProductDAO.getInstance().addProduct(product);
     }

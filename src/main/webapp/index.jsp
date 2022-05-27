@@ -343,7 +343,7 @@
                                         <li class="right-menu cat-mega-title">
 
                                             <ul>
-                                                <li><a href="noi-com-dien.html">Nồi cơm điện</a></li>
+                                                <li><a href="${pageContext.request.contextPath}/ProductList?category=noi-com">Nồi cơm điện</a></li>
                                                 <li><a href="noi-ap-suat.html">Nồi áp suất</a></li>
                                                 <li><a href="noi-chien-khong-dau.html">Nồi chiên không dầu</a></li>
                                                 <li><a href="binh-dun-sieu-toc.html">Bình đun siêu tốc</a></li>
