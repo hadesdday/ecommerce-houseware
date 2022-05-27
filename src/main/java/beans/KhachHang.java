@@ -3,7 +3,7 @@ package beans;
 import java.io.Serializable;
 
 public class KhachHang implements Serializable {
-    private String id_khachhang;
+    private int id_khachhang;
     private String ten_kh;
     private String diachi;
     private String sodt;
@@ -13,8 +13,8 @@ public class KhachHang implements Serializable {
 
     }
 
-    public KhachHang(String id_khachhang, String ten_kh, String diachi, String sodt, String email) {
-        this.id_khachhang = id_khachhang;
+    public KhachHang( String ten_kh, String diachi, String sodt, String email) {
+
         this.ten_kh = ten_kh;
         this.diachi = diachi;
         this.sodt = sodt;
@@ -55,11 +55,11 @@ public class KhachHang implements Serializable {
         this.email = email;
     }
 
-    public String getId_khachhang() {
+    public int getId_khachhang() {
         return id_khachhang;
     }
 
-    public void setId_khachhang(String id_khachhang) {
+    public void setId_khachhang(int id_khachhang) {
         this.id_khachhang = id_khachhang;
     }
 }

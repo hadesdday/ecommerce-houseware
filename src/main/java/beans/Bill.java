@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class Bill implements Serializable {
     private String id_hoadon;
-    private String id_khachHang;
+    private int id_khachHang;
     private String ngaylaphd;
     private String id_magg;
     private String mapttt;
     private double trigia;
-    private String trangthai;
+    private int trangthai;
 
-    public Bill(String id_khachHang, String ngaylaphd, String id_magg, String mapttt, double trigia) {
+    public Bill(int id_khachHang, String id_magg, String mapttt, double trigia) {
 
         this.id_khachHang = id_khachHang;
-        this.ngaylaphd = ngaylaphd;
+
         this.id_magg = id_magg;
         this.mapttt = mapttt;
         this.trigia = trigia;
@@ -54,11 +54,11 @@ public class Bill implements Serializable {
         this.trigia = trigia;
     }
 
-    public String getTrangthai() {
+    public int getTrangthai() {
         return trangthai;
     }
 
-    public void setTrangthai(String trangthai) {
+    public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
 
@@ -70,11 +70,11 @@ public class Bill implements Serializable {
         this.id_hoadon = id_hoadon;
     }
 
-    public String getId_khachHang() {
+    public int getId_khachHang() {
         return id_khachHang;
     }
 
-    public void setId_khachHang(String id_khachHang) {
+    public void setId_khachHang(int id_khachHang) {
         this.id_khachHang = id_khachHang;
     }
 }

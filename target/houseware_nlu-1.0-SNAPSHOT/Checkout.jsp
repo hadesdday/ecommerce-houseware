@@ -384,7 +384,7 @@
                 </div>
             </div>
             <div class="row">
-                <form method="post" action="/FinalProject/CompleteCheckout" id="checkout-form">
+                <form method="post" action="/houseware_nlu_war_exploded/CompleteCheckout" id="checkout-form">
                     <div class="col-lg-6 col-12">
 
                         <input type="hidden" name="fieldHidden" value="formOne">

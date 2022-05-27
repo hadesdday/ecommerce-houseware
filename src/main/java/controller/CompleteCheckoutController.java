@@ -50,7 +50,7 @@ public class CompleteCheckoutController extends HttpServlet {
 
             if (address.length() < 1) {
                 addressError = true;
-                addressErrorMsg = "cui lòng nhập địa chỉ nhà";
+                addressErrorMsg = "vui lòng nhập địa chỉ nhà";
             }
             String emailPattern = "^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$";
             if (email.length() < 1 || !Pattern.matches(emailPattern, email)) {
@@ -74,10 +74,10 @@ public class CompleteCheckoutController extends HttpServlet {
             int authenticated = (int) session.getAttribute("authenticated");
             if (authenticated == 1) {
                 User user = (User) session.getAttribute("user");
-                CheckoutService.getInstance().checkBill(1,user.getId_user(),fullname,email,phone,address,"pttt","maGG",100);
+                CheckoutService.getInstance().checkBill(1,Integer.parseInt(user.getId_user()),fullname,email,phone,address,"COD","",100);
             }else{
                 System.out.println("adaslkfhdsakjfdsbvkdgkhjdsfgkhjsgfhkjhk");
-                CheckoutService.getInstance().checkBill(0,"0",fullname,email,phone,address,"pttt","maGG",100);
+                CheckoutService.getInstance().checkBill(0,0,fullname,email,phone,address,"COD","",100);
             }
                 response.sendRedirect("success.jsp");
             }

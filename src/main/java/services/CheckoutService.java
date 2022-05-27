@@ -17,11 +17,10 @@ public class CheckoutService {
     }
 
 
-    public Bill checkBill(int authenticated, String idkhachhang, String fullName, String email, String phoneNumber, String address, String ptThanhToan, String maGG, double triGia){
+    public Bill checkBill(int authenticated, int idkhachhang, String fullName, String email, String phoneNumber, String address, String ptThanhToan, String maGG, double triGia){
         return  CheckoutDao.getInstance().checkBill(authenticated,idkhachhang,fullName,email,phoneNumber,address,ptThanhToan,maGG,triGia);
     }
-
-    public KhachHang signinedCustomer(String idkhachhang){
+    public KhachHang signinedCustomer(int idkhachhang){
         return  CheckoutDao.getInstance().signinedCustomer(idkhachhang);
     }
 }

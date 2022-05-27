@@ -22,7 +22,7 @@ public class CheckoutDao {
         return instance;
     }
 
-    public Bill checkBill(int authenticated, String idkhachhang, String fullName, String email, String phoneNumber, String address, String ptThanhToan, String maGG, double triGia) {
+    public Bill checkBill(int authenticated, int idkhachhang, String fullName, String email, String phoneNumber, String address, String ptThanhToan, String maGG, double triGia) {
             
         KhachHang sc= signinedCustomer(idkhachhang);
         if (authenticated == 1) {
@@ -30,31 +30,30 @@ public class CheckoutDao {
             else
                 insertBill(idkhachhang, ptThanhToan, maGG, triGia);
         } else {
-            DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO KhachHang (Ten_KH,DiaChi,SoDT,Email) VALUES(?,?,?,?,?)")
-                    .bind(1, fullName)
-                    .bind(2, address)
-                    .bind(3, phoneNumber)
-                    .bind(4, email)
+            DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO KhachHang (Ten_KH,DiaChi,SoDT,Email) VALUES(?,?,?,?)")
+                    .bind(0, fullName)
+                    .bind(1, address)
+                    .bind(2, phoneNumber)
+                    .bind(3, email)
                     .execute());
             List<KhachHang> khachhangList = DbConnector.get().withHandle(h -> h.createQuery("SELECT * FROM KhachHang ").mapToBean(KhachHang.class).stream().collect(Collectors.toList()));
             insertBill(khachhangList.get(khachhangList.size() - 1).getId_khachhang(), ptThanhToan, maGG, triGia);
         }
-        Bill bill=new Bill(idkhachhang,"ngay lap hoa don",maGG,ptThanhToan,triGia);
+        Bill bill=new Bill(idkhachhang,maGG,ptThanhToan,triGia);
         return bill;
     }
 
-    public void insertBill(String idkhachhang, String ptThanhToan, String maGG, double triGia) {
-        DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO hoadon (ID_KhachHang,NgayLapHD,ID_MaGG,MaPTTT,TriGia,TrangThai) VALUES(?,?,?,?,?,?)")
+    public void insertBill(int idkhachhang, String ptThanhToan, String maGG, double triGia) {
+        DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO hoadon (ID_KhachHang,ID_MaGG,MaPTTT,TriGia,TrangThai) VALUES(?,?,?,?,?)")
                 .bind(0, idkhachhang)
-                .bind(1, Timestamp.valueOf(LocalDateTime.now()))
-                .bind(2, maGG)
-                .bind(3, ptThanhToan)
-                .bind(4, triGia)
-                .bind(5, "Chua thanh toan")
+                .bind(1, maGG)
+                .bind(2, ptThanhToan)
+                .bind(3, triGia)
+                .bind(4, 2)
                 .execute());
     }
 
-    public KhachHang signinedCustomer(String idkhachhang){
+    public KhachHang signinedCustomer(int idkhachhang){
         List<KhachHang> userList = DbConnector.get().withHandle(h -> h.createQuery("SELECT * FROM KhachHang WHERE ID_KhachHang=?")
                 .bind(0, idkhachhang)
                 .mapToBean(KhachHang.class).stream().collect(Collectors.toList()));
