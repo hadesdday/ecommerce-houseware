@@ -259,7 +259,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="index.jsp">Trang chủ</a>
+                                    <li class=""><a href="{pageContext.request.contextPath}">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản

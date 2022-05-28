@@ -581,6 +581,28 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
             order: [[0, "asc"]],
         });
     });
+
+
+    $("#dicount-form").submit(function (e) {
+        alert("As")
+
+
+        var form = $(this);
+        var actionUrl = form.attr('action');
+        var code = $("#coupon_code").val();
+        alert(actionUrl)
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: {
+                coupon_code: code,
+            },
+            success: function (data) {
+                alert(code); // show response from the php script.
+            }
+        });
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+    });
     /*----------------------------------------*/
     /* 27. add cart
 

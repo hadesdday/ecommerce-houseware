@@ -486,7 +486,7 @@
 
                                     <tr class="order-total">
                                         <th>Tổng tiền</th>
-                                        <td><strong><span class="amount">${cart.total()}VND</span></strong></td>
+                                        <td><strong><span class="amount">${cart.total()*(1-cart.rate)}VND</span></strong></td>
                                     </tr>
                                     </tfoot>
                                 </table>
