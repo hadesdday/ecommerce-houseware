@@ -1,5 +1,6 @@
 package controller;
 
+import beans.Cart;
 import beans.User;
 import services.CheckoutService;
 
@@ -23,7 +24,7 @@ public class CompleteCheckoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String form = request.getParameter("fieldHidden");
 
-        if(form.equals("formOne") ){
+        if (form.equals("formOne")) {
             //process create logic for form 1
 
             String fullname = request.getParameter("fullname");
@@ -69,17 +70,20 @@ public class CompleteCheckoutController extends HttpServlet {
             if (fullnameError || addressError || addressError || phoneError) {
                 request.getRequestDispatcher("Checkout.jsp").forward(request, response);
             } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("authenticated",0);
-            int authenticated = (int) session.getAttribute("authenticated");
-            if (authenticated == 1) {
-                User user = (User) session.getAttribute("user");
-                CheckoutService.getInstance().checkBill(1,Integer.parseInt(user.getId_user()),fullname,email,phone,address,pttt,"",100);
-            }else{
-                System.out.println("adaslkfhdsakjfdsbvkdgkhjdsfgkhjsgfhkjhk");
-                CheckoutService.getInstance().checkBill(0,0,fullname,email,phone,address,pttt,"",100);
-            }
+                HttpSession session = request.getSession();
+                session.setAttribute("authenticated", 0);
+                int authenticated = (int) session.getAttribute("authenticated");
+                Cart cart = (Cart) session.getAttribute("cart");
+                if (authenticated == 1) {
+                    User user = (User) session.getAttribute("user");
+                    CheckoutService.getInstance().checkBill(1, Integer.parseInt(user.getId_user()), fullname, email, phone, address, pttt, "", 100, cart);
+                } else {
+                    System.out.println("adaslkfhdsakjfdsbvkdgkhjdsfgkhjsgfhkjhk");
+                    CheckoutService.getInstance().checkBill(0, 0, fullname, email, phone, address, pttt, "", 100, cart);
+                }
                 response.sendRedirect("success-checkout.jsp");
+                cart = null;
+                session.setAttribute("cart", cart);
             }
         }
     }

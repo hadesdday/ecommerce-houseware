@@ -605,7 +605,7 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
                     "debug": false,
                     "newestOnTop": false,
                     "progressBar": false,
-                    "positionClass": "toast-top-right",
+                    "positionClass": "toast-bottom-right",
                     "preventDuplicates": false,
                     "onclick": null,
                     "showDuration": "300",
@@ -620,6 +620,25 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
 
             },
             error: function (data, textStatus, xhr) {
+                Command: toastr["error"]("Thêm sản phẩm vào giỏ hàng thất bại!")
+
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
             }
         })
 
@@ -640,7 +659,25 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
                     quantity: quantity
                 },
                 success: function (data) {
-                    console.log("success");
+                    Command: toastr["error"]("Thay đổi thành công, bạn nên cập nhật giỏ hàng")
+
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": true,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
                 },
                 error: function (data) {
                     if (data.status === 404) {
@@ -670,10 +707,30 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
                 console.log("success");
             },
             error: function (data) {
+                var error = ""
                 if (data.status === 404) {
-                    alert("sp ko ton tai");
+                    error = "Sản phẩm không tồn tại!";
                 } else if (data.status === 405) {
-                    alert("vuot qua luong hang ton");
+                    error = "vượt quá số lượng hàng tồn!";
+
+                }
+                Command: toastr["error"](error)
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
                 }
             }
         });
@@ -691,11 +748,48 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
             },
             success: function (data) {
                 tr.remove();
+                Command: toastr["success"]("Xóa sản phẩm thành công!")
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
             },
             error: function (data, textStatus, errorThrown) {
                 if (data.status === 404) {
+                    Command: toastr["error"]("Xóa sản phẩm thất bại!")
 
-                    alert(errorThrown)
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+
                 }
             }
         });

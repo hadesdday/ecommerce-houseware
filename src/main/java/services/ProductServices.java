@@ -24,16 +24,27 @@ public class ProductServices {
         return ProductDAO.getInstance().getProductByCategory(cat);
     }
 
+    public List<Product> getProductByMostSold() {
+        return ProductDAO.getInstance().getProductByMostSold();
+    }
+
+    public List<Product> getProductByDiscount() {
+        return ProductDAO.getInstance().getProductByDiscount();
+    }
+
     public List<Product> getProduct() {
         return ProductDAO.getInstance().getProduct();
     }
-    public String getMainImageProduct(String masp){
+
+    public String getMainImageProduct(String masp) {
         return ProductDAO.getInstance().getMainImageProduct(masp);
     }
+
     public Product getProduct(String maSP) {
         return ProductDAO.getInstance().getProduct(maSP);
     }
-//
+
+    //
     public boolean addProduct(Product product) {
         return ProductDAO.getInstance().addProduct(product);
     }

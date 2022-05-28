@@ -30,7 +30,7 @@ public class ProductListController extends HttpServlet {
 //            session.setAttribute("cart",cart);
 //        }
         request.setAttribute("products", products);
-        request.getRequestDispatcher("noi-com.jsp").forward(request, response);
+        request.getRequestDispatcher("product-list.jsp").forward(request, response);
     }
 
     @Override
