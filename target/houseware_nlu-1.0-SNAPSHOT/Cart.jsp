@@ -192,45 +192,37 @@
                                 <li class="hm-minicart">
                                     <div class="hm-minicart-trigger">
                                         <span class="item-icon"></span>
-                                        <span class="item-text">£160
-                                                <span class="cart-item-count">2</span>
+                                        <span class="item-text">${cart.total()}
+                                                <span class="cart-item-count">${cart.products.size()}</span>
                                             </span>
                                     </div>
                                     <span></span>
                                     <div class="minicart">
                                         <ul class="minicart-product-list">
-                                            <li>
-                                                <a href="single-product.html" class="minicart-product-image">
-                                                    <img src="images/product/small-size/3.jpg" alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                    <span>£80 x 1</span>
-                                                </div>
-                                                <button class="close">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <a href="single-product.html" class="minicart-product-image">
-                                                    <img src="images/product/small-size/4.jpg" alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                    <span>£80 x 1</span>
-                                                </div>
-                                                <button class="close">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
+                                            <c:set var="list" value="${cart.products}"/>
+                                            <c:forEach items="${list}" var="item">
+                                                <li>
+                                                    <a href="single-product.html" class="minicart-product-image">
+                                                        <img src="${item.imageMain}" alt="cart products">
+                                                    </a>
+                                                    <div class="minicart-product-details">
+                                                        <h6><a href="single-product.html">${item.ten_sp}</a></h6>
+                                                        <span class="price">${item.gia}</span><span>VND x</span><span
+                                                            class="quantity">${item.quantitySold}</span>
+                                                    </div>
+                                                    <button class="close" title="Remove" pid="${item.id_sanpham}">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </li>
+                                            </c:forEach>
                                         </ul>
-                                        <p class="minicart-total">SUBTOTAL: <span>£160</span></p>
+                                        <p class="minicart-total">SUBTOTAL: <span>${cart.total()}</span></p>
                                         <div class="minicart-button">
-                                            <a href="shopping-cart.html"
+                                            <a href="${pageContext.request.contextPath}/Cart"
                                                class="li-button li-button-dark li-button-fullwidth li-button-sm">
                                                 <span>Xem giỏ hàng</span>
                                             </a>
-                                            <a href="checkout.html"
+                                            <a href="${pageContext.request.contextPath}/Checkout"
                                                class="li-button li-button-fullwidth li-button-sm">
                                                 <span>Thanh toán</span>
                                             </a>
@@ -256,7 +248,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="index.html">Trang chủ</a>
+                                    <li class=""><a href="index.jsp">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
@@ -365,7 +357,7 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.jsp">Home</a></li>
                     <li class="active">Giỏ hàng</li>
                 </ul>
             </div>
@@ -435,7 +427,7 @@
                                     <ul>
                                         <li>Tổng cộng <span>${cart.total()}</span></li>
                                     </ul>
-                                    <a href="checkout.html">Thanh toán</a>
+                                    <a href="${pageContext.request.contextPath}/Checkout">Thanh toán</a>
                                 </div>
                             </div>
                         </div>

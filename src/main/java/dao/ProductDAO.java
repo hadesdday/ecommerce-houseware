@@ -20,11 +20,45 @@ public class ProductDAO {
     }
     public List<Product> getProductByCategory(String cat){
         try {
-            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.maloaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.maloaisp=b.maloaisp and b.ten_loaisp=?")
+            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.maloaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.maloaisp=b.maloaisp and (b.maloaisp=? or a.thuonghieu=?)")
                     .bind(0, cat)
+                    .bind(1, cat)
                     .mapToBean(Product.class)
                     .stream().collect(Collectors.toList()));
             System.out.print(re.size());
+            return re;
+        } catch (Exception exception) {
+            System.out.print(exception);
+            return null;
+
+        }
+    }
+    public List<Product> getProductByMostSold(){
+        try {
+            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("SELECT * from sanpham WHERE id_sanpham in(\n" +
+                            "SELECT id_sanpham from chitiethoadon GROUP BY id_sanpham ORDER BY sum(soluong) DESC) LIMIT 10")
+                    .mapToBean(Product.class)
+                    .stream().collect(Collectors.toList()));
+            System.out.print(re.size());
+            return re;
+        } catch (Exception exception) {
+            System.out.print(exception);
+            return null;
+
+        }
+    }
+    public List<Product> getProductByDiscount(){
+        try {
+            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("SELECT * FROM sanpham WHERE id_sanpham in(SELECT a.id_sanpham FROM sanpham a,khuyenmai b WHERE a.id_km=b.id_km )")
+                    .mapToBean(Product.class)
+                    .stream().collect(Collectors.toList()));
+            for(Product p:re){
+                String km=p.getId_km();
+                p.setRateDiscount(DbConnector.get().withHandle(h -> h.createQuery("SELECT rate FROM khuyenmai WHERE id_km=?")
+                        .bind(0,p.getId_km())
+                        .mapTo(Double.class)
+                        .one()));
+            }
             return re;
         } catch (Exception exception) {
             System.out.print(exception);

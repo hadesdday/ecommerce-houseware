@@ -13,10 +13,10 @@
 <%
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
-    Cart cart =(Cart) session.getAttribute("cart");
-    if(cart==null) {
+    Cart cart = (Cart) session.getAttribute("cart");
+    if (cart == null) {
         cart = Cart.getInstance();
-        session.setAttribute("cart",cart);
+        session.setAttribute("cart", cart);
     }
 %>
 
@@ -71,19 +71,7 @@
 </head>
 
 <body>
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="...">
-            <strong class="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div>
-</div>
+
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -166,7 +154,7 @@
                     <!-- Begin Header Logo Area -->
                     <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="index.html">
+                            <a href="${pageContext.request.contextPath}">
                                 <img src="images/menu/logo/1.jpg" alt="">
                             </a>
                         </div>
@@ -214,8 +202,8 @@
                                 <li class="hm-minicart">
                                     <div class="hm-minicart-trigger">
                                         <span class="item-icon"></span>
-                                        <span class="item-text">
-                                                <span class="cart-item-count">2</span>
+                                        <span class="item-text">${cart.total()}
+                                                <span class="cart-item-count">${cart.products.size()}</span>
                                             </span>
                                     </div>
                                     <span></span>
@@ -271,43 +259,81 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="index.html">Trang chủ</a>
+                                    <li class=""><a href="index.jsp">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
                                         phẩm</a>
+
+
                                         <ul class="megamenu hb-megamenu">
                                             <li><a href="gia-dung-nha-bep.html">Gia dụng nhà bếp</a>
                                                 <ul>
-                                                    <li><a href="noi-com-dien.html">Nồi cơm điện</a></li>
-                                                    <li><a href="lo-vi-song.html">Lò vi sóng</a></li>
-                                                    <li><a href="noi-chien-khong-dau.html">Nồi chiên không dầu</a>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=noi-com">Nồi
+                                                            cơm điện</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=lvs">Lò
+                                                            vi sóng</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=nckd">Nồi
+                                                            chiên không dầu</a></li>
                                                     </li>
-                                                    <li><a href="bep-tu.html">Bếp từ</a></li>
-                                                    <li><a href="bep-hong-ngoai.html">Bếp hồng ngoại</a></li>
-                                                    <li><a href="bep-ga.html">Bếp gas</a></li>
-                                                    <li><a href="noi-ap-suat.html">Nồi áp suất</a></li>
-                                                    <li><a href="lo-nuong.html">Lò nướng</a></li>
-                                                    <li><a href="binh-dun-sieu-toc.html">Bình đun siêu tốc</a></li>
-                                                    <li><a href="binh-thuy-dien.html">Bình thủy điện</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=bep-tu">Bếp
+                                                            từ</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=bhn">Bếp
+                                                            hồng ngoại</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=bep-ga">Bếp
+                                                            gas</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=nas">Nồi
+                                                            áp suất</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=lo-nuong">Lò
+                                                            nướng</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=bdst">Bình
+                                                            đun siêu tốc</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=btd">Bình
+                                                            thủy điện</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="may-xay-vat-ep.html">Máy xay, vắt, ép</a>
                                                 <ul>
-                                                    <li><a href="may-xay-sinh-to.html">Máy xay sinh tố</a></li>
-                                                    <li><a href="may-ep-trai-cay.html">Máy ép trái cây</a></li>
-                                                    <li><a href="may-pha-cafe.html">Máy pha cà phê</a></li>
-                                                    <li><a href="may-vat-cam.html">Máy vắt cam</a></li>
-                                                    <li><a href="may-xay-thit.html">Máy xay thịt</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=mxst">Máy
+                                                            xay sinh tố</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=metc">Máy
+                                                            ép trái cây</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=mpcf">Máy
+                                                            pha cà phê</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=mvc">Máy
+                                                            vắt cam</a></li>
+                                                    <li><a href="mxt">Máy xay thịt</a></li>
 
                                                 </ul>
                                             </li>
                                             <li><a href="dung-cu-nha-bep.html">Dụng cụ nhà bếp</a>
                                                 <ul>
-                                                    <li><a href="xoong-noi.html">Xoong, nồi</a></li>
-                                                    <li><a href="chao-chong-dinh.html">Chảo chống dính</a></li>
-                                                    <li><a href="dung-cu-an.html">Dụng cụ ăn</a></li>
-                                                    <li><a href="noi-chien-khong-dau.html">Nồi chiên không dầu</a>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=xoong-noi">Xoong,
+                                                            nồi</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=ccd">Chảo
+                                                            chống dính</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=dca">Dụng
+                                                            cụ ăn</a></li>
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=nckd">Nồi
+                                                            chiên không dầu</a>
                                                     </li>
 
                                                 </ul>
@@ -316,43 +342,47 @@
                                     </li>
                                     <li class="dropdown-holder"><a href="thuong-hieu.html">Thương hiệu</a>
                                         <ul class="hb-dropdown">
-                                            <li class="sub-dropdown-holder"><a href="phillips.html">Phillips</a>
+                                            <li class="sub-dropdown-holder"><a
+                                                    href="${pageContext.request.contextPath}/ProductList?category=phillips">Phillips</a>
 
                                             </li>
-                                            <li class="sub-dropdown-holder"><a href="sunhouse.html">Sunhouse</a>
+                                            <li class="sub-dropdown-holder"><a
+                                                    href="${pageContext.request.contextPath}/ProductList?category=sunhouse">Sunhouse</a>
 
                                             </li>
-                                            <li class="sub-dropdown-holder"><a href="deawon.html">Deawoo</a>
+                                            <li class="sub-dropdown-holder"><a
+                                                    href="${pageContext.request.contextPath}/ProductList?category=deawoo">Deawoo</a>
 
                                             </li>
-                                            <li class="sub-dropdown-holder"><a href="panasonic.html">Panasonic</a>
+                                            <li class="sub-dropdown-holder"><a
+                                                    href="${pageContext.request.contextPath}/ProductList?category=panasonic">Panasonic</a>
 
                                             </li>
-                                            <li class="sub-dropdown-holder"><a href="sauce.html">Sauce</a>
+                                            <li class="sub-dropdown-holder"><a
+                                                    href="${pageContext.request.contextPath}/ProductList?category=sauce">Sauce</a>
 
                                             </li>
-                                            <li class="sub-dropdown-holder"><a href="sharp.html">Sharp</a>
+                                            <li class="sub-dropdown-holder"><a
+                                                    href="${pageContext.request.contextPath}/ProductList?category=sharp">Sharp</a>
 
                                             </li>
-                                            <li class="sub-dropdown-holder"><a href="electrolux.html">Electrolux</a>
+                                            <li class="sub-dropdown-holder"><a
+                                                    href="${pageContext.request.contextPath}/ProductList?category=electrolux">Electrolux</a>
 
                                             </li>
-                                            <li class="sub-dropdown-holder"><a href="kangaroo.html">Kangaroo</a>
+                                            <li class="sub-dropdown-holder"><a
+                                                    href="${pageContext.request.contextPath}/ProductList?category=kangaroo">Kangaroo</a>
 
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="megamenu-static-holder"><a href="blog-list.html">Blog</a>
 
-                                    </li>
                                     <!-- <li><a href="about-us.html">About Us</a></li> -->
                                     <li><a href="contact.html">Liên hệ</a></li>
 
                                     </li>
                                     <!-- Begin Header Bottom Menu Information Area -->
-                                    <li class="hb-info f-right p-0 d-sm-none d-lg-block">
-                                        <span>Khu phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</span>
-                                    </li>
+
                                     <!-- Header Bottom Menu Information Area End Here -->
                                 </ul>
                             </nav>
@@ -453,7 +483,7 @@
                                                     <div class="product-image">
                                                         <a href="">
                                                             <img src="${p.getImageMain()}"
-<%--                                                            <img src="images/product/noi-com/noi-com-dien-cuckoo-1-8-lit-cp-0661.png"--%>
+                                                                <%--                                                            <img src="images/product/noi-com/noi-com-dien-cuckoo-1-8-lit-cp-0661.png"--%>
                                                                  alt="Li's Product Image">
                                                         </a>
                                                         <span class="sticker">New</span>
