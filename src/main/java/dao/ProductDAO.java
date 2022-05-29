@@ -18,7 +18,8 @@ public class ProductDAO {
         }
         return instance;
     }
-    public List<Product> getProductByCategory(String cat){
+
+    public List<Product> getProductByCategory(String cat) {
         try {
             List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.maloaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.maloaisp=b.maloaisp and (b.maloaisp=? or a.thuonghieu=?)")
                     .bind(0, cat)
@@ -33,7 +34,8 @@ public class ProductDAO {
 
         }
     }
-    public List<Product> getProductByMostSold(){
+
+    public List<Product> getProductByMostSold() {
         try {
             List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("SELECT * from sanpham WHERE id_sanpham in(\n" +
                             "SELECT id_sanpham from chitiethoadon GROUP BY id_sanpham ORDER BY sum(soluong) DESC) LIMIT 10")
@@ -47,15 +49,16 @@ public class ProductDAO {
 
         }
     }
-    public List<Product> getProductByDiscount(){
+
+    public List<Product> getProductByDiscount() {
         try {
             List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("SELECT * FROM sanpham WHERE id_sanpham in(SELECT a.id_sanpham FROM sanpham a,khuyenmai b WHERE a.id_km=b.id_km )")
                     .mapToBean(Product.class)
                     .stream().collect(Collectors.toList()));
-            for(Product p:re){
-                String km=p.getId_km();
+            for (Product p : re) {
+                String km = p.getId_km();
                 p.setRateDiscount(DbConnector.get().withHandle(h -> h.createQuery("SELECT rate FROM khuyenmai WHERE id_km=?")
-                        .bind(0,p.getId_km())
+                        .bind(0, p.getId_km())
                         .mapTo(Double.class)
                         .one()));
             }
@@ -66,7 +69,8 @@ public class ProductDAO {
 
         }
     }
-    public String getMainImageProduct(String masp){
+
+    public String getMainImageProduct(String masp) {
         try {
             List<String> re = DbConnector.get().withHandle(h ->
                     h.createQuery("SELECT link_anh FROM hinhanh where id_sanpham=?")
@@ -78,6 +82,7 @@ public class ProductDAO {
             return null;
         }
     }
+
     public List<Product> getProduct() {
         try {
             List<Product> re = DbConnector.get().withHandle(h ->
@@ -105,11 +110,13 @@ public class ProductDAO {
             return null;
         }
     }
+
     public List<Product> getAll() {
-        return  DbConnector.get().withHandle(handle ->{
+        return DbConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from sanpham").mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
+
     public boolean addProduct(Product product) {
         try {
             int rowInserted = DbConnector.get().withHandle(h ->
@@ -160,6 +167,21 @@ public class ProductDAO {
             return rowsAffected == 1;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public double discountCodeRate(String code) {
+        try {
+            double re = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT rate FROM magiamgia where id_magg = ?")
+                            .bind(0, code)
+                            .mapTo(Double.class).one()
+            );
+
+            return re;
+        } catch (Exception exception) {
+
+            return 0.0;
         }
     }
 }
