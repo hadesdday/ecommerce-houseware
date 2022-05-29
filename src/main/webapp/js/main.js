@@ -598,7 +598,7 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
                 coupon_code: code,
             },
             success: function (data) {
-                alert(code); // show response from the php script.
+                alert(data); // show response from the php script.
             }
         });
         e.preventDefault(); // avoid to execute the actual submit of the form.
