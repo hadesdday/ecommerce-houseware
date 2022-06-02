@@ -581,4 +581,239 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
             order: [[0, "asc"]],
         });
     });
+
+
+    $("#dicount-form").submit(function (e) {
+        alert("As")
+
+
+        var form = $(this);
+        var actionUrl = form.attr('action');
+        var code = $("#coupon_code").val();
+        alert(actionUrl)
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: {
+                coupon_code: code,
+            },
+            success: function (data) {
+                alert(data); // show response from the php script.
+            }
+        });
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+    });
+    /*----------------------------------------*/
+    /* 27. add cart
+
+     */
+    /*----------------------------------------*/
+    $(".add-cart").click(function () {
+
+        var maSP = $(this).attr("pid");
+        var path = $(this).attr("path")
+        $.ajax({
+            url: "http://localhost:8080" + path,
+            method: "GET",
+            data: {
+                id: maSP,
+                quantitySold: 1,
+            },
+            success: function (data, textStatus, xhr) {
+                Command: toastr["success"]("Sản phẩm đã được thêm vào giỏ hàng!")
+
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+
+            },
+            error: function (data, textStatus, xhr) {
+                Command: toastr["error"]("Thêm sản phẩm vào giỏ hàng thất bại!")
+
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            }
+        })
+
+    });
+    $(".qtybutton").click(function () {
+
+        var input = $(this).closest(".cart-plus-minus").find(".changeQuantity");
+        var id = input.attr("pid");
+
+        var oldQuantity = input.attr("oldQuantity");
+        var quantity = input.val();
+        if (oldQuantity != quantity) {
+            $.ajax({
+                url: "/houseware_nlu_war_exploded/Update-quantity",
+                method: "POST",
+                data: {
+                    id: id,
+                    quantity: quantity
+                },
+                success: function (data) {
+                    Command: toastr["error"]("Thay đổi thành công, bạn nên cập nhật giỏ hàng")
+
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": true,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                },
+                error: function (data) {
+                    if (data.status === 404) {
+                        alert("sp ko ton tai");
+                    } else if (data.status === 405) {
+                        alert("vuot qua luong hang ton");
+                    }
+                }
+            });
+        }
+    })
+
+    $(".changeQuantity").change(function () {
+        var id = $(this).attr("pid");
+        var tr = $(this).closest("tr");
+        var oldQuantity = $(this).attr("oldQuantity");
+        var quantity = $(this).val();
+
+        $.ajax({
+            url: "/houseware_nlu_war_exploded/Update-quantity",
+            method: "POST",
+            data: {
+                id: id,
+                quantity: quantity
+            },
+            success: function (data) {
+                console.log("success");
+            },
+            error: function (data) {
+                var error = ""
+                if (data.status === 404) {
+                    error = "Sản phẩm không tồn tại!";
+                } else if (data.status === 405) {
+                    error = "vượt quá số lượng hàng tồn!";
+
+                }
+                Command: toastr["error"](error)
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            }
+        });
+    })
+
+    $(".remove-product").click(function () {
+        var id = $(this).attr("pid");
+        var tr = $(this).closest("tr");
+        console.log(id)
+        $.ajax({
+            url: "/houseware_nlu_war_exploded/product-remove",
+            method: "POST",
+            data: {
+                id: id
+            },
+            success: function (data) {
+                tr.remove();
+                Command: toastr["success"]("Xóa sản phẩm thành công!")
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                if (data.status === 404) {
+                    Command: toastr["error"]("Xóa sản phẩm thất bại!")
+
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-bottom-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+
+                }
+            }
+        });
+    })
 })(jQuery);
