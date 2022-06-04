@@ -14,11 +14,11 @@
     <div class="nano">
         <div class="nano-content">
             <ul>
-                <div class="logo"><a href="index.jsp">
+                <div class="logo"><a href="${pageContext.request.contextPath}">
                     <span>NLU</span></a></div>
                 <li class="label">Trang chủ</li>
                 <li>
-                    <a href="index.jsp"><i class="ti-home"></i> Trang chủ </a>
+                    <a href="${pageContext.request.contextPath}/admin"><i class="ti-home"></i> Trang chủ </a>
                 </li>
                 <li class="label">Quản Lý</li>
                 <li>

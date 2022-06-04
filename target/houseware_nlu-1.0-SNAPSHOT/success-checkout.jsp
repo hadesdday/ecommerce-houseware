@@ -107,7 +107,7 @@
                     <!-- Begin Header Logo Area -->
                     <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="index.jsp">
+                            <a href="${pageContext.request.contextPath}/">
                                 <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
                             </a>
                         </div>
@@ -221,7 +221,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="index.jsp">Trang chủ</a>
+                                    <li class=""><a href="${pageContext.request.contextPath}/">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
@@ -326,7 +326,7 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.jsp">Trang chủ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
                     <li class="active">Thanh toán</li>
                 </ul>
             </div>
@@ -368,7 +368,7 @@
 <%--                                    </div>--%>
 <%--                                </c:if>--%>
                                 <div class="col-md-12 d-flex justify-content-center mt-20">
-                                    <a href="index.jsp"><i class="fa fa-arrow-left pr-2"></i> Trở về trang chủ</a>
+                                    <a href="${pageContext.request.contextPath}/"><i class="fa fa-arrow-left pr-2"></i> Trở về trang chủ</a>
                                 </div>
                             </div>
                         </div>

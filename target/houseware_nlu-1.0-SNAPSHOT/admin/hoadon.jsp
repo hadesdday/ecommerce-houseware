@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:useBean id="orderList" scope="request" type="java.util.List"/>
+<jsp:useBean id="latestOrder" scope="request" type="beans.Order"/>
 
 <%@include file="header.jsp" %>
 
@@ -27,19 +28,15 @@
                             <h2>Thêm hóa đơn</h2>
                         </div>
                         <div class="custom-modal-body">
-                            <label>Mã hóa đơn</label>
+                            <%--                            <label>Mã hóa đơn</label>--%>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="maHD">
+                                <input type="text" class="form-control" name="maHD" hidden
+                                       value="<%=latestOrder.getID_HOADON()+1%>">
                             </div>
 
                             <label>Mã khách hàng</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="maKH">
-                            </div>
-
-                            <label>Ngày lập hóa đơn</label>
-                            <div class="input-group mb-3">
-                                <input type="datetime-local" class="form-control" name="ngayMua">
                             </div>
 
                             <label>Mã giảm giá</label>
@@ -51,11 +48,11 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="paymentMethod">
                                     <option selected hidden disabled value="0">Chọn phương thức thanh toán</option>
-                                    <option value="Chuyển khoản ngân hàng">Chuyển khoản ngân hàng</option>
-                                    <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
-                                    <option value="Thanh toán qua ví điện tử momo">Thanh toán qua ví điện tử momo
+                                    <option value="BANK">Chuyển khoản ngân hàng</option>
+                                    <option value="COD">Thanh toán khi nhận hàng</option>
+                                    <option value="MOMO">Thanh toán qua ví điện tử momo
                                     </option>
-                                    <option value="Thanh toán qua ví điện tử paypal">Thanh toán qua ví điện tử paypal
+                                    <option value="PAYPAL">Thanh toán qua ví điện tử paypal
                                     </option>
                                 </select>
                             </div>
@@ -69,15 +66,15 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="status">
                                     <option selected hidden disabled value="0">Chọn trạng thái đơn hàng</option>
-                                    <option value="Bị hủy bỏ">Bị hủy bỏ</option>
-                                    <option value="Đang chờ xử lý">Đang chờ xử lý</option>
-                                    <option value="Hết hạn xử lý">Hết hạn xử lý</option>
-                                    <option value="Khách hàng trả lại hàng">Khách hàng trả lại hàng</option>
-                                    <option value="Đơn hàng được giao thành công">Đơn hàng được giao thành công</option>
-                                    <option value="Khách hàng từ chối nhận hàng">Khách hàng từ chối nhận hàng</option>
-                                    <option value="Đang vận chuyển">Đang vận chuyển</option>
-                                    <option value="Đã được xử lý">Đã được xử lý</option>
-                                    <option value="Đang xử lý">Đang xử lý</option>
+                                    <option value="1">Bị hủy bỏ</option>
+                                    <option value="2">Đang chờ xử lý</option>
+                                    <option value="3">Hết hạn xử lý</option>
+                                    <option value="4">Khách hàng trả lại hàng</option>
+                                    <option value="5">Đơn hàng được giao thành công</option>
+                                    <option value="6">Khách hàng từ chối nhận hàng</option>
+                                    <option value="7">Đang vận chuyển</option>
+                                    <option value="8">Đã được xử lý</option>
+                                    <option value="9">Đang xử lý</option>
                                 </select>
                             </div>
                         </div>
@@ -107,11 +104,6 @@
                                 <input type="text" class="form-control" name="editmaKH">
                             </div>
 
-                            <label>Ngày lập hóa đơn</label>
-                            <div class="input-group mb-3">
-                                <input type="datetime-local" class="form-control" name="editngayMua">
-                            </div>
-
                             <label>Mã giảm giá</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="editcoupon">
@@ -121,11 +113,11 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editpaymentMethod">
                                     <option selected hidden disabled value="0">Chọn phương thức thanh toán</option>
-                                    <option value="Chuyển khoản ngân hàng">Chuyển khoản ngân hàng</option>
-                                    <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
-                                    <option value="Thanh toán qua ví điện tử momo">Thanh toán qua ví điện tử momo
+                                    <option value="BANK">Chuyển khoản ngân hàng</option>
+                                    <option value="COD">Thanh toán khi nhận hàng</option>
+                                    <option value="MOMO">Thanh toán qua ví điện tử momo
                                     </option>
-                                    <option value="Thanh toán qua ví điện tử paypal">Thanh toán qua ví điện tử paypal
+                                    <option value="PAYPAL">Thanh toán qua ví điện tử paypal
                                     </option>
                                 </select>
                             </div>
@@ -139,15 +131,15 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editstatus">
                                     <option selected hidden disabled value="0">Chọn trạng thái đơn hàng</option>
-                                    <option value="Bị hủy bỏ">Bị hủy bỏ</option>
-                                    <option value="Đang chờ xử lý">Đang chờ xử lý</option>
-                                    <option value="Hết hạn xử lý">Hết hạn xử lý</option>
-                                    <option value="Khách hàng trả lại hàng">Khách hàng trả lại hàng</option>
-                                    <option value="Đơn hàng được giao thành công">Đơn hàng được giao thành công</option>
-                                    <option value="Khách hàng từ chối nhận hàng">Khách hàng từ chối nhận hàng</option>
-                                    <option value="Đang vận chuyển">Đang vận chuyển</option>
-                                    <option value="Đã được xử lý">Đã được xử lý</option>
-                                    <option value="Đang xử lý">Đang xử lý</option>
+                                    <option value="1">Bị hủy bỏ</option>
+                                    <option value="2">Đang chờ xử lý</option>
+                                    <option value="3">Hết hạn xử lý</option>
+                                    <option value="4">Khách hàng trả lại hàng</option>
+                                    <option value="5">Đơn hàng được giao thành công</option>
+                                    <option value="6">Khách hàng từ chối nhận hàng</option>
+                                    <option value="7">Đang vận chuyển</option>
+                                    <option value="8">Đã được xử lý</option>
+                                    <option value="9">Đang xử lý</option>
                                 </select>
                             </div>
                         </div>
@@ -189,11 +181,11 @@
                                         <tr>
                                             <th>Mã hóa đơn</th>
                                             <th>Mã khách hàng</th>
-                                            <th>Ngày lập hóa đơn</th>
                                             <th>Mã giảm giá</th>
                                             <th>Phương thức thanh toán</th>
                                             <th>Trị giá</th>
                                             <th>Trạng thái</th>
+                                            <th>Ngày lập hóa đơn</th>
                                             <th>Hành động</th>
                                         </tr>
                                         </thead>
@@ -202,7 +194,6 @@
                                             <tr>
                                                 <td>${item.ID_HOADON} </td>
                                                 <td>${item.ID_KHACHHANG}</td>
-                                                <td>${item.NGAYLAPHD}</td>
                                                 <td>${item.ID_MAGG}</td>
                                                 <td>${item.MAPTTT}</td>
                                                 <td>
@@ -210,6 +201,7 @@
                                                     <fmt:formatNumber value="${item.TRIGIA}" type="currency"/>
                                                 </td>
                                                 <td>${item.TRANGTHAI}</td>
+                                                <td>${item.createdAt}</td>
                                                 <td>
                                                     <a class="btn rounded bg-warning" id="editBtn"
                                                        onclick="onEdit(this)" oid="${item.ID_HOADON}">
@@ -257,7 +249,6 @@
         $("#addOrder").click(function () {
             var maHD = $("input[name='maHD']").val();
             var maKH = $("input[name='maKH']").val();
-            var ngayMua = $("input[name='ngayMua']").val();
             var coupon = $("input[name='coupon']").val();
             var paymentMethod = $("select[name='paymentMethod'] option:selected").val();
             var totalPrice = $("input[name='totalPrice']").val();
@@ -268,13 +259,17 @@
                 data: {
                     maHD: maHD,
                     maKH: maKH,
-                    ngayMua: ngayMua,
                     coupon: coupon,
                     paymentMethod: paymentMethod,
                     totalPrice: totalPrice,
                     status: status,
                 },
                 success: function (data, textStatus, xhr) {
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var dateTime = date + ' ' + time;
+
                     swal("Thành công", "Thêm hóa đơn mới thành công", "success");
                     var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' oid='" + maHD + "'>"
                         + "<i class='ti-pencil text-white'></i></a>";
@@ -285,11 +280,11 @@
                         [
                             maHD,
                             maKH,
-                            ngayMua.replace("T", " "),
                             coupon,
                             paymentMethod,
                             totalPrice,
                             status,
+                            dateTime,
                             editElm + "\n" + delElm
                         ]
                     ).draw(false);
@@ -340,30 +335,20 @@
                 closeModal();
             },
             error: function (data) {
+                if (data.status === 406)
+                    swal("Thất bại", "Xóa hóa đơn thất bại do tồn tại chi tiết hóa đơn cùng mã hóa đơn", "error");
                 if (data.status === 500 || data.status === 404)
-                    swal("Thất bại", "Hóa đơn không tồn tại", "error")
+                    swal("Thất bại", "Hóa đơn không tồn tại", "error");
+                closeModal();
             }
         })
     })
 </script>
 
 <script>
-    function getTime(inp) {
-        var re = inp;
-        if (Number(inp) < 10) {
-            re = "0" + inp;
-        }
-        return re;
-    }
-
     function setEditModalValue(data) {
         $("input[name='editmaHD']").val(data.ID_HOADON);
         $("input[name='editmaKH']").val(data.ID_KHACHHANG);
-
-        const date = new Date(data.NGAYLAPHD);
-        const dmy = String(date.getFullYear() + "-" + getTime(date.getMonth() + 1) + "-" + getTime(date.getDate()) + "T" + getTime(date.getHours()) + ":" + getTime(date.getMinutes()));
-        $("input[name='editngayMua']").val(dmy);
-
         $("input[name='editcoupon']").val(data.ID_MAGG);
         $("select[name='editpaymentMethod']").val(data.MAPTTT);
         $("input[name='edittotalPrice']").val(data.TRIGIA);
@@ -396,7 +381,6 @@
     $("#editAction").click(() => {
         var maHD = $("input[name='editmaHD']").val();
         var maKH = $("input[name='editmaKH']").val();
-        var ngayMua = $("input[name='editngayMua']").val();
         var coupon = $("input[name='editcoupon']").val();
         var paymentMethod = $("select[name='editpaymentMethod'] option:selected").val();
         var totalPrice = $("input[name='edittotalPrice']").val();
@@ -408,7 +392,6 @@
             data: {
                 maHD: maHD,
                 maKH: maKH,
-                ngayMua: ngayMua,
                 coupon: coupon,
                 paymentMethod: paymentMethod,
                 totalPrice: totalPrice,
@@ -419,11 +402,10 @@
                 closeModal();
                 clearValue();
                 editRow.eq(1).text(maKH);
-                editRow.eq(2).text(ngayMua.replace("T", " "));
-                editRow.eq(3).text(coupon);
-                editRow.eq(4).text(paymentMethod);
-                editRow.eq(5).text(totalPrice);
-                editRow.eq(6).text(status);
+                editRow.eq(2).text(coupon);
+                editRow.eq(3).text(paymentMethod);
+                editRow.eq(4).text(totalPrice);
+                editRow.eq(5).text(status);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật hóa đơn thất bại do sai dữ liệu đầu vào", "error");

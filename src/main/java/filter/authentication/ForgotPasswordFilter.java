@@ -1,5 +1,7 @@
 package filter.authentication;
 
+import properties.AssetsProperties;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ public class ForgotPasswordFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpSession session = ((HttpServletRequest) request).getSession();
         if (session.getAttribute("user") != null) {
-            ((HttpServletResponse) response).sendRedirect("index.jsp");
+            ((HttpServletResponse) response).sendRedirect(AssetsProperties.getBaseURL());
             return;
         }
         chain.doFilter(request, response);

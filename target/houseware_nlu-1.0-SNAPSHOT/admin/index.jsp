@@ -21,7 +21,7 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.jsp">Trang chủ</a></li>
+                                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">Trang chủ</a></li>
                                 <li class="breadcrumb-item active">Tổng quan</li>
                             </ol>
                         </div>

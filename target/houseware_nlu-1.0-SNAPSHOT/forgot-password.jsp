@@ -1,8 +1,9 @@
+<%@ page import="properties.AssetsProperties" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     if (session.getAttribute("user") != null)
-        response.sendRedirect("index.jsp");
+        response.sendRedirect(AssetsProperties.getBaseURL());
     String email = request.getParameter("email");
 %>
 <!doctype html>
@@ -96,7 +97,7 @@
                     <!-- Begin Header Logo Area -->
                     <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="index.jsp">
+                            <a href="${pageContext.request.contextPath}/">
                                 <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
                             </a>
                         </div>
@@ -210,7 +211,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="index.jsp">Trang chủ</a>
+                                    <li class=""><a href="${pageContext.request.contextPath}/">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
@@ -315,7 +316,7 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.jsp">Trang chủ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
                     <li><a href="login.jsp">Đăng nhập</a></li>
                     <li class="active">Quên mật khẩu</li>
                 </ul>

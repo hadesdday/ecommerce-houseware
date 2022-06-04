@@ -1,6 +1,7 @@
 package filter.admin;
 
 import beans.User;
+import properties.AssetsProperties;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
@@ -22,7 +23,7 @@ public class AdminFilter implements Filter {
         HttpSession session = ((HttpServletRequest) request).getSession();
         User sessionUser = (User) session.getAttribute("user");
         if (sessionUser == null || sessionUser.getRole() == null || !sessionUser.getRole().equals("admin")) {
-            ((HttpServletResponse) response).sendRedirect("/houseware_nlu_war_exploded/index.jsp");
+            ((HttpServletResponse) response).sendRedirect(AssetsProperties.getBaseURL());
             return;
         }
         chain.doFilter(request, response);

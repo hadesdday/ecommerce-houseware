@@ -34,4 +34,8 @@ public class OrderServices {
     public boolean updateOrder(Order o) {
         return OrderDAO.getInstance().updateOrder(o);
     }
+
+    public Order getLatestOrder() {
+        return OrderDAO.getInstance().getLatestOrder();
+    }
 }

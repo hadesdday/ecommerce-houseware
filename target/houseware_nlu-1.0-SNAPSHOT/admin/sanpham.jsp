@@ -41,13 +41,14 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="loaiSP">
                                     <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                    <option value="Gia dụng nhà bếp">Gia dụng nhà bếp</option>
-                                    <option value="Máy xay, vắt, ép">Máy xay, vắt, ép</option>
-                                    <option value="Dụng cụ nhà bếp">Dụng cụ nhà bếp</option>
-                                    <option value="Nồi chiên không dầu">Nồi chiên không dầu</option>
-                                    <option value="Nồi cơm">Nồi cơm</option>
-                                    <option value="Máy xay sinh tố">Máy xay sinh tố</option>
-                                    <option value="Nồi áp suất">Nồi áp suất</option>
+                                    <option value="gia-dung">Gia dụng nhà bếp</option>
+                                    <option value="may-xay-vat-ep">Máy xay, vắt, ép</option>
+                                    <option value="dung-cu-nha-bep">Dụng cụ nhà bếp</option>
+                                    <option value="noi-chien-khong-dau">Nồi chiên không dầu</option>
+                                    <option value="noi-com">Nồi cơm</option>
+                                    <option value="may-xay-sinh-to">Máy xay sinh tố</option>
+                                    <option value="noi-ap-suat">Nồi áp suất</option>
+                                    <option value="lo-nuong">Lò nướng</option>
                                 </select>
                             </div>
 
@@ -80,8 +81,8 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="active">
                                     <option selected hidden disabled value="0">Chọn trạng thái cho sản phẩm</option>
-                                    <option value="1">Có</option>
-                                    <option value="2">Không</option>
+                                    <option value="1">Còn Hàng</option>
+                                    <option value="2">Hết Hàng</option>
                                 </select>
                             </div>
                         </div>
@@ -114,13 +115,14 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editLoaiSP">
                                     <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                    <option value="Gia dụng nhà bếp">Gia dụng nhà bếp</option>
-                                    <option value="Máy xay, vắt, ép">Máy xay, vắt, ép</option>
-                                    <option value="Dụng cụ nhà bếp">Dụng cụ nhà bếp</option>
-                                    <option value="Nồi chiên không dầu">Nồi chiên không dầu</option>
-                                    <option value="Nồi cơm">Nồi cơm</option>
-                                    <option value="Máy xay sinh tố">Máy xay sinh tố</option>
-                                    <option value="Nồi áp suất">Nồi áp suất</option>
+                                    <option value="gia-dung">Gia dụng nhà bếp</option>
+                                    <option value="may-xay-vat-ep">Máy xay, vắt, ép</option>
+                                    <option value="dung-cu-nha-bep">Dụng cụ nhà bếp</option>
+                                    <option value="noi-chien-khong-dau">Nồi chiên không dầu</option>
+                                    <option value="noi-com">Nồi cơm</option>
+                                    <option value="may-xay-sinh-to">Máy xay sinh tố</option>
+                                    <option value="noi-ap-suat">Nồi áp suất</option>
+                                    <option value="lo-nuong">Lò nướng</option>
                                 </select>
                             </div>
 
@@ -148,8 +150,8 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editActive">
                                     <option selected hidden disabled value="0">Chọn trạng thái cho sản phẩm</option>
-                                    <option value="1">Có</option>
-                                    <option value="2">Không</option>
+                                    <option value="1">Còn Hàng</option>
+                                    <option value="2">Hết Hàng</option>
                                 </select>
                             </div>
                         </div>
@@ -203,24 +205,24 @@
                                         <tbody>
                                         <c:forEach items="${productList}" var="item">
                                             <tr>
-                                                <td>${item.maSP}</td>
-                                                <td>${item.tenSP}</td>
-                                                <td>${item.maLoaiSP}</td>
+                                                <td>${item.id_sanpham}</td>
+                                                <td>${item.ten_sp}</td>
+                                                <td>${item.ma_loaisp}</td>
                                                 <td>
                                                     <fmt:setLocale value="vi-VN"/>
                                                     <fmt:formatNumber value="${item.gia}" type="currency"/>
                                                 </td>
-                                                <td>${item.maKM}</td>
-                                                <td>${item.thuongHieu}</td>
-                                                <td>${item.soLuongTon}</td>
+                                                <td>${item.id_km}</td>
+                                                <td>${item.thuonghieu}</td>
+                                                <td>${item.soluongton}</td>
                                                 <td>${item.active}</td>
                                                 <td>
                                                     <a class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" pid="${item.maSP}">
+                                                       onclick="onEdit(this)" pid="${item.id_sanpham}">
                                                         <i class="ti-pencil text-white"></i>
                                                     </a>
                                                     <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" pid="${item.maSP}">
+                                                       onclick="onDelete(this)" pid="${item.id_sanpham}">
                                                         <i class="ti-trash text-white"></i>
                                                     </a>
                                                 </td>
@@ -379,13 +381,13 @@
 
 <script>
     function setEditModalValue(data) {
-        $("input[name='editMaSP']").val(data.maSP);
-        $("input[name='editTenSP']").val(data.tenSP);
-        $("select[name='editLoaiSP']").val(data.maLoaiSP);
+        $("input[name='editMaSP']").val(data.id_sanpham);
+        $("input[name='editTenSP']").val(data.ten_sp);
+        $("select[name='editLoaiSP']").val(data.ma_loaisp);
         $("input[name='editGiaSP']").val(data.gia);
-        $("input[name='editKmSP']").val(data.maKM);
-        $("input[name='editHangSP']").val(data.thuongHieu);
-        $("input[name='editSlSP']").val(data.soLuongTon);
+        $("input[name='editKmSP']").val(data.id_km);
+        $("input[name='editHangSP']").val(data.thuonghieu);
+        $("input[name='editSlSP']").val(data.soluongton);
         $("select[name='editActive']").val(data.active);
     }
 </script>

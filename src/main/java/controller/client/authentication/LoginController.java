@@ -1,6 +1,7 @@
 package controller.client.authentication;
 
 import beans.User;
+import properties.AssetsProperties;
 import services.UserServices;
 
 import javax.servlet.ServletException;
@@ -42,7 +43,7 @@ public class LoginController extends HttpServlet {
 
             session.setAttribute("user", sessionUser);
             session.setAttribute("authenticated", 1);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect(AssetsProperties.getBaseURL());
         } else {
             request.setAttribute("error", "Tài khoản không tồn tại");
             request.getRequestDispatcher("login.jsp").forward(request, response);

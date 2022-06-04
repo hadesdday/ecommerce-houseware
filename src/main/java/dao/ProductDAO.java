@@ -103,10 +103,8 @@ public class ProductDAO {
                             .bind(0, id_sanpham)
                             .mapToBean(Product.class).stream().collect(Collectors.toList())
             );
-            System.out.println("ok");
             return re.get(0);
         } catch (Exception exception) {
-            System.out.println(exception);
             return null;
         }
     }
@@ -120,7 +118,7 @@ public class ProductDAO {
     public boolean addProduct(Product product) {
         try {
             int rowInserted = DbConnector.get().withHandle(h ->
-                    h.createUpdate("insert into sanpham(id_sanpham,ten_sp,maloaisp,gia,id_km,thuongHieu,soLuongTon,active) values(?,?,?,?,?,?,?,?)")
+                    h.createUpdate("insert into sanpham(id_sanpham,ten_sp,ma_loaisp,gia,id_km,thuonghieu,soluongton,active) values(?,?,?,?,?,?,?,?)")
                             .bind(0, product.getId_sanpham())
                             .bind(1, product.getTen_sp())
                             .bind(2, product.getMa_loaisp())
@@ -153,7 +151,7 @@ public class ProductDAO {
     public boolean editProduct(Product product) {
         try {
             int rowsAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("UPDATE sanpham SET ten_sp=?,maloaisp=?,gia=?,id_km=?,thuongHieu=?,soLuongTon=?,active=? where id_sanpham = ?")
+                    h.createUpdate("UPDATE sanpham SET ten_sp=?,ma_loaisp=?,gia=?,id_km=?,thuongHieu=?,soLuongTon=?,active=? where id_sanpham = ?")
                             .bind(0, product.getTen_sp())
                             .bind(1, product.getMa_loaisp())
                             .bind(2, product.getGia())

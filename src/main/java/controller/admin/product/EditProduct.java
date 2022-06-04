@@ -51,7 +51,6 @@ public class EditProduct extends HttpServlet {
         if (tenSP.trim().length() < 1) isErr = true;
         if (loaiSP.equals("0")) isErr = true;
         if (Double.parseDouble(giaSP) < 0) isErr = true;
-        if (kmSP.trim().length() < 1) isErr = true;
         if (hangSP.trim().length() < 1) isErr = true;
         if (Integer.parseInt(slSP) < 0) isErr = true;
         if (active.equals("0")) isErr = true;

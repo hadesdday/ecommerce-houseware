@@ -21,7 +21,7 @@ public class ShowProduct extends HttpServlet {
     }
 
     private void renderPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<beans.Product> productList = ProductServices.getInstance().getProduct();
+        List<Product> productList = ProductServices.getInstance().getProduct();
 //        Gson gson = new Gson();
 //        PrintWriter writer = response.getWriter();
 //        if (productList.size() > 0) {

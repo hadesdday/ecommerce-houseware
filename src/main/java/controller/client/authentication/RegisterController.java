@@ -1,6 +1,7 @@
 package controller.client.authentication;
 
 import beans.User;
+import properties.AssetsProperties;
 import services.UserServices;
 
 import javax.servlet.ServletException;
@@ -135,7 +136,7 @@ public class RegisterController extends HttpServlet {
                     user.setAddress(address);
 
                     session.setAttribute("user", user);
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect(AssetsProperties.getBaseURL());
                 }
             }
         }

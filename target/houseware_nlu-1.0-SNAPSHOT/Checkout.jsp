@@ -165,40 +165,30 @@
                                     <span></span>
                                     <div class="minicart">
                                         <ul class="minicart-product-list">
-                                            <li>
-                                                <a href="single-product.html" class="minicart-product-image">
-                                                    <img loading="lazy" src="images/product/small-size/3.jpg"
-                                                         alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                    <span>£80 x 1</span>
-                                                </div>
-                                                <button class="close">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <a href="single-product.html" class="minicart-product-image">
-                                                    <img loading="lazy" src="images/product/small-size/4.jpg"
-                                                         alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                    <span>£80 x 1</span>
-                                                </div>
-                                                <button class="close">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
+                                            <c:set var="list" value="${cart.products}"/>
+                                            <c:forEach items="${list}" var="item">
+                                                <li>
+                                                    <a href="single-product.html" class="minicart-product-image">
+                                                        <img src="${item.imageMain}" alt="cart products">
+                                                    </a>
+                                                    <div class="minicart-product-details">
+                                                        <h6><a href="single-product.html">${item.ten_sp}</a></h6>
+                                                        <span class="price">${item.gia}</span><span>VND x</span><span
+                                                            class="quantity">${item.quantitySold}</span>
+                                                    </div>
+                                                    <button class="close" title="Remove" pid="${item.id_sanpham}">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </li>
+                                            </c:forEach>
                                         </ul>
-                                        <p class="minicart-total">SUBTOTAL: <span>£160</span></p>
+                                        <p class="minicart-total">SUBTOTAL: <span>${cart.total()}</span></p>
                                         <div class="minicart-button">
-                                            <a href="shopping-cart.html"
+                                            <a href="${pageContext.request.contextPath}/Cart"
                                                class="li-button li-button-dark li-button-fullwidth li-button-sm">
                                                 <span>Xem giỏ hàng</span>
                                             </a>
-                                            <a href="checkout.html"
+                                            <a href="${pageContext.request.contextPath}/Checkout"
                                                class="li-button li-button-fullwidth li-button-sm">
                                                 <span>Thanh toán</span>
                                             </a>

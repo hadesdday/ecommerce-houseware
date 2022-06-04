@@ -79,7 +79,7 @@
                                         </div>
                                     </c:if>
                                     <c:if test="${sessionScope.user.role.equals('admin')}">
-                                        <a href="./admin/index.jsp">Go to admin page</a>
+                                        <a href="${pageContext.request.contextPath}/admin/">Go to admin page</a>
                                     </c:if>
                                     <c:if test="${sessionScope.user != null}">
                                         <div class="ht-setting-trigger">
@@ -111,7 +111,7 @@
                     <!-- Begin Header Logo Area -->
                     <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="index.jsp">
+                            <a href="${pageContext.request.contextPath}/">
                                 <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
                             </a>
                         </div>
@@ -215,7 +215,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="index.jsp">Trang chủ</a>
+                                    <li class=""><a href="${pageContext.request.contextPath}/">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản

@@ -48,7 +48,7 @@
                     <li><a href="hoadon.jsp"><i class="ti-bag"></i> Hóa đơn</a>
                     <li><a href="user.jsp"><i class="ti-user"></i>Người dùng</a>
                     </li>
-                    <li><a href="thongtin-sanpham.html"><i class="ti-clipboard"></i>Thông tin sản phẩm</a>
+                    <li><a href="thongtin-sanpham.jsp"><i class="ti-clipboard"></i>Thông tin sản phẩm</a>
                     </li>
                     <li><a href="khachhang.html"><i class="ti-user"></i>Khách hàng</a>
                     </li>
