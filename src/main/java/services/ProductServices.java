@@ -1,5 +1,6 @@
 package services;
 
+import beans.Category;
 import beans.Product;
 import dao.ProductDAO;
 
@@ -27,9 +28,11 @@ public class ProductServices {
     public List<Product> getProductByMostSold() {
         return ProductDAO.getInstance().getProductByMostSold();
     }
-    public double discountCodeRate(String code){
+
+    public double discountCodeRate(String code) {
         return ProductDAO.getInstance().discountCodeRate(code);
     }
+
     public List<Product> getProductByDiscount() {
         return ProductDAO.getInstance().getProductByDiscount();
     }
@@ -57,5 +60,25 @@ public class ProductServices {
 
     public boolean editProduct(Product product) {
         return ProductDAO.getInstance().editProduct(product);
+    }
+
+    public Category getCategory(String maloai) {
+        return ProductDAO.getInstance().getCategory(maloai);
+    }
+
+    public List<Category> getCategory() {
+        return ProductDAO.getInstance().getCategory();
+    }
+
+    public boolean addCategory(Category c) {
+        return ProductDAO.getInstance().addCategory(c);
+    }
+
+    public boolean deleteCategory(String maloai) {
+        return ProductDAO.getInstance().deleteCategory(maloai);
+    }
+
+    public boolean editCategory(Category c) {
+        return ProductDAO.getInstance().editCategory(c);
     }
 }

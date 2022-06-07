@@ -9,18 +9,15 @@ public class KhachHang implements Serializable {
     private String sodt;
     private String email;
 
-    public KhachHang(){
-
+    public KhachHang() {
     }
 
-    public KhachHang( String ten_kh, String diachi, String sodt, String email) {
-
+    public KhachHang(String ten_kh, String diachi, String sodt, String email) {
         this.ten_kh = ten_kh;
         this.diachi = diachi;
         this.sodt = sodt;
         this.email = email;
     }
-
 
 
     public String getTen_kh() {

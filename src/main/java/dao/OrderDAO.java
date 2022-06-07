@@ -89,7 +89,6 @@ public class OrderDAO {
 
     public boolean updateOrder(Order o) {
         try {
-            System.out.println(o.toString());
             int rowAffected = DbConnector.get().withHandle(h ->
                     h.createUpdate("UPDATE hoadon SET ID_KHACHHANG=?,ID_MAGG=?,MAPTTT=?,TRIGIA=?,TRANGTHAI=? WHERE ID_HOADON = ?")
                             .bind(0, o.getID_KHACHHANG())

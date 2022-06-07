@@ -1,5 +1,6 @@
 package dao;
 
+import beans.Category;
 import beans.Product;
 import db.DbConnector;
 
@@ -21,12 +22,11 @@ public class ProductDAO {
 
     public List<Product> getProductByCategory(String cat) {
         try {
-            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.maloaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.maloaisp=b.maloaisp and (b.maloaisp=? or a.thuonghieu=?)")
+            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.ma_loaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.ma_loaisp=b.ma_loaisp and (b.ma_loaisp=? or a.thuonghieu=?)")
                     .bind(0, cat)
                     .bind(1, cat)
                     .mapToBean(Product.class)
                     .stream().collect(Collectors.toList()));
-            System.out.print(re.size());
             return re;
         } catch (Exception exception) {
             System.out.print(exception);
@@ -118,7 +118,7 @@ public class ProductDAO {
     public boolean addProduct(Product product) {
         try {
             int rowInserted = DbConnector.get().withHandle(h ->
-                    h.createUpdate("insert into sanpham(id_sanpham,ten_sp,ma_loaisp,gia,id_km,thuonghieu,soluongton,active) values(?,?,?,?,?,?,?,?)")
+                    h.createUpdate("insert into sanpham(id_sanpham,ten_sp,ma_loaisp,gia,id_km,thuonghieu,soluongton,active,mota) values(?,?,?,?,?,?,?,?,?)")
                             .bind(0, product.getId_sanpham())
                             .bind(1, product.getTen_sp())
                             .bind(2, product.getMa_loaisp())
@@ -127,6 +127,7 @@ public class ProductDAO {
                             .bind(5, product.getThuonghieu())
                             .bind(6, product.getSoluongton())
                             .bind(7, product.getActive())
+                            .bind(8, product.getMota())
                             .execute()
             );
             return rowInserted == 1;
@@ -151,7 +152,7 @@ public class ProductDAO {
     public boolean editProduct(Product product) {
         try {
             int rowsAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("UPDATE sanpham SET ten_sp=?,ma_loaisp=?,gia=?,id_km=?,thuongHieu=?,soLuongTon=?,active=? where id_sanpham = ?")
+                    h.createUpdate("UPDATE sanpham SET ten_sp=?,ma_loaisp=?,gia=?,id_km=?,thuongHieu=?,soLuongTon=?,active=?,mota=? where id_sanpham = ?")
                             .bind(0, product.getTen_sp())
                             .bind(1, product.getMa_loaisp())
                             .bind(2, product.getGia())
@@ -159,7 +160,8 @@ public class ProductDAO {
                             .bind(4, product.getThuonghieu())
                             .bind(5, product.getSoluongton())
                             .bind(6, product.getActive())
-                            .bind(7, product.getId_sanpham())
+                            .bind(7, product.getMota())
+                            .bind(8, product.getId_sanpham())
                             .execute()
             );
             return rowsAffected == 1;
@@ -180,6 +182,66 @@ public class ProductDAO {
         } catch (Exception exception) {
 
             return 0.0;
+        }
+    }
+
+    public Category getCategory(String maloai) {
+        try {
+            List<Category> re = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT * FROM loaisanpham where ma_loaisp = ?")
+                            .bind(0, maloai)
+                            .mapToBean(Category.class).stream().collect(Collectors.toList())
+            );
+            return re.get(0);
+        } catch (Exception exception) {
+            return null;
+        }
+    }
+
+    public List<Category> getCategory() {
+        return DbConnector.get().withHandle(h -> {
+            return h.createQuery("select * from loaisanpham").mapToBean(Category.class).stream().collect(Collectors.toList());
+        });
+    }
+
+    public boolean addCategory(Category c) {
+        try {
+            int rowInserted = DbConnector.get().withHandle(h ->
+                    h.createUpdate("insert into loaisanpham(ma_loaisp,ten_loaisp) values(?,?)")
+                            .bind(0, c.getMa_loaisp())
+                            .bind(1, c.getTen_loaisp())
+                            .execute()
+            );
+            return rowInserted == 1;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
+    public boolean deleteCategory(String maloai) {
+        try {
+            int rowsAffected = DbConnector.get().withHandle(h ->
+                    h.createUpdate("DELETE FROM loaisanpham WHERE ma_loaisp = ?")
+                            .bind(0, maloai)
+                            .execute()
+            );
+            return rowsAffected == 1;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean editCategory(Category c) {
+        try {
+            int rowsAffected = DbConnector.get().withHandle(h ->
+                    h.createUpdate("UPDATE loaisanpham SET ten_loaisp = ? where ma_loaisp = ?")
+                            .bind(0, c.getTen_loaisp())
+                            .bind(1, c.getMa_loaisp())
+                            .execute()
+            );
+            return rowsAffected == 1;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

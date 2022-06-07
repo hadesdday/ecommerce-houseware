@@ -176,7 +176,7 @@
                         <div class="card">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <table id="order-table" class="table table-striped table-bordered">
                                         <thead>
                                         <tr>
                                             <th>Mã hóa đơn</th>
@@ -196,10 +196,7 @@
                                                 <td>${item.ID_KHACHHANG}</td>
                                                 <td>${item.ID_MAGG}</td>
                                                 <td>${item.MAPTTT}</td>
-                                                <td>
-                                                    <fmt:setLocale value="vi-VN"/>
-                                                    <fmt:formatNumber value="${item.TRIGIA}" type="currency"/>
-                                                </td>
+                                                <td>${item.TRIGIA} đ</td>
                                                 <td>${item.TRANGTHAI}</td>
                                                 <td>${item.createdAt}</td>
                                                 <td>
@@ -276,19 +273,20 @@
                     var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" oid="' + maHD + '">' +
                         "<i class='ti-trash text-white'></i></a>";
 
-                    $('#bootstrap-data-table-export').DataTable().row.add(
+                    $('#order-table').DataTable().row.add(
                         [
                             maHD,
                             maKH,
                             coupon,
                             paymentMethod,
-                            totalPrice,
+                            totalPrice + " đ",
                             status,
                             dateTime,
                             editElm + "\n" + delElm
                         ]
                     ).draw(false);
                     clearValue();
+                    $("input[name='maHD']").val(Number(maHD) + 1);
                     closeModal();
                 },
                 error: function (data, textStatus, xhr) {
@@ -328,10 +326,12 @@
                 maHD: maHD
             },
             success: function (data) {
+                var t = $("input[name='maHD']").val();
                 swal("Thành công", "Xóa hóa đơn thành công", "success")
                 tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
+                $('#order-table').DataTable().row(tr).remove().draw();
                 clearValue();
+                $("input[name='maHD']").val(t);
                 closeModal();
             },
             error: function (data) {
@@ -398,13 +398,15 @@
                 status: status
             },
             success: (data) => {
+                var t = $("input[name='maHD']").val();
                 swal("Thành công", "Cập nhật hóa đơn thành công", "success");
                 closeModal();
                 clearValue();
+                $("input[name='maHD']").val(t);
                 editRow.eq(1).text(maKH);
                 editRow.eq(2).text(coupon);
                 editRow.eq(3).text(paymentMethod);
-                editRow.eq(4).text(totalPrice);
+                editRow.eq(4).text(totalPrice + " đ");
                 editRow.eq(5).text(status);
             },
             error: (data) => {

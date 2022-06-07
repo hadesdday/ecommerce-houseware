@@ -5443,3 +5443,13 @@ h6.h1 {
     border: none;
     border-radius: 15px;
 }
+
+.text__ctsp {
+    border-radius: 8px;
+    border-color: #697a8d;
+    outline: none;
+}
+
+.text__ctsp:focus {
+    border-color: #696cff;
+}

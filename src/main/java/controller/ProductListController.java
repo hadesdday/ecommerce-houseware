@@ -1,6 +1,7 @@
 package controller;
 
 import beans.Product;
+import helper.Base64;
 import services.ProductServices;
 
 import javax.servlet.ServletException;
@@ -21,7 +22,8 @@ public class ProductListController extends HttpServlet {
 //        String imageMain=ProductServices.getInstance().getMainImageProduct();
         for (int i=0;i<products.size();i++) {
             String imageMain=ProductServices.getInstance().getMainImageProduct(products.get(i).getId_sanpham());
-            products.get(i).setImageMain(imageMain);
+            String url = Base64.get(imageMain);
+            products.get(i).setImageMain(url);
         }
 //        HttpSession session=request.getSession();
 //        Cart cart =(Cart) session.getAttribute("cart");

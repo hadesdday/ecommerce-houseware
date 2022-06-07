@@ -214,7 +214,7 @@
                                             <c:forEach items="${list}" var="item">
                                                 <li>
                                                     <a href="single-product.html" class="minicart-product-image">
-                                                        <img src="${item.imageMain}" alt="cart products">
+                                                        <img src="data:image/jpg;base64,${item.imageMain}" alt="cart products">
                                                     </a>
                                                     <div class="minicart-product-details">
                                                         <h6><a href="single-product.html">${item.ten_sp}</a></h6>
@@ -482,7 +482,7 @@
                                                 <div class="single-product-wrap">
                                                     <div class="product-image">
                                                         <a href="">
-                                                            <img src="${p.getImageMain()}"
+                                                            <img src="data:image/jpg;base64,${p.getImageMain()}"
                                                                 <%--                                                            <img src="images/product/noi-com/noi-com-dien-cuckoo-1-8-lit-cp-0661.png"--%>
                                                                  alt="Li's Product Image">
                                                         </a>

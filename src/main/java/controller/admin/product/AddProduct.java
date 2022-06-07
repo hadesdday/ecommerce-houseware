@@ -28,8 +28,9 @@ public class AddProduct extends HttpServlet {
         String hangSP = request.getParameter("hangSP");
         String slSP = request.getParameter("slSP");
         String active = request.getParameter("active");
+        String ctSP = request.getParameter("ctSP");
 
-        Product product = new Product(maSP, tenSP, loaiSP, Double.parseDouble(giaSP), kmSP, hangSP, Integer.parseInt(slSP), active);
+        Product product = new Product(maSP, tenSP, loaiSP, Double.parseDouble(giaSP), kmSP, hangSP, Integer.parseInt(slSP), active, ctSP);
 
         boolean isErr = false;
         if (maSP.trim().length() < 1) isErr = true;

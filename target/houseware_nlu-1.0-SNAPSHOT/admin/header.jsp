@@ -14,7 +14,7 @@
     <div class="nano">
         <div class="nano-content">
             <ul>
-                <div class="logo"><a href="${pageContext.request.contextPath}">
+                <div class="logo"><a href="${pageContext.request.contextPath}/admin">
                     <span>NLU</span></a></div>
                 <li class="label">Trang chủ</li>
                 <li>
@@ -23,9 +23,6 @@
                 <li class="label">Quản Lý</li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/product"><i class="ti-desktop"></i> Sản phẩm</a>
-                </li>
-                <li>
-                    <a href="thongtin-sanpham.html"><i class="ti-clipboard"></i>Thông tin sản phẩm</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/image"><i class="ti-clipboard"></i>Hình ảnh</a>
@@ -37,10 +34,10 @@
                     <a href="${pageContext.request.contextPath}/admin/user"><i class="ti-user"></i>Người dùng</a>
                 </li>
                 <li>
-                    <a href="khachhang.html"><i class="ti-user"></i>Khách hàng</a>
+                    <a href="${pageContext.request.contextPath}/admin/customer"><i class="ti-user"></i>Khách hàng</a>
                 </li>
                 <li>
-                    <a href="loai-sp.html"><i class="ti-user"></i>Loại sản phẩm</a>
+                    <a href="${pageContext.request.contextPath}/admin/category"><i class="ti-user"></i>Loại sản phẩm</a>
                 </li>
                 <li>
                     <a href="khuyenmai.html"><i class="ti-star"></i>Khuyến mãi</a>

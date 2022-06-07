@@ -67,10 +67,10 @@
                                 <input type="text" class="form-control" name="hangSP">
                             </div>
 
-                            <%--                                <label>Thông tin sản phẩm</label>--%>
-                            <%--                                <div class="input group mb-3">--%>
-                            <%--                                    <input type="text" class="form-control" name="ctSP">--%>
-                            <%--                                </div>--%>
+                            <label>Thông tin sản phẩm</label>
+                            <div class="input group mb-3">
+                                <textarea name="ctSP" rows="15" cols="95%" class="text__ctsp"></textarea>
+                            </div>
 
                             <label>Số lượng tồn kho</label>
                             <div class="input-group mb-3">
@@ -141,6 +141,11 @@
                                 <input type="text" class="form-control" name="editHangSP">
                             </div>
 
+                            <label>Thông tin sản phẩm</label>
+                            <div class="input group mb-3">
+                                <textarea name="editctSP" rows="15" cols="95%" class="text__ctsp"></textarea>
+                            </div>
+
                             <label>Số lượng tồn kho</label>
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control" name="editSlSP" min="0">
@@ -187,7 +192,7 @@
                         <div class="card" style="margin-right: -15px;">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
+                                    <table id="products-table"
                                            class="table table-striped table-bordered">
                                         <thead>
                                         <tr>
@@ -199,6 +204,7 @@
                                             <th>Thương hiệu</th>
                                             <th>Số lượng</th>
                                             <th>Active</th>
+                                            <th>Mô tả</th>
                                             <th>Hành động</th>
                                         </tr>
                                         </thead>
@@ -208,14 +214,12 @@
                                                 <td>${item.id_sanpham}</td>
                                                 <td>${item.ten_sp}</td>
                                                 <td>${item.ma_loaisp}</td>
-                                                <td>
-                                                    <fmt:setLocale value="vi-VN"/>
-                                                    <fmt:formatNumber value="${item.gia}" type="currency"/>
-                                                </td>
+                                                <td>${item.gia} đ</td>
                                                 <td>${item.id_km}</td>
                                                 <td>${item.thuonghieu}</td>
                                                 <td>${item.soluongton}</td>
                                                 <td>${item.active}</td>
+                                                <td>${item.mota}</td>
                                                 <td>
                                                     <a class="btn rounded bg-warning" id="editBtn"
                                                        onclick="onEdit(this)" pid="${item.id_sanpham}">
@@ -294,6 +298,7 @@
             var hangSP = $("input[name='hangSP']").val();
             var slSP = $("input[name='slSP']").val();
             var active = $("select[name='active'] option:selected").val()
+            var ctSP = $("textarea[name='ctSP']").val();
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/add",
                 method: "POST",
@@ -305,7 +310,8 @@
                     kmSP: kmSP,
                     hangSP: hangSP,
                     slSP: slSP,
-                    active: active
+                    active: active,
+                    ctSP: ctSP
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm sản phẩm mới thành công", "success");
@@ -313,16 +319,17 @@
                         + "<i class='ti-pencil text-white'></i></a>";
                     var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" pid="' + maSP + '">' +
                         "<i class='ti-trash text-white'></i></a>";
-                    $('#bootstrap-data-table-export').DataTable().row.add(
+                    $('#products-table').DataTable().row.add(
                         [
                             maSP,
                             tenSP,
                             loaiSP,
-                            giaSP,
+                            giaSP + " đ",
                             kmSP,
                             hangSP,
                             slSP,
                             active,
+                            ctSP,
                             editElm + "\n" + delElm
                         ]
                     ).draw(false);
@@ -366,7 +373,7 @@
             success: function (data) {
                 swal("Thành công", "Xóa sản phẩm thành công", "success")
                 tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
+                $('#products-table').DataTable().row(tr).remove().draw();
                 clearValue();
                 closeModal();
             },
@@ -389,6 +396,7 @@
         $("input[name='editHangSP']").val(data.thuonghieu);
         $("input[name='editSlSP']").val(data.soluongton);
         $("select[name='editActive']").val(data.active);
+        $("textarea[name='editctSP']").val(data.mota);
     }
 </script>
 <%--edit product--%>
@@ -423,6 +431,7 @@
         var hangSP = $("input[name='editHangSP']").val();
         var slSP = $("input[name='editSlSP']").val();
         var active = $("select[name='editActive'] option:selected").val();
+        var ctSP = $("textarea[name='editctSP']").val();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/product/edit",
@@ -435,7 +444,8 @@
                 kmSP: kmSP,
                 hangSP: hangSP,
                 slSP: slSP,
-                active: active
+                active: active,
+                ctSP: ctSP
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật sản phẩm thành công", "success");
@@ -443,11 +453,12 @@
                 clearValue();
                 editRow.eq(1).text(tenSP);
                 editRow.eq(2).text(loaiSP);
-                editRow.eq(3).text(giaSP);
+                editRow.eq(3).text(giaSP +" đ");
                 editRow.eq(4).text(kmSP);
                 editRow.eq(5).text(hangSP);
                 editRow.eq(6).text(slSP);
                 editRow.eq(7).text(active);
+                editRow.eq(8).text(ctSP);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật sản phẩm thất bại do sai dữ liệu đầu vào", "error");
