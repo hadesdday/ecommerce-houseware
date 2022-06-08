@@ -40,16 +40,13 @@
                     <a href="${pageContext.request.contextPath}/admin/category"><i class="ti-user"></i>Loại sản phẩm</a>
                 </li>
                 <li>
-                    <a href="khuyenmai.html"><i class="ti-star"></i>Khuyến mãi</a>
+                    <a href="${pageContext.request.contextPath}/admin/sale"><i class="ti-star"></i>Khuyến mãi</a>
                 </li>
                 <li>
-                    <a href="review.html"><i class="ti-star"></i>Đánh giá sản phẩm</a>
+                    <a href="${pageContext.request.contextPath}/admin/review"><i class="ti-star"></i>Đánh giá sản phẩm</a>
                 </li>
                 <li>
-                    <a href="chitiet-hoadon.html"><i class="ti-clipboard"></i>Chi tiết hóa đơn</a>
-                </li>
-                <li>
-                    <a href="payment.html"><i class="ti-clipboard"></i>Phương thức thanh toán</a>
+                    <a href="${pageContext.request.contextPath}/admin/payment-method"><i class="ti-clipboard"></i>Phương thức thanh toán</a>
                 </li>
             </ul>
         </div>

@@ -1,6 +1,6 @@
 package services;
 
-import beans.KhachHang;
+import beans.Customer;
 import dao.CustomerDAO;
 
 import java.util.List;
@@ -15,19 +15,19 @@ public class CustomerServices {
         return instance;
     }
 
-    public KhachHang getCustomerById(String maKH) {
+    public Customer getCustomerById(String maKH) {
         return CustomerDAO.getInstance().getCustomerById(maKH);
     }
 
-    public List<KhachHang> getCustomerList() {
+    public List<Customer> getCustomerList() {
         return CustomerDAO.getInstance().getCustomerList();
     }
 
-    public boolean addCustomer(KhachHang c) {
+    public boolean addCustomer(Customer c) {
         return CustomerDAO.getInstance().addCustomer(c);
     }
 
-    public boolean updateCustomer(KhachHang c) {
+    public boolean updateCustomer(Customer c) {
         return CustomerDAO.getInstance().updateCustomer(c);
     }
 
@@ -35,7 +35,7 @@ public class CustomerServices {
         return CustomerDAO.getInstance().deleteCustomer(maKH);
     }
 
-    public KhachHang getLatestCustomer() {
+    public Customer getLatestCustomer() {
         return CustomerDAO.getInstance().getLatestCustomer();
     }
 }

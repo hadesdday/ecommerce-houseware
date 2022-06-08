@@ -2,17 +2,17 @@ package beans;
 
 import java.io.Serializable;
 
-public class KhachHang implements Serializable {
+public class Customer implements Serializable {
     private int id_khachhang;
     private String ten_kh;
     private String diachi;
     private String sodt;
     private String email;
 
-    public KhachHang() {
+    public Customer() {
     }
 
-    public KhachHang(String ten_kh, String diachi, String sodt, String email) {
+    public Customer(String ten_kh, String diachi, String sodt, String email) {
         this.ten_kh = ten_kh;
         this.diachi = diachi;
         this.sodt = sodt;

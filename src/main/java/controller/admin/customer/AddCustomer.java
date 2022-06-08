@@ -1,6 +1,6 @@
 package controller.admin.customer;
 
-import beans.KhachHang;
+import beans.Customer;
 import properties.AssetsProperties;
 import services.CustomerServices;
 
@@ -22,7 +22,7 @@ public class AddCustomer extends HttpServlet {
         String sdt = request.getParameter("sdt");
         String email = request.getParameter("email");
 
-        KhachHang kh = new KhachHang(tenKH, diachi, sdt, email);
+        Customer kh = new Customer(tenKH, diachi, sdt, email);
 
         boolean isErr = false;
 

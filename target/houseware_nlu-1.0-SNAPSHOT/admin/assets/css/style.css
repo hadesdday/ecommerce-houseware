@@ -5444,12 +5444,12 @@ h6.h1 {
     border-radius: 15px;
 }
 
-.text__ctsp {
+.text__details {
     border-radius: 8px;
     border-color: #697a8d;
     outline: none;
 }
 
-.text__ctsp:focus {
+.text__details:focus {
     border-color: #696cff;
 }

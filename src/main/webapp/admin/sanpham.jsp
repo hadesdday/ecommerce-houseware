@@ -69,7 +69,7 @@
 
                             <label>Thông tin sản phẩm</label>
                             <div class="input group mb-3">
-                                <textarea name="ctSP" rows="15" cols="95%" class="text__ctsp"></textarea>
+                                <textarea name="ctSP" rows="15" cols="95%" class="text__details"></textarea>
                             </div>
 
                             <label>Số lượng tồn kho</label>
@@ -143,7 +143,7 @@
 
                             <label>Thông tin sản phẩm</label>
                             <div class="input group mb-3">
-                                <textarea name="editctSP" rows="15" cols="95%" class="text__ctsp"></textarea>
+                                <textarea name="editctSP" rows="15" cols="95%" class="text__details"></textarea>
                             </div>
 
                             <label>Số lượng tồn kho</label>
@@ -175,9 +175,9 @@
                         </div>
                         <div class="custom-modal-body">
                             <h6>Bạn có chắc chắn muốn xóa sản phẩm này ?</h6>
+                            <input type="hidden" name="pidDelete">
                         </div>
                         <div class="custom-modal-footer">
-                            <input type="hidden" name="pidDelete">
                             <button type="button" class="btn btn-secondary close-btn">Hủy</button>
                             <button type="submit" class="btn btn-primary" id="confirmDelAct">Đồng ý</button>
                         </div>

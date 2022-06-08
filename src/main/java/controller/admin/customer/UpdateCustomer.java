@@ -1,11 +1,9 @@
 package controller.admin.customer;
 
-import beans.KhachHang;
-import beans.Product;
+import beans.Customer;
 import com.google.gson.Gson;
 import properties.AssetsProperties;
 import services.CustomerServices;
-import services.ProductServices;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,7 +16,7 @@ public class UpdateCustomer extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String maKH = (String) request.getParameter("maKH");
-        KhachHang kh = CustomerServices.getInstance().getCustomerById(maKH);
+        Customer kh = CustomerServices.getInstance().getCustomerById(maKH);
         PrintWriter writer = response.getWriter();
         Gson gson = new Gson();
 
@@ -43,7 +41,7 @@ public class UpdateCustomer extends HttpServlet {
         String sdt = request.getParameter("sdt");
         String email = request.getParameter("email");
 
-        KhachHang kh = new KhachHang(tenKH, diachi, sdt, email);
+        Customer kh = new Customer(tenKH, diachi, sdt, email);
         kh.setId_khachhang(Integer.parseInt(maKH));
 
         boolean isErr = false;

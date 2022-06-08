@@ -1,6 +1,6 @@
 package dao;
 
-import beans.KhachHang;
+import beans.Customer;
 import db.DbConnector;
 
 import java.util.List;
@@ -19,12 +19,12 @@ public class CustomerDAO {
         return instance;
     }
 
-    public KhachHang getCustomerById(String maKH) {
+    public Customer getCustomerById(String maKH) {
         try {
-            List<KhachHang> re = DbConnector.get().withHandle(h ->
+            List<Customer> re = DbConnector.get().withHandle(h ->
                     h.createQuery("select * from khachhang where id_khachhang = ?")
                             .bind(0, maKH)
-                            .mapToBean(KhachHang.class).stream().collect(Collectors.toList())
+                            .mapToBean(Customer.class).stream().collect(Collectors.toList())
             );
             return re.get(0);
         } catch (Exception e) {
@@ -32,10 +32,10 @@ public class CustomerDAO {
         }
     }
 
-    public List<KhachHang> getCustomerList() {
+    public List<Customer> getCustomerList() {
         try {
-            List<KhachHang> re = DbConnector.get().withHandle(h ->
-                    h.createQuery("select * from khachhang").mapToBean(KhachHang.class).stream().collect(Collectors.toList())
+            List<Customer> re = DbConnector.get().withHandle(h ->
+                    h.createQuery("select * from khachhang").mapToBean(Customer.class).stream().collect(Collectors.toList())
             );
             return re;
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class CustomerDAO {
         }
     }
 
-    public boolean addCustomer(KhachHang c) {
+    public boolean addCustomer(Customer c) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->
                     h.createUpdate("insert into khachhang(ten_kh,diachi,sodt,email) values(?,?,?,?)")
@@ -59,7 +59,7 @@ public class CustomerDAO {
         }
     }
 
-    public boolean updateCustomer(KhachHang c) {
+    public boolean updateCustomer(Customer c) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->
                     h.createUpdate("update khachhang set ten_kh = ?,diachi=?,sodt=?,email=? where id_khachhang = ?")
@@ -89,11 +89,11 @@ public class CustomerDAO {
         }
     }
 
-    public KhachHang getLatestCustomer() {
+    public Customer getLatestCustomer() {
         try {
-            KhachHang kh = DbConnector.get().withHandle(h ->
+            Customer kh = DbConnector.get().withHandle(h ->
                     h.createQuery("select * from khachhang where id_khachhang=(select max(id_khachhang) from khachhang)")
-                            .mapToBean(KhachHang.class).stream().collect(Collectors.toList())
+                            .mapToBean(Customer.class).stream().collect(Collectors.toList())
             ).get(0);
             return kh;
         } catch (Exception e) {

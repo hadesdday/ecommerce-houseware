@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:useBean id="customerList" scope="request" type="java.util.List"/>
-<jsp:useBean id="latestCustomer" scope="request" type="beans.KhachHang"/>
+<jsp:useBean id="latestCustomer" scope="request" type="beans.Customer"/>
 
 <%@include file="header.jsp" %>
 <title>Quản lý khách hàng | NLU</title>
