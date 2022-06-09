@@ -14,37 +14,37 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
     <!-- Material Design Iconic Font-V2.2.0 -->
-    <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/material-design-iconic-font.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
     <!-- Font Awesome Stars-->
-    <link rel="stylesheet" href="css/fontawesome-stars.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fontawesome-stars.css">
     <!-- Meanmenu CSS -->
-    <link rel="stylesheet" href="css/meanmenu.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/meanmenu.css">
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
     <!-- Slick Carousel CSS -->
-    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slick.css">
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.css">
     <!-- Jquery-ui CSS -->
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.min.css">
     <!-- Venobox CSS -->
-    <link rel="stylesheet" href="css/venobox.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/venobox.css">
     <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nice-select.css">
     <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css">
     <!-- Bootstrap V4.1.3 Fremwork CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <!-- Helper CSS -->
-    <link rel="stylesheet" href="css/helper.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/helper.css">
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
     <!-- Modernizr js -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
@@ -106,7 +106,8 @@
                     <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
                             <a href="${pageContext.request.contextPath}">
-                                <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
+                                <img loading="lazy" src="${pageContext.request.contextPath}/images/menu/logo/1.jpg"
+                                     alt="">
                             </a>
                         </div>
                     </div>
@@ -162,7 +163,8 @@
                                         <ul class="minicart-product-list">
                                             <li>
                                                 <a href="single-product.html" class="minicart-product-image">
-                                                    <img loading="lazy" src="images/product/small-size/3.jpg"
+                                                    <img loading="lazy"
+                                                         src="${pageContext.request.contextPath}/images/product/small-size/3.jpg"
                                                          alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
@@ -175,7 +177,8 @@
                                             </li>
                                             <li>
                                                 <a href="single-product.html" class="minicart-product-image">
-                                                    <img loading="lazy" src="images/product/small-size/4.jpg"
+                                                    <img loading="lazy"
+                                                         src="${pageContext.request.contextPath}/images/product/small-size/4.jpg"
                                                          alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
@@ -370,7 +373,9 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img loading="lazy" src="images/shipping-icon/1.png" alt="Shipping Icon">
+                                    <img loading="lazy"
+                                         src="${pageContext.request.contextPath}/images/shipping-icon/1.png"
+                                         alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Miễn phí vận chuyển</h2>
@@ -384,7 +389,9 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img loading="lazy" src="images/shipping-icon/2.png" alt="Shipping Icon">
+                                    <img loading="lazy"
+                                         src="${pageContext.request.contextPath}/images/shipping-icon/2.png"
+                                         alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Phương thức thanh toán an toàn</h2>
@@ -397,7 +404,9 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img loading="lazy" src="images/shipping-icon/3.png" alt="Shipping Icon">
+                                    <img loading="lazy"
+                                         src="${pageContext.request.contextPath}/images/shipping-icon/3.png"
+                                         alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Mua hàng với trải nghiệm tốt nhất</h2>
@@ -411,7 +420,9 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img loading="lazy" src="images/shipping-icon/4.png" alt="Shipping Icon">
+                                    <img loading="lazy"
+                                         src="${pageContext.request.contextPath}/images/shipping-icon/4.png"
+                                         alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Trung tâm hỗ trợ 24/7</h2>
@@ -434,7 +445,8 @@
                         <!-- Begin Footer Logo Area -->
                         <div class="col-lg-4 col-md-6">
                             <div class="footer-logo">
-                                <img loading="lazy" src="images/menu/logo/1.jpg" alt="Footer Logo">
+                                <img loading="lazy" src="${pageContext.request.contextPath}/images/menu/logo/1.jpg"
+                                     alt="Footer Logo">
                                 <p class="info">
                                     Chúng tôi có sản phẩm tốt nhất cho ngôi nhà của bạn.
                                 </p>
@@ -554,7 +566,8 @@
                         <!-- Begin Footer Payment Area -->
                         <div class="copyright text-center">
                             <a href="#">
-                                <img loading="lazy" src="images/payment/1.png" alt="">
+                                <img loading="lazy" src="${pageContext.request.contextPath}/images/payment/1.png"
+                                     alt="">
                             </a>
                         </div>
                         <!-- Footer Payment Area End Here -->
@@ -573,47 +586,47 @@
 </div>
 <!-- Body Wrapper End Here -->
 <!-- jQuery-V1.12.4 -->
-<script src="js/vendor/jquery-1.12.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
 <!-- Popper js -->
-<script src="js/vendor/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/vendor/popper.min.js"></script>
 <!-- Bootstrap V4.1.3 Fremwork js -->
-<script src="js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <!-- Ajax Mail js -->
-<script src="js/ajax-mail.js"></script>
+<script src="${pageContext.request.contextPath}/js/ajax-mail.js"></script>
 <!-- Meanmenu js -->
-<script src="js/jquery.meanmenu.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.meanmenu.min.js"></script>
 <!-- Wow.min js -->
-<script src="js/wow.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/wow.min.js"></script>
 <!-- Slick Carousel js -->
-<script src="js/slick.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 <!-- Owl Carousel-2 js -->
-<script src="js/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 <!-- Magnific popup js -->
-<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
 <!-- Isotope js -->
-<script src="js/isotope.pkgd.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/isotope.pkgd.min.js"></script>
 <!-- Imagesloaded js -->
-<script src="js/imagesloaded.pkgd.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/imagesloaded.pkgd.min.js"></script>
 <!-- Mixitup js -->
-<script src="js/jquery.mixitup.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.mixitup.min.js"></script>
 <!-- Countdown -->
-<script src="js/jquery.countdown.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
 <!-- Counterup -->
-<script src="js/jquery.counterup.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
 <!-- Waypoints -->
-<script src="js/waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
 <!-- Barrating -->
-<script src="js/jquery.barrating.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.barrating.min.js"></script>
 <!-- Jquery-ui -->
-<script src="js/jquery-ui.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <!-- Venobox -->
-<script src="js/venobox.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/venobox.min.js"></script>
 <!-- Nice Select js -->
-<script src="js/jquery.nice-select.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
 <!-- ScrollUp js -->
-<script src="js/scrollUp.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/scrollUp.min.js"></script>
 <!-- Main/Activator js -->
-<script src="js/main.js"></script>
+<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 
 <!-- 40432:14-->

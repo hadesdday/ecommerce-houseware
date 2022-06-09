@@ -2,6 +2,7 @@ package services;
 
 import beans.Customer;
 import dao.CustomerDAO;
+import dao.OrderDAO;
 
 import java.util.List;
 
@@ -37,5 +38,9 @@ public class CustomerServices {
 
     public Customer getLatestCustomer() {
         return CustomerDAO.getInstance().getLatestCustomer();
+    }
+
+    public int getTotalCustomer() {
+        return CustomerDAO.getInstance().getTotalCustomer();
     }
 }

@@ -100,4 +100,16 @@ public class CustomerDAO {
             return null;
         }
     }
+
+    public int getTotalCustomer() {
+        try {
+            int re = DbConnector.get().withHandle(h ->
+                    h.select("select count(*) from khachhang")
+                            .mapTo(int.class).one()
+            );
+            return re;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }

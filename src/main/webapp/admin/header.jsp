@@ -43,10 +43,12 @@
                     <a href="${pageContext.request.contextPath}/admin/sale"><i class="ti-star"></i>Khuyến mãi</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/review"><i class="ti-star"></i>Đánh giá sản phẩm</a>
+                    <a href="${pageContext.request.contextPath}/admin/review"><i class="ti-star"></i>Đánh giá sản
+                        phẩm</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/payment-method"><i class="ti-clipboard"></i>Phương thức thanh toán</a>
+                    <a href="${pageContext.request.contextPath}/admin/payment-method"><i class="ti-clipboard"></i>Phương
+                        thức thanh toán</a>
                 </li>
             </ul>
         </div>
@@ -65,11 +67,12 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">
-                                    <i class="ti-user pr-2"></i>
-                                    <span> Thông tin</span>
-                                </a>
-                                <a class="dropdown-item" href="page-login.html"><i class="ti-power-off pr-2"></i>
+<%--                                <a class="dropdown-item" href="#">--%>
+<%--                                    <i class="ti-user pr-2"></i>--%>
+<%--                                    <span> Thông tin</span>--%>
+<%--                                </a>--%>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><i
+                                        class="ti-power-off pr-2"></i>
                                     Đăng
                                     xuất</a>
                             </div>

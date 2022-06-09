@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="houseware_nlu:war2">
+    <output-path>$PROJECT_DIR$/out/artifacts/houseware_nlu_war2</output-path>
+    <root id="archive" name="houseware_nlu_war.war">
+      <element id="artifact" artifact-name="houseware_nlu:war exploded" />
+    </root>
+  </artifact>
+</component>

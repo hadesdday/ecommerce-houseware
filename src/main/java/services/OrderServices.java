@@ -38,4 +38,12 @@ public class OrderServices {
     public Order getLatestOrder() {
         return OrderDAO.getInstance().getLatestOrder();
     }
+
+    public int getSumPriceByOrder() {
+        return OrderDAO.getInstance().getSumPriceAllOrder();
+    }
+
+    public int getTotalOrder() {
+        return OrderDAO.getInstance().getTotalOrder();
+    }
 }
