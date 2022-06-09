@@ -70,6 +70,19 @@ public class ProductDAO {
         }
     }
 
+    public List<String> getAllImageProduct(String masp) {
+        try {
+            List<String> re = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT link_anh FROM hinhanh where id_sanpham=?")
+                            .bind(0, masp)
+                            .mapTo(String.class).stream().collect(Collectors.toList())
+            );
+            return re;
+        } catch (Exception exception) {
+            return null;
+        }
+    }
+
     public String getMainImageProduct(String masp) {
         try {
             List<String> re = DbConnector.get().withHandle(h ->
@@ -96,7 +109,6 @@ public class ProductDAO {
     }
 
     public Product getProduct(String id_sanpham) {
-        System.out.println(id_sanpham);
         try {
             List<Product> re = DbConnector.get().withHandle(h ->
                     h.createQuery("SELECT * FROM sanpham where id_sanpham = ?")
@@ -242,6 +254,22 @@ public class ProductDAO {
             return rowsAffected == 1;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public int getAverageRating(String id) {
+        try {
+            int avg = DbConnector.get().withHandle(h ->
+                    h.select("select avg(rating) trungbinh from review where id_sanpham = ?")
+                            .bind(0, id)
+                            .mapTo(Integer.class).one()
+            );
+
+            if (avg < 1 || String.valueOf(avg).isEmpty())
+                return 0;
+            return avg;
+        } catch (Exception e) {
+            return 0;
         }
     }
 }

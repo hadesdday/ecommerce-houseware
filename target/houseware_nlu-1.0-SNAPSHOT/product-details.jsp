@@ -1,17 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String email = (String) request.getAttribute("email");
-%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<jsp:useBean id="product" scope="request" type="beans.Product"/>
+<jsp:useBean id="sameCategoryProducts" scope="request" type="java.util.List"/>
+<jsp:useBean id="comments" scope="request" type="java.util.List"/>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
-<!-- login-register31:27-->
+<!-- single-product31:30-->
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Thành công || NLU</title>
+    <title>Sản Phẩm || NLU</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -51,6 +54,10 @@
 </head>
 
 <body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
 <!-- Begin Body Wrapper -->
 <div class="body-wrapper">
     <!-- Begin Header Area -->
@@ -74,23 +81,18 @@
                             <ul class="ht-menu">
                                 <!-- Begin Setting Area -->
                                 <li>
-                                    <c:if test="${sessionScope.user == null}">
-                                        <div>
-                                            <span class="mr-3"><a href="register.jsp">Đăng Ký</a></span>
-                                            <span class="mr-3"><a href="login.jsp">Đăng Nhập</a></span>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user != null}">
-                                        <div class="ht-setting-trigger">
-                                            <span>Chào, ${sessionScope.user.fullname}</span></div>
-                                        <div class="setting ht-setting">
-                                            <ul class="ht-setting-list">
-                                                <li><a href="#">My Account</a></li>
-                                                <li><a href="#">Checkout</a></li>
-                                                <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-                                            </ul>
-                                        </div>
-                                    </c:if>
+                                    <div>
+                                        <span class="mr-3"><a href="register.jsp">Đăng Ký</a></span>
+                                        <span class="mr-3"><a href="login.jsp">Đăng Nhập</a></span>
+                                    </div>
+                                    <!-- <div class="ht-setting-trigger"><span>Setting</span></div> -->
+                                    <div class="setting ht-setting">
+                                        <!-- <ul class="ht-setting-list">
+                                            <li><a href="login-register.jsp">My Account</a></li>
+                                            <li><a href="checkout.html">Checkout</a></li>
+                                            <li><a href="login-register.jsp">Sign In</a></li>
+                                        </ul> -->
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -107,7 +109,7 @@
                     <!-- Begin Header Logo Area -->
                     <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="${pageContext.request.contextPath}/">
+                            <a href="index.jsp">
                                 <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
                             </a>
                         </div>
@@ -221,7 +223,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="${pageContext.request.contextPath}/">Trang chủ</a>
+                                    <li class=""><a href="index.jsp">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
@@ -326,58 +328,372 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
-                    <li class="active">Thanh toán</li>
+                    <li><a href="index.jsp">Trang chủ</a></li>
+                    <li class="active">${product.ten_sp}</li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- Li's Breadcrumb Area End Here -->
-    <!-- Begin Login Content Area -->
-    <div class="page-section mb-60 mt-60">
+    <!-- content-wraper start -->
+    <div class="content-wraper">
         <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
-                    <!-- Login Form s-->
-                    <form action="#">
-                        <div class="sent-mail-form">
-                            <h4 class="sent-mail-title text-center">
-                                <i class="fa fa-4x fa-check-circle"></i>
-                            </h4>
-                            <div class="row">
-<%--                                <c:if test="${requestScope.tokenSent.length() > 1}">--%>
-<%--                                    <div class="col-md-12 col-12 mb-20">--%>
-<%--                                        <h1 class="text-center">Đặt lại mật khẩu</h1>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="col-md-12">--%>
-<%--                                        <p class="text-center">${requestScope.tokenSent} <%=email%>--%>
-<%--                                        </p>--%>
-<%--                                        <p class="text-center">Vui lòng kiểm tra trong thư rác nếu như không tìm thấy--%>
-<%--                                            trong--%>
-<%--                                            hộp thư đến</p>--%>
-<%--                                    </div>--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${requestScope.resetSuccess.length() > 1}">--%>
-<%--                                    <div class="col-md-12 col-12 mb-20">--%>
-<%--                                        <h1 class="text-center">${requestScope.resetSuccess}</h1>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="col-md-12">--%>
-<%--                                        <p class="text-center">Bạn đã thành công đặt lại mật khẩu cho tài khoản bằng--%>
-<%--                                            email <%=email%>--%>
-<%--                                        </p>--%>
-<%--                                    </div>--%>
-<%--                                </c:if>--%>
-                                <div class="col-md-12 d-flex justify-content-center mt-20">
-                                    <a href="${pageContext.request.contextPath}/"><i class="fa fa-arrow-left pr-2"></i> Trở về trang chủ</a>
-                                </div>
+            <div class="row single-product-area">
+                <div class="col-lg-5 col-md-6">
+                    <!-- Product Details Left -->
+                    <div class="product-details-left">
+                        <div class="product-details-images slider-navigation-1">
+                            <div class="lg-image">
+                                <a class="popup-img venobox vbox-item" href="images/product/large-size/1.jpg"
+                                   data-gall="myGallery">
+                                    <img loading="lazy" src="images/product/large-size/1.jpg" alt="product image">
+                                </a>
+                            </div>
+                            <div class="lg-image">
+                                <a class="popup-img venobox vbox-item" href="images/product/large-size/2.jpg"
+                                   data-gall="myGallery">
+                                    <img loading="lazy" src="images/product/large-size/2.jpg" alt="product image">
+                                </a>
                             </div>
                         </div>
-                    </form>
+                        <div class="product-details-thumbs slider-thumbs-1">
+                            <div class="sm-image"><img loading="lazy" src="images/product/small-size/1.jpg"
+                                                       alt="product image thumb"></div>
+                            <div class="sm-image"><img loading="lazy" src="images/product/small-size/2.jpg"
+                                                       alt="product image thumb"></div>
+                            <div class="sm-image"><img loading="lazy" src="images/product/small-size/3.jpg"
+                                                       alt="product image thumb"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 col-md-6">
+                    <div class="product-details-view-content pt-60">
+                        <div class="product-info">
+                            <h2>${product.ten_sp}</h2>
+                            <span class="product-details-ref">
+                                  <a href="${pageContext.request.contextPath}/ProductList?category=${product.ma_loaisp}">
+                                      ${product.ma_loaisp}</a>
+                            </span>
+                            <div class="rating-box pt-20">
+                                <ul class="rating rating-with-review-item">
+                                    ${product.avgRating}
+                                </ul>
+                            </div>
+                            <div class="price-box pt-20">
+                                <fmt:setLocale value="vi-VN"/>
+                                <span class="new-price new-price-2">
+                                <fmt:formatNumber value="${product.gia}" type="currency"/>
+                                </span>
+                            </div>
+                            <div class="product-desc">
+                                <p>
+                                        <span>
+                                            ${product.mota}
+                                        </span>
+                                </p>
+                            </div>
+                            <div class="single-add-to-cart">
+                                <div class="quantity">
+                                    <label>Số lượng</label>
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                    </div>
+                                </div>
+                                <button class="add-to-cart add-cart" pid="${product.id_sanpham}"
+                                        path="/houseware_nlu_war_exploded/AddToCart" type="submit">
+                                    Add to cart
+                                </button>
+                            </div>
+                            <div class="product-additional-info pt-25">
+                                <div class="product-social-sharing pt-25">
+                                    <ul>
+                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a>
+                                        </li>
+                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a>
+                                        </li>
+                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google
+                                            +</a></li>
+                                        <li class="instagram"><a href="#"><i
+                                                class="fa fa-instagram"></i>Instagram</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="block-reassurance">
+                                <ul>
+                                    <li>
+                                        <div class="reassurance-item">
+                                            <div class="reassurance-icon">
+                                                <i class="fa fa-check-square-o"></i>
+                                            </div>
+                                            <p>An toàn tuyệt đối</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="reassurance-item">
+                                            <div class="reassurance-icon">
+                                                <i class="fa fa-truck"></i>
+                                            </div>
+                                            <p>Dịch vụ vận chuyển siêu tốc</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="reassurance-item">
+                                            <div class="reassurance-icon">
+                                                <i class="fa fa-exchange"></i>
+                                            </div>
+                                            <p>Chính sách đổi trả phù hợp</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Login Content Area End Here -->
+    <!-- content-wraper end -->
+    <!-- Begin Product Area -->
+    <div class="product-area pt-35">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="li-product-tab">
+                        <ul class="nav li-product-menu">
+                            <li><a class="active" data-toggle="tab" href="#description"><span>Mô tả</span></a>
+                            </li>
+                            <li><a data-toggle="tab" href="#reviews"><span>Đánh giá</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- Begin Li's Tab Menu Content Area -->
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="description" class="tab-pane active show" role="tabpanel">
+                    <div class="product-description">
+                            <span>
+                                ${product.mota}
+                            </span>
+                    </div>
+                </div>
+                <div id="reviews" class="tab-pane" role="tabpanel">
+                    <div class="product-reviews">
+                        <div class="product-details-comment-block">
+                            <div class="comment-review">
+                                <span>Số sao trung bình</span>
+                                <ul class="rating">
+                                    ${product.avgRating}
+                                </ul>
+                            </div>
+                            <div class="review-btn">
+                                <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết đánh
+                                    giá</a>
+                            </div>
+                            <!-- Begin Quick View | Modal Area -->
+                            <div class="modal fade modal-wrapper" id="mymodal">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h3 class="review-page-title">Viết đánh giá của bạn</h3>
+                                            <div class="modal-inner-area row">
+                                                <div class="col-lg-6">
+                                                    <div class="li-review-product">
+                                                        <img loading="lazy"
+                                                             src="data:image/jpg;base64,${product.imageMain}"
+                                                             alt="Li's Product">
+                                                        <div class="li-review-product-desc">
+                                                            <p class="li-product-name">${product.ten_sp}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="li-review-content">
+                                                        <!-- Begin Feedback Area -->
+                                                        <div class="feedback-area">
+                                                            <div class="feedback">
+                                                                <h3 class="feedback-title">Đánh giá</h3>
+                                                                <p class="your-opinion">
+                                                                    <label>Số sao</label>
+                                                                    <span>
+                                                                                <select class="star-rating"
+                                                                                        name="star-rating">
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                </select>
+                                                                            </span>
+                                                                </p>
+                                                                <p class="feedback-form">
+                                                                    <label for="feedback">Nội dung</label>
+                                                                    <textarea id="feedback" name="comment"
+                                                                              cols="45" rows="8"
+                                                                              aria-required="true"></textarea>
+                                                                </p>
+                                                                <div class="feedback-input">
+                                                                    <p class="feedback-form-author">
+                                                                        <label for="author">Tên<span
+                                                                                class="required">*</span>
+                                                                        </label>
+                                                                        <input id="author" name="author"
+                                                                               value="" size="30"
+                                                                               aria-required="true" type="text">
+                                                                    </p>
+                                                                    <p
+                                                                            class="feedback-form-author feedback-form-email">
+                                                                        <label for="email">Email<span
+                                                                                class="required">*</span>
+                                                                        </label>
+                                                                        <input id="email" name="email" value=""
+                                                                               size="30" aria-required="true"
+                                                                               type="text">
+                                                                        <%--                                                                            <span class="required"><sub>*</sub>--%>
+                                                                        <%--                                                                                    Required fields</span>--%>
+                                                                    </p>
+                                                                    <div class="feedback-btn pb-15">
+                                                                        <a href="#" class="close"
+                                                                           data-dismiss="modal"
+                                                                           aria-label="Close">Hủy</a>
+                                                                        <a href="#">Gửi</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Feedback Area End Here -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Quick View | Modal Area End Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product Area End Here -->
+    <!-- Begin Li's Laptop Product Area -->
+    <section class="product-area li-laptop-product pt-30 pb-50">
+        <div class="container">
+            <div class="row">
+                <!-- Begin Li's Section Area -->
+                <div class="col-lg-12">
+                    <div class="li-section-title">
+                        <h2>
+                            <span>Các sản phẩm cùng loại</span>
+                        </h2>
+                    </div>
+                    <div class="row">
+                        <div class="product-active owl-carousel">
+                            <c:forEach var="si" items="${sameCategoryProducts}">
+                                <div class="col-lg-12">
+                                    <!-- single-product-wrap start -->
+                                    <div class="single-product-wrap">
+                                        <div class="product-image">
+                                            <a href="product-details.jsp">
+                                                <img loading="lazy" src="data:image/jpg;base64,${si.getImageMain()}"
+                                                     alt="Li's Product Image">
+                                            </a>
+                                            <span class="sticker">New</span>
+                                        </div>
+                                        <div class="product_desc">
+                                            <div class="product_desc_info">
+                                                <div class="product-review">
+                                                    <h5 class="manufacturer">
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=${si.getMa_loaisp()}">${si.getMa_loaisp()}</a>
+                                                    </h5>
+                                                    <div class="rating-box">
+                                                        <ul class="rating">
+                                                                ${si.getAvgRating()}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <h4><a class="product_name"
+                                                       href="${pageContext.request.contextPath}/ProductDetails?pid=${si.getId_sanpham()}">${si.getTen_sp()}</a>
+                                                </h4>
+                                                <div class="price-box">
+                                                    <fmt:setLocale value="vi-VN"/>
+                                                    <span class="new-price">
+                                                    <fmt:formatNumber value="${si.getGia()}"
+                                                                      type="currency"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="add-actions">
+                                                <ul class="add-actions-link">
+                                                    <li class="add-cart active" pid="${si.getId_sanpham()}"
+                                                        path="/houseware_nlu_war_exploded/AddToCart"><a href="#">Add to
+                                                        cart</a></li>
+                                                    <li><a href="#" title="quick view" class="quick-view-btn"
+                                                           data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                            class="fa fa-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single-product-wrap end -->
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+                <!-- Li's Section Area End Here -->
+            </div>
+        </div>
+    </section>
+    <div class="li-comment-section">
+        <h3>${comments.size()} bình luận</h3>
+        <ul>
+            <c:forEach var="cmt" items="${comments}">
+                <li>
+                    <div class="author-avatar pt-15">
+                        <img loading="lazy" src="images/product-details/user.png" alt="User">
+                    </div>
+                    <div class="comment-body pl-15">
+                            <%--                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>--%>
+                        <h5 class="comment-author pt-15">${cmt.getUsername()}</h5>
+                        <div class="comment-post-date">
+                                ${cmt.createdAt}
+                        </div>
+                        <p>${cmt.getContent()}</p>
+                    </div>
+                </li>
+            </c:forEach>
+            <%--            <li class="comment-children">--%>
+            <%--                <div class="author-avatar pt-15">--%>
+            <%--                    <img loading="lazy" src="images/product-details/admin.png" alt="Admin">--%>
+            <%--                </div>--%>
+            <%--                <div class="comment-body pl-15">--%>
+            <%--                    <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>--%>
+            <%--                    <h5 class="comment-author pt-15">admin</h5>--%>
+            <%--                    <div class="comment-post-date">--%>
+            <%--                        20 nov, 2018 at 9:30pm--%>
+            <%--                    </div>--%>
+            <%--                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci optio ex,--%>
+            <%--                        laboriosam facilis non pariatur itaque illo sunt?</p>--%>
+            <%--                </div>--%>
+            <%--            </li>--%>
+            <%--            <li>--%>
+            <%--                <div class="author-avatar pt-15">--%>
+            <%--                    <img loading="lazy" src="images/product-details/admin.png" alt="Admin">--%>
+            <%--                </div>--%>
+            <%--                <div class="comment-body pl-15">--%>
+            <%--                    <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>--%>
+            <%--                    <h5 class="comment-author pt-15">admin</h5>--%>
+            <%--                    <div class="comment-post-date">--%>
+            <%--                        20 nov, 2018 at 9:30pm--%>
+            <%--                    </div>--%>
+            <%--                </div>--%>
+            <%--            </li>--%>
+        </ul>
+    </div>
     <!-- Begin Footer Area -->
     <div class="footer">
         <!-- Begin Footer Static Top Area -->
@@ -589,7 +905,6 @@
         </div>
         <!-- Footer Static Bottom Area End Here -->
     </div>
-    <!-- Footer Area End Here -->
 </div>
 <!-- Body Wrapper End Here -->
 <!-- jQuery-V1.12.4 -->
@@ -635,5 +950,7 @@
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
 </body>
+
+<!-- single-product31:32-->
 
 </html>

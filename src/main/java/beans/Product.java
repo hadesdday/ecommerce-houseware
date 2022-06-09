@@ -15,6 +15,7 @@ public class Product implements Serializable {
     private int quantitySold;
     private String imageMain;
     private String mota;
+    private String avgRating;
 
     public Product() {
     }
@@ -30,17 +31,6 @@ public class Product implements Serializable {
         this.active = active;
         this.mota = mota;
     }
-//    public Product(String id_sanpham, String ten_sp, String ma_loaisp, double gia,  String thuonghieu, int soluongton, String active, double rateDiscount) {
-//        this.id_sanpham = id_sanpham;
-//        this.ten_sp = ten_sp;
-//        this.ma_loaisp = ma_loaisp;
-//        this.gia = gia;
-//        this.rateDiscount = rateDiscount;
-//        this.id_km = id_km;
-//        this.thuonghieu = thuonghieu;
-//        this.soluongton = soluongton;
-//        this.active = active;
-//    }
 
     public String getId_sanpham() {
         return id_sanpham;
@@ -141,6 +131,14 @@ public class Product implements Serializable {
 
     public void setMota(String mota) {
         this.mota = mota;
+    }
+
+    public String getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(String avgRating) {
+        this.avgRating = avgRating;
     }
 }
 

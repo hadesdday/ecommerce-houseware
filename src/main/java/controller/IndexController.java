@@ -2,6 +2,7 @@ package controller;
 
 import beans.Image;
 import beans.Product;
+import helper.Base64;
 import jakarta.xml.bind.DatatypeConverter;
 import services.FileServices;
 import services.ProductServices;
@@ -22,34 +23,39 @@ public class IndexController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = ProductServices.getInstance().getProductByMostSold();
         List<Product> productsDiscount = ProductServices.getInstance().getProductByDiscount();
-        List<Image> imageList = FileServices.getInstance().getImages();
-        File f;
 
         for (int i = 0; i < products.size(); i++) {
             String url = ProductServices.getInstance().getMainImageProduct(products.get(i).getId_sanpham());
-            f = new File(url);
+            int avgRating = ProductServices.getInstance().getAverageRating(products.get(i).getId_sanpham());
+            String starItem = "";
 
-            BufferedImage bImage = ImageIO.read(f);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, getFileExtension(f), baos);
-            baos.flush();
-            byte[] imageInByteArray = baos.toByteArray();
-            baos.close();
-            String base64 = DatatypeConverter.printBase64Binary(imageInByteArray);
-            products.get(i).setImageMain(base64);
+            for (int j = 1; j <= avgRating; j++) {
+                starItem += "<li><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            for (int k = 1; k <= 5 - avgRating; k++) {
+                starItem += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            products.get(i).setImageMain(Base64.get(url));
+            products.get(i).setAvgRating(starItem);
         }
+
         for (int i = 0; i < productsDiscount.size(); i++) {
             String url = ProductServices.getInstance().getMainImageProduct(products.get(i).getId_sanpham());
-            f = new File(url);
+            int avgRating = ProductServices.getInstance().getAverageRating(productsDiscount.get(i).getId_sanpham());
+            String nonStar = "";
 
-            BufferedImage bImage = ImageIO.read(f);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, getFileExtension(f), baos);
-            baos.flush();
-            byte[] imageInByteArray = baos.toByteArray();
-            baos.close();
-            String base64 = DatatypeConverter.printBase64Binary(imageInByteArray);
-            products.get(i).setImageMain(base64);
+            for (int j = 1; j <= avgRating; j++) {
+                nonStar += "<li><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            for (int k = 1; k <= 5 - avgRating; k++) {
+                nonStar += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            productsDiscount.get(i).setImageMain(Base64.get(url));
+            productsDiscount.get(i).setAvgRating(nonStar);
         }
 
         request.setAttribute("mostSoldProducts", products);
@@ -60,12 +66,5 @@ public class IndexController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
-
-    private static String getFileExtension(File file) {
-        String fileName = file.getName();
-        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".") + 1);
-        else return "";
     }
 }

@@ -213,11 +213,11 @@
                                             <c:set var="list" value="${cart.products}"/>
                                             <c:forEach items="${list}" var="item">
                                                 <li>
-                                                    <a href="single-product.html" class="minicart-product-image">
+                                                    <a href="product-details.jsp" class="minicart-product-image">
                                                         <img src="data:image/jpg;base64,${item.imageMain}" alt="cart products">
                                                     </a>
                                                     <div class="minicart-product-details">
-                                                        <h6><a href="single-product.html">${item.ten_sp}</a></h6>
+                                                        <h6><a href="product-details.jsp">${item.ten_sp}</a></h6>
                                                         <span class="price">${item.gia}</span><span>VND x</span><span
                                                             class="quantity">${item.quantitySold}</span>
                                                     </div>
@@ -507,7 +507,7 @@
                                                                 </div>
                                                             </div>
                                                             <h4><a class="product_name"
-                                                                   href="single-product.html">${p.getTen_sp()}</a>
+                                                                   href="product-details.jsp">${p.getTen_sp()}</a>
                                                                     <%--                                                            <a class="ma_sp" style="display: none">${p.id}</a>--%>
                                                             </h4>
                                                             <div class="price-box">
@@ -545,7 +545,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/12.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -572,7 +572,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -603,7 +603,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/11.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -630,7 +630,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -661,7 +661,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/10.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -688,7 +688,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -719,7 +719,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/9.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -746,7 +746,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -777,7 +777,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/8.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -804,7 +804,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -835,7 +835,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/7.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -862,7 +862,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -893,7 +893,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/6.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -920,7 +920,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -951,7 +951,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/5.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -978,7 +978,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -1009,7 +1009,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/4.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -1036,7 +1036,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -1067,7 +1067,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/3.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -1094,7 +1094,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -1125,7 +1125,7 @@
                                         <div class="row product-layout-list">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/2.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -1152,7 +1152,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>
@@ -1183,7 +1183,7 @@
                                         <div class="row product-layout-list last-child">
                                             <div class="col-lg-3 col-md-5 ">
                                                 <div class="product-image">
-                                                    <a href="single-product.html">
+                                                    <a href="product-details.jsp">
                                                         <img src="images/product/large-size/1.jpg"
                                                              alt="Li's Product Image">
                                                     </a>
@@ -1210,7 +1210,7 @@
                                                             </div>
                                                         </div>
                                                         <h4><a class="product_name"
-                                                               href="single-product.html">Hummingbird printed
+                                                               href="product-details.jsp">Hummingbird printed
                                                             t-shirt</a></h4>
                                                         <div class="price-box">
                                                             <span class="new-price">120000</span>

@@ -41,6 +41,10 @@ public class ProductServices {
         return ProductDAO.getInstance().getProduct();
     }
 
+    public List<String> getAllImageProduct(String masp) {
+        return ProductDAO.getInstance().getAllImageProduct(masp);
+    }
+
     public String getMainImageProduct(String masp) {
         return ProductDAO.getInstance().getMainImageProduct(masp);
     }
@@ -49,7 +53,6 @@ public class ProductServices {
         return ProductDAO.getInstance().getProduct(maSP);
     }
 
-    //
     public boolean addProduct(Product product) {
         return ProductDAO.getInstance().addProduct(product);
     }
@@ -80,5 +83,9 @@ public class ProductServices {
 
     public boolean editCategory(Category c) {
         return ProductDAO.getInstance().editCategory(c);
+    }
+
+    public int getAverageRating(String id) {
+        return ProductDAO.getInstance().getAverageRating(id);
     }
 }

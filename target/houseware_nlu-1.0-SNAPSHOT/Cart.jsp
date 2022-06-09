@@ -203,11 +203,11 @@
                                             <c:set var="list" value="${cart.products}"/>
                                             <c:forEach items="${list}" var="item">
                                                 <li>
-                                                    <a href="single-product.html" class="minicart-product-image">
+                                                    <a href="product-details.jsp" class="minicart-product-image">
                                                         <img src="data:image/jpg;base64,${item.imageMain}" width=50px" height="50px" alt="cart products">
                                                     </a>
                                                     <div class="minicart-product-details">
-                                                        <h6><a href="single-product.html">${item.ten_sp}</a></h6>
+                                                        <h6><a href="product-details.jsp">${item.ten_sp}</a></h6>
                                                         <span class="price">${item.gia}</span><span>VND x</span><span
                                                             class="quantity">${item.quantitySold}</span>
                                                     </div>

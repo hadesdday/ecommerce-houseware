@@ -34,4 +34,8 @@ public class ReviewServices {
     public boolean editReview(Review r) {
         return ReviewDAO.getInstance().editReview(r);
     }
+
+    public List<Review> getReviewByPid(String pid) {
+        return ReviewDAO.getInstance().getReviewByPid(pid);
+    }
 }

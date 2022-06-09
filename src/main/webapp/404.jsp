@@ -162,13 +162,13 @@
                                     <div class="minicart">
                                         <ul class="minicart-product-list">
                                             <li>
-                                                <a href="single-product.html" class="minicart-product-image">
+                                                <a href="product-details.jsp" class="minicart-product-image">
                                                     <img loading="lazy"
                                                          src="${pageContext.request.contextPath}/images/product/small-size/3.jpg"
                                                          alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                    <h6><a href="product-details.jsp">Aenean eu tristique</a></h6>
                                                     <span>£80 x 1</span>
                                                 </div>
                                                 <button class="close">
@@ -176,13 +176,13 @@
                                                 </button>
                                             </li>
                                             <li>
-                                                <a href="single-product.html" class="minicart-product-image">
+                                                <a href="product-details.jsp" class="minicart-product-image">
                                                     <img loading="lazy"
                                                          src="${pageContext.request.contextPath}/images/product/small-size/4.jpg"
                                                          alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                    <h6><a href="product-details.jsp">Aenean eu tristique</a></h6>
                                                     <span>£80 x 1</span>
                                                 </div>
                                                 <button class="close">

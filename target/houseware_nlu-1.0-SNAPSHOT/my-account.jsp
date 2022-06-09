@@ -176,12 +176,12 @@
                                     <div class="minicart">
                                         <ul class="minicart-product-list">
                                             <li>
-                                                <a href="single-product.html" class="minicart-product-image">
+                                                <a href="product-details.jsp" class="minicart-product-image">
                                                     <img loading="lazy" src="images/product/small-size/3.jpg"
                                                          alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                    <h6><a href="product-details.jsp">Aenean eu tristique</a></h6>
                                                     <span>120000</span><span>VNĐ</span>
                                                     <div class="mini-cart-plus-minus">
                                                         <input class="mini-cart-plus-minus-box" value=1 type="text">
@@ -196,12 +196,12 @@
                                                 </button>
                                             </li>
                                             <li>
-                                                <a href="single-product.html" class="minicart-product-image">
+                                                <a href="product-details.jsp" class="minicart-product-image">
                                                     <img loading="lazy" src="images/product/small-size/4.jpg"
                                                          alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                    <h6><a href="product-details.jsp">Aenean eu tristique</a></h6>
                                                     <span>120000</span><span>VNĐ</span>
                                                     <div class="mini-cart-plus-minus">
                                                         <input class="mini-cart-plus-minus-box" value=1 type="text">

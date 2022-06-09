@@ -31,6 +31,19 @@ public class ReviewDAO {
         }
     }
 
+    public List<Review> getReviewByPid(String pid) {
+        try {
+            List<Review> list = DbConnector.get().withHandle(h ->
+                    h.createQuery("select * from review where id_sanpham = ?")
+                            .bind(0, pid)
+                            .mapToBean(Review.class).stream().collect(Collectors.toList())
+            );
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public Review getReview(String pid, int rating, String username) {
         try {
             List<Review> list = DbConnector.get().withHandle(h ->
