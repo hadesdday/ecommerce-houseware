@@ -1,8 +1,10 @@
+<%@ page import="java.lang.reflect.Array" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:useBean id="productList" scope="request" type="java.util.List"/>
+<jsp:useBean id="categoryList" scope="request" type="java.util.List"/>
 
 <%@include file="header.jsp" %>
 
@@ -41,14 +43,9 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="loaiSP">
                                     <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                    <option value="gia-dung">Gia dụng nhà bếp</option>
-                                    <option value="may-xay-vat-ep">Máy xay, vắt, ép</option>
-                                    <option value="dung-cu-nha-bep">Dụng cụ nhà bếp</option>
-                                    <option value="noi-chien-khong-dau">Nồi chiên không dầu</option>
-                                    <option value="noi-com">Nồi cơm</option>
-                                    <option value="may-xay-sinh-to">Máy xay sinh tố</option>
-                                    <option value="noi-ap-suat">Nồi áp suất</option>
-                                    <option value="lo-nuong">Lò nướng</option>
+                                    <c:forEach var="ct" items="${categoryList}">
+                                        <option value="${ct.getMa_loaisp()}">${ct.getTen_loaisp()}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
 
@@ -115,14 +112,9 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editLoaiSP">
                                     <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                    <option value="gia-dung">Gia dụng nhà bếp</option>
-                                    <option value="may-xay-vat-ep">Máy xay, vắt, ép</option>
-                                    <option value="dung-cu-nha-bep">Dụng cụ nhà bếp</option>
-                                    <option value="noi-chien-khong-dau">Nồi chiên không dầu</option>
-                                    <option value="noi-com">Nồi cơm</option>
-                                    <option value="may-xay-sinh-to">Máy xay sinh tố</option>
-                                    <option value="noi-ap-suat">Nồi áp suất</option>
-                                    <option value="lo-nuong">Lò nướng</option>
+                                    <c:forEach var="ct" items="${categoryList}">
+                                        <option value="${ct.getMa_loaisp()}">${ct.getTen_loaisp()}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
 
@@ -198,7 +190,7 @@
                                         <tr>
                                             <th>Mã sản phẩm</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Loại sản phẩm</th>
+                                            <th>Mã loại sản phẩm</th>
                                             <th>Giá</th>
                                             <th>Khuyến mãi</th>
                                             <th>Thương hiệu</th>
@@ -260,32 +252,6 @@
 </div>
 <!-- Common -->
 <%@include file="script.jsp" %>
-<script>
-    $("input[name='maSP']").on("input", () => {
-        var val = $("input[name='maSP']").val();
-        $("input[name='maSP']").attr("value", val);
-    });
-    $("input[name='tenSP']").on("input", () => {
-        var val = $("input[name='tenSP']").val();
-        $("input[name='tenSP']").attr("value", val);
-    });
-    $("input[name='giaSP']").on("input", () => {
-        var val = $("input[name='giaSP']").val();
-        $("input[name='giaSP']").attr("value", val);
-    });
-    $("input[name='kmSP']").on("input", () => {
-        var val = $("input[name='kmSP']").val();
-        $("input[name='kmSP']").attr("value", val);
-    });
-    $("input[name='hangSP']").on("input", () => {
-        var val = $("input[name='hangSP']").val();
-        $("input[name='hangSP']").attr("value", val);
-    });
-    $("input[name='slSP']").on("input", () => {
-        var val = $("input[name='slSP']").val();
-        $("input[name='slSP']").attr("value", val);
-    });
-</script>
 <%--add product--%>
 <script>
     $(document).ready(function () {
@@ -407,7 +373,7 @@
         editRow = $(element).parents("tr").children();
         var pid = $(element).attr('pid');
         $.ajax({
-            url: "${pageContext.request.contextPath}/product/edit",
+            url: "${pageContext.request.contextPath}/product/update",
             method: "GET",
             data: {
                 maSP: pid
@@ -434,7 +400,7 @@
         var ctSP = $("textarea[name='editctSP']").val();
 
         $.ajax({
-            url: "${pageContext.request.contextPath}/product/edit",
+            url: "${pageContext.request.contextPath}/product/update",
             method: "POST",
             data: {
                 maSP: maSP,
@@ -453,7 +419,7 @@
                 clearValue();
                 editRow.eq(1).text(tenSP);
                 editRow.eq(2).text(loaiSP);
-                editRow.eq(3).text(giaSP +" đ");
+                editRow.eq(3).text(giaSP + " đ");
                 editRow.eq(4).text(kmSP);
                 editRow.eq(5).text(hangSP);
                 editRow.eq(6).text(slSP);
@@ -470,5 +436,12 @@
 <%--end edit product--%>
 <script src="assets/js/lib/sweetalert/sweetalert.min.js"></script>
 <script src="assets/js/lib/data-table/currency.js"></script>
+<script>
+    let xs = [];
+    <c:forEach var="is" items="${productList}">
+    xs.push(${is.getTen_sp()});
+    </c:forEach>
+    console.log(xs);
+</script>
 </body>
 </html>

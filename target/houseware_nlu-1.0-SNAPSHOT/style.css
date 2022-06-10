@@ -81,14 +81,14 @@ body {
 }
 a {
   color: #a4a4a4;
-  transition: 0.3s ease-in-out;
+  transition: 0.032s ease-in-out;
 }
 a:hover {
   color: #fed700;
 }
 .img {
   max-width: 100%;
-  transition: all 0.3s ease-out 0s;
+  transition: all 0.032s ease-out 0s;
 }
 .img-full {
   width: 100%;
@@ -256,11 +256,11 @@ iframe {
 /*----------------------------------------*/
 a.button::after,
 a.button-small::after {
-  -webkit-transition: all 0.3s ease-out 0s;
-  -moz-transition: all 0.3s ease-out 0s;
-  -ms-transition: all 0.3s ease-out 0s;
-  -o-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
+  -webkit-transition: all 0.032s ease-out 0s;
+  -moz-transition: all 0.032s ease-out 0s;
+  -ms-transition: all 0.032s ease-out 0s;
+  -o-transition: all 0.032s ease-out 0s;
+  transition: all 0.032s ease-out 0s;
 }
 .share ul,
 .share:hover ul {
@@ -326,7 +326,7 @@ button.li-btn {
   position: absolute;
   right: -1px;
   top: -1px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   cursor: pointer;
 }
 button.li-btn:hover {
@@ -346,7 +346,7 @@ a.review-links {
   line-height: 50px;
   position: relative;
   text-transform: uppercase;
-  transition: all 0.3s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
   width: 170px;
   text-align: center;
 }
@@ -815,7 +815,7 @@ textarea:focus {
 }
 .special-product-active .add-actions {
   padding: 0 15px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 /*Shop Product Area Box Shadow*/
 .shop-product-area .single-product-wrap::before {
@@ -1188,8 +1188,8 @@ textarea:focus {
   visibility: hidden;
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.032s ease-in-out;
+  transition: all 0.032s ease-in-out;
   z-index: -9;
 }
 .modal-wrapper.modal.show {
@@ -1289,8 +1289,8 @@ textarea:focus {
   border: 2px solid rgba(0, 0, 0, 0);
   display: block;
   height: 28px;
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.032s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
   width: 28px;
 }
 .product-variants .produt-variants-color .color-list li a:hover {
@@ -1327,7 +1327,7 @@ textarea:focus {
   text-transform: capitalize;
   padding: 13px 70px;
   border-radius: 2px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .cart-quantity .add-to-cart:hover {
   background: #242424;
@@ -1361,8 +1361,8 @@ textarea:focus {
   line-height: 20px;
   position: absolute;
   text-align: center;
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.032s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
   width: 28px;
 }
 .cart-plus-minus .dec.qtybutton:hover,
@@ -1398,8 +1398,8 @@ textarea:focus {
   visibility: hidden;
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  -webkit-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
+  -webkit-transition: 0.032s ease-in-out;
+  transition: 0.032s ease-in-out;
   cursor: pointer;
 }
 .tab-style-right .slick-arrow,
@@ -1539,7 +1539,7 @@ textarea:focus {
 .ht-currency-trigger,
 .ht-language-trigger {
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .ht-currency-trigger:hover,
 .ht-language-trigger:hover {
@@ -1567,7 +1567,7 @@ textarea:focus {
   text-align: left;
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .setting {
   min-width: 150px;
@@ -1583,7 +1583,7 @@ textarea:focus {
   font-size: 12px;
 }
 .ht-setting-list > li {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .ht-setting-list > li.active {
   background: #fed700;
@@ -1685,7 +1685,7 @@ textarea:focus {
   height: 45px;
   line-height: 45px;
   display: block;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .hm-wishlist > a:hover {
   border-color: #fed700;
@@ -1923,7 +1923,7 @@ textarea:focus {
   display: inline-block;
   position: relative;
   padding-right: 40px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .hb-menu nav > ul > li > a {
   display: flex;
@@ -1954,7 +1954,7 @@ textarea:focus {
   right: 15px;
   font-family: fontawesome;
   font-size: 18px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   color: #242424;
 }
 .hb-menu nav > ul > li:nth-child(n + 5) > a::after {
@@ -1972,7 +1972,7 @@ textarea:focus {
   font-size: 18px;
   font-family: fontawesome;
   color: #242424;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .ht-menu > li:hover .ht-currency-trigger span,
 .ht-menu > li:hover .ht-currency-trigger span::after,
@@ -2008,9 +2008,9 @@ textarea:focus {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 30px 15px;
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  -o-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.032s ease-in-out 0s;
+  -o-transition: all 0.032s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
   visibility: hidden;
   opacity: 0;
   -webkit-transform: translateY(30px);
@@ -2043,7 +2043,7 @@ textarea:focus {
   color: #1e1e1e;
   font-weight: 500;
   font-size: 14px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .megamenu-static-holder ul li ul li.active a,
 .dropdown-holder ul li ul li.active a {
@@ -2138,7 +2138,7 @@ textarea:focus {
   transform: scaleY(0);
   transform-origin: 0 0 0;
   visibility: hidden;
-  transition: all 0.3s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.2);
   width: 220px;
   z-index: 99;
@@ -2152,13 +2152,13 @@ textarea:focus {
 }
 .hb-menu nav ul > li > ul.hb-dropdown > li {
   position: relative;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .hb-menu nav ul > li > ul.hb-dropdown > li > a {
   color: #242424;
   display: block;
   padding: 6px 20px;
-  transition: all 0.3s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
 }
 .hb-menu nav ul > li > ul.hb-dropdown > li.active > a {
   color: #fed700;
@@ -2176,7 +2176,7 @@ textarea:focus {
   visibility: hidden;
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.2);
   top: 100%;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .hb-menu nav > ul > li > ul > li:hover > ul.hb-sub-dropdown {
   opacity: 1;
@@ -2189,7 +2189,7 @@ textarea:focus {
   position: absolute;
   right: 25px;
   top: 5px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   color: #242424;
 }
 .hb-menu nav ul > li > ul.hb-dropdown > li.sub-dropdown-holder:hover::after {
@@ -2316,7 +2316,7 @@ textarea:focus {
   padding: 0 30px 0 0;
   position: relative;
   text-transform: capitalize;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   letter-spacing: 0.25px;
   border-right: 1px solid #e1e1e1;
 }
@@ -2332,7 +2332,7 @@ textarea:focus {
 .single-product-wrap {
   background: #ffffff none repeat scroll 0 0;
   position: relative;
-  -webkit-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.032s ease-in-out;
   transition: all 300ms ease-in 0s;
 }
 .single-product-wrap:hover {
@@ -2415,7 +2415,7 @@ textarea:focus {
   font-family: fontawesome;
   color: #7a7a7a;
   font-size: 13px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .review-item:hover::before {
   color: #fed700;
@@ -2468,7 +2468,7 @@ textarea:focus {
   font-size: 13px;
   margin-top: 9px;
   text-transform: capitalize;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .product_desc .manufacturer a:hover {
   color: #fed700;
@@ -2544,7 +2544,7 @@ textarea:focus {
   margin: 0;
   background: #eef0f1;
   border: 1px solid #e1e1e1;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   width: 120px;
 }
 .add-actions-link li:hover {
@@ -2629,8 +2629,8 @@ textarea:focus {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   visibility: hidden;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.032s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .product-active .owl-nav button:hover,
 .product-active-2 .owl-nav button:hover {
@@ -2715,8 +2715,8 @@ textarea:focus {
   position: absolute;
   right: 15px;
   top: -55px;
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.032s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
 }
 .product-active-3 .owl-nav button.owl-prev,
 .pos-product-active .owl-nav button.owl-prev,
@@ -3057,12 +3057,12 @@ textarea:focus {
   line-height: 36px;
   display: block;
   position: relative;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .footer-block > ul > li > a:hover {
   color: #242424;
   text-decoration: underline;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 /*Social Link*/
 .social-link {
@@ -3072,7 +3072,7 @@ textarea:focus {
 }
 .social-link > li {
   display: inline-block !important;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   float: left;
   margin-right: 12px !important;
 }
@@ -3207,7 +3207,7 @@ textarea:focus {
 .li-header-4 .hb-menu nav > ul > li > a,
 .li-header-4 .hb-menu nav > ul > li > a:after {
   color: #ffffff;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .li-header-4 .hb-menu nav > ul > li:hover > a,
 .li-header-4 .hb-menu nav > ul > li:hover > a::after {
@@ -3319,7 +3319,7 @@ textarea:focus {
   font-family: FontAwesome;
   float: right;
   vertical-align: top;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .category-menu-list > ul > li.right-menu > a:hover::after {
   transform: rotate(-90deg);
@@ -3387,8 +3387,8 @@ li.rx-parent a.rx-show::after {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   visibility: hidden;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.032s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .cat-dropdown li,
 .cat-mega-menu ul li {
@@ -3469,7 +3469,7 @@ li.right-menu .cat-mega-menu-2 > li {
   margin-top: 9px;
   font-weight: 400;
   text-transform: capitalize;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .featured-product-active .owl-item {
   padding: 15px;
@@ -3737,7 +3737,7 @@ li.right-menu .cat-mega-menu-2 > li {
   font-size: 14px;
   font-weight: normal;
   color: #242424;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .li-product-remove > a:hover i {
   color: #fed700;
@@ -3807,7 +3807,7 @@ li.right-menu .cat-mega-menu-2 > li {
 .coupon-accordion span {
   color: #6f6f6f;
   cursor: pointer;
-  transition: all 0.3s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
   text-transform: none;
 }
 .coupon-accordion span:hover {
@@ -3859,8 +3859,8 @@ li.right-menu .cat-mega-menu-2 > li {
   padding: 0 30px;
   text-shadow: none;
   text-transform: uppercase;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.032s ease 0s;
+  transition: all 0.032s ease 0s;
   white-space: nowrap;
   width: inherit;
 }
@@ -3907,8 +3907,8 @@ p.checkout-coupon input[type="submit"] {
   cursor: pointer;
   margin-left: 6px;
   padding: 5px 10px;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.032s ease 0s;
+  transition: all 0.032s ease 0s;
   width: inherit;
 }
 .coupon-info p.form-row input[type="submit"]:hover,
@@ -4085,8 +4085,8 @@ thead {
   margin: 20px 0 0;
   padding: 0;
   text-transform: uppercase;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.032s ease 0s;
+  transition: all 0.032s ease 0s;
   width: 100%;
   border: 1px solid transparent;
   cursor: pointer;
@@ -4125,7 +4125,7 @@ thead {
   color: #ffffff;
   background-color: #363f4d;
   border-radius: 3px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .login-button:hover {
   background: #fed700;
@@ -4205,9 +4205,9 @@ thead {
   display: block;
   border: 2px solid #999999;
   content: "";
-  -webkit-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.032s ease 0s;
+  -o-transition: all 0.032s ease 0s;
+  transition: all 0.032s ease 0s;
 }
 .login-form .check-box input[type="checkbox"] + label::after {
   position: absolute;
@@ -4222,9 +4222,9 @@ thead {
   color: #363f4d;
   width: 20px;
   text-align: center;
-  -webkit-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.032s ease 0s;
+  -o-transition: all 0.032s ease 0s;
+  transition: all 0.032s ease 0s;
 }
 .login-form .check-box input[type="checkbox"]:checked + label::before {
   border: 2px solid #363f4d;
@@ -4277,7 +4277,7 @@ thead {
   color: #ffffff;
   background-color: #363f4d;
   border-radius: 3px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 
 .verify-button:hover {
@@ -4329,7 +4329,7 @@ thead {
   color: #ffffff;
   background-color: #363f4d;
   border-radius: 3px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .register-button:hover {
   background: #fed700;
@@ -4401,7 +4401,7 @@ thead {
   color: #ffffff;
   background-color: #363f4d;
   border-radius: 3px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 
 .change-password-button:hover {
@@ -4468,8 +4468,8 @@ thead {
   line-height: 42px;
   padding: 0 25px;
   text-transform: uppercase;
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.032s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
   width: inherit;
 }
 .coupon-all input.button:hover {
@@ -4513,8 +4513,8 @@ thead {
   margin-top: 30px;
   padding: 10px 20px;
   text-transform: capitalize;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.032s ease 0s;
+  transition: all 0.032s ease 0s;
 }
 .cart-page-total > a:hover {
   background: #fed700;
@@ -4557,7 +4557,7 @@ thead {
   font-size: 20px;
   line-height: 50px;
   color: #242424;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .li-sidebar-search-form .li-search-btn:hover i {
   color: #fed700;
@@ -4654,7 +4654,7 @@ thead {
   text-transform: uppercase;
   position: relative;
   margin-right: 10px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .li-blog-single-item .li-blog-content .li-blog-details .li-blog-meta a:hover {
   color: #fed700;
@@ -4760,7 +4760,7 @@ thead {
   font-style: italic;
   text-transform: capitalize;
   color: #242424;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .li-tag-line a:hover {
   color: #fed700;
@@ -4921,7 +4921,7 @@ thead {
   padding: 15px 10px;
 }
 .compare-table .table-hover tbody tr {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .compare-table .table-hover tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.02);
@@ -5028,7 +5028,7 @@ span.required {
   border: 1px solid #242424;
   color: #ffffff;
   text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .contact-form .li-btn-3:hover {
   background-color: #fed700;
@@ -5184,8 +5184,8 @@ span.required {
   font-size: 0.875rem;
   line-height: 15px;
   padding: 5px;
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.032s ease-in-out 0s;
+  transition: all 0.032s ease-in-out 0s;
   margin-top: 30px;
 }
 .btn-clear-all::before {
@@ -5203,7 +5203,7 @@ span.required {
 }
 .category-sub-menu ul li {
   padding-top: 10px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .category-sub-menu ul li:hover a {
   color: #fed700;
@@ -5402,7 +5402,7 @@ span.required {
   display: inline-block;
   padding: 2px 10px;
   border: 1px solid #ebebeb;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   margin: 0 2px 5px;
 }
 .category-tags > ul > li:first-child {
@@ -5473,7 +5473,7 @@ span.required {
 .product-social-sharing > ul > li {
   display: inline-block;
   border-radius: 2px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   width: 85px;
   height: 25px;
   line-height: 25px;
@@ -5639,7 +5639,7 @@ span.required {
   right: auto;
   top: 0;
   display: block;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .feedback-btn .close:hover,
 .feedback-btn a:hover {
@@ -5738,7 +5738,7 @@ span.required {
 .tab-style-right .slick-slide {
   border: 1px solid transparent;
   padding: 5px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .sp-tab-style-left-page .tab-style-left .slick-slide:hover,
 .tab-style-right .slick-slide:hover {
@@ -5765,7 +5765,7 @@ span.required {
 /*----------------------------------------*/
 .sp-gallery-left .lg-image {
   outline: 1px solid #e1e1e1;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
   padding: 5px;
 }
 .sp-gallery-left .lg-image:hover {
@@ -5824,7 +5824,7 @@ span.required {
   position: absolute;
   right: 0;
   top: 0;
-  transition: all 0.3s ease 0s;
+  transition: all 0.032s ease 0s;
   width: 50px;
 }
 #search-form button:hover {
@@ -5841,7 +5841,7 @@ span.required {
   margin-top: 53px;
   padding: 0 30px;
   text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.032s ease-in-out;
 }
 .error-button a:hover {
   background: #242424;

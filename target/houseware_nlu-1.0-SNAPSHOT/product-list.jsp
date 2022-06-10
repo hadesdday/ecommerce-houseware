@@ -1,15 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hoang
-  Date: 5/17/2022
-  Time: 9:23 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--<jsp:useBean id="cart" scope="request" type="vn.houseware.finalproject.bean.Cart"/>--%>
 <%@ page import="beans.Cart" %>
+<jsp:useBean id="categoryName" scope="request" type="java.lang.String"/>
+
 <%
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
@@ -22,53 +16,8 @@
 
 <html class="no-js" lang="zxxs">
 
-<!-- shop-right-sidebar31:48-->
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Shop Right Sidebar || limupa - Digital Products Store eCommerce Bootstrap 4 Template</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
-    <!-- Material Design Iconic Font-V2.2.0 -->
-    <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- Font Awesome Stars-->
-    <link rel="stylesheet" href="css/fontawesome-stars.css">
-    <!-- Meanmenu CSS -->
-    <link rel="stylesheet" href="css/meanmenu.css">
-    <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <!-- Slick Carousel CSS -->
-    <link rel="stylesheet" href="css/slick.css">
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- Jquery-ui CSS -->
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
-    <!-- Venobox CSS -->
-    <link rel="stylesheet" href="css/venobox.css">
-    <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="css/nice-select.css">
-    <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <!-- Bootstrap V4.1.3 Fremwork CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Helper CSS -->
-    <link rel="stylesheet" href="css/helper.css">
-
-    <!-- Main Style CSS -->
-    <link rel="stylesheet" href="admin/assets/css/lib/toastr/toastr.min.css">
-    <link rel="stylesheet" href="style.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- Modernizr js -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
+<title>${categoryName} giá rẻ , chính hãng | NLU</title>
+<%@include file="head.jsp" %>
 
 <body>
 
@@ -79,339 +28,15 @@
 <!-- Begin Body Wrapper -->
 <div class="body-wrapper">
     <!-- Begin Header Area -->
-    <header>
-        <!-- Begin Header Top Area -->
-        <div class="header-top">
-            <div class="container">
-                <div class="row">
-                    <!-- Begin Header Top Left Area -->
-                    <div class="col-lg-3 col-md-4">
-                        <div class="header-top-left">
-                            <ul class="phone-wrap">
-                                <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Header Top Left Area End Here -->
-                    <!-- Begin Header Top Right Area -->
-                    <div class="col-lg-9 col-md-8">
-                        <div class="header-top-right">
-                            <ul class="ht-menu">
-                                <!-- Begin Setting Area -->
-                                <li>
-                                    <div>
-                                        <span class="mr-3"><a href="register.html">Đăng Ký</a></span>
-                                        <span class="mr-3"><a href="login.html">Đăng Nhập</a></span>
-                                    </div>
-                                    <!-- <div class="ht-setting-trigger"><span>Setting</span></div> -->
-                                    <div class="setting ht-setting">
-                                        <ul class="ht-setting-list">
-                                            <li><a href="login-register.html">My Account</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="login-register.html">Sign In</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <!-- Setting Area End Here -->
-                                <!-- Begin Currency Area -->
-                                <li>
-                                    <span class="currency-selector-wrapper">Currency :</span>
-                                    <div class="ht-currency-trigger"><span>USD $</span></div>
-                                    <div class="currency ht-currency">
-                                        <ul class="ht-setting-list">
-                                            <li><a href="#">EUR €</a></li>
-                                            <li class="active"><a href="#">USD $</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <!-- Currency Area End Here -->
-                                <!-- Begin Language Area -->
-                                <li>
-                                    <span class="language-selector-wrapper">Language :</span>
-                                    <div class="ht-language-trigger"><span>English</span></div>
-                                    <div class="language ht-language">
-                                        <ul class="ht-setting-list">
-                                            <li class="active"><a href="#"><img src="images/menu/flag-icon/1.jpg"
-                                                                                alt="">English</a></li>
-                                            <li><a href="#"><img src="images/menu/flag-icon/2.jpg"
-                                                                 alt="">Français</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <!-- Language Area End Here -->
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Header Top Right Area End Here -->
-                </div>
-            </div>
-        </div>
-        <!-- Header Top Area End Here -->
-        <!-- Begin Header Middle Area -->
-        <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
-            <div class="container">
-                <div class="row">
-                    <!-- Begin Header Logo Area -->
-                    <div class="col-lg-3">
-                        <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="${pageContext.request.contextPath}">
-                                <img src="images/menu/logo/1.jpg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Header Logo Area End Here -->
-                    <!-- Begin Header Middle Right Area -->
-                    <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
-                        <!-- Begin Header Middle Searchbox Area -->
-                        <form action="#" class="hm-searchbox">
-                            <select class="nice-select select-search-category">
-                                <option value="0">All</option>
-                                <option value="20">- - - - Máy vắt cam</option>
-                                <option value="21">- - - - Nồi cơm điện</option>
-                                <option value="22">- - - - Máy rửa chén</option>
-                                <option value="23">- - - - Máy xay thịt</option>
-                                <option value="24">- - - - Máy pha cà phê</option>
-                                <option value="25">- - - - Bếp từ hồng ngoại</option>
-                                <option value="26">- - - - Lò nướng bánh mì</option>
-                                <option value="27">- - - - Bình siêu tốc</option>
-                                <option value="28">- - - - Máy xay sinh tố</option>
-                                <option value="18">- - - - Nồi chính hãng</option>
-                                <option value="29">- - - - Bếp ga &amp; Bếp ga mini</option>
-                                <option value="30">- - - - Lò vi sóng</option>
-                                <option value="31">- - - - Nồi cơm mini</option>
-                                <option value="32">- - - - Dụng cụ nhà bếp</option>
-                                <option value="33">- - - - Nồi chiên không dầu</option>
-
-                            </select>
-                            <input type="text" placeholder="Enter your search key ...">
-                            <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                        <!-- Header Middle Searchbox Area End Here -->
-                        <!-- Begin Header Middle Right Area -->
-                        <div class="header-middle-right">
-                            <ul class="hm-menu">
-                                <!-- Begin Header Middle Wishlist Area -->
-                                <li class="hm-wishlist">
-                                    <a href="wishlist.html">
-                                        <span class="cart-item-count wishlist-item-count">0</span>
-                                        <i class="fa fa-heart-o"></i>
-                                    </a>
-                                </li>
-                                <!-- Header Middle Wishlist Area End Here -->
-                                <!-- Begin Header Mini Cart Area -->
-                                <li class="hm-minicart">
-                                    <div class="hm-minicart-trigger">
-                                        <span class="item-icon"></span>
-                                        <span class="item-text">${cart.total()}
-                                                <span class="cart-item-count">${cart.products.size()}</span>
-                                            </span>
-                                    </div>
-                                    <span></span>
-
-                                    <div class="minicart">
-                                        <ul class="minicart-product-list">
-                                            <c:set var="list" value="${cart.products}"/>
-                                            <c:forEach items="${list}" var="item">
-                                                <li>
-                                                    <a href="product-details.jsp" class="minicart-product-image">
-                                                        <img src="data:image/jpg;base64,${item.imageMain}" alt="cart products">
-                                                    </a>
-                                                    <div class="minicart-product-details">
-                                                        <h6><a href="product-details.jsp">${item.ten_sp}</a></h6>
-                                                        <span class="price">${item.gia}</span><span>VND x</span><span
-                                                            class="quantity">${item.quantitySold}</span>
-                                                    </div>
-                                                    <button class="close" title="Remove" pid="${item.id_sanpham}">
-                                                        <i class="fa fa-close"></i>
-                                                    </button>
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-                                        <p class="minicart-total">SUBTOTAL: <span>${cart.total()}</span></p>
-                                        <div class="minicart-button">
-                                            <a href="${pageContext.request.contextPath}/Cart"
-                                               class="li-button li-button-dark li-button-fullwidth li-button-sm">
-                                                <span>Xem giỏ hàng</span>
-                                            </a>
-                                            <a href="${pageContext.request.contextPath}/Checkout"
-                                               class="li-button li-button-fullwidth li-button-sm">
-                                                <span>Thanh toán</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- Header Mini Cart Area End Here -->
-                            </ul>
-                        </div>
-                        <!-- Header Middle Right Area End Here -->
-                    </div>
-                    <!-- Header Middle Right Area End Here -->
-                </div>
-            </div>
-        </div>
-        <!-- Header Middle Area End Here -->
-        <!-- Begin Header Bottom Area -->
-        <div class="header-bottom header-sticky d-none d-lg-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Begin Header Bottom Menu Area -->
-                        <div class="hb-menu hb-menu-2 d-xl-block">
-                            <nav>
-                                <ul>
-                                    <li class=""><a href="{pageContext.request.contextPath}">Trang chủ</a>
-
-                                    </li>
-                                    <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
-                                        phẩm</a>
-
-
-                                        <ul class="megamenu hb-megamenu">
-                                            <li><a href="gia-dung-nha-bep.html">Gia dụng nhà bếp</a>
-                                                <ul>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=noi-com">Nồi
-                                                            cơm điện</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=lvs">Lò
-                                                            vi sóng</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=nckd">Nồi
-                                                            chiên không dầu</a></li>
-                                                    </li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=bep-tu">Bếp
-                                                            từ</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=bhn">Bếp
-                                                            hồng ngoại</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=bep-ga">Bếp
-                                                            gas</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=nas">Nồi
-                                                            áp suất</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=lo-nuong">Lò
-                                                            nướng</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=bdst">Bình
-                                                            đun siêu tốc</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=btd">Bình
-                                                            thủy điện</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="may-xay-vat-ep.html">Máy xay, vắt, ép</a>
-                                                <ul>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=mxst">Máy
-                                                            xay sinh tố</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=metc">Máy
-                                                            ép trái cây</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=mpcf">Máy
-                                                            pha cà phê</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=mvc">Máy
-                                                            vắt cam</a></li>
-                                                    <li><a href="mxt">Máy xay thịt</a></li>
-
-                                                </ul>
-                                            </li>
-                                            <li><a href="dung-cu-nha-bep.html">Dụng cụ nhà bếp</a>
-                                                <ul>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=xoong-noi">Xoong,
-                                                            nồi</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=ccd">Chảo
-                                                            chống dính</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=dca">Dụng
-                                                            cụ ăn</a></li>
-                                                    <li>
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=nckd">Nồi
-                                                            chiên không dầu</a>
-                                                    </li>
-
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-holder"><a href="thuong-hieu.html">Thương hiệu</a>
-                                        <ul class="hb-dropdown">
-                                            <li class="sub-dropdown-holder"><a
-                                                    href="${pageContext.request.contextPath}/ProductList?category=phillips">Phillips</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a
-                                                    href="${pageContext.request.contextPath}/ProductList?category=sunhouse">Sunhouse</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a
-                                                    href="${pageContext.request.contextPath}/ProductList?category=deawoo">Deawoo</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a
-                                                    href="${pageContext.request.contextPath}/ProductList?category=panasonic">Panasonic</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a
-                                                    href="${pageContext.request.contextPath}/ProductList?category=sauce">Sauce</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a
-                                                    href="${pageContext.request.contextPath}/ProductList?category=sharp">Sharp</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a
-                                                    href="${pageContext.request.contextPath}/ProductList?category=electrolux">Electrolux</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a
-                                                    href="${pageContext.request.contextPath}/ProductList?category=kangaroo">Kangaroo</a>
-
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <!-- <li><a href="about-us.html">About Us</a></li> -->
-                                    <li><a href="contact.html">Liên hệ</a></li>
-
-                                    </li>
-                                    <!-- Begin Header Bottom Menu Information Area -->
-
-                                    <!-- Header Bottom Menu Information Area End Here -->
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- Header Bottom Menu Area End Here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Header Bottom Area End Here -->
-        <!-- Begin Mobile Menu Area -->
-        <div class="mobile-menu-area d-lg-none d-xl-none col-12">
-            <div class="container">
-                <div class="row">
-                    <div class="mobile-menu">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Menu Area End Here -->
-    </header>
+    <%@include file="home-header.jsp" %>
     <!-- Header Area End Here -->
     <!-- Begin Li's Breadcrumb Area -->
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active">Shop Right Sidebar</li>
+                    <li><a href="${pageContext.request.contextPath}">Trang chủ</a></li>
+                    <li class="active">${categoryName}</li>
                 </ul>
             </div>
         </div>
@@ -435,11 +60,12 @@
                             <div class="product-view-mode">
                                 <!-- shop-item-filter-list start -->
                                 <ul class="nav shop-item-filter-list" role="tablist">
-                                    <li class="active" role="presentation"><a aria-selected="true"
-                                                                              class="active show" data-toggle="tab"
-                                                                              role="tab"
-                                                                              aria-controls="grid-view"
-                                                                              href="#grid-view"><i class="fa fa-th"></i></a>
+                                    <li class="active" role="presentation">
+                                        <a aria-selected="true"
+                                           class="active show" data-toggle="tab"
+                                           role="tab"
+                                           aria-controls="grid-view"
+                                           href="#grid-view"><i class="fa fa-th"></i></a>
                                     </li>
                                     <li role="presentation"><a data-toggle="tab" role="tab"
                                                                aria-controls="list-view" href="#list-view"><i

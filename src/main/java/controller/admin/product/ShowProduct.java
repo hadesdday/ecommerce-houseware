@@ -1,5 +1,6 @@
 package controller.admin.product;
 
+import beans.Category;
 import beans.Product;
 import com.google.gson.Gson;
 import db.DbConnector;
@@ -18,7 +19,9 @@ public class ShowProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> productList = ProductServices.getInstance().getProduct();
+        List<Category> categoryList = ProductServices.getInstance().getCategory();
         request.setAttribute("productList", productList);
+        request.setAttribute("categoryList", categoryList);
         request.getRequestDispatcher("sanpham.jsp").forward(request, response);
     }
 

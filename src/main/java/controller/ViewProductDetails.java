@@ -1,8 +1,11 @@
 package controller;
 
+import beans.Category;
+import beans.Image;
 import beans.Product;
 import beans.Review;
 import helper.Base64;
+import services.FileServices;
 import services.ProductServices;
 import services.ReviewServices;
 
@@ -20,6 +23,8 @@ public class ViewProductDetails extends HttpServlet {
         Product p = ProductServices.getInstance().getProduct(pid);
         List<Product> sameCategoryProducts = ProductServices.getInstance().getByCategory(p.getMa_loaisp());
         List<Review> comments = ReviewServices.getInstance().getReviewByPid(pid);
+        List<Image> images = FileServices.getInstance().getImagesByPid(pid);
+        Category c = ProductServices.getInstance().getCategory(p.getMa_loaisp());
         String url = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
         p.setImageMain(Base64.get(url));
 
@@ -53,9 +58,15 @@ public class ViewProductDetails extends HttpServlet {
             sp.setImageMain(Base64.get(sUrl));
         }
 
+        for (Image i : images) {
+            i.setLINK_ANH(Base64.get(i.getLINK_ANH()));
+        }
+
+        request.setAttribute("categoryName", c.getTen_loaisp());
         request.setAttribute("product", p);
         request.setAttribute("sameCategoryProducts", sameCategoryProducts);
         request.setAttribute("comments", comments);
+        request.setAttribute("images", images);
         request.getRequestDispatcher("product-details.jsp").forward(request, response);
     }
 

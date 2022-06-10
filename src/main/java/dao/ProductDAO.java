@@ -4,6 +4,7 @@ import beans.Category;
 import beans.Product;
 import db.DbConnector;
 
+import java.sql.Types;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -129,19 +130,35 @@ public class ProductDAO {
 
     public boolean addProduct(Product product) {
         try {
-            int rowInserted = DbConnector.get().withHandle(h ->
-                    h.createUpdate("insert into sanpham(id_sanpham,ten_sp,ma_loaisp,gia,id_km,thuonghieu,soluongton,active,mota) values(?,?,?,?,?,?,?,?,?)")
-                            .bind(0, product.getId_sanpham())
-                            .bind(1, product.getTen_sp())
-                            .bind(2, product.getMa_loaisp())
-                            .bind(3, product.getGia())
-                            .bind(4, product.getId_km())
-                            .bind(5, product.getThuonghieu())
-                            .bind(6, product.getSoluongton())
-                            .bind(7, product.getActive())
-                            .bind(8, product.getMota())
-                            .execute()
-            );
+            int rowInserted = 0;
+            if (!product.getId_km().isEmpty()) {
+                rowInserted = DbConnector.get().withHandle(h ->
+                        h.createUpdate("insert into sanpham(id_sanpham,ten_sp,ma_loaisp,gia,id_km,thuonghieu,soluongton,active,mota) values(?,?,?,?,?,?,?,?,?)")
+                                .bind(0, product.getId_sanpham())
+                                .bind(1, product.getTen_sp())
+                                .bind(2, product.getMa_loaisp())
+                                .bind(3, product.getGia())
+                                .bind(4, product.getId_km())
+                                .bind(5, product.getThuonghieu())
+                                .bind(6, product.getSoluongton())
+                                .bind(7, product.getActive())
+                                .bind(8, product.getMota())
+                                .execute()
+                );
+            } else {
+                rowInserted = DbConnector.get().withHandle(h ->
+                        h.createUpdate("insert into sanpham(id_sanpham,ten_sp,ma_loaisp,gia,id_km,thuonghieu,soluongton,active,mota) values(?,?,?,?,?,?,?,?,?)")
+                                .bind(0, product.getId_sanpham())
+                                .bind(1, product.getTen_sp())
+                                .bind(2, product.getMa_loaisp())
+                                .bind(3, product.getGia())
+                                .bindNull(4, Types.NULL)
+                                .bind(5, product.getThuonghieu())
+                                .bind(6, product.getSoluongton())
+                                .bind(7, product.getActive())
+                                .bind(8, product.getMota())
+                                .execute());
+            }
             return rowInserted == 1;
         } catch (Exception exception) {
             return false;
@@ -163,19 +180,35 @@ public class ProductDAO {
 
     public boolean editProduct(Product product) {
         try {
-            int rowsAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("UPDATE sanpham SET ten_sp=?,ma_loaisp=?,gia=?,id_km=?,thuongHieu=?,soLuongTon=?,active=?,mota=? where id_sanpham = ?")
-                            .bind(0, product.getTen_sp())
-                            .bind(1, product.getMa_loaisp())
-                            .bind(2, product.getGia())
-                            .bind(3, product.getId_km())
-                            .bind(4, product.getThuonghieu())
-                            .bind(5, product.getSoluongton())
-                            .bind(6, product.getActive())
-                            .bind(7, product.getMota())
-                            .bind(8, product.getId_sanpham())
-                            .execute()
-            );
+            int rowsAffected = 0;
+            if (!product.getId_km().isEmpty()) {
+                rowsAffected = DbConnector.get().withHandle(h ->
+                        h.createUpdate("UPDATE sanpham SET ten_sp=?,ma_loaisp=?,gia=?,id_km=?,thuongHieu=?,soLuongTon=?,active=?,mota=? where id_sanpham = ?")
+                                .bind(0, product.getTen_sp())
+                                .bind(1, product.getMa_loaisp())
+                                .bind(2, product.getGia())
+                                .bind(3, product.getId_km())
+                                .bind(4, product.getThuonghieu())
+                                .bind(5, product.getSoluongton())
+                                .bind(6, product.getActive())
+                                .bind(7, product.getMota())
+                                .bind(8, product.getId_sanpham())
+                                .execute()
+                );
+            } else {
+                rowsAffected = DbConnector.get().withHandle(h ->
+                        h.createUpdate("UPDATE sanpham SET ten_sp=?,ma_loaisp=?,gia=?,id_km=?,thuongHieu=?,soLuongTon=?,active=?,mota=? where id_sanpham = ?")
+                                .bind(0, product.getTen_sp())
+                                .bind(1, product.getMa_loaisp())
+                                .bind(2, product.getGia())
+                                .bindNull(3, Types.NULL)
+                                .bind(4, product.getThuonghieu())
+                                .bind(5, product.getSoluongton())
+                                .bind(6, product.getActive())
+                                .bind(7, product.getMota())
+                                .bind(8, product.getId_sanpham())
+                                .execute());
+            }
             return rowsAffected == 1;
         } catch (Exception e) {
             return false;
