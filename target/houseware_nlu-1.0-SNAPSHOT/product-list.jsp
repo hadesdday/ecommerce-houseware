@@ -77,7 +77,7 @@
                                 <span>Showing 1 to 9 of 15</span>
                             </div>
                         </div>
-
+                        
                     </div>
                     <!-- shop-top-bar end -->
                     <!-- shop-products-wrapper start -->
@@ -908,10 +908,10 @@
                             <div class="categori-checkbox">
                                 <form action="#">
                                     <ul>
-                                        <li><input type="checkbox" name="price"><a href="#"></a><1 triệu</li>
-                                        <li><input type="checkbox" name="price"><a href="#"></a>1-3 triệu</li>
-                                        <li><input type="checkbox" name="price"><a href="#"></a>3-6 triệu</li>
-                                        <li><input type="checkbox" name="price"><a href="#"></a>>6 triệu</li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#"></a><1 triệu</li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>1-3 triệu</li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>3-6 triệu</li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>>6 triệu</li>
                                     </ul>
                                 </form>
                             </div>
@@ -923,14 +923,14 @@
                             <div class="categori-checkbox">
                                 <form action="#">
                                     <ul>
-                                        <li><input type="checkbox" name="branch">Philips</li>
-                                        <li><input type="checkbox" name="branch"><a href="#">Sunhouse</a></li>
-                                        <li><input type="checkbox" name="branch"><a href="#">Deawoo</a></li>
-                                        <li><input type="checkbox" name="branch"><a href="#">Panasonic</a></li>
-                                        <li><input type="checkbox" name="branch"><a href="#">Sauce</a></li>
-                                        <li><input type="checkbox" name="branch"><a href="#">Sharp</a></li>
-                                        <li><input type="checkbox" name="branch"><a href="#">Electrolux</a></li>
-                                        <li><input type="checkbox" name="branch"><a href="#">Kangaroo</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Philips</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Sunhouse</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Deawoo</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Panasonic</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Sauce</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Sharp</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Electrolux</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Kangaroo</a></li>
                                     </ul>
                                 </form>
                             </div>
@@ -1407,11 +1407,29 @@
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
 <script>
-    $(document).ready(function () {
-        $('input[type=checkbox]').each(function () {
-
-        });
-    })
+    // $(document).ready(function () {
+    //     $(".pagination-box li").click(function (){
+    //         alert("click")
+    //         var index=$(this).index()
+    //         var className=$(this).children()[0].attr("class")
+    //         if(className!='Previous'||className!='Next'){
+    //             console.log(); alert("clic2k")
+    //
+    //             $.ajax({
+    //                 url: "/houseware_nlu_war_exploded/ProductList",
+    //                 method: "GET",
+    //                 data: {
+    //
+    //                 },
+    //                 success: function (data) {
+    //                 },
+    //                 error: function (data) {
+    //
+    //                 }
+    //             });
+    //         }
+    //     })
+    // })
 
 </script>
 </body>
