@@ -1,5 +1,6 @@
 package controller.admin.product;
 
+import beans.Category;
 import beans.Product;
 import com.google.gson.Gson;
 import db.DbConnector;
@@ -17,25 +18,10 @@ import java.util.stream.Collectors;
 public class ShowProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        renderPage(request, response);
-    }
-
-    private void renderPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<beans.Product> productList = ProductServices.getInstance().getProduct();
-//        Gson gson = new Gson();
-//        PrintWriter writer = response.getWriter();
-//        if (productList.size() > 0) {
-//            response.setContentType("application/json");
-//            writer.write(gson.toJson(productList));
-//            writer.close();
-//            request.getRequestDispatcher("/admin/product").forward(request, response);
-//        } else {
-//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-//            response.setContentType("application/json");
-//            writer.write("Trống");
-//            writer.close();
-//        }
+        List<Product> productList = ProductServices.getInstance().getProduct();
+        List<Category> categoryList = ProductServices.getInstance().getCategory();
         request.setAttribute("productList", productList);
+        request.setAttribute("categoryList", categoryList);
         request.getRequestDispatcher("sanpham.jsp").forward(request, response);
     }
 

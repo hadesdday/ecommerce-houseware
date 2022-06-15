@@ -35,21 +35,18 @@ public class UpdateOrder extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String maHD = request.getParameter("maHD");
+        int maHD = Integer.parseInt(request.getParameter("maHD"));
         String maKH = request.getParameter("maKH");
-        String ngayMua = request.getParameter("ngayMua");
         String coupon = request.getParameter("coupon");
         String paymentMethod = request.getParameter("paymentMethod");
         double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
         String status = request.getParameter("status");
 
-        Order order = new Order(maHD, maKH, ngayMua, coupon, paymentMethod, totalPrice, status);
+        Order newOrder = new Order(maHD, maKH, coupon, paymentMethod, totalPrice, status);
 
         boolean isError = false;
-        if (maHD.trim().length() < 1) isError = true;
+        if (maHD < 1) isError = true;
         if (maKH.trim().length() < 1) isError = true;
-        if (ngayMua.trim().length() < 1) isError = true;
-        if (coupon.trim().length() < 1) isError = true;
         if (paymentMethod.trim().length() < 1) isError = true;
         if (totalPrice < 1) isError = true;
         if (status.trim().length() < 1) isError = true;
@@ -57,7 +54,7 @@ public class UpdateOrder extends HttpServlet {
         if (isError) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
-            if (OrderServices.getInstance().updateOrder(order)) {
+            if (OrderServices.getInstance().updateOrder(newOrder)) {
                 response.sendRedirect(AssetsProperties.getBaseURL("admin/order"));
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);

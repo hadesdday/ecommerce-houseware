@@ -1,5 +1,7 @@
 package controller.client.authentication;
 
+import properties.AssetsProperties;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +21,6 @@ public class LogOutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("index.jsp");
+        response.sendRedirect(AssetsProperties.getBaseURL());
     }
 }

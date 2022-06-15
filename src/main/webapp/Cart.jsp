@@ -64,7 +64,8 @@
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 <!-- Begin Body Wrapper -->
 <div class="body-wrapper">
@@ -160,7 +161,7 @@
                                 <option value="21">- - - - Nồi cơm điện</option>
                                 <option value="22">- - - - Máy rửa chén</option>
                                 <option value="23">- - - - Máy xay thịt</option>
-                                <option value="24">- - - - Máy pha cà phê </option>
+                                <option value="24">- - - - Máy pha cà phê</option>
                                 <option value="25">- - - - Bếp từ hồng ngoại</option>
                                 <option value="26">- - - - Lò nướng bánh mì</option>
                                 <option value="27">- - - - Bình siêu tốc</option>
@@ -169,7 +170,7 @@
                                 <option value="29">- - - - Bếp ga &amp; Bếp ga mini</option>
                                 <option value="30">- - - - Lò vi sóng</option>
                                 <option value="31">- - - - Nồi cơm mini</option>
-                                <option value="32">- - - - Dụng cụ nhà bếp </option>
+                                <option value="32">- - - - Dụng cụ nhà bếp</option>
                                 <option value="33">- - - - Nồi chiên không dầu</option>
 
                             </select>
@@ -192,45 +193,37 @@
                                 <li class="hm-minicart">
                                     <div class="hm-minicart-trigger">
                                         <span class="item-icon"></span>
-                                        <span class="item-text">£160
-                                                <span class="cart-item-count">2</span>
+                                        <span class="item-text">${cart.total()}
+                                                <span class="cart-item-count">${cart.products.size()}</span>
                                             </span>
                                     </div>
                                     <span></span>
                                     <div class="minicart">
                                         <ul class="minicart-product-list">
-                                            <li>
-                                                <a href="single-product.html" class="minicart-product-image">
-                                                    <img src="images/product/small-size/3.jpg" alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                    <span>£80 x 1</span>
-                                                </div>
-                                                <button class="close">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <a href="single-product.html" class="minicart-product-image">
-                                                    <img src="images/product/small-size/4.jpg" alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                    <span>£80 x 1</span>
-                                                </div>
-                                                <button class="close">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
+                                            <c:set var="list" value="${cart.products}"/>
+                                            <c:forEach items="${list}" var="item">
+                                                <li>
+                                                    <a href="product-details.jsp" class="minicart-product-image">
+                                                        <img src="data:image/jpg;base64,${item.imageMain}" width=50px" height="50px" alt="cart products">
+                                                    </a>
+                                                    <div class="minicart-product-details">
+                                                        <h6><a href="product-details.jsp">${item.ten_sp}</a></h6>
+                                                        <span class="price">${item.gia}</span><span>VND x</span><span
+                                                            class="quantity">${item.quantitySold}</span>
+                                                    </div>
+                                                    <button class="close" title="Remove" pid="${item.id_sanpham}">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </li>
+                                            </c:forEach>
                                         </ul>
-                                        <p class="minicart-total">SUBTOTAL: <span>£160</span></p>
+                                        <p class="minicart-total">SUBTOTAL: <span>${cart.total()}</span></p>
                                         <div class="minicart-button">
-                                            <a href="shopping-cart.html"
+                                            <a href="${pageContext.request.contextPath}/Cart"
                                                class="li-button li-button-dark li-button-fullwidth li-button-sm">
                                                 <span>Xem giỏ hàng</span>
                                             </a>
-                                            <a href="checkout.html"
+                                            <a href="${pageContext.request.contextPath}/Checkout"
                                                class="li-button li-button-fullwidth li-button-sm">
                                                 <span>Thanh toán</span>
                                             </a>
@@ -256,7 +249,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href="index.html">Trang chủ</a>
+                                    <li class=""><a href="{pageContext.request.contextPath}">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
@@ -365,7 +358,7 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{pageContext.request.contextPath}">Home</a></li>
                     <li class="active">Giỏ hàng</li>
                 </ul>
             </div>
@@ -377,69 +370,77 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="#">
-                        <div class="table-content table-responsive">
-                            <table class="table cart-table">
-                                <thead>
+
+                    <div class="table-content table-responsive">
+                        <table class="table cart-table">
+                            <thead>
+                            <tr>
+                                <th class="li-product-remove">Loại bỏ</th>
+                                <th class="li-product-thumbnail">Hình ảnh</th>
+                                <th class="cart-product-name">Tên sản phẩm</th>
+                                <th class="li-product-price">Giá sản phẩm</th>
+                                <th class="li-product-quantity">Số lượng</th>
+                                <th class="li-product-subtotal">Tổng cộng</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:set var="list" value="${cart.products}"/>
+                            <c:forEach items="${list}" var="item">
                                 <tr>
-                                    <th class="li-product-remove">Loại bỏ</th>
-                                    <th class="li-product-thumbnail">Hình ảnh</th>
-                                    <th class="cart-product-name">Tên sản phẩm</th>
-                                    <th class="li-product-price">Giá sản phẩm</th>
-                                    <th class="li-product-quantity">Số lượng</th>
-                                    <th class="li-product-subtotal">Tổng cộng</th>
+                                    <td class="li-product-remove"><a class="remove-product" pid="${item.id_sanpham}"
+                                                                     href="#"><i class="fa fa-times"></i></a></td>
+                                    <td class="li-product-thumbnail"><a href="#"><img
+                                            src="data:image/jpg;base64,${item.getImageMain()}" width="50px" height="50px" alt="${item.getImageMain()}"></a></td>
+                                    <td class="li-product-name"><a href="#">${item.ten_sp}</a></td>
+                                    <td class="li-product-price"><span class="amount">${item.gia}</span></td>
+                                    <td class="quantity">
+                                        <label> Quantity</label>
+                                        <div class="cart-plus-minus">
+                                            <input class="cart-plus-minus-box changeQuantity"
+                                                   oldQuantity="${item.quantitySold}" pid="${item.id_sanpham}"
+                                                   value="${item.quantitySold}" type="text">
+                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                        </div>
+                                    </td>
+                                    <td class="product-subtotal"><span class="amount">${item.total()}</span></td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <c:set var="list" value="${cart.products}"/>
-                                <c:forEach items="${list}" var="item">
-                                    <tr>
-                                        <td class="li-product-remove"><a class="remove-product" pid="${item.id_sanpham}" href="#"><i class="fa fa-times"></i></a></td>
-                                        <td class="li-product-thumbnail"><a href="#"><img
-                                                src="${item.getImageMain()}" alt="${item.getImageMain()}"></a></td>
-                                        <td class="li-product-name"><a href="#">${item.ten_sp}</a></td>
-                                        <td class="li-product-price"><span class="amount">${item.gia}</span></td>
-                                        <td class="quantity">
-                                            <label> Quantity</label>
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box changeQuantity" oldQuantity="${item.quantitySold}" pid="${item.id_sanpham}" value="${item.quantitySold}" type="text">
-                                                <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal"><span class="amount">${item.total()}</span></td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="coupon-all">
-                                    <div class="coupon">
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="coupon-all">
+                                <div class="coupon">
+                                    <form method="post" action="/houseware_nlu_war_exploded/BillDiscountController"
+                                          id="dicount-form">
                                         <input id="coupon_code" class="input-text" name="coupon_code" value=""
                                                placeholder="Mã khuyến mãi" type="text">
                                         <input class="button" name="apply_coupon" value="Áp dụng" type="submit">
-                                    </div>
-                                    <div class="coupon2">
+                                    </form>
+                                </div>
+                                <div class="coupon2">
+                                    <form>
                                         <input class="button" name="update_cart" value="cập nhật giỏ hàng"
                                                type="submit">
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-5 ml-auto">
-                                <div class="cart-page-total">
-                                    <h2>Tổng giá trị giỏ hàng</h2>
-                                    <ul>
-                                        <li>Tổng cộng <span>${cart.total()}</span></li>
-                                    </ul>
-                                    <a href="checkout.html">Thanh toán</a>
-                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 ml-auto">
+                            <div class="cart-page-total">
+                                <h2>Tổng giá trị giỏ hàng</h2>
+                                <ul>
+                                    <li>Tổng cộng <span>${cart.total()*(1-cart.rate)}</span></li>
+                                </ul>
+                                <a href="${pageContext.request.contextPath}/Checkout">Thanh toán</a>
                             </div>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -619,7 +620,7 @@
                                     <div id="mc_embed_signup_scroll">
                                         <div id="mc-form" class="mc-form subscribe-form form-group">
                                             <input id="mc-email" type="email" autocomplete="off"
-                                                   placeholder="Nhập email của bạn" />
+                                                   placeholder="Nhập email của bạn"/>
                                             <button class="btn" id="mc-submit">Đăng kí</button>
                                         </div>
                                     </div>

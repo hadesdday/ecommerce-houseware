@@ -3,32 +3,41 @@ package beans;
 import java.io.Serializable;
 
 public class Order implements Serializable {
-    private String ID_HOADON;
+    private int ID_HOADON;
     private String ID_KHACHHANG;
-    private String NGAYLAPHD;
     private String ID_MAGG;
     private String MAPTTT;
     private double TRIGIA;
     private String TRANGTHAI;
+    private String createdAt;
 
     public Order() {
     }
 
-    public Order(String ID_HOADON, String ID_KHACHHANG, String NGAYLAPHD, String ID_MAGG, String MAPTTT, double TRIGIA, String TRANGTHAI) {
+    public Order(int ID_HOADON, String ID_KHACHHANG, String ID_MAGG, String MAPTTT, double TRIGIA, String TRANGTHAI) {
         this.ID_HOADON = ID_HOADON;
         this.ID_KHACHHANG = ID_KHACHHANG;
-        this.NGAYLAPHD = NGAYLAPHD;
         this.ID_MAGG = ID_MAGG;
         this.MAPTTT = MAPTTT;
         this.TRIGIA = TRIGIA;
         this.TRANGTHAI = TRANGTHAI;
     }
 
-    public String getID_HOADON() {
+    public Order(int ID_HOADON, String ID_KHACHHANG, String ID_MAGG, String MAPTTT, double TRIGIA, String TRANGTHAI, String createdAt) {
+        this.ID_HOADON = ID_HOADON;
+        this.ID_KHACHHANG = ID_KHACHHANG;
+        this.ID_MAGG = ID_MAGG;
+        this.MAPTTT = MAPTTT;
+        this.TRIGIA = TRIGIA;
+        this.TRANGTHAI = TRANGTHAI;
+        this.createdAt = createdAt;
+    }
+
+    public int getID_HOADON() {
         return ID_HOADON;
     }
 
-    public void setID_HOADON(String ID_HOADON) {
+    public void setID_HOADON(int ID_HOADON) {
         this.ID_HOADON = ID_HOADON;
     }
 
@@ -38,14 +47,6 @@ public class Order implements Serializable {
 
     public void setID_KHACHHANG(String ID_KHACHHANG) {
         this.ID_KHACHHANG = ID_KHACHHANG;
-    }
-
-    public String getNGAYLAPHD() {
-        return NGAYLAPHD;
-    }
-
-    public void setNGAYLAPHD(String NGAYLAPHD) {
-        this.NGAYLAPHD = NGAYLAPHD;
     }
 
     public String getID_MAGG() {
@@ -78,5 +79,26 @@ public class Order implements Serializable {
 
     public void setTRANGTHAI(String TRANGTHAI) {
         this.TRANGTHAI = TRANGTHAI;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "ID_HOADON=" + ID_HOADON +
+                ", ID_KHACHHANG='" + ID_KHACHHANG + '\'' +
+                ", ID_MAGG='" + ID_MAGG + '\'' +
+                ", MAPTTT='" + MAPTTT + '\'' +
+                ", TRIGIA=" + TRIGIA +
+                ", TRANGTHAI='" + TRANGTHAI + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                '}';
     }
 }

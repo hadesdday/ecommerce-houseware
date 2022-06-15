@@ -1,17 +1,22 @@
 @media screen and (max-width: 500px) {
-  .meanmenu-reveal {
-    display: none !important;
-  }
-  .sidebar-content {
-    margin-left: 0 !important;
-  }
+    .meanmenu-reveal {
+        display: none !important;
+    }
+
+    .sidebar-content {
+        margin-left: 0 !important;
+    }
 }
+
 .b-none {
-  border: none !important;
+    border: none !important;
 }
+
 .p-title {
-  font-size: 130%;
+    font-size: 130%;
 }
+
 .w-65 {
-  width: 65% !important;
+    width: 65% !important;
 }
+

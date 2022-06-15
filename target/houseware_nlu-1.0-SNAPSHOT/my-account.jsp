@@ -1,4 +1,5 @@
 <%@ page import="beans.User" %>
+<%@ page import="properties.AssetsProperties" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -10,7 +11,7 @@
     String email = sessionUser.getEmail();
 
     if ((session.getAttribute("authenticated") == null) || ((int) session.getAttribute("authenticated") != 1))
-        response.sendRedirect("index.jsp");
+        response.sendRedirect(AssetsProperties.getBaseURL());
 %>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -119,7 +120,7 @@
                     <!-- Begin Header Logo Area -->
                     <div class="col-lg-3">
                         <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="index.jsp">
+                            <a href="${pageContext.request.contextPath}/">
                                 <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
                             </a>
                         </div>
@@ -175,12 +176,12 @@
                                     <div class="minicart">
                                         <ul class="minicart-product-list">
                                             <li>
-                                                <a href="single-product.html" class="minicart-product-image">
+                                                <a href="product-details.jsp" class="minicart-product-image">
                                                     <img loading="lazy" src="images/product/small-size/3.jpg"
                                                          alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                    <h6><a href="product-details.jsp">Aenean eu tristique</a></h6>
                                                     <span>120000</span><span>VNĐ</span>
                                                     <div class="mini-cart-plus-minus">
                                                         <input class="mini-cart-plus-minus-box" value=1 type="text">
@@ -195,12 +196,12 @@
                                                 </button>
                                             </li>
                                             <li>
-                                                <a href="single-product.html" class="minicart-product-image">
+                                                <a href="product-details.jsp" class="minicart-product-image">
                                                     <img loading="lazy" src="images/product/small-size/4.jpg"
                                                          alt="cart products">
                                                 </a>
                                                 <div class="minicart-product-details">
-                                                    <h6><a href="single-product.html">Aenean eu tristique</a></h6>
+                                                    <h6><a href="product-details.jsp">Aenean eu tristique</a></h6>
                                                     <span>120000</span><span>VNĐ</span>
                                                     <div class="mini-cart-plus-minus">
                                                         <input class="mini-cart-plus-minus-box" value=1 type="text">
@@ -247,7 +248,7 @@
                         <div class="hb-menu hb-menu-2 d-xl-block">
                             <nav>
                                 <ul>
-                                    <li class=""><a href=" index.jsp">Trang chủ</a>
+                                    <li class=""><a href="${pageContext.request.contextPath}">Trang chủ</a>
 
                                     </li>
                                     <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
@@ -352,7 +353,7 @@
         <div class="container">
             <div class="breadcrumb-content">
                 <ul>
-                    <li><a href="index.jsp">Trang chủ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
                     <li class="active">Thông tin tài khoản</li>
                 </ul>
             </div>

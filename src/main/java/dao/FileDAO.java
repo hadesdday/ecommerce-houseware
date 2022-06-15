@@ -69,6 +69,19 @@ public class FileDAO {
         }
     }
 
+    public List<Image> getImagesByPid(String pid) {
+        try {
+            List<Image> re = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT * FROM hinhanh where id_sanpham = ?")
+                            .bind(0, pid)
+                            .mapToBean(Image.class).stream().collect(Collectors.toList())
+            );
+            return re;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public boolean updateInfor(Image i) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->

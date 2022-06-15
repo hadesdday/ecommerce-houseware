@@ -21,7 +21,8 @@
                     <div class="page-header">
                         <div class="page-title">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.jsp">Trang chủ</a></li>
+                                <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/admin">Trang
+                                    chủ</a></li>
                                 <li class="breadcrumb-item active">Tổng quan</li>
                             </ol>
                         </div>
@@ -38,8 +39,8 @@
                                 <div class="stat-icon dib"><i class="ti-money color-success border-success"></i>
                                 </div>
                                 <div class="stat-content dib">
-                                    <div class="stat-text">Doanh thu</div>
-                                    <div class="stat-digit">100.000.000 VNĐ</div>
+                                    <div class="stat-text">Tổng Doanh thu</div>
+                                    <div class="stat-digit" id="sumTurnover">0</div>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +52,7 @@
                                 </div>
                                 <div class="stat-content dib">
                                     <div class="stat-text">Số khách hàng</div>
-                                    <div class="stat-digit">1000</div>
+                                    <div class="stat-digit" id="totalCustomer">0</div>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +64,7 @@
                                 </div>
                                 <div class="stat-content dib">
                                     <div class="stat-text">Hóa đơn</div>
-                                    <div class="stat-digit">1001</div>
+                                    <div class="stat-digit" id="totalOrder">0</div>
                                 </div>
                             </div>
                         </div>
@@ -104,43 +105,73 @@
 <%--<script src="assets/js/lib/morris-chart/morris-init.js"></script>--%>
 <script src="assets/js/lib/bootstrap.min.js"></script>
 <script src="assets/js/scripts.js"></script>
-<script>
-    const labels = [
-        'Tháng 1',
-        'Tháng 2',
-        'Tháng 3',
-        'Tháng 4',
-        'Tháng 5',
-        'Tháng 6',
-        'Tháng 7',
-        'Tháng 8',
-        'Tháng 9',
-        'Tháng 10',
-        'Tháng 11',
-        'Tháng 12'
-    ];
 
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Doanh thu',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [100000000, 12000000, 5000000, 2000000, 20000000, 30000000, 450000000, 500000000, 600000000, 70000000, 710000000, 900000000],
-        }]
-    };
-
-    const config = {
-        type: 'line',
-        data: data,
-        options: {}
-    };
-</script>
 <script>
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
+    // var totalTurnover = [];
+
+    $(() => {
+        var array = [];
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/admin/stats",
+            method: "GET",
+            success: function (data, textStatus, xhr) {
+                $("#sumTurnover").text(new Intl.NumberFormat("vi-VN").format(data[0]) + " đ");
+                $("#totalCustomer").text(data[1]);
+                $("#totalOrder").text(data[2]);
+
+                let se = data[3];
+                let re = [];
+                for (let i = 1; i <= 12; i++) {
+                    re.push(se[i]);
+                }
+
+                array = [...re];
+                drawChart(array);
+            },
+            error: function (data, textStatus, xhr) {
+                console.log("error")
+                console.log(data);
+            }
+        })
+
+        function drawChart(arrayData) {
+            const labels = [
+                'Tháng 1',
+                'Tháng 2',
+                'Tháng 3',
+                'Tháng 4',
+                'Tháng 5',
+                'Tháng 6',
+                'Tháng 7',
+                'Tháng 8',
+                'Tháng 9',
+                'Tháng 10',
+                'Tháng 11',
+                'Tháng 12'
+            ];
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Doanh thu',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: arrayData,
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {}
+            };
+            const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
+        }
+    });
 </script>
 </body>
 

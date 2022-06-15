@@ -7,6 +7,7 @@ import java.util.Map;
 public class Cart {
     private Map<String, Product> data;
     private static Cart instance;
+    private double rate=0;
 
     private Cart() {
         data = new HashMap<>();
@@ -39,6 +40,8 @@ public class Cart {
         return total;
     }
 
+    
+
     public int quantity() {
         int quantity = 0;
         for (Product p : data.values()) {
@@ -60,5 +63,13 @@ public class Cart {
 //        put(new Product("sp1","Sản phẩm 1",400000,350000,10,2,"images/pic1.jpg"));
 //        put(new Product("sp2","Sản phẩm 2",400000,350000,10,1,"images/pic1.jpg"));
         return data.values();
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 }

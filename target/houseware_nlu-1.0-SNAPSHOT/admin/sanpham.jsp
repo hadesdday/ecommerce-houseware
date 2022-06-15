@@ -1,8 +1,10 @@
+<%@ page import="java.lang.reflect.Array" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:useBean id="productList" scope="request" type="java.util.List"/>
+<jsp:useBean id="categoryList" scope="request" type="java.util.List"/>
 
 <%@include file="header.jsp" %>
 
@@ -41,13 +43,9 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="loaiSP">
                                     <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                    <option value="Gia dụng nhà bếp">Gia dụng nhà bếp</option>
-                                    <option value="Máy xay, vắt, ép">Máy xay, vắt, ép</option>
-                                    <option value="Dụng cụ nhà bếp">Dụng cụ nhà bếp</option>
-                                    <option value="Nồi chiên không dầu">Nồi chiên không dầu</option>
-                                    <option value="Nồi cơm">Nồi cơm</option>
-                                    <option value="Máy xay sinh tố">Máy xay sinh tố</option>
-                                    <option value="Nồi áp suất">Nồi áp suất</option>
+                                    <c:forEach var="ct" items="${categoryList}">
+                                        <option value="${ct.getMa_loaisp()}">${ct.getTen_loaisp()}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
 
@@ -66,10 +64,10 @@
                                 <input type="text" class="form-control" name="hangSP">
                             </div>
 
-                            <%--                                <label>Thông tin sản phẩm</label>--%>
-                            <%--                                <div class="input group mb-3">--%>
-                            <%--                                    <input type="text" class="form-control" name="ctSP">--%>
-                            <%--                                </div>--%>
+                            <label>Thông tin sản phẩm</label>
+                            <div class="input group mb-3">
+                                <textarea name="ctSP" rows="15" cols="95%" class="text__details"></textarea>
+                            </div>
 
                             <label>Số lượng tồn kho</label>
                             <div class="input-group mb-3">
@@ -80,8 +78,8 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="active">
                                     <option selected hidden disabled value="0">Chọn trạng thái cho sản phẩm</option>
-                                    <option value="1">Có</option>
-                                    <option value="2">Không</option>
+                                    <option value="1">Còn Hàng</option>
+                                    <option value="2">Hết Hàng</option>
                                 </select>
                             </div>
                         </div>
@@ -114,13 +112,9 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editLoaiSP">
                                     <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                    <option value="Gia dụng nhà bếp">Gia dụng nhà bếp</option>
-                                    <option value="Máy xay, vắt, ép">Máy xay, vắt, ép</option>
-                                    <option value="Dụng cụ nhà bếp">Dụng cụ nhà bếp</option>
-                                    <option value="Nồi chiên không dầu">Nồi chiên không dầu</option>
-                                    <option value="Nồi cơm">Nồi cơm</option>
-                                    <option value="Máy xay sinh tố">Máy xay sinh tố</option>
-                                    <option value="Nồi áp suất">Nồi áp suất</option>
+                                    <c:forEach var="ct" items="${categoryList}">
+                                        <option value="${ct.getMa_loaisp()}">${ct.getTen_loaisp()}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
 
@@ -139,6 +133,11 @@
                                 <input type="text" class="form-control" name="editHangSP">
                             </div>
 
+                            <label>Thông tin sản phẩm</label>
+                            <div class="input group mb-3">
+                                <textarea name="editctSP" rows="15" cols="95%" class="text__details"></textarea>
+                            </div>
+
                             <label>Số lượng tồn kho</label>
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control" name="editSlSP" min="0">
@@ -148,8 +147,8 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editActive">
                                     <option selected hidden disabled value="0">Chọn trạng thái cho sản phẩm</option>
-                                    <option value="1">Có</option>
-                                    <option value="2">Không</option>
+                                    <option value="1">Còn Hàng</option>
+                                    <option value="2">Hết Hàng</option>
                                 </select>
                             </div>
                         </div>
@@ -168,9 +167,9 @@
                         </div>
                         <div class="custom-modal-body">
                             <h6>Bạn có chắc chắn muốn xóa sản phẩm này ?</h6>
+                            <input type="hidden" name="pidDelete">
                         </div>
                         <div class="custom-modal-footer">
-                            <input type="hidden" name="pidDelete">
                             <button type="button" class="btn btn-secondary close-btn">Hủy</button>
                             <button type="submit" class="btn btn-primary" id="confirmDelAct">Đồng ý</button>
                         </div>
@@ -185,42 +184,41 @@
                         <div class="card" style="margin-right: -15px;">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
+                                    <table id="products-table"
                                            class="table table-striped table-bordered">
                                         <thead>
                                         <tr>
                                             <th>Mã sản phẩm</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Loại sản phẩm</th>
+                                            <th>Mã loại sản phẩm</th>
                                             <th>Giá</th>
                                             <th>Khuyến mãi</th>
                                             <th>Thương hiệu</th>
                                             <th>Số lượng</th>
                                             <th>Active</th>
+                                            <th>Mô tả</th>
                                             <th>Hành động</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${productList}" var="item">
                                             <tr>
-                                                <td>${item.maSP}</td>
-                                                <td>${item.tenSP}</td>
-                                                <td>${item.maLoaiSP}</td>
-                                                <td>
-                                                    <fmt:setLocale value="vi-VN"/>
-                                                    <fmt:formatNumber value="${item.gia}" type="currency"/>
-                                                </td>
-                                                <td>${item.maKM}</td>
-                                                <td>${item.thuongHieu}</td>
-                                                <td>${item.soLuongTon}</td>
+                                                <td>${item.id_sanpham}</td>
+                                                <td>${item.ten_sp}</td>
+                                                <td>${item.ma_loaisp}</td>
+                                                <td>${item.gia} đ</td>
+                                                <td>${item.id_km}</td>
+                                                <td>${item.thuonghieu}</td>
+                                                <td>${item.soluongton}</td>
                                                 <td>${item.active}</td>
+                                                <td>${item.mota}</td>
                                                 <td>
                                                     <a class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" pid="${item.maSP}">
+                                                       onclick="onEdit(this)" pid="${item.id_sanpham}">
                                                         <i class="ti-pencil text-white"></i>
                                                     </a>
                                                     <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" pid="${item.maSP}">
+                                                       onclick="onDelete(this)" pid="${item.id_sanpham}">
                                                         <i class="ti-trash text-white"></i>
                                                     </a>
                                                 </td>
@@ -254,32 +252,6 @@
 </div>
 <!-- Common -->
 <%@include file="script.jsp" %>
-<script>
-    $("input[name='maSP']").on("input", () => {
-        var val = $("input[name='maSP']").val();
-        $("input[name='maSP']").attr("value", val);
-    });
-    $("input[name='tenSP']").on("input", () => {
-        var val = $("input[name='tenSP']").val();
-        $("input[name='tenSP']").attr("value", val);
-    });
-    $("input[name='giaSP']").on("input", () => {
-        var val = $("input[name='giaSP']").val();
-        $("input[name='giaSP']").attr("value", val);
-    });
-    $("input[name='kmSP']").on("input", () => {
-        var val = $("input[name='kmSP']").val();
-        $("input[name='kmSP']").attr("value", val);
-    });
-    $("input[name='hangSP']").on("input", () => {
-        var val = $("input[name='hangSP']").val();
-        $("input[name='hangSP']").attr("value", val);
-    });
-    $("input[name='slSP']").on("input", () => {
-        var val = $("input[name='slSP']").val();
-        $("input[name='slSP']").attr("value", val);
-    });
-</script>
 <%--add product--%>
 <script>
     $(document).ready(function () {
@@ -292,6 +264,7 @@
             var hangSP = $("input[name='hangSP']").val();
             var slSP = $("input[name='slSP']").val();
             var active = $("select[name='active'] option:selected").val()
+            var ctSP = $("textarea[name='ctSP']").val();
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/add",
                 method: "POST",
@@ -303,7 +276,8 @@
                     kmSP: kmSP,
                     hangSP: hangSP,
                     slSP: slSP,
-                    active: active
+                    active: active,
+                    ctSP: ctSP
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm sản phẩm mới thành công", "success");
@@ -311,16 +285,17 @@
                         + "<i class='ti-pencil text-white'></i></a>";
                     var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" pid="' + maSP + '">' +
                         "<i class='ti-trash text-white'></i></a>";
-                    $('#bootstrap-data-table-export').DataTable().row.add(
+                    $('#products-table').DataTable().row.add(
                         [
                             maSP,
                             tenSP,
                             loaiSP,
-                            giaSP,
+                            giaSP + " đ",
                             kmSP,
                             hangSP,
                             slSP,
                             active,
+                            ctSP,
                             editElm + "\n" + delElm
                         ]
                     ).draw(false);
@@ -364,7 +339,7 @@
             success: function (data) {
                 swal("Thành công", "Xóa sản phẩm thành công", "success")
                 tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
+                $('#products-table').DataTable().row(tr).remove().draw();
                 clearValue();
                 closeModal();
             },
@@ -379,14 +354,15 @@
 
 <script>
     function setEditModalValue(data) {
-        $("input[name='editMaSP']").val(data.maSP);
-        $("input[name='editTenSP']").val(data.tenSP);
-        $("select[name='editLoaiSP']").val(data.maLoaiSP);
+        $("input[name='editMaSP']").val(data.id_sanpham);
+        $("input[name='editTenSP']").val(data.ten_sp);
+        $("select[name='editLoaiSP']").val(data.ma_loaisp);
         $("input[name='editGiaSP']").val(data.gia);
-        $("input[name='editKmSP']").val(data.maKM);
-        $("input[name='editHangSP']").val(data.thuongHieu);
-        $("input[name='editSlSP']").val(data.soLuongTon);
+        $("input[name='editKmSP']").val(data.id_km);
+        $("input[name='editHangSP']").val(data.thuonghieu);
+        $("input[name='editSlSP']").val(data.soluongton);
         $("select[name='editActive']").val(data.active);
+        $("textarea[name='editctSP']").val(data.mota);
     }
 </script>
 <%--edit product--%>
@@ -397,7 +373,7 @@
         editRow = $(element).parents("tr").children();
         var pid = $(element).attr('pid');
         $.ajax({
-            url: "${pageContext.request.contextPath}/product/edit",
+            url: "${pageContext.request.contextPath}/product/update",
             method: "GET",
             data: {
                 maSP: pid
@@ -421,9 +397,10 @@
         var hangSP = $("input[name='editHangSP']").val();
         var slSP = $("input[name='editSlSP']").val();
         var active = $("select[name='editActive'] option:selected").val();
+        var ctSP = $("textarea[name='editctSP']").val();
 
         $.ajax({
-            url: "${pageContext.request.contextPath}/product/edit",
+            url: "${pageContext.request.contextPath}/product/update",
             method: "POST",
             data: {
                 maSP: maSP,
@@ -433,7 +410,8 @@
                 kmSP: kmSP,
                 hangSP: hangSP,
                 slSP: slSP,
-                active: active
+                active: active,
+                ctSP: ctSP
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật sản phẩm thành công", "success");
@@ -441,11 +419,12 @@
                 clearValue();
                 editRow.eq(1).text(tenSP);
                 editRow.eq(2).text(loaiSP);
-                editRow.eq(3).text(giaSP);
+                editRow.eq(3).text(giaSP + " đ");
                 editRow.eq(4).text(kmSP);
                 editRow.eq(5).text(hangSP);
                 editRow.eq(6).text(slSP);
                 editRow.eq(7).text(active);
+                editRow.eq(8).text(ctSP);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật sản phẩm thất bại do sai dữ liệu đầu vào", "error");
@@ -457,5 +436,12 @@
 <%--end edit product--%>
 <script src="assets/js/lib/sweetalert/sweetalert.min.js"></script>
 <script src="assets/js/lib/data-table/currency.js"></script>
+<script>
+    let xs = [];
+    <c:forEach var="is" items="${productList}">
+    xs.push(${is.getTen_sp()});
+    </c:forEach>
+    console.log(xs);
+</script>
 </body>
 </html>
