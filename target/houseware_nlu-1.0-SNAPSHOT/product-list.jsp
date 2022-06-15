@@ -77,7 +77,7 @@
                                 <span>Showing 1 to 9 of 15</span>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- shop-top-bar end -->
                     <!-- shop-products-wrapper start -->
