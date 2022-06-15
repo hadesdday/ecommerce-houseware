@@ -174,51 +174,51 @@
                                         <li><a href="gia-dung-nha-bep.html">Gia dụng nhà bếp</a>
                                             <ul>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=noi-com">Nồi
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=noi-com&pageN=1">Nồi
                                                         cơm điện</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=lvs">Lò
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=lvs&pageN=1">Lò
                                                         vi sóng</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=nckd">Nồi
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=nckd&pageN=1">Nồi
                                                         chiên không dầu</a></li>
                                                 </li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=bep-tu">Bếp
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=bep-tu&pageN=1">Bếp
                                                         từ</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=bhn">Bếp
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=bhn&pageN=1">Bếp
                                                         hồng ngoại</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=bep-ga">Bếp
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=bep-ga&pageN=1">Bếp
                                                         gas</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=nas">Nồi
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=nas&pageN=1">Nồi
                                                         áp suất</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=lo-nuong">Lò
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=lo-nuong&pageN=1">Lò
                                                         nướng</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=bdst">Bình
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=bdst&pageN=1">Bình
                                                         đun siêu tốc</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=btd">Bình
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=btd&pageN=1">Bình
                                                         thủy điện</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="may-xay-vat-ep.html">Máy xay, vắt, ép</a>
                                             <ul>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=may-xay-sinh-to">Máy
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=may-xay-sinh-to&pageN=1">Máy
                                                         xay sinh tố</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=metc">Máy
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=metc&pageN=1">Máy
                                                         ép trái cây</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=mpcf">Máy
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=mpcf&pageN=1">Máy
                                                         pha cà phê</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=mvc">Máy
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=mvc&pageN=1">Máy
                                                         vắt cam</a></li>
                                                 <li><a href="mxt">Máy xay thịt</a></li>
 
@@ -227,16 +227,16 @@
                                         <li><a href="dung-cu-nha-bep.html">Dụng cụ nhà bếp</a>
                                             <ul>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=xoong-noi">Xoong,
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=xoong-noi&pageN=1">Xoong,
                                                         nồi</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=ccd">Chảo
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=ccd&pageN=1">Chảo
                                                         chống dính</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=dca">Dụng
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=dca&pageN=1">Dụng
                                                         cụ ăn</a></li>
                                                 <li>
-                                                    <a href="${pageContext.request.contextPath}/ProductList?category=nckd">Nồi
+                                                    <a href="${pageContext.request.contextPath}/ProductList?category=nckd&pageN=1">Nồi
                                                         chiên không dầu</a>
                                                 </li>
 

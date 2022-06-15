@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="beans.Cart" %>
 <jsp:useBean id="categoryName" scope="request" type="java.lang.String"/>
-
+<% String currentURL="/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+request.getAttribute("page");%>
 <%
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
@@ -77,22 +77,7 @@
                                 <span>Showing 1 to 9 of 15</span>
                             </div>
                         </div>
-                        <!-- product-select-box start -->
-                        <div class="product-select-box">
-                            <div class="product-short">
-                                <p>Sort By:</p>
-                                <select class="nice-select">
-                                    <option value="trending">Relevance</option>
-                                    <option value="sales">Name (A - Z)</option>
-                                    <option value="sales">Name (Z - A)</option>
-                                    <option value="rating">Price (Low &gt; High)</option>
-                                    <option value="date">Rating (Lowest)</option>
-                                    <option value="price-asc">Model (A - Z)</option>
-                                    <option value="price-asc">Model (Z - A)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- product-select-box end -->
+
                     </div>
                     <!-- shop-top-bar end -->
                     <!-- shop-products-wrapper start -->
@@ -874,14 +859,30 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul class="pagination-box pt-xs-20 pb-xs-15">
-                                            <li><a href="#" class="Previous"><i class="fa fa-chevron-left"></i>
+                                            <li><a href="<%=
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")>1?(int)request.getAttribute("page")-1:1)
+                                            %>" class="Previous"><i class="fa fa-chevron-left"></i>
                                                 Previous</a>
                                             </li>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
+                                            <jsp:useBean id="allProducts" scope="request" type="java.util.List"/>
+                                            <% int productCount = allProducts.size();
+                                                System.out.println(productCount);
+                                                int pageCount = (int) Math.round(productCount / 5);
+                                                if(productCount%5!=0)
+                                                    pageCount++;
+                                                if (request.getAttribute("page") == null)
+                                                    request.setAttribute("page", 1);
+                                                for (int i = 0; i < pageCount; i++) {
+                                            %>
+
+                                            <li class="<%=((int)request.getAttribute("page")==(i+1)?"active":"") %>"><a href="<%=
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)
+                                            %>"><%=(i+1)%></a></li>
+                                            <%}%>
                                             <li>
-                                                <a href="#" class="Next"> Next <i
+                                                <a href="<%=
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)
+                                            %>" class="Next"> Next <i
                                                         class="fa fa-chevron-right"></i></a>
                                             </li>
                                         </ul>
@@ -894,50 +895,6 @@
                 </div>
                 <div class="col-lg-3 order-1 order-lg-2">
                     <!--sidebar-categores-box start  -->
-                    <div class="sidebar-categores-box mt-sm-30 mt-xs-30">
-                        <div class="sidebar-title">
-                            <h2>Laptop</h2>
-                        </div>
-                        <!-- category-sub-menu start -->
-                        <div class="category-sub-menu">
-                            <ul>
-                                <li class="has-sub"><a href="# ">Prime Video</a>
-                                    <ul>
-                                        <li><a href="#">All Videos</a></li>
-                                        <li><a href="#">Blouses</a></li>
-                                        <li><a href="#">Evening Dresses</a></li>
-                                        <li><a href="#">Summer Dresses</a></li>
-                                        <li><a href="#">T-Rent or Buy</a></li>
-                                        <li><a href="#">Your Watchlist</a></li>
-                                        <li><a href="#">Watch Anywhere</a></li>
-                                        <li><a href="#">Getting Started</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-sub"><a href="#">Computer</a>
-                                    <ul>
-                                        <li><a href="#">TV & Video</a></li>
-                                        <li><a href="#">Audio & Theater</a></li>
-                                        <li><a href="#">Camera, Photo</a></li>
-                                        <li><a href="#">Cell Phones</a></li>
-                                        <li><a href="#">Headphones</a></li>
-                                        <li><a href="#">Video Games</a></li>
-                                        <li><a href="#">Wireless Speakers</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-sub"><a href="#">Electronics</a>
-                                    <ul>
-                                        <li><a href="#">Amazon Home</a></li>
-                                        <li><a href="#">Kitchen & Dining</a></li>
-                                        <li><a href="#">Bed & Bath</a></li>
-                                        <li><a href="#">Appliances</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- category-sub-menu end -->
-                    </div>
-                    <!--sidebar-categores-box end  -->
-                    <!--sidebar-categores-box start  -->
                     <div class="sidebar-categores-box">
                         <div class="sidebar-title">
                             <h2>Filter By</h2>
@@ -947,102 +904,87 @@
                         <!-- btn-clear-all end -->
                         <!-- filter-sub-area start -->
                         <div class="filter-sub-area">
+                            <h5 class="filter-sub-titel">Prices</h5>
+                            <div class="categori-checkbox">
+                                <form action="#">
+                                    <ul>
+                                        <li><input type="checkbox" name="product-categori"><a href="#"></a><1 triệu</li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>1-3 triệu</li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>3-6 triệu</li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>>6 triệu</li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- filter-sub-area end -->
+                        <!-- filter-sub-area start -->
+                        <div class="filter-sub-area pt-sm-10 pt-xs-10">
                             <h5 class="filter-sub-titel">Brand</h5>
                             <div class="categori-checkbox">
                                 <form action="#">
                                     <ul>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Prime Video
-                                            (13)</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Computers
-                                            (12)</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Electronics
-                                            (11)</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Philips</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Sunhouse</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Deawoo</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Panasonic</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Sauce</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Sharp</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Electrolux</a></li>
+                                        <li><input type="checkbox" name="product-categori"><a href="#">Kangaroo</a></li>
                                     </ul>
                                 </form>
                             </div>
                         </div>
                         <!-- filter-sub-area end -->
                         <!-- filter-sub-area start -->
-                        <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                            <h5 class="filter-sub-titel">Categories</h5>
-                            <div class="categori-checkbox">
-                                <form action="#">
-                                    <ul>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Graphic
-                                            Corner (10)</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#"> Studio
-                                            Design (6)</a></li>
-                                    </ul>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- filter-sub-area end -->
-                        <!-- filter-sub-area start -->
-                        <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                            <h5 class="filter-sub-titel">Size</h5>
-                            <div class="size-checkbox">
-                                <form action="#">
-                                    <ul>
-                                        <li><input type="checkbox" name="product-size"><a href="#">S (3)</a></li>
-                                        <li><input type="checkbox" name="product-size"><a href="#">M (3)</a></li>
-                                        <li><input type="checkbox" name="product-size"><a href="#">L (3)</a></li>
-                                        <li><input type="checkbox" name="product-size"><a href="#">XL (3)</a></li>
-                                    </ul>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- filter-sub-area end -->
-                        <!-- filter-sub-area start -->
-                        <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                            <h5 class="filter-sub-titel">Color</h5>
-                            <div class="color-categoriy">
-                                <form action="#">
-                                    <ul>
-                                        <li><span class="white"></span><a href="#">White (1)</a></li>
-                                        <li><span class="black"></span><a href="#">Black (1)</a></li>
-                                        <li><span class="Orange"></span><a href="#">Orange (3) </a></li>
-                                        <li><span class="Blue"></span><a href="#">Blue (2) </a></li>
-                                    </ul>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- filter-sub-area end -->
-                        <!-- filter-sub-area start -->
-                        <div class="filter-sub-area pt-sm-10 pb-sm-15 pb-xs-15">
-                            <h5 class="filter-sub-titel">Dimension</h5>
-                            <div class="categori-checkbox">
-                                <form action="#">
-                                    <ul>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">40x60cm
-                                            (6)</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">60x90cm
-                                            (6)</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">80x120cm
-                                            (6)</a></li>
-                                    </ul>
-                                </form>
-                            </div>
-                        </div>
+<%--                        <div class="filter-sub-area pt-sm-10 pt-xs-10">--%>
+<%--                            <h5 class="filter-sub-titel">Size</h5>--%>
+<%--                            <div class="size-checkbox">--%>
+<%--                                <form action="#">--%>
+<%--                                    <ul>--%>
+<%--                                        <li><input type="checkbox" name="product-size"><a href="#">S (3)</a></li>--%>
+<%--                                        <li><input type="checkbox" name="product-size"><a href="#">M (3)</a></li>--%>
+<%--                                        <li><input type="checkbox" name="product-size"><a href="#">L (3)</a></li>--%>
+<%--                                        <li><input type="checkbox" name="product-size"><a href="#">XL (3)</a></li>--%>
+<%--                                    </ul>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <!-- filter-sub-area end -->--%>
+<%--                        <!-- filter-sub-area start -->--%>
+<%--                        <div class="filter-sub-area pt-sm-10 pt-xs-10">--%>
+<%--                            <h5 class="filter-sub-titel">Color</h5>--%>
+<%--                            <div class="color-categoriy">--%>
+<%--                                <form action="#">--%>
+<%--                                    <ul>--%>
+<%--                                        <li><span class="white"></span><a href="#">White (1)</a></li>--%>
+<%--                                        <li><span class="black"></span><a href="#">Black (1)</a></li>--%>
+<%--                                        <li><span class="Orange"></span><a href="#">Orange (3) </a></li>--%>
+<%--                                        <li><span class="Blue"></span><a href="#">Blue (2) </a></li>--%>
+<%--                                    </ul>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <!-- filter-sub-area end -->--%>
+<%--                        <!-- filter-sub-area start -->--%>
+<%--                        <div class="filter-sub-area pt-sm-10 pb-sm-15 pb-xs-15">--%>
+<%--                            <h5 class="filter-sub-titel">Dimension</h5>--%>
+<%--                            <div class="categori-checkbox">--%>
+<%--                                <form action="#">--%>
+<%--                                    <ul>--%>
+<%--                                        <li><input type="checkbox" name="product-categori"><a href="#">40x60cm--%>
+<%--                                            (6)</a></li>--%>
+<%--                                        <li><input type="checkbox" name="product-categori"><a href="#">60x90cm--%>
+<%--                                            (6)</a></li>--%>
+<%--                                        <li><input type="checkbox" name="product-categori"><a href="#">80x120cm--%>
+<%--                                            (6)</a></li>--%>
+<%--                                    </ul>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                         <!-- filter-sub-area end -->
                     </div>
                     <!--sidebar-categores-box end  -->
-                    <!-- category-sub-menu start -->
-                    <div class="sidebar-categores-box mb-sm-0 mb-xs-0">
-                        <div class="sidebar-title">
-                            <h2>Laptop</h2>
-                        </div>
-                        <div class="category-tags">
-                            <ul>
-                                <li><a href="# ">Devita</a></li>
-                                <li><a href="# ">Cameras</a></li>
-                                <li><a href="# ">Sony</a></li>
-                                <li><a href="# ">Computer</a></li>
-                                <li><a href="# ">Big Sale</a></li>
-                                <li><a href="# ">Accessories</a></li>
-                            </ul>
-                        </div>
-                        <!-- category-sub-menu end -->
-                    </div>
                 </div>
             </div>
         </div>
@@ -1464,7 +1406,32 @@
 <script src="admin/assets/js/lib/toastr/toastr.min.js"></script>
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
+<script>
+    // $(document).ready(function () {
+    //     $(".pagination-box li").click(function (){
+    //         alert("click")
+    //         var index=$(this).index()
+    //         var className=$(this).children()[0].attr("class")
+    //         if(className!='Previous'||className!='Next'){
+    //             console.log(); alert("clic2k")
+    //
+    //             $.ajax({
+    //                 url: "/houseware_nlu_war_exploded/ProductList",
+    //                 method: "GET",
+    //                 data: {
+    //
+    //                 },
+    //                 success: function (data) {
+    //                 },
+    //                 error: function (data) {
+    //
+    //                 }
+    //             });
+    //         }
+    //     })
+    // })
 
+</script>
 </body>
 
 <!-- shop-right-sidebar31:48-->

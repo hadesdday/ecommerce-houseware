@@ -21,8 +21,12 @@ public class ProductServices {
         return ProductDAO.getInstance().getAll();
     }
 
-    public List<Product> getByCategory(String cat) {
-        return ProductDAO.getInstance().getProductByCategory(cat);
+    public List<Product> getByCategory(String cat, int page) {
+        return ProductDAO.getInstance().getProductByCategory(cat, page);
+    }
+
+    public List<Product> getAllProductByCategory(String cat) {
+        return ProductDAO.getInstance().getAllProductByCategory(cat);
     }
 
     public List<Product> getProductByMostSold() {

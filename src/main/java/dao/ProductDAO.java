@@ -21,7 +21,21 @@ public class ProductDAO {
         return instance;
     }
 
-    public List<Product> getProductByCategory(String cat) {
+    public List<Product> getProductByCategory(String cat,int page) {
+        int begin =(page-1)*5;
+        try {
+            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.ma_loaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.ma_loaisp=b.ma_loaisp and (b.ma_loaisp=? or a.thuonghieu=?) limit "+begin+",5")
+                    .bind(0, cat)
+                    .bind(1, cat)
+                    .mapToBean(Product.class)
+                    .stream().collect(Collectors.toList()));
+            return re;
+        } catch (Exception exception) {
+            System.out.print(exception);
+            return null;
+
+        }
+    }public List<Product> getAllProductByCategory(String cat) {
         try {
             List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.ma_loaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.ma_loaisp=b.ma_loaisp and (b.ma_loaisp=? or a.thuonghieu=?)")
                     .bind(0, cat)

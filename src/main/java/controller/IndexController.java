@@ -37,7 +37,7 @@ public class IndexController extends HttpServlet {
                 starItem += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
             }
 
-            products.get(i).setImageMain(Base64.get(url));
+//            products.get(i).setImageMain(Base64.get(url));
             products.get(i).setAvgRating(starItem);
         }
 
@@ -54,7 +54,7 @@ public class IndexController extends HttpServlet {
                 nonStar += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
             }
 
-            productsDiscount.get(i).setImageMain(Base64.get(url));
+//            productsDiscount.get(i).setImageMain(Base64.get(url));
             productsDiscount.get(i).setAvgRating(nonStar);
         }
 
