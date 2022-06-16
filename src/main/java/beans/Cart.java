@@ -60,8 +60,6 @@ public class Cart {
     }
 
     public Collection<Product> getProducts() {
-//        put(new Product("sp1","Sản phẩm 1",400000,350000,10,2,"images/pic1.jpg"));
-//        put(new Product("sp2","Sản phẩm 2",400000,350000,10,1,"images/pic1.jpg"));
         return data.values();
     }
 

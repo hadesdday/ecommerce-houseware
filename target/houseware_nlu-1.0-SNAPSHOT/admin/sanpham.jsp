@@ -436,12 +436,5 @@
 <%--end edit product--%>
 <script src="assets/js/lib/sweetalert/sweetalert.min.js"></script>
 <script src="assets/js/lib/data-table/currency.js"></script>
-<script>
-    let xs = [];
-    <c:forEach var="is" items="${productList}">
-    xs.push(${is.getTen_sp()});
-    </c:forEach>
-    console.log(xs);
-</script>
 </body>
 </html>
