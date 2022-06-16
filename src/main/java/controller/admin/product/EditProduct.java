@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Locale;
 
-@WebServlet(name = "EditProduct", value = "/product/edit")
+@WebServlet(name = "EditProduct", value = "/product/update")
 public class EditProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,15 +43,15 @@ public class EditProduct extends HttpServlet {
         String hangSP = request.getParameter("hangSP");
         String slSP = request.getParameter("slSP");
         String active = request.getParameter("active");
+        String ctSP = request.getParameter("ctSP");
 
-        Product product = new Product(maSP, tenSP, loaiSP, Double.parseDouble(giaSP), kmSP, hangSP, Integer.parseInt(slSP), active);
+        Product product = new Product(maSP, tenSP, loaiSP, Double.parseDouble(giaSP), kmSP, hangSP, Integer.parseInt(slSP), active, ctSP);
 
         boolean isErr = false;
         if (maSP.trim().length() < 1) isErr = true;
         if (tenSP.trim().length() < 1) isErr = true;
         if (loaiSP.equals("0")) isErr = true;
         if (Double.parseDouble(giaSP) < 0) isErr = true;
-        if (kmSP.trim().length() < 1) isErr = true;
         if (hangSP.trim().length() < 1) isErr = true;
         if (Integer.parseInt(slSP) < 0) isErr = true;
         if (active.equals("0")) isErr = true;

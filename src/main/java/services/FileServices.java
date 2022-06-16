@@ -34,4 +34,8 @@ public class FileServices {
     public boolean updateInfor(Image i) {
         return FileDAO.getInstance().updateInfor(i);
     }
+
+    public List<Image> getImagesByPid(String pid) {
+        return FileDAO.getInstance().getImagesByPid(pid);
+    }
 }

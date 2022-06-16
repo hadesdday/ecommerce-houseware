@@ -13,6 +13,21 @@
         ],
     });
 
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+        "numeric-comma-pre": function (a) {
+            var x = (a == "-") ? 0 : a.replace(/,/, ".");
+            return parseFloat(x);
+        },
+
+        "numeric-comma-asc": function (a, b) {
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+        },
+
+        "numeric-comma-desc": function (a, b) {
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+        }
+    });
+
     $("#bootstrap-data-table-export").DataTable({
         dom: "lBfrtip",
         lengthMenu: [
@@ -23,8 +38,35 @@
         language: {
             "url": "./assets/js/lib/data-table/vi.json"
         },
+    });
+
+    $("#order-table").DataTable({
+        dom: "lBfrtip",
+        lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"],
+        ],
+        buttons: ["copy", "csv", "excel", "pdf", "print"],
+        language: {
+            "url": "./assets/js/lib/data-table/vi.json"
+        },
         columnDefs: [
-            {type: 'currency', targets: 3}
+            {type: 'numeric-comma', targets: 4}
+        ],
+    });
+
+    $("#products-table").DataTable({
+        dom: "lBfrtip",
+        lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"],
+        ],
+        buttons: ["copy", "csv", "excel", "pdf", "print"],
+        language: {
+            "url": "./assets/js/lib/data-table/vi.json"
+        },
+        columnDefs: [
+            {type: 'numeric-comma', targets: 3}
         ],
     });
 
@@ -41,7 +83,7 @@
                         .on("change", function () {
                             var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
-                            column.search(val ? "^" + val + "$" : "", true, false).draw();
+                            column.search(val ? "^" + val + "đ" : "", true, false).draw();
                         });
 
                     column
