@@ -49,18 +49,23 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
     /*----------------------------------------*/
     /*  02. Header Dropdown
    /*----------------------------------------*/
+
     // Li's Dropdown Menu
-    $(
-        ".ht-setting-trigger, .ht-currency-trigger, .ht-language-trigger, .hm-minicart-trigger, .cw-sub-menu"
-    ).on("click", function (e) {
-        e.preventDefault();
-        $(this).toggleClass("is-active");
-        $(this)
-            .siblings(
-                ".ht-setting, .ht-currency, .ht-language, .minicart, .cw-sub-menu li"
-            )
-            .slideToggle();
-    });
+    function dropdown() {
+        $(
+            ".ht-setting-trigger, .ht-currency-trigger, .ht-language-trigger, .hm-minicart-trigger, .cw-sub-menu"
+        ).on("click", function (e) {
+            e.preventDefault();
+            $(this).toggleClass("is-active");
+            $(this)
+                .siblings(
+                    ".ht-setting, .ht-currency, .ht-language, .minicart, .cw-sub-menu li"
+                )
+                .slideToggle();
+        });
+    }
+
+    dropdown();
     $(".ht-setting-trigger.is-active").siblings(".catmenu-body").slideDown();
     /*----------------------------------------*/
     /* 03. Li's Sticky Menu Activation
@@ -608,7 +613,7 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
 
      */
     /*----------------------------------------*/
-    $(".add-cart").click(function () {
+    $(".add-cart").on("click",function () {
 
         var maSP = $(this).attr("pid");
         var path = $(this).attr("path")
@@ -620,6 +625,10 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
                 quantitySold: 1,
             },
             success: function (data, textStatus, xhr) {
+                $(".minicart").load("http://localhost:8080" + path + "?id=" + maSP + "&quantitySold=" + 1 + " .minicart2");
+                $(".hm-minicart-trigger").load("http://localhost:8080" + path + "?id=" + maSP + "&quantitySold=" + 1 + " .hm-minicart-trigger2");
+                console.log("http://localhost:8080" + path + "?id=" + maSP + "&quantitySold=" + 1)
+                console.log(window.location.href)
                 Command: toastr["success"]("Sản phẩm đã được thêm vào giỏ hàng!")
 
                 toastr.options = {
@@ -665,6 +674,8 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
         })
 
     });
+    $(".header-middle-right").on("load", dropdown());
+    dropdown()
     $(".qtybutton").click(function () {
 
         var input = $(this).closest(".cart-plus-minus").find(".changeQuantity");

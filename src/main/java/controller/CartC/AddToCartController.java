@@ -28,17 +28,17 @@ public class AddToCartController extends HttpServlet {
         if (cart == null)
             cart = Cart.getInstance();
         Product p = ProductServices.getInstance().getProduct(id);
-        String url = ProductServices.getInstance().getMainImageProduct(id);
-        File f = new File(url);
-
-        BufferedImage bImage = ImageIO.read(f);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(bImage, getFileExtension(f), baos);
-        baos.flush();
-        byte[] imageInByteArray = baos.toByteArray();
-        baos.close();
-        String base64 = DatatypeConverter.printBase64Binary(imageInByteArray);
-        p.setImageMain(base64);
+//        String url = ProductServices.getInstance().getMainImageProduct(id);
+//        File f = new File(url);
+//
+//        BufferedImage bImage = ImageIO.read(f);
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        ImageIO.write(bImage, getFileExtension(f), baos);
+//        baos.flush();
+//        byte[] imageInByteArray = baos.toByteArray();
+//        baos.close();
+//        String base64 = DatatypeConverter.printBase64Binary(imageInByteArray);
+//        p.setImageMain(base64);
         
         if (cart.isContain(id)) {
             int newQuantitySold = (cart.get(id).getQuantitySold()) + 1;
@@ -48,6 +48,8 @@ public class AddToCartController extends HttpServlet {
         }
         cart.put(p);
         session.setAttribute("cart", cart);
+
+        request.getRequestDispatcher("/").forward(request, response);
     }
 
     @Override

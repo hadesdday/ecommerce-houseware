@@ -15,9 +15,10 @@
         cart = Cart.getInstance();
         session.setAttribute("cart", cart);
     }
-    Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-    map.put("price", new ArrayList<>());
-    map.put("branch", new ArrayList<>());
+//    Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+//    map.put("price", new ArrayList<>());
+//    map.put("branch", new ArrayList<>());
+    request.setAttribute("page-name","product-list.jsp");
 %>
 
 <html class="no-js" lang="zxxs">
@@ -1434,6 +1435,7 @@
 
     });
 </script>
+
 </body>
 
 <!-- shop-right-sidebar31:48-->
