@@ -3,6 +3,7 @@ package dao;
 import beans.EmailMessage;
 import beans.User;
 import db.DbConnector;
+import properties.AssetsProperties;
 import services.EmailServices;
 
 import java.math.BigInteger;
@@ -129,7 +130,7 @@ public class UserDAO {
                             .bind(0, token)
                             .bind(1, email)
                             .execute());
-            String resetUrl = "http://localhost:8080/forgot_password_project_war_exploded/forgotPassword?email=" + email + "&token=" + token;
+            String resetUrl = AssetsProperties.getBaseURL() + "forgotPassword?email=" + email + "&token=" + token;
             EmailMessage emailbean = new EmailMessage();
             emailbean.setTo(email);
             emailbean.setSubject("Thiết lập lại mật khẩu đăng nhập NLU");

@@ -21,9 +21,9 @@ public class ViewProductDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
-        int page = (int) request.getAttribute("page");
+//        int page = (int) request.getAttribute("page");
         Product p = ProductServices.getInstance().getProduct(pid);
-        List<Product> sameCategoryProducts = ProductServices.getInstance().getByCategory(p.getMa_loaisp(), page, "");
+        List<Product> sameCategoryProducts = ProductServices.getInstance().getProductByCategory(p.getMa_loaisp());
         List<Review> comments = ReviewServices.getInstance().getReviewByPid(pid);
         List<Image> images = FileServices.getInstance().getImagesByPid(pid);
         Category c = ProductServices.getInstance().getCategory(p.getMa_loaisp());

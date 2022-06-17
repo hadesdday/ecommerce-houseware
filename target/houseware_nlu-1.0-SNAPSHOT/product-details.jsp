@@ -12,7 +12,7 @@
 <html class="no-js" lang="zxx">
 
 <%@include file="head.jsp" %>
-<title>${product.ten_sp} || NLU</title>
+<title>${product.ten_sp} giá rẻ, chính hãng || NLU</title>
 
 
 <body>
@@ -50,7 +50,8 @@
                                     <a class="popup-img venobox vbox-item"
                                        href="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
                                        data-gall="myGallery">
-                                        <img loading="lazy" src="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
+                                        <img loading="lazy"
+                                             src="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
                                              alt="product image">
                                     </a>
                                 </div>
@@ -103,7 +104,7 @@
                                     </div>
                                 </div>
                                 <button class="add-to-cart add-cart" pid="${product.id_sanpham}"
-                                        path="/houseware_nlu_war_exploded/AddToCart" type="submit">
+                                        path="${pageContext.request.contextPath}/AddToCart" type="submit">
                                     Add to cart
                                 </button>
                             </div>
@@ -298,7 +299,8 @@
                                     <div class="single-product-wrap">
                                         <div class="product-image">
                                             <a href="product-details.jsp">
-                                                <img loading="lazy" src="${pageContext.request.contextPath}/image/${si.getImageMain()}"
+                                                <img loading="lazy"
+                                                     src="${pageContext.request.contextPath}/image/${si.getImageMain()}"
                                                      alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>
@@ -329,7 +331,8 @@
                                             <div class="add-actions">
                                                 <ul class="add-actions-link">
                                                     <li class="add-cart active" pid="${si.getId_sanpham()}"
-                                                        path="/houseware_nlu_war_exploded/AddToCart"><a href="#">Add to
+                                                        path="${pageContext.request.contextPath}/AddToCart"><a href="#">Add
+                                                        to
                                                         cart</a></li>
                                                     <li><a href="#" title="quick view" class="quick-view-btn"
                                                            data-toggle="modal" data-target="#exampleModalCenter"><i
