@@ -106,42 +106,47 @@
                             <!-- Begin Header Mini Cart Area -->
                             <li class="hm-minicart">
                                 <div class="hm-minicart-trigger">
+                                    <div class="hm-minicart-trigger2">
                                     <span class="item-icon"></span>
                                     <span class="item-text">${cart.total()}
                                                 <span class="cart-item-count">${cart.products.size()}</span>
                                             </span>
+                                    </div>
                                 </div>
                                 <span></span>
                                 <div class="minicart">
-                                    <ul class="minicart-product-list">
-                                        <c:set var="list" value="${cart.products}"/>
-                                        <c:forEach items="${list}" var="item">
-                                            <li>
-                                                <a href="product-details.jsp" class="minicart-product-image">
-                                                    <img src="data:image/jpg;base64,${item.imageMain}"
-                                                         alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="product-details.jsp">${item.ten_sp}</a></h6>
-                                                    <span class="price">${item.gia}</span><span>VND x</span><span
-                                                        class="quantity">${item.quantitySold}</span>
-                                                </div>
-                                                <button class="close" title="Remove" pid="${item.id_sanpham}">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                    <p class="minicart-total">SUBTOTAL: <span>${cart.total()}</span></p>
-                                    <div class="minicart-button">
-                                        <a href="${pageContext.request.contextPath}/Cart"
-                                           class="li-button li-button-dark li-button-fullwidth li-button-sm">
-                                            <span>Xem giỏ hàng</span>
-                                        </a>
-                                        <a href="${pageContext.request.contextPath}/Checkout"
-                                           class="li-button li-button-fullwidth li-button-sm">
-                                            <span>Thanh toán</span>
-                                        </a>
+                                    <div class="minicart2">
+                                        <ul class="minicart-product-list">
+                                            <c:set var="list" value="${cart.products}"/>
+                                            <c:forEach items="${list}" var="item">
+                                                <li>
+                                                    <a href="product-details.jsp" class="minicart-product-image">
+                                                        <img src="data:image/jpg;base64,${item.imageMain}"
+                                                             alt="cart products">
+                                                    </a>
+                                                    <div class="minicart-product-details">
+                                                        <h6><a href="product-details.jsp">${item.ten_sp}</a></h6>
+                                                        <span class="price">${item.gia}</span><span>VND x</span><span
+                                                            class="quantity">${item.quantitySold}</span>
+                                                    </div>
+                                                    <button class="close" title="Remove" pid="${item.id_sanpham}">
+                                                        <i class="fa fa-close"></i>
+                                                    </button>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+
+                                        <p class="minicart-total">SUBTOTAL: <span>${cart.total()}</span></p>
+                                        <div class="minicart-button">
+                                            <a href="${pageContext.request.contextPath}/Cart"
+                                               class="li-button li-button-dark li-button-fullwidth li-button-sm">
+                                                <span>Xem giỏ hàng</span>
+                                            </a>
+                                            <a href="${pageContext.request.contextPath}/Checkout"
+                                               class="li-button li-button-fullwidth li-button-sm">
+                                                <span>Thanh toán</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
