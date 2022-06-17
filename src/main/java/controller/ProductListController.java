@@ -28,21 +28,17 @@ public class ProductListController extends HttpServlet {
         String filterQuery = "";
         if (request.getParameter("branch") != null && request.getParameter("branch") != ""&&request.getParameter("branch") != "null") {
             branchs = request.getParameter("branch");
-            System.out.println(branchs);
             branchs = branchs.substring(0, branchs.length() - 1).replace("-", "' or thuonghieu='");
             branchs = "(thuonghieu='" + branchs + "')";
-            System.out.println(branchs);
 
         }
 
 
         if (request.getParameter("price") != null & request.getParameter("price") != ""&&request.getParameter("price") != "null") {
             prices = request.getParameter("price");
-            System.out.println(prices);
             StringTokenizer st = new StringTokenizer(prices, "-", false);
             while (st.hasMoreTokens()) {
                 String price = st.nextToken();
-                System.out.println(price);
                 switch (price) {
                     case "duoi1":
                         priceQuery += "<100000),";
@@ -58,22 +54,17 @@ public class ProductListController extends HttpServlet {
                         break;
                 }
             }
-            System.out.println(priceQuery);
             priceQuery = priceQuery.substring(0, priceQuery.length() - 1).replace("-", " or (gia");
             priceQuery = "((gia" + priceQuery + ")";
-            System.out.println(priceQuery);
 
         }
         if (branchs.equals("") && priceQuery.equals("")) {
             filterQuery = "";
         } else if (branchs.equals("")) {
-            System.out.println("111111");
             filterQuery = "and " + priceQuery;
         } else if (priceQuery.equals("")) {
-            System.out.println("22222");
             filterQuery = "and " + branchs;
         } else {
-            System.out.println("3333");
             filterQuery = "and (" + branchs + " and " + priceQuery + ")";
         }
         System.out.println(filterQuery);
@@ -81,9 +72,7 @@ public class ProductListController extends HttpServlet {
         List<Product> productsAll = ProductServices.getInstance().getAllProductByCategory(category, filterQuery);
         List<Product> emptyList = new ArrayList<>();
         List<Product> products = ProductServices.getInstance().getByCategory(category, page, filterQuery);
-        System.out.println(category);
-        System.out.println("products:"+products.size());
-        System.out.println(productsAll.size());
+
         Category ct = ProductServices.getInstance().getCategory(category);
 
 //        for (int i = 0; i < products.size(); i++) {

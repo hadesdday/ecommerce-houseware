@@ -916,12 +916,15 @@
                             <div class="categori-checkbox">
                                 <form action="#">
                                     <ul>
-                                        <li><input type="checkbox" name="price" value="duoi1"><a href="#"></a><1 triệu</li>
+                                        
+                                        <li><input type="checkbox" name="price" value="duoi1"><a href="#"></a><1 triệu
+                                        </li>
                                         <li><input type="checkbox" name="price" value="1den3"><a href="#"></a>1-3 triệu
                                         </li>
                                         <li><input type="checkbox" name="price" value="3den6"><a href="#"></a>3-6 triệu
                                         </li>
-                                        <li><input type="checkbox" name="price" value="tren6"><a href="#"></a>>6 triệu</li>
+                                        <li><input type="checkbox" name="price" value="tren6"><a href="#"></a>>6 triệu
+                                        </li>
                                     </ul>
                                 </form>
                             </div>
@@ -1378,12 +1381,12 @@
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
 
+
 <script>
     var branchs = "";
     var prices = "";
 
     function getFilters() {
-        alert("dit me m")
         branchs = "";
         prices = "";
         $("input[type='checkbox']").each(function () {
@@ -1407,14 +1410,13 @@
 
     getFilters();
     $('input[type="checkbox"]').click(function () {
-        alert("asadad")
         getFilters();
         $.ajax({
             url: "/houseware_nlu_war_exploded/ProductList",
             method: "GET",
             data: {
                 pageN: 1,
-                category:"<%=request.getParameter("category")%>",
+                category: "<%=request.getParameter("category")%>",
                 price: prices,
                 branch: branchs,
 
@@ -1424,14 +1426,9 @@
 
                 $(".paginatoin-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .paging")
 
-                console.log("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs)
-                console.log(window.location.href)
             },
             error: function (data) {
-                console.log("error")
-                console.log("prices:"+prices)
-                console.log("branchs:"+branchs)
-                console.log(window.location.href)
+
             }
         });
 
