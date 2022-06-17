@@ -5,6 +5,9 @@
 <html class="no-js" lang="zxx">
 
 <%@include file="head.jsp" %>
+<%
+    request.setAttribute("page-name","index.jsp");
+%>
 <title>Trang chủ | NLU</title>
 
 <body>
@@ -1667,6 +1670,7 @@
 <script src="js/scrollUp.min.js"></script>
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
+
 </body>
 
 <!-- index-231:38-->

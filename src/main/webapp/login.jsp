@@ -5,6 +5,7 @@
     if (session.getAttribute("user") != null)
         response.sendRedirect("${pageContext.request.contextPath}/");
     String username = request.getParameter("username") != null ? request.getParameter("username") : "";
+
 %>
 <!doctype html>
 <html class="no-js" lang="zxx">
