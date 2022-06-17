@@ -917,13 +917,6 @@
                                 <form action="#">
                                     <ul>
 
-                                        <li><input type="checkbox" name="price" value="<1"><a href="#"></a><1 triệu</li>
-                                        <li><input type="checkbox" name="price" value="1-3"><a href="#"></a>1-3 triệu
-                                        </li>
-                                        <li><input type="checkbox" name="price" value="3-6"><a href="#"></a>3-6 triệu
-                                        </li>
-                                        <li><input type="checkbox" name="price" value=">6"><a href="#"></a>>6 triệu</li>
-
                                         <li><input type="checkbox" name="price" value="duoi1"><a href="#"></a><1 triệu
                                         </li>
                                         <li><input type="checkbox" name="price" value="1den3"><a href="#"></a>1-3 triệu
