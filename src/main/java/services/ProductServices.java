@@ -21,12 +21,12 @@ public class ProductServices {
         return ProductDAO.getInstance().getAll();
     }
 
-    public List<Product> getByCategory(String cat, int page) {
-        return ProductDAO.getInstance().getProductByCategory(cat, page);
+    public List<Product> getByCategory(String cat, int page,String filter) {
+        return ProductDAO.getInstance().getProductByCategory(cat, page,filter);
     }
 
-    public List<Product> getAllProductByCategory(String cat) {
-        return ProductDAO.getInstance().getAllProductByCategory(cat);
+    public List<Product> getAllProductByCategory(String cat,String filter) {
+        return ProductDAO.getInstance().getAllProductByCategory(cat,filter);
     }
 
     public List<Product> getProductByMostSold() {
