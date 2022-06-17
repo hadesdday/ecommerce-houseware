@@ -91,7 +91,7 @@
                         <div class="tab-content">
                             <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
                                 <div class="product-area shop-product-area">
-                                    <div class="row">
+                                    <div class="row product-list">
                                         <jsp:useBean id="products" scope="request" type="java.util.List"/>
                                         <c:forEach var="p" items="${products}">
                                             <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
@@ -859,14 +859,14 @@
                                 </div>
                             </div>
                             <div class="paginatoin-area">
-                                <div class="row">
+                                <div class="row paging">
                                     <div class="col-lg-6 col-md-6 pt-xs-15">
                                         <p>Showing 1-12 of 13 item(s)</p>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul class="pagination-box pt-xs-20 pb-xs-15">
                                             <li><a href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")>1?(int)request.getAttribute("page")-1:1)
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")>1?(int)request.getAttribute("page")-1:1)+"&branch="+request.getParameter("branch")+"&price="+request.getParameter("price")
                                             %>" class="Previous"><i class="fa fa-chevron-left"></i>
                                                 Previous</a>
                                             </li>
@@ -883,13 +883,13 @@
 
                                             <li class="<%=((int)request.getAttribute("page")==(i+1)?"active":"") %>"><a
                                                     href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)+"&branch="+(request.getParameter("branch")==null?"":request.getParameter("branch"))+"&price="+(request.getParameter("price")==null?"":request.getParameter("price"))
                                             %>"><%=(i + 1)%>
                                             </a></li>
                                             <%}%>
                                             <li>
                                                 <a href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&price="+request.getParameter("price")
                                             %>" class="Next"> Next <i
                                                         class="fa fa-chevron-right"></i></a>
                                             </li>
@@ -916,12 +916,12 @@
                             <div class="categori-checkbox">
                                 <form action="#">
                                     <ul>
-                                        <li><input type="checkbox" name="price" value="<1"><a href="#"></a><1 triệu</li>
-                                        <li><input type="checkbox" name="price" value="1-3"><a href="#"></a>1-3 triệu
+                                        <li><input type="checkbox" name="price" value="duoi1"><a href="#"></a><1 triệu</li>
+                                        <li><input type="checkbox" name="price" value="1den3"><a href="#"></a>1-3 triệu
                                         </li>
-                                        <li><input type="checkbox" name="price" value="3-6"><a href="#"></a>3-6 triệu
+                                        <li><input type="checkbox" name="price" value="3den6"><a href="#"></a>3-6 triệu
                                         </li>
-                                        <li><input type="checkbox" name="price" value=">6"><a href="#"></a>>6 triệu</li>
+                                        <li><input type="checkbox" name="price" value="tren6"><a href="#"></a>>6 triệu</li>
                                     </ul>
                                 </form>
                             </div>
@@ -1377,43 +1377,65 @@
 <script src="admin/assets/js/lib/toastr/toastr.min.js"></script>
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
+
 <script>
-    $(document).ready(function () {
-        var branchs=[];
-        var prices=[];
-        $('input[type=checkbox]').each(function () {
-            if(this.checked()){
-                var type=$(this).attr("name");
-                if(type=="branch"){
+    var branchs = "";
+    var prices = "";
+
+    function getFilters() {
+        alert("dit me m")
+        branchs = "";
+        prices = "";
+        $("input[type='checkbox']").each(function () {
+
+            if ($(this).is(':checked')) {
+                alert("check")
+                var type = $(this).attr("name");
+                if (type == "branch") {
                     alert("branch");
-                    var value=$(this).attr("value");
-                    branchs.push(value);
-                }else if(type=="price"){
+                    var value = $(this).attr("value");
+                    branchs += (value + "-");
+                }
+                if (type == "price") {
                     alert("price");
-                    var value=$(this).attr("value");
-                    prices.push(value);
+                    var value = $(this).attr("value");
+                    prices += (value + "-");
                 }
             }
         });
+    }
+
+    getFilters();
+    $('input[type="checkbox"]').click(function () {
+        alert("asadad")
+        getFilters();
         $.ajax({
             url: "/houseware_nlu_war_exploded/ProductList",
-            method: "POST",
+            method: "GET",
             data: {
-                pageN:1,
-                category:<%=request.getAttribute("category")%>,
-                branchs:branchs,
-                prices:prices,
+                pageN: 1,
+                category:"<%=request.getParameter("category")%>",
+                price: prices,
+                branch: branchs,
+
             },
             success: function (data) {
+                $(".shop-product-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .product-list")
 
+                $(".paginatoin-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .paging")
+
+                console.log("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs)
+                console.log(window.location.href)
             },
             error: function (data) {
-
+                console.log("error")
+                console.log("prices:"+prices)
+                console.log("branchs:"+branchs)
+                console.log(window.location.href)
             }
         });
 
-    })
-
+    });
 </script>
 </body>
 

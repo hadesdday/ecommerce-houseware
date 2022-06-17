@@ -22,7 +22,7 @@ public class ViewProductDetails extends HttpServlet {
         String pid = request.getParameter("pid");
         int page= (int) request.getAttribute("page");
         Product p = ProductServices.getInstance().getProduct(pid);
-        List<Product> sameCategoryProducts = ProductServices.getInstance().getByCategory(p.getMa_loaisp(),page);
+        List<Product> sameCategoryProducts = ProductServices.getInstance().getByCategory(p.getMa_loaisp(),page,"");
         List<Review> comments = ReviewServices.getInstance().getReviewByPid(pid);
         List<Image> images = FileServices.getInstance().getImagesByPid(pid);
         Category c = ProductServices.getInstance().getCategory(p.getMa_loaisp());
