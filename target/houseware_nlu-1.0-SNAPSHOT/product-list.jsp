@@ -2,8 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="beans.Cart" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <jsp:useBean id="categoryName" scope="request" type="java.lang.String"/>
-<% String currentURL="/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+request.getAttribute("page");%>
+<% String currentURL = "/houseware_nlu_war_exploded/ProductList?category=" + request.getParameter("category") + "&pageN=" + request.getAttribute("page");%>
 <%
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
@@ -12,6 +15,9 @@
         cart = Cart.getInstance();
         session.setAttribute("cart", cart);
     }
+    Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+    map.put("price", new ArrayList<>());
+    map.put("branch", new ArrayList<>());
 %>
 
 <html class="no-js" lang="zxxs">
@@ -85,7 +91,7 @@
                         <div class="tab-content">
                             <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
                                 <div class="product-area shop-product-area">
-                                    <div class="row">
+                                    <div class="row product-list">
                                         <jsp:useBean id="products" scope="request" type="java.util.List"/>
                                         <c:forEach var="p" items="${products}">
                                             <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
@@ -853,14 +859,14 @@
                                 </div>
                             </div>
                             <div class="paginatoin-area">
-                                <div class="row">
+                                <div class="row paging">
                                     <div class="col-lg-6 col-md-6 pt-xs-15">
                                         <p>Showing 1-12 of 13 item(s)</p>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul class="pagination-box pt-xs-20 pb-xs-15">
                                             <li><a href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")>1?(int)request.getAttribute("page")-1:1)
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")>1?(int)request.getAttribute("page")-1:1)+"&branch="+request.getParameter("branch")+"&price="+request.getParameter("price")
                                             %>" class="Previous"><i class="fa fa-chevron-left"></i>
                                                 Previous</a>
                                             </li>
@@ -868,20 +874,22 @@
                                             <% int productCount = allProducts.size();
                                                 System.out.println(productCount);
                                                 int pageCount = (int) Math.round(productCount / 5);
-                                                if(productCount%5!=0)
+                                                if (productCount % 5 != 0)
                                                     pageCount++;
                                                 if (request.getAttribute("page") == null)
                                                     request.setAttribute("page", 1);
                                                 for (int i = 0; i < pageCount; i++) {
                                             %>
 
-                                            <li class="<%=((int)request.getAttribute("page")==(i+1)?"active":"") %>"><a href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)
-                                            %>"><%=(i+1)%></a></li>
+                                            <li class="<%=((int)request.getAttribute("page")==(i+1)?"active":"") %>"><a
+                                                    href="<%=
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)+"&branch="+(request.getParameter("branch")==null?"":request.getParameter("branch"))+"&price="+(request.getParameter("price")==null?"":request.getParameter("price"))
+                                            %>"><%=(i + 1)%>
+                                            </a></li>
                                             <%}%>
                                             <li>
                                                 <a href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&price="+request.getParameter("price")
                                             %>" class="Next"> Next <i
                                                         class="fa fa-chevron-right"></i></a>
                                             </li>
@@ -908,10 +916,12 @@
                             <div class="categori-checkbox">
                                 <form action="#">
                                     <ul>
-                                        <li><input type="checkbox" name="product-categori"><a href="#"></a><1 triệu</li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>1-3 triệu</li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>3-6 triệu</li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#"></a>>6 triệu</li>
+                                        <li><input type="checkbox" name="price" value="duoi1"><a href="#"></a><1 triệu</li>
+                                        <li><input type="checkbox" name="price" value="1den3"><a href="#"></a>1-3 triệu
+                                        </li>
+                                        <li><input type="checkbox" name="price" value="3den6"><a href="#"></a>3-6 triệu
+                                        </li>
+                                        <li><input type="checkbox" name="price" value="tren6"><a href="#"></a>>6 triệu</li>
                                     </ul>
                                 </form>
                             </div>
@@ -923,66 +933,27 @@
                             <div class="categori-checkbox">
                                 <form action="#">
                                     <ul>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Philips</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Sunhouse</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Deawoo</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Panasonic</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Sauce</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Sharp</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Electrolux</a></li>
-                                        <li><input type="checkbox" name="product-categori"><a href="#">Kangaroo</a></li>
+                                        <li><input type="checkbox" name="branch" value="Philips"><a href="#">Philips</a>
+                                        </li>
+                                        <li><input type="checkbox" name="branch" value="Sunhouse"><a
+                                                href="#">Sunhouse</a></li>
+                                        <li><input type="checkbox" name="branch" value="Deawoo"><a href="#">Deawoo</a>
+                                        </li>
+                                        <li><input type="checkbox" name="branch" value="Panasonic"><a
+                                                href="#">Panasonic</a></li>
+                                        <li><input type="checkbox" name="branch" value="Sauce"><a href="#">Sauce</a>
+                                        </li>
+                                        <li><input type="checkbox" name="branch" value="Sharp"><a href="#">Sharp</a>
+                                        </li>
+                                        <li><input type="checkbox" name="branch" value="Electrolux"><a href="#">Electrolux</a>
+                                        </li>
+                                        <li><input type="checkbox" name="branch" value="Kangaroo"><a
+                                                href="#">Kangaroo</a></li>
                                     </ul>
                                 </form>
                             </div>
                         </div>
-                        <!-- filter-sub-area end -->
-                        <!-- filter-sub-area start -->
-<%--                        <div class="filter-sub-area pt-sm-10 pt-xs-10">--%>
-<%--                            <h5 class="filter-sub-titel">Size</h5>--%>
-<%--                            <div class="size-checkbox">--%>
-<%--                                <form action="#">--%>
-<%--                                    <ul>--%>
-<%--                                        <li><input type="checkbox" name="product-size"><a href="#">S (3)</a></li>--%>
-<%--                                        <li><input type="checkbox" name="product-size"><a href="#">M (3)</a></li>--%>
-<%--                                        <li><input type="checkbox" name="product-size"><a href="#">L (3)</a></li>--%>
-<%--                                        <li><input type="checkbox" name="product-size"><a href="#">XL (3)</a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </form>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <!-- filter-sub-area end -->--%>
-<%--                        <!-- filter-sub-area start -->--%>
-<%--                        <div class="filter-sub-area pt-sm-10 pt-xs-10">--%>
-<%--                            <h5 class="filter-sub-titel">Color</h5>--%>
-<%--                            <div class="color-categoriy">--%>
-<%--                                <form action="#">--%>
-<%--                                    <ul>--%>
-<%--                                        <li><span class="white"></span><a href="#">White (1)</a></li>--%>
-<%--                                        <li><span class="black"></span><a href="#">Black (1)</a></li>--%>
-<%--                                        <li><span class="Orange"></span><a href="#">Orange (3) </a></li>--%>
-<%--                                        <li><span class="Blue"></span><a href="#">Blue (2) </a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </form>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <!-- filter-sub-area end -->--%>
-<%--                        <!-- filter-sub-area start -->--%>
-<%--                        <div class="filter-sub-area pt-sm-10 pb-sm-15 pb-xs-15">--%>
-<%--                            <h5 class="filter-sub-titel">Dimension</h5>--%>
-<%--                            <div class="categori-checkbox">--%>
-<%--                                <form action="#">--%>
-<%--                                    <ul>--%>
-<%--                                        <li><input type="checkbox" name="product-categori"><a href="#">40x60cm--%>
-<%--                                            (6)</a></li>--%>
-<%--                                        <li><input type="checkbox" name="product-categori"><a href="#">60x90cm--%>
-<%--                                            (6)</a></li>--%>
-<%--                                        <li><input type="checkbox" name="product-categori"><a href="#">80x120cm--%>
-<%--                                            (6)</a></li>--%>
-<%--                                    </ul>--%>
-<%--                                </form>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-                        <!-- filter-sub-area end -->
+
                     </div>
                     <!--sidebar-categores-box end  -->
                 </div>
@@ -1406,31 +1377,65 @@
 <script src="admin/assets/js/lib/toastr/toastr.min.js"></script>
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
-<script>
-    // $(document).ready(function () {
-    //     $(".pagination-box li").click(function (){
-    //         alert("click")
-    //         var index=$(this).index()
-    //         var className=$(this).children()[0].attr("class")
-    //         if(className!='Previous'||className!='Next'){
-    //             console.log(); alert("clic2k")
-    //
-    //             $.ajax({
-    //                 url: "/houseware_nlu_war_exploded/ProductList",
-    //                 method: "GET",
-    //                 data: {
-    //
-    //                 },
-    //                 success: function (data) {
-    //                 },
-    //                 error: function (data) {
-    //
-    //                 }
-    //             });
-    //         }
-    //     })
-    // })
 
+<script>
+    var branchs = "";
+    var prices = "";
+
+    function getFilters() {
+        alert("dit me m")
+        branchs = "";
+        prices = "";
+        $("input[type='checkbox']").each(function () {
+
+            if ($(this).is(':checked')) {
+                alert("check")
+                var type = $(this).attr("name");
+                if (type == "branch") {
+                    alert("branch");
+                    var value = $(this).attr("value");
+                    branchs += (value + "-");
+                }
+                if (type == "price") {
+                    alert("price");
+                    var value = $(this).attr("value");
+                    prices += (value + "-");
+                }
+            }
+        });
+    }
+
+    getFilters();
+    $('input[type="checkbox"]').click(function () {
+        alert("asadad")
+        getFilters();
+        $.ajax({
+            url: "/houseware_nlu_war_exploded/ProductList",
+            method: "GET",
+            data: {
+                pageN: 1,
+                category:"<%=request.getParameter("category")%>",
+                price: prices,
+                branch: branchs,
+
+            },
+            success: function (data) {
+                $(".shop-product-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .product-list")
+
+                $(".paginatoin-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .paging")
+
+                console.log("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs)
+                console.log(window.location.href)
+            },
+            error: function (data) {
+                console.log("error")
+                console.log("prices:"+prices)
+                console.log("branchs:"+branchs)
+                console.log(window.location.href)
+            }
+        });
+
+    });
 </script>
 </body>
 
