@@ -10,6 +10,6 @@
 
     <context-param>
         <param-name>tempfile.dir</param-name>
-        <param-value>houseware_nlu\assets\images\upload</param-value>
+        <param-value>houseware_nlu\images</param-value>
     </context-param>
 </web-app>

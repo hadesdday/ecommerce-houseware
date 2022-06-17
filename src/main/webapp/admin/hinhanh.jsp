@@ -126,7 +126,8 @@
                                                         ${item.ID_ANH}
                                                 </td>
                                                 <td>
-                                                    <img src="data:image/jpg;base64,${item.LINK_ANH}" width="50px"
+                                                    <img src="${pageContext.request.contextPath}/image/${item.LINK_ANH}"
+                                                         width="50px"
                                                          height="50px"/>
                                                 </td>
                                                 <td>
@@ -214,19 +215,8 @@
                     + "<i class='ti-pencil text-white'></i></a>";
                 var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" iid="' + id + '">' +
                     "<i class='ti-trash text-white'></i></a>";
-                var urlBase;
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/GetImage",
-                    type: 'GET',
-                    async: false,
-                    data: {
-                        url: url
-                    }, success: function (data) {
-                        urlBase = data;
-                    }
-                });
 
-                const imageElm = '<img src="data:image/jpg;base64,' + urlBase + '"width="50px" height="50px"/>';
+                const imageElm = '<img src="${pageContext.request.contextPath}/image/' + url + '"width="50px" height="50px"/>';
 
                 $('#bootstrap-data-table-export').DataTable().row.add(
                     [
@@ -266,7 +256,7 @@
             success: function (data) {
                 $("input[name='urlDel']").val(data);
             }
-        })
+        });
         showDeleteModal();
     }
 

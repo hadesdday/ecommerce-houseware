@@ -265,7 +265,7 @@
                                     <div class="single-product-wrap">
                                         <div class="product-image">
                                             <a href="product-details.jsp">
-                                                <img loading="lazy" src="data:image/jpg;base64,${p.getImageMain()}"
+                                                <img loading="lazy" src="${pageContext.request.contextPath}/image/${p.getImageMain()}"
                                                      alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>
@@ -371,7 +371,7 @@
                                     <div class="single-product-wrap">
                                         <div class="product-image">
                                             <a href="product-details.jsp">
-                                                <img loading="lazy" src="data:image/jpg;base64,${p.getImageMain()}"
+                                                <img loading="lazy" src="${pageContext.request.contextPath}/image/${p.getImageMain()}"
                                                      alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>

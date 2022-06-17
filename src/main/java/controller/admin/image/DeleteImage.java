@@ -17,8 +17,9 @@ public class DeleteImage extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        File root = new File((String) request.getServletContext().getAttribute("FILES_DIR") + File.separator);
         String id = request.getParameter("id");
-        String url = request.getParameter("url");
+        String url = root + File.separator + request.getParameter("url");
         if (FileServices.getInstance().deleteImage(id)) {
             File f = new File(url);
             if (f.exists()) f.delete();

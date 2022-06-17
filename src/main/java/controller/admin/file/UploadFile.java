@@ -59,11 +59,10 @@ public class UploadFile extends HttpServlet {
                 Gson gson = new Gson();
 
                 response.setContentType("application/json");
-                String pathToFile = file.getAbsolutePath();
+                String pathToFile = "product" + File.separator + file.getName();
                 pw.write(gson.toJson(pathToFile));
                 pw.close();
                 request.getRequestDispatcher("/admin/image").forward(request, response);
-//                response.sendRedirect(AssetsProperties.getBaseURL("admin/image"));
             }
         } catch (Exception e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);

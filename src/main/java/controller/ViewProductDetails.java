@@ -4,14 +4,15 @@ import beans.Category;
 import beans.Image;
 import beans.Product;
 import beans.Review;
-import helper.Base64;
 import services.FileServices;
 import services.ProductServices;
 import services.ReviewServices;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,14 +21,14 @@ public class ViewProductDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
-        int page= (int) request.getAttribute("page");
+        int page = (int) request.getAttribute("page");
         Product p = ProductServices.getInstance().getProduct(pid);
-        List<Product> sameCategoryProducts = ProductServices.getInstance().getByCategory(p.getMa_loaisp(),page,"");
+        List<Product> sameCategoryProducts = ProductServices.getInstance().getByCategory(p.getMa_loaisp(), page, "");
         List<Review> comments = ReviewServices.getInstance().getReviewByPid(pid);
         List<Image> images = FileServices.getInstance().getImagesByPid(pid);
         Category c = ProductServices.getInstance().getCategory(p.getMa_loaisp());
         String url = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
-        p.setImageMain(Base64.get(url));
+        p.setImageMain(url);
 
         int avgRating = ProductServices.getInstance().getAverageRating(p.getId_sanpham());
         String starItem = "";
@@ -56,11 +57,7 @@ public class ViewProductDetails extends HttpServlet {
             }
 
             sp.setAvgRating(starElm);
-            sp.setImageMain(Base64.get(sUrl));
-        }
-
-        for (Image i : images) {
-            i.setLINK_ANH(Base64.get(i.getLINK_ANH()));
+            sp.setImageMain(sUrl);
         }
 
         request.setAttribute("categoryName", c.getTen_loaisp());

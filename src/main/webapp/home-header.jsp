@@ -121,7 +121,7 @@
                                             <c:forEach items="${list}" var="item">
                                                 <li>
                                                     <a href="product-details.jsp" class="minicart-product-image">
-                                                        <img src="data:image/jpg;base64,${item.imageMain}"
+                                                        <img src="${pageContext.request.contextPath}/image/${item.imageMain}"
                                                              alt="cart products">
                                                     </a>
                                                     <div class="minicart-product-details">

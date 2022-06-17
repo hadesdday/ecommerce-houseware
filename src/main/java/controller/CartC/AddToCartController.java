@@ -28,18 +28,9 @@ public class AddToCartController extends HttpServlet {
         if (cart == null)
             cart = Cart.getInstance();
         Product p = ProductServices.getInstance().getProduct(id);
-//        String url = ProductServices.getInstance().getMainImageProduct(id);
-//        File f = new File(url);
-//
-//        BufferedImage bImage = ImageIO.read(f);
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        ImageIO.write(bImage, getFileExtension(f), baos);
-//        baos.flush();
-//        byte[] imageInByteArray = baos.toByteArray();
-//        baos.close();
-//        String base64 = DatatypeConverter.printBase64Binary(imageInByteArray);
-//        p.setImageMain(base64);
-        
+        String url = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
+        p.setImageMain(url);
+
         if (cart.isContain(id)) {
             int newQuantitySold = (cart.get(id).getQuantitySold()) + 1;
             p.setQuantitySold(newQuantitySold);
@@ -48,19 +39,10 @@ public class AddToCartController extends HttpServlet {
         }
         cart.put(p);
         session.setAttribute("cart", cart);
-
         request.getRequestDispatcher("/").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    private static String getFileExtension(File file) {
-        String fileName = file.getName();
-        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".") + 1);
-        else return "";
     }
 }

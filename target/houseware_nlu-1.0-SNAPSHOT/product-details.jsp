@@ -48,9 +48,9 @@
                             <c:forEach var="img" items="${images}">
                                 <div class="lg-image">
                                     <a class="popup-img venobox vbox-item"
-                                       href="data:image/jpg;base64,${img.getLINK_ANH()}"
+                                       href="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
                                        data-gall="myGallery">
-                                        <img loading="lazy" src="data:image/jpg;base64,${img.getLINK_ANH()}"
+                                        <img loading="lazy" src="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
                                              alt="product image">
                                     </a>
                                 </div>
@@ -60,7 +60,7 @@
                             <c:forEach var="img" items="${images}">
                                 <div class="sm-image">
                                     <img loading="lazy"
-                                         src="data:image/jpg;base64,${img.getLINK_ANH()}"
+                                         src="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
                                          alt="product image thumb"></div>
                             </c:forEach>
                         </div>
@@ -202,7 +202,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="li-review-product">
                                                         <img loading="lazy"
-                                                             src="data:image/jpg;base64,${product.imageMain}"
+                                                             src="${pageContext.request.contextPath}/image/${product.imageMain}"
                                                              alt="Li's Product" width="50%" height="50%">
                                                         <div class="li-review-product-desc">
                                                             <p class="li-product-name">${product.ten_sp}</p>
@@ -298,7 +298,7 @@
                                     <div class="single-product-wrap">
                                         <div class="product-image">
                                             <a href="product-details.jsp">
-                                                <img loading="lazy" src="data:image/jpg;base64,${si.getImageMain()}"
+                                                <img loading="lazy" src="${pageContext.request.contextPath}/image/${si.getImageMain()}"
                                                      alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>

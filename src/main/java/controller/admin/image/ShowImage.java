@@ -22,29 +22,8 @@ public class ShowImage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Image> imageList = FileServices.getInstance().getImages();
-        File f;
-        for (Image i : imageList) {
-            String url = i.getLINK_ANH();
-            f = new File(url);
-
-            BufferedImage bImage = ImageIO.read(f);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, getFileExtension(f), baos);
-            baos.flush();
-            byte[] imageInByteArray = baos.toByteArray();
-            baos.close();
-            String base64 = DatatypeConverter.printBase64Binary(imageInByteArray);
-            i.setLINK_ANH(base64);
-        }
         request.setAttribute("imageList", imageList);
         request.getRequestDispatcher("hinhanh.jsp").forward(request, response);
-    }
-
-    private static String getFileExtension(File file) {
-        String fileName = file.getName();
-        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".") + 1);
-        else return "";
     }
 
     @Override

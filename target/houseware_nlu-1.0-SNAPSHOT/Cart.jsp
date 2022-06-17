@@ -204,7 +204,7 @@
                                             <c:forEach items="${list}" var="item">
                                                 <li>
                                                     <a href="product-details.jsp" class="minicart-product-image">
-                                                        <img src="data:image/jpg;base64,${item.imageMain}" width=50px" height="50px" alt="cart products">
+                                                        <img src="${pageContext.request.contextPath}/image/${item.imageMain}" width=50px" height="50px" alt="cart products">
                                                     </a>
                                                     <div class="minicart-product-details">
                                                         <h6><a href="product-details.jsp">${item.ten_sp}</a></h6>
@@ -390,7 +390,7 @@
                                     <td class="li-product-remove"><a class="remove-product" pid="${item.id_sanpham}"
                                                                      href="#"><i class="fa fa-times"></i></a></td>
                                     <td class="li-product-thumbnail"><a href="#"><img
-                                            src="data:image/jpg;base64,${item.getImageMain()}" width="50px" height="50px" alt="${item.getImageMain()}"></a></td>
+                                            src="${pageContext.request.contextPath}/image/${item.getImageMain()}" width="50px" height="50px" alt="${item.getImageMain()}"></a></td>
                                     <td class="li-product-name"><a href="#">${item.ten_sp}</a></td>
                                     <td class="li-product-price"><span class="amount">${item.gia}</span></td>
                                     <td class="quantity">

@@ -1,19 +1,13 @@
 package controller;
 
-import beans.Image;
 import beans.Product;
-import helper.Base64;
-import jakarta.xml.bind.DatatypeConverter;
-import services.FileServices;
 import services.ProductServices;
 
-import javax.imageio.ImageIO;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,6 +20,7 @@ public class IndexController extends HttpServlet {
 
         for (int i = 0; i < products.size(); i++) {
             String url = ProductServices.getInstance().getMainImageProduct(products.get(i).getId_sanpham());
+            products.get(i).setImageMain(url);
             int avgRating = ProductServices.getInstance().getAverageRating(products.get(i).getId_sanpham());
             String starItem = "";
 
@@ -37,12 +32,12 @@ public class IndexController extends HttpServlet {
                 starItem += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
             }
 
-//            products.get(i).setImageMain(Base64.get(url));
             products.get(i).setAvgRating(starItem);
         }
 
         for (int i = 0; i < productsDiscount.size(); i++) {
             String url = ProductServices.getInstance().getMainImageProduct(products.get(i).getId_sanpham());
+            productsDiscount.get(i).setImageMain(url);
             int avgRating = ProductServices.getInstance().getAverageRating(productsDiscount.get(i).getId_sanpham());
             String nonStar = "";
 
@@ -54,7 +49,6 @@ public class IndexController extends HttpServlet {
                 nonStar += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
             }
 
-//            productsDiscount.get(i).setImageMain(Base64.get(url));
             productsDiscount.get(i).setAvgRating(nonStar);
         }
 
