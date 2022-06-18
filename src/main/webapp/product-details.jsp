@@ -48,10 +48,10 @@
                             <c:forEach var="img" items="${images}">
                                 <div class="lg-image">
                                     <a class="popup-img venobox vbox-item"
-                                       href="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
+                                       href="${pageContext.request.contextPath}/img/${img.getLINK_ANH()}"
                                        data-gall="myGallery">
                                         <img loading="lazy"
-                                             src="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
+                                             src="${pageContext.request.contextPath}/img/${img.getLINK_ANH()}"
                                              alt="product image">
                                     </a>
                                 </div>
@@ -61,7 +61,7 @@
                             <c:forEach var="img" items="${images}">
                                 <div class="sm-image">
                                     <img loading="lazy"
-                                         src="${pageContext.request.contextPath}/image/${img.getLINK_ANH()}"
+                                         src="${pageContext.request.contextPath}/img/${img.getLINK_ANH()}"
                                          alt="product image thumb"></div>
                             </c:forEach>
                         </div>
@@ -189,6 +189,11 @@
                                     ${product.avgRating}
                                 </ul>
                             </div>
+                            <c:choose>
+                                <c:when test="${sessionScope.get('authenticated') == 1} && ${sessionScope.get('user') != null}">
+
+                                </c:when>
+                            </c:choose>
                             <div class="review-btn">
                                 <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết đánh
                                     giá</a>
@@ -203,7 +208,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="li-review-product">
                                                         <img loading="lazy"
-                                                             src="${pageContext.request.contextPath}/image/${product.imageMain}"
+                                                             src="${pageContext.request.contextPath}/img/${product.imageMain}"
                                                              alt="Li's Product" width="50%" height="50%">
                                                         <div class="li-review-product-desc">
                                                             <p class="li-product-name">${product.ten_sp}</p>
@@ -236,30 +241,11 @@
                                                                               aria-required="true"></textarea>
                                                                 </p>
                                                                 <div class="feedback-input">
-                                                                    <p class="feedback-form-author">
-                                                                        <label for="author">Tên<span
-                                                                                class="required">*</span>
-                                                                        </label>
-                                                                        <input id="author" name="author"
-                                                                               value="" size="30"
-                                                                               aria-required="true" type="text">
-                                                                    </p>
-                                                                    <p
-                                                                            class="feedback-form-author feedback-form-email">
-                                                                        <label for="email">Email<span
-                                                                                class="required">*</span>
-                                                                        </label>
-                                                                        <input id="email" name="email" value=""
-                                                                               size="30" aria-required="true"
-                                                                               type="text">
-                                                                        <%--                                                                            <span class="required"><sub>*</sub>--%>
-                                                                        <%--                                                                                    Required fields</span>--%>
-                                                                    </p>
                                                                     <div class="feedback-btn pb-15">
                                                                         <a href="#" class="close"
                                                                            data-dismiss="modal"
                                                                            aria-label="Close">Hủy</a>
-                                                                        <a href="#">Gửi</a>
+                                                                        <a id="submit-comment">Gửi</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -300,7 +286,7 @@
                                         <div class="product-image">
                                             <a href="product-details.jsp">
                                                 <img loading="lazy"
-                                                     src="${pageContext.request.contextPath}/image/${si.getImageMain()}"
+                                                     src="${pageContext.request.contextPath}/img/${si.getImageMain()}"
                                                      alt="Li's Product Image">
                                             </a>
                                             <span class="sticker">New</span>
@@ -654,6 +640,16 @@
 <script src="js/main.js"></script>
 </body>
 
-<!-- single-product31:32-->
+<script>
+    $("#submit-comment").click(() => {
+        var rating = $("select[name='star-rating'] option:selected").val();
+        var pid = "${product.id_sanpham}";
+        var content = $("textarea[name='comment']").val();
+        var username = "he";
+
+        console.log({rating, pid, content, username});
+        // $.ajax({})
+    })
+</script>
 
 </html>

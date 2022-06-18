@@ -126,7 +126,7 @@
                                                         ${item.ID_ANH}
                                                 </td>
                                                 <td>
-                                                    <img src="${pageContext.request.contextPath}/image/${item.LINK_ANH}"
+                                                    <img src="${pageContext.request.contextPath}/img/${item.LINK_ANH}"
                                                          width="50px"
                                                          height="50px"/>
                                                 </td>
@@ -202,7 +202,7 @@
         var maSP = $("input[name='maSP']").val();
 
         $.ajax({
-            url: "${pageContext.request.contextPath}/image/add",
+            url: "${pageContext.request.contextPath}/image/upload",
             type: 'POST',
             data: {
                 id: id,
@@ -216,7 +216,7 @@
                 var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" iid="' + id + '">' +
                     "<i class='ti-trash text-white'></i></a>";
 
-                const imageElm = '<img src="${pageContext.request.contextPath}/image/' + url + '"width="50px" height="50px"/>';
+                const imageElm = '<img src="${pageContext.request.contextPath}/img/' + url + '"width="50px" height="50px"/>';
 
                 $('#bootstrap-data-table-export').DataTable().row.add(
                     [

@@ -100,7 +100,7 @@
                                                 <div class="single-product-wrap">
                                                     <div class="product-image">
                                                         <a href="">
-                                                            <img src="${pageContext.request.contextPath}/image/${p.getImageMain()}"
+                                                            <img src="${pageContext.request.contextPath}/img/${p.getImageMain()}"
                                                                 <%--                                                            <img src="images/product/noi-com/noi-com-dien-cuckoo-1-8-lit-cp-0661.png"--%>
                                                                  alt="Li's Product Image">
                                                         </a>

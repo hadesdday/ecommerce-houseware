@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 
-@WebServlet(name = "DisplayImage", value = "/image/*")
+@WebServlet(name = "DisplayImage", value = "/img/*")
 public class DisplayImage extends HttpServlet {
     private String imagePath;
 
