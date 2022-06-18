@@ -1,24 +1,8 @@
-<%@ page import="beans.Cart" %><%--
-  Created by IntelliJ IDEA.
-  User: hoang
-  Date: 12/16/2021
-  Time: 9:47 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<%
-    request.setCharacterEncoding("UTF-8");
-    response.setCharacterEncoding("UTF-8");
-
-%>
-<jsp:useBean id="cart" scope="request" type="beans.Cart"/>
 <html class="no-js" lang="zxx">
 
 <%@include file="head.jsp" %>
-<title>Giỏ Hàng | NLU</title>
+<title>Về chúng tôi | NLU</title>
 <body>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -28,88 +12,178 @@
 <div class="body-wrapper">
     <!-- Begin Header Area -->
     <%@include file="home-header.jsp" %>
-    <div class="Shopping-cart-area pt-60 pb-60">
+    <!-- Header Area End Here -->
+    <!-- Begin Li's Breadcrumb Area -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <ul>
+                    <li><a href="${pageContext.request.contextPath}">Home</a></li>
+                    <li class="active">About Us</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Li's Breadcrumb Area End Here -->
+    <!-- about wrapper start -->
+    <div class="about-us-wrapper pt-60 pb-40">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-
-                    <div class="table-content table-responsive">
-                        <table class="table cart-table">
-                            <thead>
-                            <tr>
-                                <th class="li-product-remove">Loại bỏ</th>
-                                <th class="li-product-thumbnail">Hình ảnh</th>
-                                <th class="cart-product-name">Tên sản phẩm</th>
-                                <th class="li-product-price">Giá sản phẩm</th>
-                                <th class="li-product-quantity">Số lượng</th>
-                                <th class="li-product-subtotal">Tổng cộng</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:set var="list" value="${cart.products}"/>
-                            <c:forEach items="${list}" var="item">
-                                <tr>
-                                    <td class="li-product-remove"><a class="remove-product" pid="${item.id_sanpham}"
-                                                                     href="#"><i class="fa fa-times"></i></a></td>
-                                    <td class="li-product-thumbnail"><a href="#"><img
-                                            src="${pageContext.request.contextPath}/img/${item.getImageMain()}"
-                                            width="50px" height="50px" alt="${item.getImageMain()}"></a></td>
-                                    <td class="li-product-name"><a href="#">${item.ten_sp}</a></td>
-                                    <td class="li-product-price"><span class="amount">${item.gia}</span></td>
-                                    <td class="quantity">
-                                        <label> Quantity</label>
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box changeQuantity"
-                                                   oldQuantity="${item.quantitySold}" pid="${item.id_sanpham}"
-                                                   value="${item.quantitySold}" type="text">
-                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal"><span class="amount">${item.total()}</span></td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                <!-- About Text Start -->
+                <div class="col-lg-6 order-last order-lg-first">
+                    <div class="about-text-wrap">
+                        <h2><span>Cung cấp</span>Sản phẩm tốt nhất</h2>
+                        <p>Với mục tiêu đem đến cho khách hàng những sản phẩm tuyệt vời cùng dịch vụ mua sắm trực
+                            tuyến tin cậy. Chúng tôi không ngừng
+                            nâng cao chất lượng dịch vụ và lắng nghe ý kiến đóng góp từ phía khách hàng để hoàn
+                            thiện dịch vụ một cách tốt nhất. Đến
+                            với trang web, Quý khách sẽ được cung cấp Dịch vụ bán hàng, giao hàng và thu tiền tại
+                            nhà
+                            trên toàn quốc đảm bảo uy tín,
+                            với hàng chục ngàn sản phẩm thuộc nhiều lĩnh vực khác nhau</p>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="coupon-all">
-                                <div class="coupon">
-                                    <form method="post"
-                                          action="${pageContext.request.contextPath}/BillDiscountController"
-                                          id="discount-form">
-                                        <input id="coupon_code" class="input-text" name="coupon_code" value=""
-                                               placeholder="Mã khuyến mãi" type="text">
-                                        <input class="button" name="apply_coupon" value="Áp dụng" type="submit">
-                                    </form>
+                </div>
+                <!-- About Text End -->
+                <!-- About Image Start -->
+                <div class="col-lg-5 col-md-10">
+                    <div class="about-image-wrap">
+                        <img loading="lazy" class="img-full" src="images/about-us/gia-dung.png" alt="About Us"/>
+                    </div>
+                </div>
+                <!-- About Image End -->
+            </div>
+        </div>
+    </div>
+    <!-- about wrapper end -->
+    <!-- Begin Counterup Area -->
+    <div class="counterup-area">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <div class="col-lg-3 col-md-6">
+                    <!-- Begin Limupa Counter Area -->
+                    <div class="limupa-counter white-smoke-bg">
+                        <div class="container">
+                            <div class="counter-img">
+                                <img loading="lazy" src="images/about-us/icon/1.png" alt="">
+                            </div>
+                            <div class="counter-info">
+                                <div class="counter-number">
+                                    <h3 class="counter">2169</h3>
                                 </div>
-                                <div class="coupon2">
-                                    <form>
-                                        <input class="button" name="update_cart" value="cập nhật giỏ hàng"
-                                               type="submit">
-                                    </form>
+                                <div class="counter-text">
+                                    <span>SỐ KHÁCH HÀNG</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-5 ml-auto">
-                            <div class="cart-page-total">
-                                <h2>Tổng giá trị giỏ hàng</h2>
-                                <ul>
-                                    <li>Tổng cộng <span>${cart.total()*(1-cart.rate)}</span></li>
-                                </ul>
-                                <a href="${pageContext.request.contextPath}/Checkout">Thanh toán</a>
+                    <!-- limupa Counter Area End Here -->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <!-- Begin limupa Counter Area -->
+                    <div class="limupa-counter gray-bg">
+                        <div class="counter-img">
+                            <img loading="lazy" src="images/about-us/icon/2.png" alt="">
+                        </div>
+                        <div class="counter-info">
+                            <div class="counter-number">
+                                <h3 class="counter">869</h3>
+                            </div>
+                            <div class="counter-text">
+                                <span>GIẢI THƯỞNG</span>
                             </div>
                         </div>
                     </div>
-
+                    <!-- limupa Counter Area End Here -->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <!-- Begin limupa Counter Area -->
+                    <div class="limupa-counter white-smoke-bg">
+                        <div class="counter-img">
+                            <img loading="lazy" src="images/about-us/icon/3.png" alt="">
+                        </div>
+                        <div class="counter-info">
+                            <div class="counter-number">
+                                <h3 class="counter">689</h3>
+                            </div>
+                            <div class="counter-text">
+                                <span>SỐ GIỜ HOẠT ĐỘNG</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- limupa Counter Area End Here -->
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <!-- Begin limupa Counter Area -->
+                    <div class="limupa-counter gray-bg">
+                        <div class="counter-img">
+                            <img loading="lazy" src="images/about-us/icon/4.png" alt="">
+                        </div>
+                        <div class="counter-info">
+                            <div class="counter-number">
+                                <h3 class="counter">2169</h3>
+                            </div>
+                            <div class="counter-text">
+                                <span>SỐ LƯỢNG PHẢN HỒI TÍCH CỰC</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- limupa Counter Area End Here -->
                 </div>
             </div>
         </div>
     </div>
-    <!--Shopping Cart Area End-->
+    <!-- Counterup Area End Here -->
+    <!-- team area wrapper start -->
+    <div class="team-area pt-60 pt-sm-44">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="li-section-title capitalize mb-25">
+                        <h2><span>Thành viên của nhóm</span></h2>
+                    </div>
+                </div>
+            </div> <!-- section title end -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="team-member mb-60 mb-sm-30 mb-xs-30">
+                        <div class="team-thumb">
+                            <img loading="lazy" src="images/team/1.png" alt="Our Team Member">
+                        </div>
+                        <div class="team-content text-center">
+                            <h3>Nguyễn Văn Hiếu</h3>
+                            <p>Developer</p>
+                            <a href="#">19130073@st.hcmuaf.edu.vn</a>
+                            <div class="team-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end single team member -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="team-member mb-30 mb-sm-60">
+                        <div class="team-thumb">
+                            <img loading="lazy" src="images/team/3.png" alt="Our Team Member">
+                        </div>
+                        <div class="team-content text-center">
+                            <h3>Trần Huy Hoàng</h3>
+                            <p>Developer</p>
+                            <a href="#">19130078@st.hcmuaf.edu.vn</a>
+                            <div class="team-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end single team member -->
+            </div>
+        </div>
+    </div>
+    <!-- team area wrapper end -->
     <!-- Begin Footer Area -->
     <div class="footer">
         <!-- Begin Footer Static Top Area -->
@@ -122,12 +196,12 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img src="images/shipping-icon/1.png" alt="Shipping Icon">
+                                    <img loading="lazy" src="images/shipping-icon/1.png" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Miễn phí vận chuyển</h2>
-                                    <p>Và miễn phí tiền vận chuyển khi trả lại hàng. Kiểm tra ngày giao hàng trong
-                                        thủ tục thanh toán.</p>
+                                    <p>Miễn phí giao hàng trên mọi miền của tổ quốc.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +210,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-sm-55 pb-xs-55">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img src="images/shipping-icon/2.png" alt="Shipping Icon">
+                                    <img loading="lazy" src="images/shipping-icon/2.png" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Phương thức thanh toán an toàn</h2>
@@ -149,7 +223,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img src="images/shipping-icon/3.png" alt="Shipping Icon">
+                                    <img loading="lazy" src="images/shipping-icon/3.png" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Mua hàng với trải nghiệm tốt nhất</h2>
@@ -163,11 +237,11 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 pb-xs-30">
                             <div class="li-shipping-inner-box">
                                 <div class="shipping-icon">
-                                    <img src="images/shipping-icon/4.png" alt="Shipping Icon">
+                                    <img loading="lazy" src="images/shipping-icon/4.png" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Trung tâm hỗ trợ 24/7</h2>
-                                    <p>có thắc mắc xin vui lòng gọi chuyên gia hoặc chat online.</p>
+                                    <p>Đội ngũ chuyên gia hỗ trợ nhiệt tình</p>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +260,7 @@
                         <!-- Begin Footer Logo Area -->
                         <div class="col-lg-4 col-md-6">
                             <div class="footer-logo">
-                                <img src="images/menu/logo/1.jpg" alt="Footer Logo">
+                                <img loading="lazy" src="images/menu/logo/1.jpg" alt="Footer Logo">
                                 <p class="info">
                                     Chúng tôi có sản phẩm tốt nhất cho ngôi nhà của bạn.
                                 </p>
@@ -194,7 +268,7 @@
                             <ul class="des">
                                 <li>
                                     <span>Địa chỉ: </span>
-                                    Tp.Hồ Chí Minh, Việt Nam
+                                    Khu Phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh
                                 </li>
                                 <li>
                                     <span>Số điện thoại: </span>
@@ -212,9 +286,9 @@
                             <div class="footer-block">
                                 <h3 class="footer-block-title">Sản phẩm</h3>
                                 <ul>
-                                    <li><a href="#">Giảm giá</a></li>
-                                    <li><a href="#">Sản phẩm mới</a></li>
-                                    <li><a href="#">Bán chạy</a></li>
+                                    <li><a href="san-pham-giam-gia.html">Giảm giá</a></li>
+                                    <li><a href="san-pham-mua-nhieu.html">Sản phẩm mua nhiều</a></li>
+                                    <li><a href="san-pham-noi-bat.html">Sản phẩm nổi bật</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -224,8 +298,8 @@
                             <div class="footer-block">
                                 <h3 class="footer-block-title">Về công ty</h3>
                                 <ul>
-                                    <li><a href="#">Giao hàng</a></li>
-                                    <li><a href="#">Legal Notice</a></li>
+
+                                    <li><a href="faq.html">FAQs</a></li>
                                     <li><a href="about-us.jsp">Về chúng tôi</a></li>
                                     <li><a href="contact.html">Liên hệ</a></li>
                                 </ul>
@@ -251,7 +325,7 @@
                                     </li>
                                     <li class="google-plus">
                                         <a href="https://www.plus.google.com/discover" data-toggle="tooltip"
-                                           target="_blank" title="Google Plus">
+                                           target="_blank" title="Google +">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
@@ -306,7 +380,7 @@
                         <!-- Begin Footer Payment Area -->
                         <div class="copyright text-center">
                             <a href="#">
-                                <img src="images/payment/1.png" alt="">
+                                <img loading="lazy" src="images/payment/1.png" alt="">
                             </a>
                         </div>
                         <!-- Footer Payment Area End Here -->
@@ -368,6 +442,6 @@
 <script src="js/main.js"></script>
 </body>
 
-<!-- shopping-cart31:32-->
+<!-- about-us32:14-->
 
 </html>

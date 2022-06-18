@@ -320,7 +320,7 @@
                                         </ul>
                                     </li>
 
-                                    <!-- <li><a href="about-us.html">About Us</a></li> -->
+                                    <!-- <li><a href="about-us.jsp">About Us</a></li> -->
                                     <li><a href="contact.html">Liên hệ</a></li>
 
                                     </li>
@@ -564,7 +564,7 @@
                                 <ul>
 
                                     <li><a href="faq.html">FAQs</a></li>
-                                    <li><a href="about-us.html">Về chúng tôi</a></li>
+                                    <li><a href="about-us.jsp">Về chúng tôi</a></li>
                                     <li><a href="contact.html">Liên hệ</a></li>
                                 </ul>
                             </div>

@@ -73,15 +73,39 @@ public class ProductListController extends HttpServlet {
 
         Category ct = ProductServices.getInstance().getCategory(category);
 
-//        for (Product p : products) {
-//            String imageMain = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
-//            p.setImageMain(imageMain);
-//        }
-//
-//        for (Product p : productsAll) {
-//            String imageMain = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
-//            p.setImageMain(imageMain);
-//        }
+        for (Product sp : products) {
+            String sUrl = ProductServices.getInstance().getMainImageProduct(sp.getId_sanpham());
+            int avgRate = ProductServices.getInstance().getAverageRating(sp.getId_sanpham());
+            String starElm = "";
+
+            for (int j = 1; j <= avgRate; j++) {
+                starElm += "<li><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            for (int k = 1; k <= 5 - avgRate; k++) {
+                starElm += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            sp.setAvgRating(starElm);
+            sp.setImageMain(sUrl);
+        }
+
+        for (Product sp : productsAll) {
+            String sUrl = ProductServices.getInstance().getMainImageProduct(sp.getId_sanpham());
+            int avgRate = ProductServices.getInstance().getAverageRating(sp.getId_sanpham());
+            String starElm = "";
+
+            for (int j = 1; j <= avgRate; j++) {
+                starElm += "<li><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            for (int k = 1; k <= 5 - avgRate; k++) {
+                starElm += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            sp.setAvgRating(starElm);
+            sp.setImageMain(sUrl);
+        }
 
         if (products.size() > 0 && ct != null) {
             request.setAttribute("allProducts", productsAll);

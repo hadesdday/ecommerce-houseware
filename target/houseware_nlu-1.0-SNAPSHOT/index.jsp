@@ -1531,7 +1531,7 @@
                                 <ul>
 
                                     <li><a href="faq.html">FAQs</a></li>
-                                    <li><a href="about-us.html">Về chúng tôi</a></li>
+                                    <li><a href="about-us.jsp">Về chúng tôi</a></li>
                                     <li><a href="contact.html">Liên hệ</a></li>
                                 </ul>
                             </div>
@@ -1670,6 +1670,7 @@
 <script src="js/scrollUp.min.js"></script>
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
+<script src="js/toastr.min.js"></script>
 
 </body>
 

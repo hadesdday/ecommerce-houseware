@@ -84,7 +84,6 @@
                                                     <div class="product-image">
                                                         <a href="">
                                                             <img src="${pageContext.request.contextPath}/img/${p.getImageMain()}"
-                                                                <%--                                                            <img src="images/product/noi-com/noi-com-dien-cuckoo-1-8-lit-cp-0661.png"--%>
                                                                  alt="Li's Product Image">
                                                         </a>
                                                         <span class="sticker">New</span>
@@ -93,23 +92,16 @@
                                                         <div class="product_desc_info">
                                                             <div class="product-review">
                                                                 <h5 class="manufacturer">
-                                                                    <a href="product-details.html">Graphic Corner</a>
+                                                                    <a href="${pageContext.request.contextPath}/ProductList?category=${p.getMa_loaisp()}&pageN=1">${p.getMa_loaisp()}</a>
                                                                 </h5>
                                                                 <div class="rating-box">
                                                                     <ul class="rating">
-                                                                        <li><i class="fa fa-star-o"></i></li>
-                                                                        <li><i class="fa fa-star-o"></i></li>
-                                                                        <li><i class="fa fa-star-o"></i></li>
-                                                                        <li class="no-star"><i class="fa fa-star-o"></i>
-                                                                        </li>
-                                                                        <li class="no-star"><i class="fa fa-star-o"></i>
-                                                                        </li>
+                                                                            ${p.getAvgRating()}
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                             <h4><a class="product_name"
-                                                                   href="product-details.jsp">${p.getTen_sp()}</a>
-                                                                    <%--                                                            <a class="ma_sp" style="display: none">${p.id}</a>--%>
+                                                                   href="${pageContext.request.contextPath}/ProductDetails?pid=${p.getId_sanpham()}">${p.getTen_sp()}</a>
                                                             </h4>
                                                             <div class="price-box">
                                                                 <span class="new-price">${p.getGia()}</span>
@@ -119,9 +111,7 @@
                                                         <div class="add-actions">
                                                             <ul class="add-actions-link">
                                                                 <li class="add-cart active" pid="${p.getId_sanpham()}"
-                                                                    path="${pageContext.request.contextPath}/AddToCart"
-                                                                    <%--                                                                    onclick="addCart(this)"--%>
-                                                                >
+                                                                    path="${pageContext.request.contextPath}/AddToCart">
                                                                     Add to cart
                                                                 </li>
                                                                 <li><a href="#" title="quick view"

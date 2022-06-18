@@ -107,10 +107,10 @@
                             <li class="hm-minicart">
                                 <div class="hm-minicart-trigger">
                                     <div class="hm-minicart-trigger2">
-                                    <span class="item-icon"></span>
-                                    <span class="item-text">${cart.total()}
+                                        <span class="item-icon"></span>
+                                        <span class="item-text">${cart.total()}
                                                 <span class="cart-item-count">${cart.products.size()}</span>
-                                            </span>
+                                        </span>
                                     </div>
                                 </div>
                                 <span></span>
@@ -122,7 +122,7 @@
                                                 <li>
                                                     <a href="product-details.jsp" class="minicart-product-image">
                                                         <img src="${pageContext.request.contextPath}/img/${item.imageMain}"
-                                                             alt="cart products">
+                                                             alt="cart products" width="50" height="50">
                                                     </a>
                                                     <div class="minicart-product-details">
                                                         <h6><a href="product-details.jsp">${item.ten_sp}</a></h6>
@@ -286,7 +286,7 @@
                                     </ul>
                                 </li>
 
-                                <!-- <li><a href="about-us.html">About Us</a></li> -->
+                                <!-- <li><a href="about-us.jsp">About Us</a></li> -->
                                 <li><a href="contact.html">Liên hệ</a></li>
 
                                 </li>
