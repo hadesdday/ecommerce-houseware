@@ -68,25 +68,27 @@ public class ProductListController extends HttpServlet {
 
         List<Product> productsAll = ProductServices.getInstance().getAllProductByCategory(category, filterQuery);
         List<Product> emptyList = new ArrayList<>();
+        List<Product> emptyList2 = new ArrayList<>();
         List<Product> products = ProductServices.getInstance().getByCategory(category, page, filterQuery);
 
         Category ct = ProductServices.getInstance().getCategory(category);
 
-        for (Product p : products) {
-            String imageMain = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
-            p.setImageMain(imageMain);
-        }
-
-        for (Product p : productsAll) {
-            String imageMain = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
-            p.setImageMain(imageMain);
-        }
+//        for (Product p : products) {
+//            String imageMain = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
+//            p.setImageMain(imageMain);
+//        }
+//
+//        for (Product p : productsAll) {
+//            String imageMain = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());
+//            p.setImageMain(imageMain);
+//        }
 
         if (products.size() > 0 && ct != null) {
             request.setAttribute("allProducts", productsAll);
             request.setAttribute("products", products);
             request.setAttribute("categoryName", ct.getTen_loaisp());
         } else {
+            request.setAttribute("allProducts", emptyList2);
             request.setAttribute("products", emptyList);
             request.setAttribute("categoryName", "Sản phẩm");
         }
