@@ -190,40 +190,38 @@
                                 </ul>
                             </div>
                             <c:choose>
-                                <c:when test="${sessionScope.get('authenticated') == 1} && ${sessionScope.get('user') != null}">
-
-                                </c:when>
-                            </c:choose>
-                            <div class="review-btn">
-                                <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết đánh
-                                    giá</a>
-                            </div>
-                            <!-- Begin Quick View | Modal Area -->
-                            <div class="modal fade modal-wrapper" id="mymodal">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <h3 class="review-page-title">Viết đánh giá của bạn</h3>
-                                            <div class="modal-inner-area row">
-                                                <div class="col-lg-6">
-                                                    <div class="li-review-product">
-                                                        <img loading="lazy"
-                                                             src="${pageContext.request.contextPath}/img/${product.imageMain}"
-                                                             alt="Li's Product" width="50%" height="50%">
-                                                        <div class="li-review-product-desc">
-                                                            <p class="li-product-name">${product.ten_sp}</p>
+                                <c:when test="${sessionScope.get('authenticated') == 1}">
+                                    <div class="review-btn">
+                                        <a href="#" class="review-links" data-toggle="modal" data-target="#mymodal">Viết
+                                            đánh
+                                            giá</a>
+                                    </div>
+                                    <!-- Begin Quick View | Modal Area -->
+                                    <div class="modal fade modal-wrapper" id="mymodal">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h3 class="review-page-title">Viết đánh giá của bạn</h3>
+                                                    <div class="modal-inner-area row">
+                                                        <div class="col-lg-6">
+                                                            <div class="li-review-product">
+                                                                <img loading="lazy"
+                                                                     src="${pageContext.request.contextPath}/img/${product.imageMain}"
+                                                                     alt="Li's Product" width="50%" height="50%">
+                                                                <div class="li-review-product-desc">
+                                                                    <p class="li-product-name">${product.ten_sp}</p>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="li-review-content">
-                                                        <!-- Begin Feedback Area -->
-                                                        <div class="feedback-area">
-                                                            <div class="feedback">
-                                                                <h3 class="feedback-title">Đánh giá</h3>
-                                                                <p class="your-opinion">
-                                                                    <label>Số sao</label>
-                                                                    <span>
+                                                        <div class="col-lg-6">
+                                                            <div class="li-review-content">
+                                                                <!-- Begin Feedback Area -->
+                                                                <div class="feedback-area">
+                                                                    <div class="feedback">
+                                                                        <h3 class="feedback-title">Đánh giá</h3>
+                                                                        <p class="your-opinion">
+                                                                            <label>Số sao</label>
+                                                                            <span>
                                                                                 <select class="star-rating"
                                                                                         name="star-rating">
                                                                                     <option value="1">1</option>
@@ -233,32 +231,40 @@
                                                                                     <option value="5">5</option>
                                                                                 </select>
                                                                             </span>
-                                                                </p>
-                                                                <p class="feedback-form">
-                                                                    <label for="feedback">Nội dung</label>
-                                                                    <textarea id="feedback" name="comment"
-                                                                              cols="45" rows="8"
-                                                                              aria-required="true"></textarea>
-                                                                </p>
-                                                                <div class="feedback-input">
-                                                                    <div class="feedback-btn pb-15">
-                                                                        <a href="#" class="close"
-                                                                           data-dismiss="modal"
-                                                                           aria-label="Close">Hủy</a>
-                                                                        <a id="submit-comment">Gửi</a>
+                                                                        </p>
+                                                                        <p class="feedback-form">
+                                                                            <label for="feedback">Nội dung</label>
+                                                                            <textarea id="feedback" name="comment"
+                                                                                      cols="45" rows="8"
+                                                                                      aria-required="true"></textarea>
+                                                                        </p>
+                                                                        <div class="feedback-input">
+                                                                            <div class="feedback-btn pb-15">
+                                                                                <a href="#" class="close"
+                                                                                   data-dismiss="modal"
+                                                                                   aria-label="Close">Hủy</a>
+                                                                                <a id="submit-comment">Gửi</a>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <!-- Feedback Area End Here -->
                                                             </div>
                                                         </div>
-                                                        <!-- Feedback Area End Here -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- Quick View | Modal Area End Here -->
+                                    <!-- Quick View | Modal Area End Here -->
+                                </c:when>
+                                <c:when test="${sessionScope.get('authenticated') != 1}">
+                                    <div class="review-btn">
+                                        <a href="${pageContext.request.contextPath}/login.jsp" class="review-links"
+                                           style="width:270px;">Vui lòng đăng nhập để đánh giá</a>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -341,7 +347,7 @@
         <h3>${comments.size()} bình luận</h3>
         <ul>
             <c:forEach var="cmt" items="${comments}">
-                <li>
+                <li class="comment">
                     <div class="author-avatar pt-15">
                         <img loading="lazy" src="images/product-details/user.png" alt="User">
                     </div>
@@ -638,18 +644,46 @@
 <script src="js/scrollUp.min.js"></script>
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
-</body>
-
+<script src="js/toastr.min.js"></script>
 <script>
     $("#submit-comment").click(() => {
         var rating = $("select[name='star-rating'] option:selected").val();
         var pid = "${product.id_sanpham}";
         var content = $("textarea[name='comment']").val();
-        var username = "he";
+        var username = "${sessionScope.get("user").getUsername()}";
+        var currentUrl = window.location.href;
 
-        console.log({rating, pid, content, username});
-        // $.ajax({})
-    })
+        $.ajax({
+            url: "${pageContext.request.contextPath}/post/comment",
+            method: 'POST',
+            data: {
+                pid: pid,
+                username: username,
+                rating: rating,
+                content: content,
+                currentUrl: currentUrl,
+            },
+            success: function (data, textStatus, xhr) {
+                toastr.success("Bình luận của bạn đã được gửi đi", "Thành công");
+                let elm = '<li class="comment"><div class="author-avatar pt-15"><img loading="lazy" src="images/product-details/user.png" alt="User"></div>';
+                let usernameElm = '<div class="comment-body pl-15"><h5 class="comment-author pt-15">' + username + '</h5>';
+                var currentDate = new Date();
+                var date = currentDate.getFullYear() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getDate() + " " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+                let commentDateElm = '<div class="comment-post-date">' + date + '</div>';
+                let contentElm = '<p>' + content + '</p></div></li>';
+                let finalElm = elm + usernameElm + commentDateElm + contentElm;
+                $(".comment").last().after(finalElm);
+                $("textarea[name='comment']").val("");
+                $(".close").click();
+            },
+            error: function (data, textStatus, xhr) {
+                toastr.error("Bình luận của bạn không được gửi đi", "Thất bại")
+                $(".close").click();
+            }
+        })
+    });
 </script>
+</body>
+
 
 </html>

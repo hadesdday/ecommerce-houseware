@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
+    <%--    Toastr--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/toastr.min.css">
     <!-- Modernizr js -->
     <script src="${pageContext.request.contextPath}/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
