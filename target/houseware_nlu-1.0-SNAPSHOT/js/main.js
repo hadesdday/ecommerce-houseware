@@ -625,8 +625,8 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
                 quantitySold: 1,
             },
             success: function (data, textStatus, xhr) {
-                $(".minicart").load("http://localhost:8080" + path + "?id=" + maSP + "&quantitySold=" + 1 + " .minicart2");
-                $(".hm-minicart-trigger").load("http://localhost:8080" + path + "?id=" + maSP + "&quantitySold=" + 1 + " .hm-minicart-trigger2");
+                $(".minicart").load("" + " .minicart2");
+                $(".hm-minicart-trigger").load("" + " .hm-minicart-trigger2");
                 console.log("http://localhost:8080" + path + "?id=" + maSP + "&quantitySold=" + 1)
                 console.log(window.location.href)
                 Command: toastr["success"]("Sản phẩm đã được thêm vào giỏ hàng!")
