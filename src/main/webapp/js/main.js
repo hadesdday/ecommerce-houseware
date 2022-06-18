@@ -588,7 +588,7 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
     });
 
 
-    $("#discount-form").submit(function (e) {
+    $("#dicount-form").submit(function (e) {
         alert("As")
 
 
@@ -613,19 +613,21 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
 
      */
     /*----------------------------------------*/
-    $(".add-cart").on("click", function () {
+    $(".add-cart").on("click",function () {
+
         var maSP = $(this).attr("pid");
-        var path = $(this).attr("path");
+        var path = $(this).attr("path")
         $.ajax({
-            url: path,
+            url: "http://localhost:8080" + path,
             method: "GET",
             data: {
                 id: maSP,
                 quantitySold: 1,
             },
             success: function (data, textStatus, xhr) {
-                // $(".minicart").load(path + "?id=" + maSP + "&quantitySold=" + 1 + " .minicart2");
-                // $(".hm-minicart-trigger").load(path + "?id=" + maSP + "&quantitySold=" + 1 + " .hm-minicart-trigger2");
+                $(".minicart").load("" + " .minicart2");
+                $(".hm-minicart-trigger").load("" + " .hm-minicart-trigger2");
+
                 Command: toastr["success"]("Sản phẩm đã được thêm vào giỏ hàng!")
 
                 toastr.options = {
