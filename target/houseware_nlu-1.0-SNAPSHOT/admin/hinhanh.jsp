@@ -202,7 +202,7 @@
         var maSP = $("input[name='maSP']").val();
 
         $.ajax({
-            url: "${pageContext.request.contextPath}/image/add",
+            url: "${pageContext.request.contextPath}/image/upload",
             type: 'POST',
             data: {
                 id: id,
