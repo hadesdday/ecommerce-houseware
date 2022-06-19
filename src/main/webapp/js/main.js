@@ -613,12 +613,11 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
 
      */
     /*----------------------------------------*/
-    $(".add-cart").on("click",function () {
-
+    $(".add-cart").on("click", function () {
         var maSP = $(this).attr("pid");
         var path = $(this).attr("path")
         $.ajax({
-            url: "http://localhost:8080" + path,
+            url: path,
             method: "GET",
             data: {
                 id: maSP,

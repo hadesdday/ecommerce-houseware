@@ -613,12 +613,11 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
 
      */
     /*----------------------------------------*/
-    $(".add-cart").on("click",function () {
-
+    $(".add-cart").on("click", function () {
         var maSP = $(this).attr("pid");
         var path = $(this).attr("path")
         $.ajax({
-            url: "http://localhost:8080" + path,
+            url: path,
             method: "GET",
             data: {
                 id: maSP,
@@ -627,8 +626,7 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
             success: function (data, textStatus, xhr) {
                 $(".minicart").load("" + " .minicart2");
                 $(".hm-minicart-trigger").load("" + " .hm-minicart-trigger2");
-                console.log("http://localhost:8080" + path + "?id=" + maSP + "&quantitySold=" + 1)
-                console.log(window.location.href)
+
                 Command: toastr["success"]("Sản phẩm đã được thêm vào giỏ hàng!")
 
                 toastr.options = {

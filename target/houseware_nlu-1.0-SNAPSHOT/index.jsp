@@ -1530,9 +1530,9 @@
                                 <h3 class="footer-block-title">Về công ty</h3>
                                 <ul>
 
-                                    <li><a href="faq.html">FAQs</a></li>
+                                    <li><a href="faq.jsp">FAQs</a></li>
                                     <li><a href="about-us.jsp">Về chúng tôi</a></li>
-                                    <li><a href="contact.html">Liên hệ</a></li>
+                                    <li><a href="contact.jsp">Liên hệ</a></li>
                                 </ul>
                             </div>
                         </div>

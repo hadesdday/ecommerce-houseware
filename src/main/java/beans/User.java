@@ -4,28 +4,23 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private String username;
-    private String id_user;
+    private int id_khachhang;
     private String password;
-    private String fullname;
     private String email;
     private String phone;
-    private String address;
     private String token;
     private String role;
+    private int active;
 
     public User() {
     }
 
-    public User(String id_user, String username, String password, String fullname, String email, String phone, String address, String token, String role) {
-        this.id_user = id_user;
+    public User(String username, int id_khachhang, String email, int active, String role) {
         this.username = username;
-        this.password = password;
-        this.fullname = fullname;
         this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.token = token;
         this.role = role;
+        this.active = active;
+        this.id_khachhang = id_khachhang;
     }
 
     public String getUsername() {
@@ -36,20 +31,20 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    public int getId_khachhang() {
+        return id_khachhang;
+    }
+
+    public void setId_khachhang(int id_khachhang) {
+        this.id_khachhang = id_khachhang;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
     }
 
     public String getEmail() {
@@ -68,14 +63,6 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getToken() {
         return token;
     }
@@ -92,11 +79,11 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public String getId_user() {
-        return id_user;
+    public int getActive() {
+        return active;
     }
 
-    public void setId_user(String id_user) {
-        this.id_user = id_user;
+    public void setActive(int active) {
+        this.active = active;
     }
 }

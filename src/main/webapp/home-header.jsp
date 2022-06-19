@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <header>
     <!-- Begin Header Top Area -->
     <div class="header-top">
@@ -8,7 +10,7 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="header-top-left">
                         <ul class="phone-wrap">
-                            <li><span>Telephone Enquiry:</span><a href="#">(+84) 769 833 185</a></li>
+                            <li><span>Số điện thoại :</span><a href="#">(+84) 567 8910</a></li>
                         </ul>
                     </div>
                 </div>
@@ -31,7 +33,7 @@
                                 </c:if>
                                 <c:if test="${sessionScope.user != null}">
                                     <div class="ht-setting-trigger">
-                                        <span>Chào, ${sessionScope.user.fullname}</span></div>
+                                        <span>Chào, ${sessionScope.customer.ten_kh}</span></div>
                                     <div class="setting ht-setting">
                                         <ul class="ht-setting-list">
                                             <li><a href="${pageContext.request.contextPath}/change-password.jsp">Đổi
@@ -287,7 +289,7 @@
                                 </li>
 
                                 <!-- <li><a href="about-us.jsp">About Us</a></li> -->
-                                <li><a href="contact.html">Liên hệ</a></li>
+                                <li><a href="contact.jsp">Liên hệ</a></li>
 
                                 </li>
                                 <!-- Begin Header Bottom Menu Information Area -->

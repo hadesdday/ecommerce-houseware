@@ -227,7 +227,7 @@
                                     <li><a href="#">Giao hàng</a></li>
                                     <li><a href="#">Legal Notice</a></li>
                                     <li><a href="about-us.jsp">Về chúng tôi</a></li>
-                                    <li><a href="contact.html">Liên hệ</a></li>
+                                    <li><a href="contact.jsp">Liên hệ</a></li>
                                 </ul>
                             </div>
                         </div>

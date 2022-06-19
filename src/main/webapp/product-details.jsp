@@ -95,18 +95,28 @@
                                 </p>
                             </div>
                             <div class="single-add-to-cart">
-                                <div class="quantity">
-                                    <label>Số lượng</label>
-                                    <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" value="1" type="text">
-                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                    </div>
-                                </div>
-                                <button class="add-to-cart add-cart" pid="${product.id_sanpham}"
-                                        path="${pageContext.request.contextPath}/AddToCart" type="submit">
-                                    Add to cart
-                                </button>
+                                <c:choose>
+                                    <c:when test="${product.soluongton > 0}">
+                                        <div class="quantity">
+                                            <label>Số lượng</label>
+                                            <div class="cart-plus-minus">
+                                                <input class="cart-plus-minus-box" value="1" type="text"
+                                                       max="${product.soluongton}">
+                                                <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                            </div>
+                                        </div>
+                                        <button class="add-to-cart add-cart" pid="${product.id_sanpham}"
+                                                path="${pageContext.request.contextPath}/AddToCart" type="submit">
+                                            Add to cart
+                                        </button>
+                                    </c:when>
+                                    <c:when test="${product.soluongton == 0}">
+                                        <button class="add-to-cart" type="submit" disabled style="opacity: 0.5">
+                                            HẾT HÀNG
+                                        </button>
+                                    </c:when>
+                                </c:choose>
                             </div>
                             <div class="product-additional-info pt-25">
                                 <div class="product-social-sharing pt-25">
@@ -286,55 +296,58 @@
                     <div class="row">
                         <div class="product-active owl-carousel">
                             <c:forEach var="si" items="${sameCategoryProducts}">
-                                <div class="col-lg-12">
-                                    <!-- single-product-wrap start -->
-                                    <div class="single-product-wrap">
-                                        <div class="product-image">
-                                            <a href="product-details.jsp">
-                                                <img loading="lazy"
-                                                     src="${pageContext.request.contextPath}/img/${si.getImageMain()}"
-                                                     alt="Li's Product Image">
-                                            </a>
-                                            <span class="sticker">New</span>
-                                        </div>
-                                        <div class="product_desc">
-                                            <div class="product_desc_info">
-                                                <div class="product-review">
-                                                    <h5 class="manufacturer">
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=${si.getMa_loaisp()}">${si.getMa_loaisp()}</a>
-                                                    </h5>
-                                                    <div class="rating-box">
-                                                        <ul class="rating">
-                                                                ${si.getAvgRating()}
-                                                        </ul>
+                                <c:if test="${product.id_sanpham != si.id_sanpham}">
+                                    <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="product-details.jsp">
+                                                    <img loading="lazy"
+                                                         src="${pageContext.request.contextPath}/img/${si.getImageMain()}"
+                                                         alt="Li's Product Image">
+                                                </a>
+                                                <span class="sticker">New</span>
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <a href="${pageContext.request.contextPath}/ProductList?category=${si.getMa_loaisp()}">${si.getMa_loaisp()}</a>
+                                                        </h5>
+                                                        <div class="rating-box">
+                                                            <ul class="rating">
+                                                                    ${si.getAvgRating()}
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <h4><a class="product_name"
-                                                       href="${pageContext.request.contextPath}/ProductDetails?pid=${si.getId_sanpham()}">${si.getTen_sp()}</a>
-                                                </h4>
-                                                <div class="price-box">
-                                                    <fmt:setLocale value="vi-VN"/>
-                                                    <span class="new-price">
+                                                    <h4><a class="product_name"
+                                                           href="${pageContext.request.contextPath}/ProductDetails?pid=${si.getId_sanpham()}">${si.getTen_sp()}</a>
+                                                    </h4>
+                                                    <div class="price-box">
+                                                        <fmt:setLocale value="vi-VN"/>
+                                                        <span class="new-price">
                                                     <fmt:formatNumber value="${si.getGia()}"
                                                                       type="currency"/>
                                                     </span>
+                                                    </div>
+                                                </div>
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active" pid="${si.getId_sanpham()}"
+                                                            path="${pageContext.request.contextPath}/AddToCart"><a
+                                                                href="#">Add
+                                                            to
+                                                            cart</a></li>
+                                                        <li><a href="#" title="quick view" class="quick-view-btn"
+                                                               data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                                class="fa fa-eye"></i></a></li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                            <div class="add-actions">
-                                                <ul class="add-actions-link">
-                                                    <li class="add-cart active" pid="${si.getId_sanpham()}"
-                                                        path="${pageContext.request.contextPath}/AddToCart"><a href="#">Add
-                                                        to
-                                                        cart</a></li>
-                                                    <li><a href="#" title="quick view" class="quick-view-btn"
-                                                           data-toggle="modal" data-target="#exampleModalCenter"><i
-                                                            class="fa fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
                                         </div>
+                                        <!-- single-product-wrap end -->
                                     </div>
-                                    <!-- single-product-wrap end -->
-                                </div>
+                                </c:if>
                             </c:forEach>
                         </div>
                     </div>
@@ -504,9 +517,9 @@
                                 <h3 class="footer-block-title">Về công ty</h3>
                                 <ul>
 
-                                    <li><a href="faq.html">FAQs</a></li>
+                                    <li><a href="faq.jsp">FAQs</a></li>
                                     <li><a href="about-us.jsp">Về chúng tôi</a></li>
-                                    <li><a href="contact.html">Liên hệ</a></li>
+                                    <li><a href="contact.jsp">Liên hệ</a></li>
                                 </ul>
                             </div>
                         </div>

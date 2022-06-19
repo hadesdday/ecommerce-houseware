@@ -1,5 +1,9 @@
 package controller.client.authentication;
 
+import beans.EmailMessage;
+import org.omg.CORBA.portable.ApplicationException;
+import properties.AssetsProperties;
+import services.EmailServices;
 import services.UserServices;
 
 import javax.servlet.ServletException;
@@ -30,6 +34,21 @@ public class ForgotPasswordController extends HttpServlet {
             response.sendRedirect("change-password.jsp");
         } else {
             if (UserServices.getInstance().forgotPassword(email)) {
+                String resetUrl = AssetsProperties.getBaseURL() + "forgotPassword?email=" + email + "&token=" + token;
+                EmailMessage emailbean = new EmailMessage();
+                emailbean.setTo(email);
+                emailbean.setSubject("Thiết lập lại mật khẩu đăng nhập HouseWareNLU");
+                emailbean.setMessage("Chào bạn\n" + "Chúng tôi có nhận được yêu cầu thiết lập lại mật khẩu cho tài khoản của bạn."
+                        + "\n" + "Nhấn đường link này[" + resetUrl + "] để thiết lập mật khẩu mới cho tài khoản của bạn.\n" +
+                        "Hoặc vui lòng copy và dán đường dẫn bên dưới lên trình duyệt:[" + resetUrl + "]\n"
+                        + "Nếu bạn không yêu cầu thiết lập lại mật khẩu, vui lòng liên hệ Bộ phận chăm sóc khách hàng của chúng tôi.\n" +
+                        "Trân trọng,\n" + "Đội ngũ NLU"
+                );
+                try {
+                    EmailServices.sendMail(emailbean);
+                } catch (ApplicationException e) {
+                    e.printStackTrace();
+                }
                 request.setAttribute("email", email);
                 request.setAttribute("tokenSent", "Mã xác minh đã được gửi đến địa chỉ email");
                 request.getRequestDispatcher("success.jsp").forward(request, response);

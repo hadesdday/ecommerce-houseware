@@ -24,11 +24,10 @@ public class AddUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
         String role = request.getParameter("role");
+        int cid = Integer.parseInt(request.getParameter("cid"));
 
         Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$");
         Matcher usernameMatched = usernamePattern.matcher(username);
@@ -91,17 +90,17 @@ public class AddUser extends HttpServlet {
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
-            User u = new User("", username, password, fullname, email, phone, address, "", role);
+            User u = new User(username, cid, email, 1, "user");
             boolean isExistedUsername = UserServices.getInstance().isExistedUsername(username);
             boolean isExistedEmail = UserServices.getInstance().isExistedEmail(email);
 
             if (isExistedEmail || isExistedUsername) {
-                response.sendError(HttpServletResponse.SC_CONFLICT);
+                response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
             } else {
-                if (UserServices.getInstance().add(u)) {
+                if (UserServices.getInstance().register(u)) {
                     response.sendRedirect(AssetsProperties.getBaseURL("admin/user"));
                 } else {
-                    response.sendError(HttpServletResponse.SC_CONFLICT);
+                    response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
                 }
             }
         }

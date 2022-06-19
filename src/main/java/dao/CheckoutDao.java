@@ -23,12 +23,12 @@ public class CheckoutDao {
     }
 
     public Bill checkBill(int authenticated, int idkhachhang, String fullName, String email, String phoneNumber, String address, String ptThanhToan, String maGG, double triGia, Cart cart) {
-        Integer id_hoadon=0;
+        Integer id_hoadon = 0;
         Customer sc = signinedCustomer(idkhachhang);
         if (authenticated == 1) {
             if (sc == null) return null;
             else
-                id_hoadon=insertBill(idkhachhang, ptThanhToan, maGG, triGia);
+                id_hoadon = insertBill(idkhachhang, ptThanhToan, maGG, triGia);
         } else {
             DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO KhachHang (Ten_KH,DiaChi,SoDT,Email) VALUES(?,?,?,?)")
                     .bind(0, fullName)
@@ -37,9 +37,10 @@ public class CheckoutDao {
                     .bind(3, email)
                     .execute());
             List<Customer> khachhangList = DbConnector.get().withHandle(h -> h.createQuery("SELECT * FROM KhachHang ").mapToBean(Customer.class).stream().collect(Collectors.toList()));
-            id_hoadon=insertBill(khachhangList.get(khachhangList.size() - 1).getId_khachhang(), ptThanhToan, maGG, triGia);
+            id_hoadon = insertBill(khachhangList.get(khachhangList.size() - 1).getId_khachhang(), ptThanhToan, maGG, triGia);
         }
-        for(Product p:cart.getProducts()){
+
+        for (Product p : cart.getProducts()) {
             Integer finalId_hoadon = id_hoadon;
             DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO chitiethoadon (id_hoadon,id_sanpham,soluong) VALUES(?,?,?)")
                     .bind(0, finalId_hoadon)

@@ -59,4 +59,15 @@ public class Customer implements Serializable {
     public void setId_khachhang(int id_khachhang) {
         this.id_khachhang = id_khachhang;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id_khachhang=" + id_khachhang +
+                ", ten_kh='" + ten_kh + '\'' +
+                ", diachi='" + diachi + '\'' +
+                ", sodt='" + sodt + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

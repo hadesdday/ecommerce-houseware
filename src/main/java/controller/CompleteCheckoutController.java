@@ -76,9 +76,8 @@ public class CompleteCheckoutController extends HttpServlet {
                 Cart cart = (Cart) session.getAttribute("cart");
                 if (authenticated == 1) {
                     User user = (User) session.getAttribute("user");
-                    CheckoutService.getInstance().checkBill(1, Integer.parseInt(user.getId_user()), fullname, email, phone, address, pttt, "", 100, cart);
+                    CheckoutService.getInstance().checkBill(1, user.getId_khachhang(), fullname, email, phone, address, pttt, "", 100, cart);
                 } else {
-                    System.out.println("adaslkfhdsakjfdsbvkdgkhjdsfgkhjsgfhkjhk");
                     CheckoutService.getInstance().checkBill(0, 0, fullname, email, phone, address, pttt, "", 100, cart);
                 }
                 response.sendRedirect("success-checkout.jsp");

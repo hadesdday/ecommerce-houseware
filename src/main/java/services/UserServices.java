@@ -1,5 +1,6 @@
 package services;
 
+import beans.Customer;
 import beans.User;
 import dao.UserDAO;
 
@@ -15,20 +16,20 @@ public class UserServices {
         return instance;
     }
 
-    public User login(String username, String password) {
-        return UserDAO.getInstance().checkUser(username, password);
+    public boolean isExistedEmail(String email) {
+        return UserDAO.getInstance().isExistedEmail(email);
     }
 
     public boolean isExistedUsername(String username) {
         return UserDAO.getInstance().isExistedUsername(username);
     }
 
-    public boolean isExistedEmail(String email) {
-        return UserDAO.getInstance().isExistedEmail(email);
+    public User checkUser(String username, String password) {
+        return UserDAO.getInstance().checkUser(username, password);
     }
 
-    public boolean register(String username, String password, String fullname, String email, String phone, String address) {
-        return UserDAO.getInstance().register(username, password, fullname, email, phone, address);
+    public boolean register(User user) {
+        return UserDAO.getInstance().register(user);
     }
 
     public boolean forgotPassword(String email) {
@@ -47,16 +48,12 @@ public class UserServices {
         return UserDAO.getInstance().changePassword(email, newPassword);
     }
 
-    public boolean updateInformation(String email, String address, String phoneNumber) {
-        return UserDAO.getInstance().updateInformation(email, address, phoneNumber);
+    public boolean updateInformation(Customer c) {
+        return UserDAO.getInstance().updateInformation(c);
     }
 
     public List<User> getUsers() {
         return UserDAO.getInstance().getUsers();
-    }
-
-    public boolean add(User u) {
-        return UserDAO.getInstance().add(u);
     }
 
     public User getUser(String username) {
@@ -69,5 +66,17 @@ public class UserServices {
 
     public boolean editUser(User u) {
         return UserDAO.getInstance().editUser(u);
+    }
+
+    public int addCustomer(Customer c) {
+        return UserDAO.getInstance().addCustomer(c);
+    }
+
+    public boolean active(String email, String token) {
+        return UserDAO.getInstance().active(email, token);
+    }
+
+    public boolean setToken(String email, String token) {
+        return UserDAO.getInstance().setToken(email, token);
     }
 }

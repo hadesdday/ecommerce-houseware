@@ -1,5 +1,6 @@
 package controller.client.account;
 
+import beans.Customer;
 import beans.User;
 import services.UserServices;
 
@@ -67,22 +68,18 @@ public class UpdateInformation extends HttpServlet {
             request.setAttribute("emailErr", emailError);
             request.setAttribute("phoneErr", phoneError);
             request.getRequestDispatcher("my-account.jsp").forward(request, response);
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
         } else {
-            if (UserServices.getInstance().updateInformation(email, address, phone)) {
+            Customer c = new Customer(fullname, address, phone, email);
+            if (UserServices.getInstance().updateInformation(c)) {
                 HttpSession session = request.getSession();
-                User sessionUser = (User) session.getAttribute("user");
-                sessionUser.setFullname(fullname);
-                sessionUser.setEmail(email);
-                sessionUser.setPhone(phone);
-                sessionUser.setAddress(address);
-                session.setAttribute("user", sessionUser);
+                session.setAttribute("customer", c);
                 request.setAttribute("updateInforSuccess", "Cập nhật thành công");
                 request.getRequestDispatcher("my-account.jsp").forward(request, response);
             } else {
                 request.setAttribute("updateInforErr", "Cập nhật thất bại");
                 request.getRequestDispatcher("my-account.jsp").forward(request, response);
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }
         }
     }

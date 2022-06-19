@@ -40,11 +40,10 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
-        String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
         String role = request.getParameter("role");
+        int active = Integer.parseInt(request.getParameter("active"));
 
         Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$");
         Matcher usernameMatched = usernamePattern.matcher(username);
@@ -97,12 +96,10 @@ public class EditUser extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             User u = new User();
-            u.setUsername(username);
-            u.setFullname(fullname);
             u.setEmail(email);
             u.setPhone(phone);
-            u.setAddress(address);
             u.setRole(role);
+            u.setActive(active);
 
             if (UserServices.getInstance().editUser(u)) {
                 response.sendRedirect(AssetsProperties.getBaseURL("admin/user"));
