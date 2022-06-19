@@ -1,6 +1,8 @@
 package beans;
 
-public class EmailMessage {
+import java.io.Serializable;
+
+public class EmailMessage implements Serializable {
 
     private String to = null;
     private String from = null;

@@ -23,6 +23,10 @@ public class ReviewServices {
         return ReviewDAO.getInstance().getReview(pid, rating, username);
     }
 
+    public List<Review> getReviewByUsername(String username) {
+        return ReviewDAO.getInstance().getReviewByUsername(username);
+    }
+
     public boolean addReview(Review r) {
         return ReviewDAO.getInstance().addReview(r);
     }

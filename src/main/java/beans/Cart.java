@@ -1,10 +1,11 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cart {
+public class Cart implements Serializable {
     private Map<String, Product> data;
     private static Cart instance;
     private double rate=0;

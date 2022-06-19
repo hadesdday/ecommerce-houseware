@@ -59,6 +59,19 @@ public class ReviewDAO {
         }
     }
 
+    public List<Review> getReviewByUsername(String username) {
+        try {
+            List<Review> list = DbConnector.get().withHandle(h ->
+                    h.createQuery("select * from review where username = ?")
+                            .bind(0, username)
+                            .mapToBean(Review.class).stream().collect(Collectors.toList())
+            );
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public boolean addReview(Review r) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->

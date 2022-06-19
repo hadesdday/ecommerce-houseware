@@ -1,6 +1,7 @@
 package dao;
 
 import beans.Order;
+import beans.OrderDetails;
 import db.DbConnector;
 
 import java.sql.Types;
@@ -26,6 +27,32 @@ public class OrderDAO {
                         .mapToBean(Order.class).stream().collect(Collectors.toList())
         );
         return re;
+    }
+
+    public List<Order> getOrdersByCustomerId(int cid) {
+        try {
+            List<Order> re = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT * FROM hoadon where id_khachHang = ?")
+                            .bind(0, cid)
+                            .mapToBean(Order.class).stream().collect(Collectors.toList())
+            );
+            return re;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<OrderDetails> getOrderDetailsByOrderId(String id) {
+        try {
+            List<OrderDetails> re = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT * FROM chitiethoadon where id_hoadon = ?")
+                            .bind(0, id)
+                            .mapToBean(OrderDetails.class).stream().collect(Collectors.toList())
+            );
+            return re;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Order getOrderById(String maHD) {

@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="orderList" scope="request" type="java.util.List"/>
+<jsp:useBean id="orderDetails" scope="request" type="java.util.List"/>
+<jsp:useBean id="listUrl" scope="request" type="java.util.List"/>
 
 <html class="no-js" lang="zxx">
 <%@include file="head.jsp" %>
-<title>Đơn hàng của tôi | NLU</title>
+<title>Chi tiết đơn hàng | NLU</title>
 <body>
 <!-- Begin Body Wrapper -->
 <div class="body-wrapper">
@@ -18,7 +18,8 @@
             <div class="breadcrumb-content">
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
-                    <li class="active">Đơn hàng của tôi</li>
+                    <li><a href="${pageContext.request.contextPath}/myOrder">Trang chủ</a></li>
+                    <li class="active">Chi tiết đơn hàng</li>
                 </ul>
             </div>
         </div>
@@ -30,25 +31,25 @@
                 <table id="my__order__table" class="display text-center" style="width:100%">
                     <thead>
                     <tr>
-                        <th>Mã đơn hàng</th>
-                        <th>Ngày mua</th>
-                        <th>Tổng tiền</th>
-                        <th>Trạng thái</th>
-                        <th>Xem</th>
+                        <th></th>
+                        <th>Mã sản phẩm</th>
+                        <th>Số lượng</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="order" items="${orderList}">
+
+                    <c:if test="${orderDetails.size() > 0}">
+                        <% for (int i = 0; i < orderDetails.size(); i += 1) { %>
                         <tr>
-                            <td>${order.getID_HOADON()}</td>
-                            <td>${order.getCreatedAt()}</td>
-                            <td>${order.getTRIGIA()} đ</td>
-                            <td> ${order.getTRANGTHAI()}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/myOrderDetails?oid=${order.getID_HOADON()}">Xem</a>
+                                <img src="${pageContext.request.contextPath}/img/<%=listUrl.get(i)%>" alt="404"
+                                     width="50" height="50">
                             </td>
+                            <td>${orderDetails.get(i).getId_sanpham()}</td>
+                            <td>${orderDetails.get(i).getSoluong()}</td>
                         </tr>
-                    </c:forEach>
+                        <% } %>
+                    </c:if>
                     </tbody>
                 </table>
             </div>

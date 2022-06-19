@@ -1,6 +1,8 @@
 package beans;
 
-public class Image {
+import java.io.Serializable;
+
+public class Image implements Serializable {
     private String ID_ANH;
     private String LINK_ANH;
     private String ID_SANPHAM;

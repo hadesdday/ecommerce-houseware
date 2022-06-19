@@ -1,6 +1,7 @@
 package services;
 
 import beans.Order;
+import beans.OrderDetails;
 import dao.OrderDAO;
 
 import java.util.List;
@@ -45,5 +46,13 @@ public class OrderServices {
 
     public int getTotalOrder() {
         return OrderDAO.getInstance().getTotalOrder();
+    }
+
+    public List<Order> getOrdersByCustomerId(int cid) {
+        return OrderDAO.getInstance().getOrdersByCustomerId(cid);
+    }
+
+    public List<OrderDetails> getOrderDetailsByOrderId(String id) {
+        return OrderDAO.getInstance().getOrderDetailsByOrderId(id);
     }
 }

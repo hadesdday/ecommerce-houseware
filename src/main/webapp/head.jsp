@@ -4,6 +4,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="admin/assets/css/lib/data-table/dataTables.bootstrap.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.png">
     <!-- Material Design Iconic Font-V2.2.0 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/material-design-iconic-font.min.css">
