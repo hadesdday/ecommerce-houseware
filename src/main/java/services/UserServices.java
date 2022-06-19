@@ -28,12 +28,16 @@ public class UserServices {
         return UserDAO.getInstance().checkUser(username, password);
     }
 
+    public Customer getCustomer(String cid) {
+        return UserDAO.getInstance().getCustomer(cid);
+    }
+
     public boolean register(User user) {
         return UserDAO.getInstance().register(user);
     }
 
-    public boolean forgotPassword(String email) {
-        return UserDAO.getInstance().forgotPassword(email);
+    public boolean forgotPassword(String email, String token) {
+        return UserDAO.getInstance().forgotPassword(email, token);
     }
 
     public boolean checkToken(String email, String token) {
@@ -78,5 +82,9 @@ public class UserServices {
 
     public boolean setToken(String email, String token) {
         return UserDAO.getInstance().setToken(email, token);
+    }
+
+    public String getEmail(String input) {
+        return UserDAO.getInstance().getEmail(input);
     }
 }

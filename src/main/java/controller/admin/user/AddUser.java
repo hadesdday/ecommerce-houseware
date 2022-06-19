@@ -25,9 +25,9 @@ public class AddUser extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
         String role = request.getParameter("role");
         int cid = Integer.parseInt(request.getParameter("cid"));
+        int active = Integer.parseInt(request.getParameter("active"));
 
         Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$");
         Matcher usernameMatched = usernamePattern.matcher(username);
@@ -39,58 +39,35 @@ public class AddUser extends HttpServlet {
         Matcher usernameEmailMatched = emailPattern.matcher(username);
         Matcher emailMatched = emailPattern.matcher(email);
 
-        Pattern phonePattern = Pattern.compile("^[0-9][0-9]{0,9}$");
-        Matcher phoneMatched = phonePattern.matcher(phone);
-
-        String usernameError = "";
-        String passwordError = "";
-        String emailError = "";
-        String phoneError = "";
-
         boolean isErr = false;
 
         if (username.length() < 1) {
-            usernameError = "Vui lòng nhập username";
             isErr = true;
         } else if (!(usernameMatched.find() || usernameEmailMatched.find())) {
-            usernameError = "Username không hợp lệ";
             isErr = true;
         } else {
             isErr = false;
         }
 
         if (password.length() < 1 || !passwordMatched.find()) {
-            passwordError = "Mật khẩu tối thiểu phải có 8 ký tự bao gồm ít nhất một chữ in hoa , một ký tự đặc biệt và một số";
             isErr = true;
         } else {
             isErr = false;
         }
 
         if (email.length() < 1) {
-            emailError = "Vui lòng nhập email";
             isErr = true;
         } else if (!emailMatched.find()) {
-            emailError = "Email không đúng định dạng";
             isErr = true;
         } else {
-            emailError = "";
             isErr = false;
-        }
-
-        if (phone.length() > 1) {
-            if (!phoneMatched.find()) {
-                phoneError = "Số điện thoại không hợp lệ";
-                isErr = true;
-            } else {
-                phoneError = "";
-                isErr = false;
-            }
         }
 
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
-            User u = new User(username, cid, email, 1, "user");
+            User u = new User(username, cid, email, active, role);
+            u.setPassword(password);
             boolean isExistedUsername = UserServices.getInstance().isExistedUsername(username);
             boolean isExistedEmail = UserServices.getInstance().isExistedEmail(email);
 

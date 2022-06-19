@@ -11,6 +11,8 @@ public class SuccessServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String registeredSuccess = request.getParameter("registeredSuccess");
         String activeSuccess = request.getParameter("activeSuccess");
+        String sentCode = request.getParameter("code");
+        String resetSuccess = request.getParameter("reset");
 
         if (registeredSuccess != null && registeredSuccess.equals("registered")) {
             request.setAttribute("registerSuccess", true);
@@ -18,6 +20,14 @@ public class SuccessServlet extends HttpServlet {
         }
         if (activeSuccess != null && activeSuccess.equals("activated")) {
             request.setAttribute("activeSuccess", true);
+            request.getRequestDispatcher("success.jsp").forward(request, response);
+        }
+        if (sentCode != null && sentCode.equals("sent")) {
+            request.setAttribute("sentRecoveryCode", true);
+            request.getRequestDispatcher("success.jsp").forward(request, response);
+        }
+        if (resetSuccess != null && resetSuccess.equals("resetSuccess")) {
+            request.setAttribute("resetSuccess", true);
             request.getRequestDispatcher("success.jsp").forward(request, response);
         }
     }

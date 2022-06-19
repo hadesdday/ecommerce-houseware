@@ -5,12 +5,11 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String username;
     private int id_khachhang;
-    private String password;
     private String email;
-    private String phone;
-    private String token;
-    private String role;
     private int active;
+    private String role;
+    private String password;
+    private String token;
 
     public User() {
     }
@@ -55,14 +54,6 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getToken() {
         return token;
     }
@@ -85,5 +76,18 @@ public class User implements Serializable {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", id_khachhang=" + id_khachhang +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", token='" + token + '\'' +
+                ", role='" + role + '\'' +
+                ", active=" + active +
+                '}';
     }
 }

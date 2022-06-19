@@ -1,329 +1,15 @@
-<%@ page import="beans.User" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    if (session.getAttribute("user") != null)
-        response.sendRedirect("${pageContext.request.contextPath}/");
-    String username = request.getParameter("username") != null ? request.getParameter("username") : "";
-
-%>
-<!doctype html>
 <html class="no-js" lang="zxx">
 
 <!-- login-register31:27-->
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Đăng Nhập || NLU</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
-    <!-- Material Design Iconic Font-V2.2.0 -->
-    <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- Font Awesome Stars-->
-    <link rel="stylesheet" href="css/fontawesome-stars.css">
-    <!-- Meanmenu CSS -->
-    <link rel="stylesheet" href="css/meanmenu.css">
-    <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <!-- Slick Carousel CSS -->
-    <link rel="stylesheet" href="css/slick.css">
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- Jquery-ui CSS -->
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
-    <!-- Venobox CSS -->
-    <link rel="stylesheet" href="css/venobox.css">
-    <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="css/nice-select.css">
-    <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <!-- Bootstrap V4.1.3 Fremwork CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Helper CSS -->
-    <link rel="stylesheet" href="css/helper.css">
-    <!-- Main Style CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- Modernizr js -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
-
+<%@include file="head.jsp" %>
+<title>Đăng Nhập | NLU</title>
 <body>
 <!-- Begin Body Wrapper -->
 <div class="body-wrapper">
     <!-- Begin Header Area -->
-    <header>
-        <!-- Begin Header Top Area -->
-        <div class="header-top">
-            <div class="container">
-                <div class="row">
-                    <!-- Begin Header Top Left Area -->
-                    <div class="col-lg-3 col-md-4">
-                        <div class="header-top-left">
-                            <ul class="phone-wrap">
-                                <li><span>Telephone Enquiry:</span><a href="#">(+84) 769 833 185</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Header Top Left Area End Here -->
-                    <!-- Begin Header Top Right Area -->
-                    <div class="col-lg-9 col-md-8">
-                        <div class="header-top-right">
-                            <ul class="ht-menu">
-                                <!-- Begin Setting Area -->
-                                <li>
-                                    <c:if test="${sessionScope.user == null}">
-                                        <div>
-                                            <span class="mr-3"><a href="register.jsp">Đăng Ký</a></span>
-                                            <span class="mr-3"><a href="login.jsp">Đăng Nhập</a></span>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user != null}">
-                                        <div class="ht-setting-trigger">
-                                            <span>Chào , ${sessionScope.user.fullname}</span></div>
-                                        <div class="setting ht-setting">
-                                            <ul class="ht-setting-list">
-                                                <li><a href="#">My Account</a></li>
-                                                <li><a href="#">Checkout</a></li>
-                                                <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-                                            </ul>
-                                        </div>
-                                    </c:if>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Header Top Right Area End Here -->
-                </div>
-            </div>
-        </div>
-        <!-- Header Top Area End Here -->
-        <!-- Begin Header Middle Area -->
-        <div class="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
-            <div class="container">
-                <div class="row">
-                    <!-- Begin Header Logo Area -->
-                    <div class="col-lg-3">
-                        <div class="logo pb-sm-30 pb-xs-30">
-                            <a href="${pageContext.request.contextPath}/">
-                                <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Header Logo Area End Here -->
-                    <!-- Begin Header Middle Right Area -->
-                    <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
-                        <!-- Begin Header Middle Searchbox Area -->
-                        <form action="#" class="hm-searchbox">
-                            <select class="nice-select select-search-category">
-                                <option value="0">All</option>
-                                <option value="20">- - - - Máy vắt cam</option>
-                                <option value="21">- - - - Nồi cơm điện</option>
-                                <option value="22">- - - - Máy rửa chén</option>
-                                <option value="23">- - - - Máy xay thịt</option>
-                                <option value="24">- - - - Máy pha cà phê</option>
-                                <option value="25">- - - - Bếp từ hồng ngoại</option>
-                                <option value="26">- - - - Lò nướng bánh mì</option>
-                                <option value="27">- - - - Bình siêu tốc</option>
-                                <option value="28">- - - - Máy xay sinh tố</option>
-                                <option value="18">- - - - Nồi chính hãng</option>
-                                <option value="29">- - - - Bếp ga &amp; Bếp ga mini</option>
-                                <option value="30">- - - - Lò vi sóng</option>
-                                <option value="31">- - - - Nồi cơm mini</option>
-                                <option value="32">- - - - Dụng cụ nhà bếp</option>
-                                <option value="33">- - - - Nồi chiên không dầu</option>
-
-                            </select>
-                            <input type="text" placeholder="Nhập từ khóa cần tìm">
-                            <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                        <!-- Header Middle Searchbox Area End Here -->
-                        <!-- Begin Header Middle Right Area -->
-                        <div class="header-middle-right">
-                            <ul class="hm-menu">
-                                <!-- Begin Header Middle Wishlist Area -->
-                                <li class="hm-wishlist">
-                                    <a href="wishlist.html">
-                                        <span class="cart-item-count wishlist-item-count">0</span>
-                                        <i class="fa fa-heart-o"></i>
-                                    </a>
-                                </li>
-                                <!-- Header Middle Wishlist Area End Here -->
-                                <!-- Begin Header Mini Cart Area -->
-                                <li class="hm-minicart">
-                                    <div class="hm-minicart-trigger">
-                                        <span class="item-icon"></span>
-                                        <span class="item-text">£160
-                                                <span class="cart-item-count">2</span>
-                                            </span>
-                                    </div>
-                                    <span></span>
-                                    <div class="minicart">
-                                        <ul class="minicart-product-list">
-                                            <li>
-                                                <a href="product-details.jsp" class="minicart-product-image">
-                                                    <img loading="lazy" src="images/product/small-size/3.jpg"
-                                                         alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="product-details.jsp">Aenean eu tristique</a></h6>
-                                                    <span>£80 x 1</span>
-                                                </div>
-                                                <button class="close">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <a href="product-details.jsp" class="minicart-product-image">
-                                                    <img loading="lazy" src="images/product/small-size/4.jpg"
-                                                         alt="cart products">
-                                                </a>
-                                                <div class="minicart-product-details">
-                                                    <h6><a href="product-details.jsp">Aenean eu tristique</a></h6>
-                                                    <span>£80 x 1</span>
-                                                </div>
-                                                <button class="close">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                        <p class="minicart-total">SUBTOTAL: <span>£160</span></p>
-                                        <div class="minicart-button">
-                                            <a href="shopping-cart.html"
-                                               class="li-button li-button-dark li-button-fullwidth li-button-sm">
-                                                <span>Xem giỏ hàng</span>
-                                            </a>
-                                            <a href="checkout.html"
-                                               class="li-button li-button-fullwidth li-button-sm">
-                                                <span>Thanh toán</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- Header Mini Cart Area End Here -->
-                            </ul>
-                        </div>
-                        <!-- Header Middle Right Area End Here -->
-                    </div>
-                    <!-- Header Middle Right Area End Here -->
-                </div>
-            </div>
-        </div>
-        <!-- Header Middle Area End Here -->
-        <!-- Begin Header Bottom Area -->
-        <div class="header-bottom header-sticky d-none d-lg-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Begin Header Bottom Menu Area -->
-                        <div class="hb-menu hb-menu-2 d-xl-block">
-                            <nav>
-                                <ul>
-                                    <li class=""><a href="${pageContext.request.contextPath}/">Trang chủ</a>
-
-                                    </li>
-                                    <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
-                                        phẩm</a>
-                                        <ul class="megamenu hb-megamenu">
-                                            <li><a href="gia-dung-nha-bep.html">Gia dụng nhà bếp</a>
-                                                <ul>
-                                                    <li><a href="noi-com-dien.html">Nồi cơm điện</a></li>
-                                                    <li><a href="lo-vi-song.html">Lò vi sóng</a></li>
-                                                    <li><a href="noi-chien-khong-dau.html">Nồi chiên không dầu</a>
-                                                    </li>
-                                                    <li><a href="bep-tu.html">Bếp từ</a></li>
-                                                    <li><a href="bep-hong-ngoai.html">Bếp hồng ngoại</a></li>
-                                                    <li><a href="bep-ga.html">Bếp gas</a></li>
-                                                    <li><a href="noi-ap-suat.html">Nồi áp suất</a></li>
-                                                    <li><a href="lo-nuong.html">Lò nướng</a></li>
-                                                    <li><a href="binh-dun-sieu-toc.html">Bình đun siêu tốc</a></li>
-                                                    <li><a href="binh-thuy-dien.html">Bình thủy điện</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="may-xay-vat-ep.html">Máy xay, vắt, ép</a>
-                                                <ul>
-                                                    <li><a href="may-xay-sinh-to.html">Máy xay sinh tố</a></li>
-                                                    <li><a href="may-ep-trai-cay.html">Máy ép trái cây</a></li>
-                                                    <li><a href="may-pha-cafe.html">Máy pha cà phê</a></li>
-                                                    <li><a href="may-vat-cam.html">Máy vắt cam</a></li>
-                                                    <li><a href="may-xay-thit.html">Máy xay thịt</a></li>
-
-                                                </ul>
-                                            </li>
-                                            <li><a href="dung-cu-nha-bep.html">Dụng cụ nhà bếp</a>
-                                                <ul>
-                                                    <li><a href="xoong-noi.html">Xoong, nồi</a></li>
-                                                    <li><a href="chao-chong-dinh.html">Chảo chống dính</a></li>
-                                                    <li><a href="dung-cu-an.html">Dụng cụ ăn</a></li>
-                                                    <li><a href="noi-chien-khong-dau.html">Nồi chiên không dầu</a>
-                                                    </li>
-
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-holder"><a href="thuong-hieu.html">Thương hiệu</a>
-                                        <ul class="hb-dropdown">
-                                            <li class="sub-dropdown-holder"><a href="phillips.html">Phillips</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a href="sunhouse.html">Sunhouse</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a href="deawon.html">Deawoo</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a href="panasonic.html">Panasonic</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a href="sauce.html">Sauce</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a href="sharp.html">Sharp</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a href="electrolux.html">Electrolux</a>
-
-                                            </li>
-                                            <li class="sub-dropdown-holder"><a href="kangaroo.html">Kangaroo</a>
-
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <!-- <li><a href="about-us.jsp">About Us</a></li> -->
-                                    <li><a href="contact.jsp">Liên hệ</a></li>
-
-                                    </li>
-                                    <!-- Begin Header Bottom Menu Information Area -->
-
-                                    <!-- Header Bottom Menu Information Area End Here -->
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- Header Bottom Menu Area End Here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Header Bottom Area End Here -->
-        <!-- Begin Mobile Menu Area -->
-        <div class="mobile-menu-area d-lg-none d-xl-none col-12">
-            <div class="container">
-                <div class="row">
-                    <div class="mobile-menu">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Menu Area End Here -->
-    </header>
+    <%@include file="home-header.jsp" %>
     <!-- Header Area End Here -->
     <!-- Begin Li's Breadcrumb Area -->
     <div class="breadcrumb-area">
@@ -351,20 +37,21 @@
                                         ${requestScope.error}
                                 </div>
                             </c:if>
+                            <c:if test="${requestScope.inactive}">
+                                <div class="alert alert-danger" role="alert">
+                                    Tài khoản của bạn chưa được kích hoạt vui lòng kích hoạt tài khoản để truy cập
+                                </div>
+                            </c:if>
                             <div class="row">
                                 <div class="col-md-12 col-12 mb-20">
                                     <label>Username *</label>
                                     <input class="mb-0 rounded" type="text" placeholder="Email" id="username"
-                                           value="<%=username != null ? username :""%>" name="username">
-                                    <%--                                    <label for="error" class="error__label">Vui lòng nhập đúng email</label>--%>
+                                           name="username">
                                 </div>
                                 <div class="col-12 mb-20">
                                     <label>Mật khẩu</label>
                                     <input class="mb-0 rounded" type="password" placeholder="Mật khẩu"
                                            id="password" name="password">
-                                    <%--                                    <label for="error" class="error__label">Tối thiểu 8 ký tự bao gồm ít nhất một--%>
-                                    <%--                                        chữ in hoa , một ký tự đặc biệt và một số--%>
-                                    <%--                                    </label>--%>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
@@ -379,7 +66,7 @@
                                     <button class="login-button mt-0" type="submit">Đăng nhập</button>
                                 </div>
                                 <div class="col-md-12 mt-20">
-                                    <label for="register">Chưa có tài khoản?
+                                    <label>Chưa có tài khoản?
                                         <a href="register.jsp">Đăng ký ngay</a>
                                     </label>
                                 </div>

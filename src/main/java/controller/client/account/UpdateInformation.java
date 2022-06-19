@@ -18,11 +18,6 @@ import java.util.regex.Pattern;
 public class UpdateInformation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            doPost(request, response);
-        } catch (Exception exception) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-        }
     }
 
     @Override
@@ -71,7 +66,8 @@ public class UpdateInformation extends HttpServlet {
             response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
         } else {
             Customer c = new Customer(fullname, address, phone, email);
-            if (UserServices.getInstance().updateInformation(c)) {
+            boolean updated = UserServices.getInstance().updateInformation(c);
+            if (updated) {
                 HttpSession session = request.getSession();
                 session.setAttribute("customer", c);
                 request.setAttribute("updateInforSuccess", "Cập nhật thành công");

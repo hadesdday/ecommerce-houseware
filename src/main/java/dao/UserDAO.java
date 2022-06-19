@@ -39,6 +39,19 @@ public class UserDAO {
         }
     }
 
+    public Customer getCustomer(String cid) {
+        try {
+            List<Customer> c = DbConnector.get().withHandle(h ->
+                    h.createQuery("SELECT * FROM khachhang WHERE id_khachhang = ?")
+                            .bind(0, cid)
+                            .mapToBean(Customer.class).stream().collect(Collectors.toList())
+            );
+            return c.get(0);
+        } catch (Exception exception) {
+            return null;
+        }
+    }
+
     public boolean isExistedUsername(String username) {
         try {
             List<User> user = DbConnector.get().withHandle(h ->
@@ -55,7 +68,7 @@ public class UserDAO {
     public User checkUser(String username, String password) {
         try {
             List<User> user = DbConnector.get().withHandle(h ->
-                    h.createQuery("SELECT * FROM Account WHERE username = ? AND password = ?")
+                    h.createQuery("SELECT * FROM user WHERE username = ? AND password = ?")
                             .bind(0, username)
                             .bind(1, MD5Hashing.get(password))
                             .mapToBean(User.class).stream().collect(Collectors.toList())
@@ -85,11 +98,12 @@ public class UserDAO {
     public boolean register(User user) {
         try {
             int insertedRecord = DbConnector.get().withHandle(h ->
-                    h.createUpdate("INSERT INTO user(username, password, email, id_khachhang) values(?,?,?,?)")
+                    h.createUpdate("INSERT INTO user(username, password, email, id_khachhang,active) values(?,?,?,?,?)")
                             .bind(0, user.getUsername())
                             .bind(1, MD5Hashing.get(user.getPassword()))
                             .bind(2, user.getEmail())
                             .bind(3, user.getId_khachhang())
+                            .bind(4, user.getActive())
                             .execute());
             return insertedRecord == 1;
         } catch (Exception err) {
@@ -110,9 +124,21 @@ public class UserDAO {
         }
     }
 
-    public boolean forgotPassword(String email) {
+    public String getEmail(String input) {
         try {
-            String token = GenerateToken.get(11);
+            String email = DbConnector.get().withHandle(h ->
+                    h.select("select email from user where email = ? or username = ?")
+                            .bind(0, input)
+                            .bind(1, input)
+                            .mapTo(String.class).one());
+            return email;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean forgotPassword(String email, String token) {
+        try {
             int rowUpdated = DbConnector.get().withHandle(h ->
                     h.createUpdate("UPDATE user set token = ? where email = ?")
                             .bind(0, token)
@@ -157,7 +183,7 @@ public class UserDAO {
         try {
             int rowUpdated = DbConnector.get().withHandle(h ->
                     h.createUpdate("UPDATE user set token = ?,password = ? WHERE email = ? and token = ?")
-                            .bind(0, "")
+                            .bindNull(0, Types.NULL)
                             .bind(1, MD5Hashing.get(newPassword))
                             .bind(2, email)
                             .bind(3, token)
@@ -189,8 +215,8 @@ public class UserDAO {
                             .bind(0, c.getTen_kh())
                             .bind(1, c.getEmail())
                             .bind(2, c.getDiachi())
-                            .bind(3, c.getDiachi())
-                            .bind(4, c.getSodt())
+                            .bind(3, c.getSodt())
+                            .bind(4, c.getEmail())
                             .execute());
             return rowUpdated == 1;
         } catch (Exception e) {
@@ -200,7 +226,7 @@ public class UserDAO {
 
     public List<User> getUsers() {
         List<User> users = DbConnector.get().withHandle(h ->
-                h.createQuery("select * from account")
+                h.createQuery("select * from user")
                         .mapToBean(User.class).stream().collect(Collectors.toList())
         );
         return users;
@@ -235,11 +261,11 @@ public class UserDAO {
     public boolean editUser(User u) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("UPDATE user SET email=?,role=?,id_khachhang=?,active=? where username = ?")
+                    h.createUpdate("UPDATE user SET email=?,role=?,active=? where username = ?")
                             .bind(0, u.getEmail())
                             .bind(1, u.getRole())
-                            .bind(2, u.getId_khachhang())
-                            .bind(3, u.getActive())
+                            .bind(2, u.getActive())
+                            .bind(3, u.getUsername())
                             .execute());
             return rowAffected == 1;
         } catch (Exception err) {

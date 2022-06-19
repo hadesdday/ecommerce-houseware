@@ -1,6 +1,7 @@
 package controller.client.authentication;
 
 import beans.EmailMessage;
+import helper.GenerateToken;
 import org.omg.CORBA.portable.ApplicationException;
 import properties.AssetsProperties;
 import services.EmailServices;
@@ -18,25 +19,33 @@ import java.io.IOException;
 public class ForgotPasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+        String email = request.getParameter("email");
+        String token = request.getParameter("token");
+
+        boolean isValidToken = UserServices.getInstance().checkToken(email, token);
+        if (isValidToken) {
+            HttpSession session = request.getSession();
+            session.setAttribute("authenticated", 1);
+            session.setAttribute("recoveryEmail", email);
+            session.setAttribute("recoveryToken", token);
+            request.getRequestDispatcher("change-password.jsp").forward(request, response);
+        } else {
+            response.sendRedirect(AssetsProperties.getBaseURL());
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String token = request.getParameter("token");
+        String email = request.getParameter("username");
 
-        if (UserServices.getInstance().checkToken(email, token)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("email", email);
-            session.setAttribute("token", token);
-            session.setAttribute("authenticated", 1);
-            response.sendRedirect("change-password.jsp");
-        } else {
-            if (UserServices.getInstance().forgotPassword(email)) {
-                String resetUrl = AssetsProperties.getBaseURL() + "forgotPassword?email=" + email + "&token=" + token;
+        String emailFromDb = UserServices.getInstance().getEmail(email);
+
+        if (emailFromDb != null) {
+            String token = GenerateToken.get(11);
+            if (UserServices.getInstance().forgotPassword(emailFromDb, token)) {
+                String resetUrl = AssetsProperties.getBaseURL() + "forgotPassword?email=" + emailFromDb + "&token=" + token;
                 EmailMessage emailbean = new EmailMessage();
-                emailbean.setTo(email);
+                emailbean.setTo(emailFromDb);
                 emailbean.setSubject("Thiết lập lại mật khẩu đăng nhập HouseWareNLU");
                 emailbean.setMessage("Chào bạn\n" + "Chúng tôi có nhận được yêu cầu thiết lập lại mật khẩu cho tài khoản của bạn."
                         + "\n" + "Nhấn đường link này[" + resetUrl + "] để thiết lập mật khẩu mới cho tài khoản của bạn.\n" +
@@ -49,13 +58,12 @@ public class ForgotPasswordController extends HttpServlet {
                 } catch (ApplicationException e) {
                     e.printStackTrace();
                 }
-                request.setAttribute("email", email);
-                request.setAttribute("tokenSent", "Mã xác minh đã được gửi đến địa chỉ email");
-                request.getRequestDispatcher("success.jsp").forward(request, response);
+                response.sendRedirect(AssetsProperties.getBaseURL("success?code=sent"));
             } else {
-                request.setAttribute("error", "Tài khoản không tồn tại");
-                request.getRequestDispatcher("forgot-password.jsp").forward(request, response);
+                response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
             }
+        } else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

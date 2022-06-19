@@ -41,7 +41,6 @@ public class EditUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
         String role = request.getParameter("role");
         int active = Integer.parseInt(request.getParameter("active"));
 
@@ -52,12 +51,8 @@ public class EditUser extends HttpServlet {
         Matcher usernameEmailMatched = emailPattern.matcher(username);
         Matcher emailMatched = emailPattern.matcher(email);
 
-        Pattern phonePattern = Pattern.compile("^[0-9][0-9]{0,9}$");
-        Matcher phoneMatched = phonePattern.matcher(phone);
-
         String usernameError = "";
         String emailError = "";
-        String phoneError = "";
 
         boolean isErr = false;
 
@@ -82,24 +77,14 @@ public class EditUser extends HttpServlet {
             isErr = false;
         }
 
-        if (phone.length() > 1) {
-            if (!phoneMatched.find()) {
-                phoneError = "Số điện thoại không hợp lệ";
-                isErr = true;
-            } else {
-                phoneError = "";
-                isErr = false;
-            }
-        }
-
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             User u = new User();
             u.setEmail(email);
-            u.setPhone(phone);
             u.setRole(role);
             u.setActive(active);
+            u.setUsername(username);
 
             if (UserServices.getInstance().editUser(u)) {
                 response.sendRedirect(AssetsProperties.getBaseURL("admin/user"));

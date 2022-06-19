@@ -1,5 +1,6 @@
 package controller.client.authentication;
 
+import beans.Customer;
 import beans.User;
 import properties.AssetsProperties;
 import services.UserServices;
@@ -16,37 +17,34 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
-        response.setHeader("Pragma", "no-cache");
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-//
-//        User user = UserServices.getInstance().login(username, password);
-//        if (user != null) {
-//            HttpSession session = request.getSession();
-//            User sessionUser = new User();
-//
-//            sessionUser.setUsername(user.getUsername());
-//            sessionUser.setFullname(user.getFullname());
-//            sessionUser.setEmail(user.getEmail());
-//            sessionUser.setPhone(user.getPhone());
-//            sessionUser.setRole(user.getRole());
-//            sessionUser.setAddress(user.getAddress());
-//
-//            session.setAttribute("user", sessionUser);
-//            session.setAttribute("authenticated", 1);
-//            response.sendRedirect(AssetsProperties.getBaseURL());
-//        } else {
-//            request.setAttribute("error", "Tài khoản không tồn tại");
-//            request.getRequestDispatcher("login.jsp").forward(request, response);
-//        }
+        User user = UserServices.getInstance().checkUser(username, password);
+        if (user != null) {
+            if (user.getActive() == 2) {
+                Customer c = UserServices.getInstance().getCustomer(String.valueOf(user.getId_khachhang()));
+                HttpSession session = request.getSession();
+                User sessionUser = new User();
+
+                sessionUser.setUsername(user.getUsername());
+                sessionUser.setEmail(user.getEmail());
+                sessionUser.setRole(user.getRole());
+
+                session.setAttribute("customer", c);
+                session.setAttribute("user", sessionUser);
+                session.setAttribute("authenticated", 1);
+                response.sendRedirect(AssetsProperties.getBaseURL());
+            } else {
+                request.setAttribute("inactive", true);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("error", "Username hoặc mật khẩu đã nhập sai");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 }

@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String email = (String) request.getAttribute("email");
-%>
+
 <html class="no-js" lang="zxx">
 <title>Thành công | NLU</title>
 
@@ -39,13 +37,12 @@
                                 <i class="fa fa-4x fa-check-circle"></i>
                             </h4>
                             <div class="row">
-                                <c:if test="${requestScope.tokenSent.length() > 1}">
+                                <c:if test="${requestScope.sentRecoveryCode}">
                                     <div class="col-md-12 col-12 mb-20">
                                         <h1 class="text-center">Đặt lại mật khẩu</h1>
                                     </div>
                                     <div class="col-md-12">
-                                        <p class="text-center">${requestScope.tokenSent} <%=email%>
-                                        </p>
+                                        <p class="text-center">Mã khôi phục đã được gửi đến email của bạn</p>
                                         <p class="text-center">Vui lòng kiểm tra trong thư rác nếu như không tìm thấy
                                             trong
                                             hộp thư đến</p>
@@ -57,8 +54,9 @@
                                     </div>
                                     <div class="col-md-12">
                                         <p class="text-center">Bạn đã đăng ký tài khoản thành công</p>
-                                        <p class="text-center">Vui lòng kiểm tra email trong hộp thư đến ( thư mục spam
-                                            nếu không tìm thấy trong hộpp thư thư đến ) để kích hoạt tài khoản</p>
+                                        <p class="text-center">Vui lòng kiểm tra trong thư rác nếu như không tìm thấy
+                                            trong
+                                            hộp thư đến</p>
                                     </div>
                                 </c:if>
                                 <c:if test="${requestScope.activeSuccess}">
@@ -71,14 +69,12 @@
                                             bên HouseWareNLU !</p>
                                     </div>
                                 </c:if>
-                                <c:if test="${requestScope.resetSuccess.length() > 1}">
+                                <c:if test="${requestScope.resetSuccess}">
                                     <div class="col-md-12 col-12 mb-20">
-                                        <h1 class="text-center">${requestScope.resetSuccess}</h1>
+                                        <h1 class="text-center">Thành công</h1>
                                     </div>
                                     <div class="col-md-12">
-                                        <p class="text-center">Bạn đã thành công đặt lại mật khẩu cho tài khoản bằng
-                                            email <%=email%>
-                                        </p>
+                                        <p class="text-center">Đặt lại mật khẩu thành công </p>
                                     </div>
                                 </c:if>
                                 <div class="col-md-12 d-flex justify-content-center mt-20">
