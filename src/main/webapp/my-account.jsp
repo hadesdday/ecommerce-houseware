@@ -49,7 +49,7 @@
                                 Thông tin tài
                                 khoản</a>
                             </li>
-                            <li class="mt-3 sidebar-item"><a href="my-order.html" class="fs-110"><i
+                            <li class="mt-3 sidebar-item"><a href="my-order.jsp" class="fs-110"><i
                                     class="fa fa-book mr-3 fs-150"></i>
                                 Quản lý đơn hàng</a>
                             </li>

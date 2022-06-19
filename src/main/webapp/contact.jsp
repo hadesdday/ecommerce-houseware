@@ -32,6 +32,11 @@
             <div id="google-map"></div>
         </div>
         <div class="container">
+            <div id="overlay">
+                <div id="overlay__elm">
+                    <img src="images/loading_overlay.gif" alt="404">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
                     <div class="contact-page-side-content">
@@ -55,27 +60,40 @@
                     <div class="contact-form-content pt-sm-55 pt-xs-55">
                         <h3 class="contact-page-title">Góp ý/Thắc mắc của bạn</h3>
                         <div class="contact-form">
-                            <form id="contact-form">
-                                <div class="form-group">
-                                    <label>Họ và Tên:<span class="required">*</span></label>
-                                    <input type="text" name="user_name" id="customername" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Số điện thoại<span class="required">*</span></label>
-                                    <input type="tel" name="user_email" id="customerEmail" required>
-                                </div>
-                                <div class="form-group mb-30">
-                                    <label>Góp ý/Thắc mắc</label>
-                                    <textarea name="message" id="contactMessage"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" value="submit" id="submit" class="li-btn-3" name="submit">
-                                        Gửi
-                                    </button>
-                                </div>
-                            </form>
+                            <div class="form-group">
+                                <label>Họ và Tên:<span class="required">*</span></label>
+                                <c:choose>
+                                    <c:when test="${sessionScope.customer != null}">
+                                        <input type="text" name="fullname" id="customername"
+                                               value="${sessionScope.customer.ten_kh}">
+                                    </c:when>
+                                    <c:when test="${sessionScope.customer == null}">
+                                        <input type="text" name="fullname" id="customername">
+                                    </c:when>
+                                </c:choose>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại<span class="required">*</span></label>
+                                <c:choose>
+                                    <c:when test="${sessionScope.customer != null}">
+                                        <input type="text" name="phone" value="${sessionScope.customer.sodt}">
+                                    </c:when>
+                                    <c:when test="${sessionScope.customer.ten_kh == null}">
+                                        <input type="text" name="phone">
+                                    </c:when>
+                                </c:choose>
+                            </div>
+                            <div class="form-group mb-30">
+                                <label>Góp ý/Thắc mắc</label>
+                                <textarea name="message" id="contactMessage"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" value="submit" id="submit-message" class="li-btn-3" name="submit">
+                                    Gửi
+                                </button>
+                            </div>
                         </div>
-                        <p class="form-messege"></p>
+                        <p class="form-message"></p>
                     </div>
                 </div>
             </div>
@@ -282,6 +300,42 @@
             animation: google.maps.Animation.BOUNCE
         });
     }
+</script>
+<script>
+    function clearData() {
+        $("input[name='fullname']").val("");
+        $("input[name='phone']").val("");
+        $("textarea[name='message']").val("");
+    }
+
+    $("#submit-message").click(() => {
+        var fullname = $("input[name='fullname']").val();
+        var phone = $("input[name='phone']").val();
+        var message = $("textarea[name='message']").val();
+
+        if (fullname.length < 1 || phone.length < 10 || message.length < 1) {
+            toastr.error('Vui lòng nhập thông tin', 'Thất bại')
+        } else {
+            $("#overlay").css("display", "block");
+            $.ajax({
+                url: "${pageContext.request.contextPath}/Contact",
+                method: "POST",
+                data: {
+                    fullname: fullname,
+                    phone: phone,
+                    content: message,
+                },
+                success: function (data) {
+                    $("#overlay").css("display", "none");
+                    toastr.success('Gửi phản hồi thành công', 'Thành công');
+                    clearData();
+                }, error: function (data) {
+                    $("#overlay").css("display", "none");
+                    toastr.error('Gửi phản hồi thất bại', 'Thất bại')
+                }
+            })
+        }
+    });
 </script>
 </body>
 

@@ -28,29 +28,19 @@
                                 <input type="text" class="form-control" name="username">
                             </div>
 
+                            <label>Mã khách hàng</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="cid">
+                            </div>
+
                             <label>Mật khẩu</label>
                             <div class="input-group mb-3">
                                 <input type="password" class="form-control" name="password">
                             </div>
 
-                            <label>Họ tên</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="fullname">
-                            </div>
-
                             <label>Email</label>
                             <div class="input-group mb-3">
                                 <input type="email" class="form-control" name="email">
-                            </div>
-
-                            <label>Số điện thoại</label>
-                            <div class="input-group mb-3">
-                                <input type="tel" class="form-control" name="phone">
-                            </div>
-
-                            <label>Địa chỉ</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="address">
                             </div>
 
                             <label>Role</label>
@@ -60,6 +50,16 @@
                                     <option value="user">user</option>
                                 </select>
                             </div>
+
+                            <label>Trạng thái</label>
+                            <div class="input-group mb-3">
+                                <select class="custom-select" name="active">
+                                    <option value="0">Bị cấm</option>
+                                    <option value="1">Chưa kích hoạt</option>
+                                    <option value="2">Đã kích hoạt</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div class="custom-modal-footer">
                             <button type="button" class="btn btn-secondary close-btn">Hủy</button>
@@ -69,49 +69,52 @@
                 </div>
 
                 <!-- modal sua thong tin hoa don -->
-                    <div id="editModal" class="custom-modal">
-                        <div class="custom-modal-content">
-                            <div class="custom-modal-header">
-                                <span class="custom-close">&times;</span>
-                                <h2>Sửa thông tin người dùng</h2>
+                <div id="editModal" class="custom-modal">
+                    <div class="custom-modal-content">
+                        <div class="custom-modal-header">
+                            <span class="custom-close">&times;</span>
+                            <h2>Sửa thông tin người dùng</h2>
+                        </div>
+                        <div class="custom-modal-body">
+                            <label>Username</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="editusername" disabled>
                             </div>
-                            <div class="custom-modal-body">
-                                <input type="hidden" class="form-control" name="editusername">
 
-                                <label>Họ tên</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="editfullname">
-                                </div>
-
-                                <label>Email</label>
-                                <div class="input-group mb-3">
-                                    <input type="email" class="form-control" name="editemail">
-                                </div>
-
-                                <label>Số điện thoại</label>
-                                <div class="input-group mb-3">
-                                    <input type="tel" class="form-control" name="editphone">
-                                </div>
-
-                                <label>Địa chỉ</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="editaddress">
-                                </div>
-
-                                <label>Role</label>
-                                <div class="input-group mb-3">
-                                    <select class="custom-select" name="editrole">
-                                        <option value="admin">admin</option>
-                                        <option value="user">user</option>
-                                    </select>
-                                </div>
+                            <label>Mã khách hàng</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="editcid" disabled>
                             </div>
-                            <div class="custom-modal-footer">
-                                <button type="button" class="btn btn-secondary close-btn">Hủy</button>
-                                <button type="submit" class="btn btn-primary" id="editAction">Lưu</button>
+
+                            <label>Email</label>
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" name="editemail">
                             </div>
+
+                            <label>Role</label>
+                            <div class="input-group mb-3">
+                                <select class="custom-select" name="editrole">
+                                    <option value="admin">admin</option>
+                                    <option value="user">user</option>
+                                </select>
+                            </div>
+
+                            <label>Trạng thái</label>
+                            <div class="input-group mb-3">
+                                <select class="custom-select" name="editactive">
+                                    <option value="0">Bị cấm</option>
+                                    <option value="1">Chưa kích hoạt</option>
+                                    <option value="2">Đã kích hoạt</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="custom-modal-footer">
+                            <button type="button" class="btn btn-secondary close-btn">Hủy</button>
+                            <button type="submit" class="btn btn-primary" id="editAction">Lưu</button>
                         </div>
                     </div>
+                </div>
 
                 <div id="confirmDelete" class="custom-modal">
                     <div class="custom-modal-content">
@@ -146,19 +149,16 @@
                                                 Username
                                             </th>
                                             <th>
-                                                Họ tên
+                                                Mã khách hàng
                                             </th>
                                             <th>
                                                 Email
                                             </th>
                                             <th>
-                                                Số điện thoại
-                                            </th>
-                                            <th>
-                                                Địa chỉ
-                                            </th>
-                                            <th>
                                                 Role
+                                            </th>
+                                            <th>
+                                                Trạng thái
                                             </th>
                                             <th>Hành động</th>
                                         </tr>
@@ -171,19 +171,16 @@
                                                         ${item.username}
                                                 </td>
                                                 <td>
-                                                        ${item.fullname}
+                                                        ${item.id_khachhang}
                                                 </td>
                                                 <td>
                                                         ${item.email}
                                                 </td>
                                                 <td>
-                                                        ${item.phone}
-                                                </td>
-                                                <td>
-                                                        ${item.address}
-                                                </td>
-                                                <td>
                                                         ${item.role}
+                                                </td>
+                                                <td>
+                                                        ${item.active}
                                                 </td>
                                                 <td>
                                                     <a class="btn rounded bg-warning" id="editBtn"
@@ -230,12 +227,11 @@
     $(document).ready(function () {
         $("#addUser").click(function () {
             var username = $("input[name='username']").val();
-            var password = $("input[name='password']").val();
-            var fullname = $("input[name='fullname']").val();
+            var cid = $("input[name='cid']").val();
             var email = $("input[name='email']").val();
-            var phone = $("input[name='phone']").val();
-            var address = $("input[name='address']").val();
             var role = $("select[name='role'] option:selected").val();
+            var active = $("select[name='active'] option:selected").val();
+            var password = $("input[name='password']").val();
 
             $.ajax({
                 url: "${pageContext.request.contextPath}/user/add",
@@ -243,11 +239,10 @@
                 data: {
                     username: username,
                     password: password,
-                    fullname: fullname,
                     email: email,
-                    phone: phone,
-                    address: address,
-                    role: role
+                    role: role,
+                    cid: cid,
+                    active: active
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm user mới thành công", "success");
@@ -259,11 +254,10 @@
                     $('#bootstrap-data-table-export').DataTable().row.add(
                         [
                             username,
-                            fullname,
+                            cid,
                             email,
-                            phone,
-                            address,
                             role,
+                            active,
                             editElm + "\n" + delElm
                         ]
                     ).draw(false);
@@ -273,7 +267,7 @@
                 error: function (data, textStatus, xhr) {
                     if (data.status === 400 || data.status === 404 || data.status === 500)
                         swal("Thất bại", "Thêm user mới thất bại do sai định dạng dữ liệu đầu vào", "error");
-                    else if (data.status === 409)
+                    else if (data.status === 406)
                         swal("Thất bại", "User đã tồn tại", "error");
                 }
             })
@@ -314,16 +308,22 @@
                 closeModal();
             },
             error: function (data) {
-                if (data.status === 500 || data.status === 404)
-                    swal("Thất bại", "User không tồn tại", "error")
+                swal("Thất bại", "User không tồn tại", "error")
             }
         })
     })
 </script>
 
 <script>
-
     var editRow;
+
+    function setEditModalValue(data) {
+        $("input[name='editusername']").val(data.username);
+        $("input[name='editcid']").val(data.id_khachhang);
+        $("input[name='editemail']").val(data.email);
+        $("select[name='editrole']").val(data.role);
+        $("select[name='editactive']").val(data.active);
+    }
 
     function onEdit(element) {
         editRow = $(element).parents("tr").children();
@@ -346,47 +346,36 @@
 
     $("#editAction").click(() => {
         var username = $("input[name='editusername']").val();
-        var fullname = $("input[name='editfullname']").val();
         var email = $("input[name='editemail']").val();
-        var phone = $("input[name='editphone']").val();
-        var address = $("input[name='editaddress']").val();
         var role = $("select[name='editrole'] option:selected").val();
+        var active = $("select[name='editactive'] option:selected").val();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/user/edit",
             method: "POST",
             data: {
                 username: username,
-                fullname: fullname,
                 email: email,
-                phone: phone,
-                address: address,
-                role: role
+                role: role,
+                active: active
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật user thành công", "success");
                 closeModal();
                 clearValue();
-                editRow.eq(1).text(fullname);
                 editRow.eq(2).text(email);
-                editRow.eq(3).text(phone);
-                editRow.eq(4).text(address);
-                editRow.eq(5).text(role);
+                editRow.eq(3).text(role);
+                editRow.eq(4).text(active);
             },
             error: (data) => {
-                swal("Thất bại", "Cập nhật user thất bại do sai dữ liệu đầu vào", "error");
+                if (data.status === 409)
+                    swal("Thất bại", "Tài khoản không tồn tại", "error");
+                else
+                    swal("Thất bại", "Cập nhật user thất bại do sai dữ liệu đầu vào", "error");
             }
         });
     });
 
-    function setEditModalValue(data) {
-        $("input[name='editusername']").val(data.username);
-        $("input[name='editfullname']").val(data.fullname);
-        $("input[name='editemail']").val(data.email);
-        $("input[name='editphone']").val(data.phone);
-        $("input[name='editaddress']").val(data.address);
-        $("select[name='editrole']").val(data.role);
-    }
 </script>
 
 <script src="assets/js/lib/sweetalert/sweetalert.min.js"></script>
