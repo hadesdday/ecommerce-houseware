@@ -29,7 +29,9 @@
     <!-- Begin Contact Main Page Area -->
     <div class="contact-main-page mt-60 mb-40 mb-md-40 mb-sm-40 mb-xs-40">
         <div class="container mb-60">
-            <div id="google-map"></div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d504.1286011785071!2d106.79147818888438!3d10.87113772227962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRwLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1655703660990!5m2!1svi!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="container">
             <div id="overlay">
@@ -83,6 +85,10 @@
                                     </c:when>
                                 </c:choose>
                             </div>
+                            <div class="form-group">
+                                <input type="hidden" name="ip">
+                                <input type="hidden" name="city">
+                            </div>
                             <div class="form-group mb-30">
                                 <label>Góp ý/Thắc mắc</label>
                                 <textarea name="message" id="contactMessage"></textarea>
@@ -104,203 +110,7 @@
     <%@include file="client-footer.jsp" %>
     <!-- Footer Area End Here -->
 </div>
-<
 <%@include file="libraries.jsp" %>
-<script
-        src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.22&amp;key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script>
-<script>
-    // When the window has finished loading create our google map below
-    google.maps.event.addDomListener(window, 'load', init);
-
-    function init() {
-        // Basic options for a simple Google Map
-        // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-        var mapOptions = {
-            // How zoomed in you want the map to start at (always required)
-            zoom: 12,
-            scrollwheel: false,
-            // The latitude and longitude to center the map (always required)
-            center: new google.maps.LatLng(10.871397, 106.790959), // New York
-            // How you would like to style the map.
-            // This is where you would paste any style found on
-            styles: [{
-                "featureType": "water",
-                "elementType": "geometry",
-                "stylers": [{
-                    "color": "#e9e9e9"
-                },
-                    {
-                        "lightness": 17
-                    }
-                ]
-            },
-                {
-                    "featureType": "landscape",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#f5f5f5"
-                    },
-                        {
-                            "lightness": 20
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#ffffff"
-                    },
-                        {
-                            "lightness": 17
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#ffffff"
-                    },
-                        {
-                            "lightness": 29
-                        },
-                        {
-                            "weight": 0.2
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.arterial",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#ffffff"
-                    },
-                        {
-                            "lightness": 18
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.local",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#ffffff"
-                    },
-                        {
-                            "lightness": 16
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#f5f5f5"
-                    },
-                        {
-                            "lightness": 21
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi.park",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#dedede"
-                    },
-                        {
-                            "lightness": 21
-                        }
-                    ]
-                },
-                {
-                    "elementType": "labels.text.stroke",
-                    "stylers": [{
-                        "visibility": "on"
-                    },
-                        {
-                            "color": "#ffffff"
-                        },
-                        {
-                            "lightness": 16
-                        }
-                    ]
-                },
-                {
-                    "elementType": "labels.text.fill",
-                    "stylers": [{
-                        "saturation": 36
-                    },
-                        {
-                            "color": "#333333"
-                        },
-                        {
-                            "lightness": 40
-                        }
-                    ]
-                },
-                {
-                    "elementType": "labels.icon",
-                    "stylers": [{
-                        "visibility": "off"
-                    }]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "geometry",
-                    "stylers": [{
-                        "color": "#f2f2f2"
-                    },
-                        {
-                            "lightness": 19
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative",
-                    "elementType": "geometry.fill",
-                    "stylers": [{
-                        "color": "#fefefe"
-                    },
-                        {
-                            "lightness": 20
-                        }
-                    ]
-                },
-                {
-                    "featureType": "administrative",
-                    "elementType": "geometry.stroke",
-                    "stylers": [{
-                        "color": "#fefefe"
-                    },
-                        {
-                            "lightness": 17
-                        },
-                        {
-                            "weight": 1.2
-                        }
-                    ]
-                }
-            ]
-        };
-
-        // Get the HTML DOM element that will contain your map
-        // We are using a div with id="map" seen below in the <body>
-        var mapElement = document.getElementById('google-map');
-
-        // Create the Google Map using our element and options defined above
-        var map = new google.maps.Map(mapElement, mapOptions);
-
-        // Let's also add a marker while we're at it
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(10.871397, 106.790959),
-            map: map,
-            title: 'Limupa',
-            animation: google.maps.Animation.BOUNCE
-        });
-    }
-</script>
 <script>
     function clearData() {
         $("input[name='fullname']").val("");
@@ -308,15 +118,38 @@
         $("textarea[name='message']").val("");
     }
 
+    function getLocation() {
+        $.ajax({
+            url: "http://ip-api.com/json",
+            method: "GET",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                $("input[name='ip']").val(data.query);
+                $("input[name='city']").val(data.city);
+            }
+            , error: function (data) {
+                console.log("error");
+            }
+        });
+    }
+
     $("#submit-message").click(() => {
         var fullname = $("input[name='fullname']").val();
         var phone = $("input[name='phone']").val();
         var message = $("textarea[name='message']").val();
+        getLocation();
 
         if (fullname.length < 1 || phone.length < 10 || message.length < 1) {
             toastr.error('Vui lòng nhập thông tin', 'Thất bại')
         } else {
+            var ip = $("input[name='ip']").val();
+            var city = $("input[name='city']").val();
+
             $("#overlay").css("display", "block");
+
+            message += "\n" + "- IP : " + ip + "\n- Thành phố : " + city;
+
             $.ajax({
                 url: "${pageContext.request.contextPath}/Contact",
                 method: "POST",

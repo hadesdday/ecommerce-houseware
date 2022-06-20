@@ -27,7 +27,7 @@
             <%@include file="my-account-sidebar.jsp" %>
             <div class="col-sm-12 col-md-12 col-xs-3 col-lg-8 bg-white">
                 <p class="p-title mt-3">Đơn hàng của tôi</p>
-                <table id="my__order__table" class="display text-center" style="width:100%">
+                <table id="my__order__table" class="display text-center table table-bordered border" style="width:100%">
                     <thead>
                     <tr>
                         <th>Mã đơn hàng</th>

@@ -138,7 +138,7 @@
                                             </c:forEach>
                                         </ul>
 
-                                        <p class="minicart-total">SUBTOTAL: <span>${cart.total()}</span></p>
+                                        <p class="minicart-total">TỔNG: <span>${cart.total()}</span></p>
                                         <div class="minicart-button">
                                             <a href="${pageContext.request.contextPath}/Cart"
                                                class="li-button li-button-dark li-button-fullwidth li-button-sm">
@@ -172,13 +172,12 @@
                         <nav>
                             <ul>
                                 <li class=""><a href="${pageContext.request.contextPath}/">Trang chủ</a>
-
                                 </li>
-                                <li class="megamenu-holder"><a href="danh-muc-san-pham.html">Danh mục sản
+                                <li class="megamenu-holder"><a>Danh mục sản
                                     phẩm</a>
 
                                     <ul class="megamenu hb-megamenu">
-                                        <li><a href="gia-dung-nha-bep.html">Gia dụng nhà bếp</a>
+                                        <li><a>Gia dụng nhà bếp</a>
                                             <ul>
                                                 <li>
                                                     <a href="${pageContext.request.contextPath}/ProductList?category=noi-com&pageN=1">Nồi
@@ -213,7 +212,7 @@
                                                         thủy điện</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="may-xay-vat-ep.html">Máy xay, vắt, ép</a>
+                                        <li><a>Máy xay, vắt, ép</a>
                                             <ul>
                                                 <li>
                                                     <a href="${pageContext.request.contextPath}/ProductList?category=may-xay-sinh-to&pageN=1">Máy
@@ -231,7 +230,7 @@
 
                                             </ul>
                                         </li>
-                                        <li><a href="dung-cu-nha-bep.html">Dụng cụ nhà bếp</a>
+                                        <li><a>Dụng cụ nhà bếp</a>
                                             <ul>
                                                 <li>
                                                     <a href="${pageContext.request.contextPath}/ProductList?category=xoong-noi&pageN=1">Xoong,
@@ -251,7 +250,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown-holder"><a href="thuong-hieu.html">Thương hiệu</a>
+                                <li class="dropdown-holder"><a>Thương hiệu</a>
                                     <ul class="hb-dropdown">
                                         <li class="sub-dropdown-holder"><a
                                                 href="${pageContext.request.contextPath}/ProductList?category=phillips">Phillips</a>
@@ -290,7 +289,6 @@
 
                                 <!-- <li><a href="about-us.jsp">About Us</a></li> -->
                                 <li><a href="contact.jsp">Liên hệ</a></li>
-
                                 </li>
                                 <!-- Begin Header Bottom Menu Information Area -->
 
