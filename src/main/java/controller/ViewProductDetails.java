@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ViewProductDetails", value = "/ProductDetails")
@@ -25,6 +26,36 @@ public class ViewProductDetails extends HttpServlet {
         Product p = ProductServices.getInstance().getProduct(pid);
         List<Product> sameCategoryProducts = ProductServices.getInstance().getProductByCategory(p.getMa_loaisp());
         List<Review> comments = ReviewServices.getInstance().getReviewByPid(pid);
+        if (comments.size() > 3) {
+            List<Review> threeFirstReview = ReviewServices.getInstance().getReviewByPidWithLimit(pid, 0, 4);
+            List<Review> remainComments = ReviewServices.getInstance().getReviewByPidWithLimit(pid, 4, comments.size());
+            comments = threeFirstReview;
+
+            for (Review r : remainComments) {
+                int rating = r.getRating();
+                String starElm = "";
+                for (int j = 1; j <= rating; j++) {
+                    starElm += "<i class=\"fa fa-star-o cl__star\"></i>";
+                }
+                for (int k = 1; k <= 5 - rating; k++) {
+                    starElm += "<i class=\"fa fa-star-o cl-non__star\"></i></li>";
+                }
+                r.setStars(starElm);
+            }
+            request.setAttribute("remainComments", remainComments);
+        }
+
+        for (Review r : comments) {
+            int rating = r.getRating();
+            String starElm = "";
+            for (int j = 1; j <= rating; j++) {
+                starElm += "<i class=\"fa fa-star-o cl__star\"></i>";
+            }
+            for (int k = 1; k <= 5 - rating; k++) {
+                starElm += "<i class=\"fa fa-star-o cl-non__star\"></i>";
+            }
+            r.setStars(starElm);
+        }
         List<Image> images = FileServices.getInstance().getImagesByPid(pid);
         Category c = ProductServices.getInstance().getCategory(p.getMa_loaisp());
         String url = ProductServices.getInstance().getMainImageProduct(p.getId_sanpham());

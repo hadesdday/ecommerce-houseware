@@ -42,4 +42,8 @@ public class ReviewServices {
     public List<Review> getReviewByPid(String pid) {
         return ReviewDAO.getInstance().getReviewByPid(pid);
     }
+
+    public List<Review> getReviewByPidWithLimit(String pid, int index, int amount) {
+        return ReviewDAO.getInstance().getReviewByPidWithLimit(pid, index, amount);
+    }
 }

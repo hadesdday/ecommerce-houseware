@@ -44,6 +44,21 @@ public class ReviewDAO {
         }
     }
 
+    public List<Review> getReviewByPidWithLimit(String pid, int index, int amount) {
+        try {
+            List<Review> list = DbConnector.get().withHandle(h ->
+                    h.createQuery("select * from review where id_sanpham = ? limit ?,?")
+                            .bind(0, pid)
+                            .bind(1, index)
+                            .bind(2, amount)
+                            .mapToBean(Review.class).stream().collect(Collectors.toList())
+            );
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public Review getReview(String pid, int rating, String username) {
         try {
             List<Review> list = DbConnector.get().withHandle(h ->

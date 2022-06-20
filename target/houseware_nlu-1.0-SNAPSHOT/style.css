@@ -6880,3 +6880,16 @@ input[class="checkbox-payment"] {
     z-index: 2;
     cursor: pointer;
 }
+
+#view__more-comments {
+    font-size: 120%;
+    transition: 0.3s all ease-in-out;
+}
+
+#view__more-comments:hover {
+    text-decoration: underline;
+}
+
+.cl__star {
+    color: #fed700 !important;
+}

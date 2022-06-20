@@ -1,42 +1,3 @@
-/*--------------------------------------------------
-Template Name: limupa;
-Description: limupa - Digital Products Store ECommerce Bootstrap 4 Template;
-Template URI:;
-Author Name:HasTech;
-Author URI:;
-Version: 1;
-Note: main.js, All Default Scripting Languages For This Theme Included In This File.
------------------------------------------------------
-		CSS INDEX
-		================
-		01. Li's Meanmenu
-		02. Header Dropdown
-		03. Li's Sticky Menu Activation
-		04. Nice Select
-		05. Main Slider Activision
-		06. Li's Product Activision
-		07. Li's Product Activision
-		08. Countdown
-		09. Tooltip Active
-		10. Scroll Up
-		11. Category Menu
-		12. Li's Product Activision
-		13. FAQ Accordion
-		14. Toggle Function Active
-		15. Li's Blog Gallery Slider
-		16. Counter Js
-		17. Price slider
-		18. Category menu Activation
-		19. Featured Product active
-		20. Featured Product 2 active
-		21. Modal Menu Active
-		22. Cart Plus Minus Button
-		23. Single Prduct Carousel Activision
-		24. Star Rating Js
-		25. Zoom Product Venobox
-		26. WOW
-
------------------------------------------------------------------------------------*/
 (function ($) {
     ("use Strict");
     /*----------------------------------------*/
@@ -168,7 +129,13 @@ Note: main.js, All Default Scripting Languages For This Theme Included In This F
     /*----------------------------------------*/
     /* 08. Countdown
   /*----------------------------------------*/
-    $(".li-countdown").countdown("2022/08/27", function (event) {
+    var fulldate = new Date();
+    fulldate.setDate(fulldate.getDate() + 7)
+    var year = fulldate.getFullYear() + "/";
+    var month = ((fulldate.getMonth() + 1) > 9 ? (fulldate.getMonth() + 1) : "0" + (fulldate.getMonth() + 1)) + "/";
+    var day = fulldate.getDate();
+    var nextWeek = year + month + day;
+    $(".li-countdown").countdown(nextWeek, function (event) {
         $(this).html(
             event.strftime(
                 '<div class="count">%D <span>Days:</span></div> <div class="count">%H <span>Hours:</span></div> <div class="count">%M <span>Mins:</span></div><div class="count"> %S <span>Secs</span></div>'

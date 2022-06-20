@@ -9,6 +9,7 @@ public class Review implements Serializable {
     private int rating;
     private String content;
     private String createdAt;
+    private String stars;
 
     public Review() {
     }
@@ -58,5 +59,13 @@ public class Review implements Serializable {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getStars() {
+        return stars;
+    }
+
+    public void setStars(String stars) {
+        this.stars = stars;
     }
 }
