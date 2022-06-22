@@ -108,7 +108,7 @@
                                         </div>
                                         <button class="add-to-cart add-cart" pid="${product.id_sanpham}"
                                                 path="${pageContext.request.contextPath}/AddToCart" type="submit">
-                                            Thêm Vài Giỏ Hàng
+                                            Thêm Vào Giỏ Hàng
                                         </button>
                                     </c:when>
                                     <c:when test="${product.soluongton == 0}">
@@ -376,7 +376,7 @@
                 </li>
             </c:forEach>
             <c:if test="${requestScope.remainComments.size() > 0}">
-                <div class="row ml-70">
+                <div class="row ml-70 mb-40">
                     <a id="view__more-comments">Xem thêm ${requestScope.remainComments.size()} bình luận</a>
                 </div>
                 <div class="d-none" id="remain__comments">

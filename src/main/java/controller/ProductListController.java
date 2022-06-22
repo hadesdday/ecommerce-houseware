@@ -38,21 +38,21 @@ public class ProductListController extends HttpServlet {
                 String price = st.nextToken();
                 switch (price) {
                     case "duoi1":
-                        priceQuery += "<100000),";
+                        priceQuery += "<1000000-";
                         break;
                     case "1den3":
-                        priceQuery += ">=1000000 and gia<3000000),";
+                        priceQuery += ">=1000000 and gia<3000000)-";
                         break;
                     case "3den6":
-                        priceQuery += ">=3000000 and gia<6000000),";
+                        priceQuery += ">=3000000 and gia<6000000)-";
                         break;
                     case "tren6":
-                        priceQuery += ">=600000),";
+                        priceQuery += ">=600000)-";
                         break;
                 }
             }
             priceQuery = priceQuery.substring(0, priceQuery.length() - 1).replace("-", " or (gia");
-            priceQuery = "((gia" + priceQuery + ")";
+            priceQuery = "(gia" + priceQuery + ")";
 
         }
         if (branchs.equals("") && priceQuery.equals("")) {

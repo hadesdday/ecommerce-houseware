@@ -5,6 +5,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Collections" %>
 <jsp:useBean id="categoryName" scope="request" type="java.lang.String"/>
 <% String currentURL = "/houseware_nlu_war_exploded/ProductList?category=" + request.getParameter("category") + "&pageN=" + request.getAttribute("page");%>
 <%
@@ -161,9 +162,11 @@
                                                     </a></li>
                                                 <%}%>
                                                 <li>
-                                                    <a href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&price="+request.getParameter("price")
-                                            %>" class="Next">Tiếp Theo<i
+                                                    <a
+                                                            href="
+<%="/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&price="+request.getParameter("price")
+                                            %>"
+                                                            class="Next">Tiếp Theo<i
                                                             class="fa fa-chevron-right"></i></a>
                                                 </li>
                                             </ul>
@@ -181,24 +184,32 @@
                                 <h2>Lọc sản phẩm</h2>
                             </div>
                             <!-- btn-clear-all start -->
-                            <button class="btn-clear-all mb-sm-30 mb-xs-30">Xóa tất cả</button>
+                            <button class="btn-clear-all mb-sm-30 mb-xs-30" ><a href="/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1">Xóa tất cả</a></button>
                             <!-- btn-clear-all end -->
                             <!-- filter-sub-area start -->
                             <div class="filter-sub-area">
                                 <h5 class="filter-sub-titel">Giá</h5>
                                 <div class="categori-checkbox">
                                     <form action="#">
+                                        <% String priceString;
+                                            ArrayList<String> priceArray=new ArrayList<>();
+                                            if (request.getParameter("price") != null && request.getParameter("price") != "" && request.getParameter("price") != "null") {
+                                                priceString=request.getParameter("price");
+                                                Collections.addAll(priceArray,priceString.split("-"));
+                                            }
+                                        %>
+
                                         <ul>
-                                            <li><input type="checkbox" name="price" value="duoi1"><a href="#"></a><1
+                                            <li><input type="checkbox" name="price" value="duoi1" <%=priceArray.contains("duoi1")?"checked":""%>><a href="#"></a><1
                                                 triệu
                                             </li>
-                                            <li><input type="checkbox" name="price" value="1den3"><a href="#"></a>1-3
+                                            <li><input type="checkbox" name="price" value="1den3" <%=priceArray.contains("1den3")?"checked":""%>><a href="#"></a>1-3
                                                 triệu
                                             </li>
-                                            <li><input type="checkbox" name="price" value="3den6"><a href="#"></a>3-6
+                                            <li><input type="checkbox" name="price" value="3den6" <%=priceArray.contains("3den6")?"checked":""%> ><a href="#"></a>3-6
                                                 triệu
                                             </li>
-                                            <li><input type="checkbox" name="price" value="tren6"><a href="#"></a>>6
+                                            <li><input type="checkbox" name="price" value="tren6" <%=priceArray.contains("tren6")?"checked":""%>><a href="#"></a>>6
                                                 triệu
                                             </li>
                                         </ul>
@@ -211,24 +222,31 @@
                                 <h5 class="filter-sub-titel">Thương Hiệu</h5>
                                 <div class="categori-checkbox">
                                     <form action="#">
+                                        <% String branchString;
+                                            ArrayList<String> branchArray=new ArrayList<>();
+                                            if (request.getParameter("branch") != null && request.getParameter("branch") != "" && request.getParameter("branch") != "null") {
+                                                branchString=request.getParameter("price");
+                                                Collections.addAll(branchArray,branchString.split("-"));
+                                            }
+                                        %>
                                         <ul>
-                                            <li><input type="checkbox" name="branch" value="Philips"><a
+                                            <li><input type="checkbox" name="branch" value="Philips" <%=branchArray.contains("Philips")?"checked":""%>><a
                                                     href="#">Philips</a>
                                             </li>
-                                            <li><input type="checkbox" name="branch" value="Sunhouse"><a
+                                            <li><input type="checkbox" name="branch" value="Sunhouse" <%=branchArray.contains("Philips")?"checked":""%>><a
                                                     href="#">Sunhouse</a></li>
-                                            <li><input type="checkbox" name="branch" value="Deawoo"><a
+                                            <li><input type="checkbox" name="branch" value="Deawoo" <%=branchArray.contains("Deawoo")?"checked":""%>><a
                                                     href="#">Deawoo</a>
                                             </li>
-                                            <li><input type="checkbox" name="branch" value="Panasonic"><a
+                                            <li><input type="checkbox" name="branch" value="Panasonic" <%=branchArray.contains("Panasonic")?"checked":""%>><a
                                                     href="#">Panasonic</a></li>
-                                            <li><input type="checkbox" name="branch" value="Sauce"><a href="#">Sauce</a>
+                                            <li><input type="checkbox" name="branch" value="Sauce" <%=branchArray.contains("Sauce")?"checked":""%>><a href="#">Sauce</a>
                                             </li>
-                                            <li><input type="checkbox" name="branch" value="Sharp"><a href="#">Sharp</a>
+                                            <li><input type="checkbox" name="branch" value="Sharp" <%=branchArray.contains("Sharp")?"checked":""%>><a href="#">Sharp</a>
                                             </li>
-                                            <li><input type="checkbox" name="branch" value="Electrolux"><a href="#">Electrolux</a>
+                                            <li><input type="checkbox" name="branch" value="Electrolux" <%=branchArray.contains("Electrolux")?"checked":""%>><a href="#">Electrolux</a>
                                             </li>
-                                            <li><input type="checkbox" name="branch" value="Kangaroo"><a
+                                            <li><input type="checkbox" name="branch" value="Kangaroo" <%=branchArray.contains("Kangaroo")?"checked":""%>><a
                                                     href="#">Kangaroo</a></li>
                                         </ul>
                                     </form>
@@ -434,17 +452,13 @@
             branchs = "";
             prices = "";
             $("input[type='checkbox']").each(function () {
-
                 if ($(this).is(':checked')) {
-                    alert("check")
                     var type = $(this).attr("name");
                     if (type == "branch") {
-                        alert("branch");
                         var value = $(this).attr("value");
                         branchs += (value + "-");
                     }
                     if (type == "price") {
-                        alert("price");
                         var value = $(this).attr("value");
                         prices += (value + "-");
                     }
@@ -469,7 +483,7 @@
                     $(".shop-product-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .product-list")
 
                     $(".paginatoin-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .paging")
-
+                    window.history.pushState("", "", "/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs);
                 },
                 error: function (data) {
 
@@ -477,6 +491,7 @@
             });
 
         });
+
     </script>
 
 </body>
