@@ -38,8 +38,11 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user", sessionUser);
                 session.setAttribute("authenticated", 1);
                 response.sendRedirect(AssetsProperties.getBaseURL());
-            } else {
+            } else if (user.getActive() == 1) {
                 request.setAttribute("inactive", true);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else if (user.getActive() == 0) {
+                request.setAttribute("banned", true);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } else {

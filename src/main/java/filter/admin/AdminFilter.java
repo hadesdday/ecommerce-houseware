@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminFilter")
-//@WebFilter(filterName = "AdminFilter", urlPatterns = {"/admin/*", "/*/add", "/*/edit", "/*/update", "/*/delete"})
+//@WebFilter(filterName = "AdminFilter")
+@WebFilter(filterName = "AdminFilter", urlPatterns = {"/admin/*", "/*/add", "/*/edit", "/*/update", "/*/delete", "/*/upload"})
 public class AdminFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
