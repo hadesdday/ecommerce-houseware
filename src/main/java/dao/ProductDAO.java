@@ -51,6 +51,37 @@ public class ProductDAO {
 
         }
     }
+    public List<Product> getProductBySearch(String cat,String search, int page, String filter) {
+        int begin = (page - 1) * 5;
+        try {
+            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.ma_loaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.ma_loaisp=b.ma_loaisp and (b.ma_loaisp=? or a.thuonghieu=?) and a.ten_sp like ? " + filter + "  limit " + begin + ",5")
+                    .bind(0, cat)
+                    .bind(1, cat)
+                    .bind(2,"%"+search+"%")
+                    .mapToBean(Product.class)
+                    .stream().collect(Collectors.toList()));
+            return re;
+        } catch (Exception exception) {
+            System.out.print(exception);
+            return null;
+
+        }
+    }
+    public List<Product> getProductBySearch(String cat,String search, String filter) {
+        try {
+            List<Product> re = DbConnector.get().withHandle(h -> h.createQuery("select a.id_sanpham, a.ten_sp, a.ma_loaisp, a.gia, a.id_km, a.thuonghieu, a.soluongton, a.active from sanpham a,loaisanpham b where a.ma_loaisp=b.ma_loaisp and (b.ma_loaisp=? or a.thuonghieu=?) and a.ten_sp like ? " + filter )
+                    .bind(0, cat)
+                    .bind(1, cat)
+                    .bind(2,"%"+search+"%")
+                    .mapToBean(Product.class)
+                    .stream().collect(Collectors.toList()));
+            return re;
+        } catch (Exception exception) {
+            System.out.print(exception);
+            return null;
+
+        }
+    }
 
     public List<Product> getAllProductByCategory(String cat, String filter) {
         try {

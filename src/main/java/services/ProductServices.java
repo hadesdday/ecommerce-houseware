@@ -96,4 +96,11 @@ public class ProductServices {
     public List<Product> getProductByCategory(String cat) {
         return ProductDAO.getInstance().getProductByCategory(cat);
     }
+
+    public List<Product> getProductBySearch(String cat,String search, int page, String filter) {
+        return ProductDAO.getInstance().getProductBySearch(cat,search, page, filter);
+    }
+    public List<Product> getProductBySearch(String cat,String search, String filter) {
+        return ProductDAO.getInstance().getProductBySearch(cat,search, filter);
+    }
 }

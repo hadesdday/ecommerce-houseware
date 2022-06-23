@@ -639,8 +639,6 @@
         })
 
     });
-    // $(".header-middle-right").on("load", dropdown());
-    // dropdown()
     $(".qtybutton").click(function () {
 
         var input = $(this).closest(".cart-plus-minus").find(".changeQuantity");
