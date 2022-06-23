@@ -114,7 +114,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="right-menu"><a href="dung-cu-nha-bep.html">Dụng Cụ Nhà Bếp</a>
+                                <li class="right-menu"><a>Dụng Cụ Nhà Bếp</a>
                                     <ul class="cat-mega-menu cat-mega-menu-2">
                                         <li class="right-menu cat-mega-title">
                                             <ul>
@@ -276,7 +276,7 @@
                                             <div class="product_desc_info">
                                                 <div class="product-review">
                                                     <h5 class="manufacturer">
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=${p.getMa_loaisp()}">${p.getMa_loaisp()}</a>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=${p.getMa_loaisp()}&pageN=1">${p.getMa_loaisp()}</a>
                                                     </h5>
                                                     <div class="rating-box">
                                                         <ul class="rating">
@@ -375,7 +375,7 @@
                                             <div class="product_desc_info">
                                                 <div class="product-review">
                                                     <h5 class="manufacturer">
-                                                        <a href="${pageContext.request.contextPath}/ProductList?category=${p.getMa_loaisp()}">${p.getMa_loaisp()}</a>
+                                                        <a href="${pageContext.request.contextPath}/ProductList?category=${p.getMa_loaisp()}&pageN=1">${p.getMa_loaisp()}</a>
                                                     </h5>
                                                     <div class="rating-box">
                                                         <ul class="rating">
