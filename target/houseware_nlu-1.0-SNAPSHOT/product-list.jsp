@@ -7,7 +7,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Collections" %>
 <jsp:useBean id="categoryName" scope="request" type="java.lang.String"/>
-<% String currentURL = "/houseware_nlu_war_exploded/ProductList?category=" + request.getParameter("category") + "&pageN=" + request.getAttribute("page");%>
+<%--<% String currentURL = "/houseware_nlu_war_exploded/ProductList?category=" + request.getParameter("category") + "&pageN=" + request.getAttribute("page");%>--%>
 <%
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
@@ -140,7 +140,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <ul class="pagination-box pt-xs-20 pb-xs-15">
                                                 <li><a href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")>1?(int)request.getAttribute("page")-1:1)+"&branch="+request.getParameter("branch")+"&price="+request.getParameter("price")
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")>1?(int)request.getAttribute("page")-1:1)+"&branch="+request.getParameter("branch")+"&search="+request.getParameter("search")+"&price="+request.getParameter("price")
                                             %>" class="Previous"><i class="fa fa-chevron-left"></i>
                                                     Trở Về</a>
                                                 </li>
@@ -157,14 +157,14 @@
                                                 <li class="<%=((int)request.getAttribute("page")==(i+1)?"active":"") %>">
                                                     <a
                                                             href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)+"&branch="+(request.getParameter("branch")==null?"":request.getParameter("branch"))+"&price="+(request.getParameter("price")==null?"":request.getParameter("price"))
+                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)+"&branch="+(request.getParameter("branch")==null?"":request.getParameter("branch"))+"&search="+request.getParameter("search")+"&price="+(request.getParameter("price")==null?"":request.getParameter("price"))
                                             %>"><%=(i + 1)%>
                                                     </a></li>
                                                 <%}%>
                                                 <li>
                                                     <a
                                                             href="
-<%="/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&price="+request.getParameter("price")
+<%="/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&search="+request.getParameter("search")+"&price="+request.getParameter("price")
                                             %>"
                                                             class="Next">Tiếp Theo<i
                                                             class="fa fa-chevron-right"></i></a>
@@ -445,19 +445,6 @@
 
 
     <script>
-        <%--var oldbranch=<%=request.getAttribute("branch")!=null?request.getAttribute("branch"):""%>;--%>
-        <%--var oldprice=<%=request.getAttribute("price")!=null?request.getAttribute("price"):""%>;--%>
-        <%--var brancharr=oldbranch.split("-");--%>
-        <%--var pricearr=oldprice.split("-");--%>
-        <%--var arr=brancharr.concat(pricearr);--%>
-        alert("arr")
-        // $("input[type='checkbox']").each(function () {
-        //     var value=$(this).attr('value');
-        //     if(arr.include(value)){
-        //         alert(value)
-        //         $(this).prop('checked',true)
-        //     }
-        // });
         var branchs = "";
         var prices = "";
 
@@ -465,17 +452,13 @@
             branchs = "";
             prices = "";
             $("input[type='checkbox']").each(function () {
-
                 if ($(this).is(':checked')) {
-                    alert("check")
                     var type = $(this).attr("name");
                     if (type == "branch") {
-                        alert("branch");
                         var value = $(this).attr("value");
                         branchs += (value + "-");
                     }
                     if (type == "price") {
-                        alert("price");
                         var value = $(this).attr("value");
                         prices += (value + "-");
                     }
