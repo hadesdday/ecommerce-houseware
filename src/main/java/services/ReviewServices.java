@@ -19,8 +19,8 @@ public class ReviewServices {
         return ReviewDAO.getInstance().getReview();
     }
 
-    public Review getReview(String pid, int rating, String username) {
-        return ReviewDAO.getInstance().getReview(pid, rating, username);
+    public Review getReview(int id) {
+        return ReviewDAO.getInstance().getReview(id);
     }
 
     public List<Review> getReviewByUsername(String username) {
@@ -31,8 +31,8 @@ public class ReviewServices {
         return ReviewDAO.getInstance().addReview(r);
     }
 
-    public boolean deleteReview(String pid, int rating, String username) {
-        return ReviewDAO.getInstance().deleteReview(pid, rating, username);
+    public boolean deleteReview(int id) {
+        return ReviewDAO.getInstance().deleteReview(id);
     }
 
     public boolean editReview(Review r) {

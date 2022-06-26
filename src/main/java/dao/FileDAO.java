@@ -1,7 +1,6 @@
 package dao;
 
 import beans.Image;
-import beans.Order;
 import db.DbConnector;
 
 import java.util.List;

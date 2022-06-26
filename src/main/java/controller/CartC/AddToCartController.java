@@ -2,19 +2,14 @@ package controller.CartC;
 
 import beans.Cart;
 import beans.Product;
-import jakarta.xml.bind.DatatypeConverter;
 import services.ProductServices;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 
 @WebServlet(name = "AddToCartController", value = "/AddToCart")

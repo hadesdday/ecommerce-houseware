@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import properties.AssetsProperties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -2,7 +2,6 @@ package services;
 
 import beans.Customer;
 import dao.CustomerDAO;
-import dao.OrderDAO;
 
 import java.util.List;
 

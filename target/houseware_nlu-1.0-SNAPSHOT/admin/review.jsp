@@ -61,6 +61,12 @@
                             <h2>Sửa đánh giá sản phẩm</h2>
                         </div>
                         <div class="custom-modal-body">
+                            <input type="hidden" name="maxId">
+                            <label>Mã bình luận</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="editRid" disabled>
+                            </div>
+
                             <label>Mã sản phẩm</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="editproductId" disabled>
@@ -80,8 +86,6 @@
                             <div class="input-group mb-3">
                                 <textarea name="editcontent" rows="15" cols="95%" class="text__details"></textarea>
                             </div>
-
-
                         </div>
                         <div class="custom-modal-footer">
                             <button type="button" class="btn btn-secondary close-btn">Hủy</button>
@@ -98,9 +102,7 @@
                         </div>
                         <div class="custom-modal-body">
                             <h6>Bạn có chắc chắn muốn xóa dòng này ?</h6>
-                            <input type="hidden" name="delPid">
-                            <input type="hidden" name="delRating">
-                            <input type="hidden" name="delUname">
+                            <input type="hidden" name="delRid">
                         </div>
                         <div class="custom-modal-footer">
                             <button type="button" class="btn btn-secondary close-btn">Hủy</button>
@@ -121,6 +123,7 @@
                                            class="table table-striped table-bordered">
                                         <thead>
                                         <tr>
+                                            <th>Mã bình luận</th>
                                             <th>Mã sản phẩm</th>
                                             <th>Username</th>
                                             <th>Số sao</th>
@@ -131,19 +134,18 @@
                                         <tbody>
                                         <c:forEach items="${reviewList}" var="item">
                                             <tr>
+                                                <th>${item.id}</th>
                                                 <th>${item.id_sanpham}</th>
                                                 <th>${item.username}</th>
                                                 <th>${item.rating}</th>
                                                 <th>${item.content}</th>
                                                 <td>
                                                     <a class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" pid="${item.id_sanpham}"
-                                                       rating="${item.rating}" username="${item.username}">
+                                                       onclick="onEdit(this)" rid="${item.id}">
                                                         <i class="ti-pencil text-white"></i>
                                                     </a>
                                                     <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" pid="${item.id_sanpham}"
-                                                       rating="${item.rating}" username="${item.username}">
+                                                       onclick="onDelete(this)" rid="${item.id}">
                                                         <i class="ti-trash text-white"></i>
                                                     </a>
                                                 </td>
@@ -186,6 +188,7 @@
             var username = $("input[name='username']").val();
             var rating = $("input[name='rating']").val();
             var content = $("textarea[name='content']").val();
+
             $.ajax({
                 url: "${pageContext.request.contextPath}/review/add",
                 method: "POST",
@@ -197,13 +200,14 @@
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm đánh giá mới thành công", "success");
-                    var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' pid='" + pid + "' rating='" + rating + "' username='" + username + "'>"
+                    var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' rid='" + data + "'>"
                         + "<i class='ti-pencil text-white'></i></a>";
-                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" pid="' + pid + '" rating="' + rating + '" username="' + username + '">' +
+                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" rid="' + data + '">' +
                         "<i class='ti-trash text-white'></i></a>";
 
                     $('#bootstrap-data-table-export').DataTable().row.add(
                         [
+                            data,
                             pid,
                             username,
                             rating,
@@ -222,22 +226,16 @@
                 }
             })
         })
-
     })
-
 </script>
 
 <script>
     var tr;
 
     function onDelete(elm) {
-        var delPid = $(elm).attr('pid');
-        var delRating = $(elm).attr('rating');
-        var delUname = $(elm).attr('username');
+        var delRid = $(elm).attr('rid');
         tr = $(elm).parents("tr");
-        $("input[name='delPid']").val(delPid);
-        $("input[name='delRating']").val(delRating);
-        $("input[name='delUname']").val(delUname);
+        $("input[name='delRid']").val(delRid);
         showDeleteModal();
     }
 
@@ -246,17 +244,13 @@
     });
 
     $("#confirmDelAct").click(() => {
-        var pid = $("input[name='delPid']").val();
-        var rating = $("input[name='delRating']").val();
-        var username = $("input[name='delUname']").val();
+        var rid = $("input[name='delRid']").val();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/review/delete",
             method: "POST",
             data: {
-                pid: pid,
-                username: username,
-                rating: rating
+                rid: rid
             },
             success: function (data) {
                 swal("Thành công", "Xóa đánh giá thành công", "success")
@@ -279,6 +273,7 @@
 
 <script>
     function setEditModalValue(data) {
+        $("input[name='editRid']").val(data.id);
         $("input[name='editproductId']").val(data.id_sanpham);
         $("input[name='editusername']").val(data.username);
         $("input[name='editrating']").val(data.rating);
@@ -291,20 +286,15 @@
 
     function onEdit(element) {
         editRow = $(element).parents("tr").children();
-        var ePid = $(element).attr('pid');
-        var eRating = $(element).attr('rating');
-        var eUname = $(element).attr('username');
+        var rid = $(element).attr("rid");
 
         $.ajax({
             url: "${pageContext.request.contextPath}/review/edit",
             method: "GET",
             data: {
-                pid: ePid,
-                username: eUname,
-                rating: eRating
+                rid: rid
             },
             success: function (data) {
-                console.log(data);
                 setEditModalValue(data);
                 showEditModal();
             },
@@ -315,8 +305,7 @@
     }
 
     $("#editAction").click(() => {
-        var pid = $("input[name='editproductId']").val();
-        var username = $("input[name='editusername']").val();
+        var rid = $("input[name='editRid']").val();
         var rating = $("input[name='editrating']").val();
         var content = $("textarea[name='editcontent']").val();
 
@@ -324,8 +313,7 @@
             url: "${pageContext.request.contextPath}/review/edit",
             method: "POST",
             data: {
-                pid: pid,
-                username: username,
+                rid: rid,
                 rating: rating,
                 content: content
             },
@@ -333,8 +321,8 @@
                 swal("Thành công", "Cập nhật đánh giá thành công", "success");
                 closeModal();
                 clearValue();
-                editRow.eq(2).text(rating);
-                editRow.eq(3).text(content);
+                editRow.eq(3).text(rating);
+                editRow.eq(4).text(content);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật đánh giá thất bại do sai dữ liệu đầu vào", "error");

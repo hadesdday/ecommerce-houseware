@@ -1,7 +1,6 @@
 package controller.client.account;
 
 import beans.Customer;
-import beans.User;
 import services.UserServices;
 
 import javax.servlet.ServletException;

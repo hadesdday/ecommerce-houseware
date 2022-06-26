@@ -21,3 +21,4 @@
 <link href="assets/css/lib/helper.css" rel="stylesheet">
 <link href="assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/lib/toastr/toastr.min.css">
+<link rel="stylesheet" href="assets/css/lib/nice-select.css">

@@ -5,7 +5,10 @@ import beans.OrderDetails;
 import db.DbConnector;
 
 import java.sql.Types;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class OrderDAO {
@@ -200,14 +203,6 @@ public class OrderDAO {
                 re.put(String.valueOf(i), (float) 0);
             }
         }
-
-//        for (Map.Entry<String, Float> rs : re.entrySet()) {
-//            String key = rs.getKey();
-//            float value = Float.parseFloat(String.valueOf(rs.getValue()));
-//
-//            System.out.println(key + "-" + value);
-//        }
-
         return re;
     }
 }
