@@ -44,7 +44,7 @@ public class EditPaymentMethod extends HttpServlet {
 
         if (id.isEmpty() || name.isEmpty()) isErr = true;
 
-        PaymentMethod p = new PaymentMethod(id, name);
+        PaymentMethod p = new PaymentMethod(id, name,"");
 
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);

@@ -76,7 +76,7 @@ public class ProductListController extends HttpServlet {
             productsAll = ProductServices.getInstance().getAllProductByCategory(category, filterQuery);
             ct = ProductServices.getInstance().getCategory(category);
         }
-        if (request.getParameter("search") != null && request.getParameter("search") != "" && request.getParameter("search") != "null") {
+        if (request.getParameter("search") != null && request.getParameter("search") != "" && request.getParameter("search").compareTo("null")!=0) {
             search = request.getParameter("search");
             System.out.println(search);
             products = ProductServices.getInstance().getProductBySearch(category,search, page, filterQuery);
