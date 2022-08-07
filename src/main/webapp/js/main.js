@@ -545,15 +545,6 @@
     /* 26. WOW
   /*----------------------------------------*/
     new WOW().init();
-    $(document).ready(function () {
-        $("#order-table").DataTable({
-            order: [[0, "asc"]],
-        });
-        $("#review-table").DataTable({
-            order: [[0, "asc"]],
-        });
-    });
-
 
     $("#dicount-form").submit(function (e) {
         alert("As")

@@ -57,7 +57,8 @@
 
                             <label>Thông tin sản phẩm</label>
                             <div class="input group mb-3">
-                                <textarea name="ctSP" rows="15" cols="95%" class="text__details"></textarea>
+                                <%--                                <textarea name="ctSP" rows="15" cols="95%" class="text__details"></textarea>--%>
+                                <div id="add__editor"></div>
                             </div>
 
                             <label>Số lượng tồn kho</label>
@@ -121,7 +122,8 @@
 
                             <label>Thông tin sản phẩm</label>
                             <div class="input group mb-3">
-                                <textarea name="editctSP" rows="15" cols="95%" class="text__details"></textarea>
+                                <%--                                <textarea name="editctSP" rows="15" cols="95%" class="text__details"></textarea>--%>
+                                <div id="edit__editor"></div>
                             </div>
 
                             <label>Số lượng tồn kho</label>
@@ -214,7 +216,11 @@
 <!-- Common -->
 <%@include file="script.jsp" %>
 <%--add product--%>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 <script>
+    var addEditor;
+    var editEditor;
+
     $(document).ready(function () {
         $("#products__table").DataTable({
             "responsive": true,
@@ -263,6 +269,31 @@
                 {"data": "mota"},
             ],
         });
+
+        ClassicEditor
+            .create(document.querySelector('#add__editor'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                defaultLanguage: 'vi'
+            })
+            .then(editor => {
+                window.editor = editor;
+                addEditor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#edit__editor'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+                editEditor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
     });
 
     $.ajax({
@@ -293,8 +324,7 @@
         $("#products__table").css("width", "100%");
         $("#products__table").DataTable().columns.adjust().draw();
     }
-</script>
-<script>
+
     $(document).ready(function () {
         $("#add-product").click(function () {
             var maSP = $("input[name='maSP']").val();
@@ -305,7 +335,8 @@
             var hangSP = $("input[name='hangSP']").val();
             var slSP = $("input[name='slSP']").val();
             var active = $("select[name='active'] option:selected").val()
-            var ctSP = $("textarea[name='ctSP']").val();
+            // var ctSP = $("textarea[name='ctSP']").val();
+            var ctSP = addEditor.getData();
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/add",
                 method: "POST",
@@ -325,6 +356,7 @@
                     reloadTable();
                     clearValue();
                     closeModal();
+                    addEditor.setData("");
                 },
                 error: function (data, textStatus, xhr) {
                     if (data.status === 400 || data.status === 404 || data.status === 500)
@@ -335,9 +367,7 @@
             })
         })
     })
-</script>
-<%--end add product--%>
-<script>
+
     function onDelete(elm) {
         var firstColumn = $(elm).parents("tr").children().first();
         var pid = firstColumn.text();
@@ -370,10 +400,7 @@
             }
         })
     })
-</script>
-<%--end delete product--%>
 
-<script>
     function setEditModalValue(data) {
         $("input[name='editMaSP']").val(data.id_sanpham);
         $("input[name='editTenSP']").val(data.ten_sp);
@@ -383,11 +410,12 @@
         $("input[name='editHangSP']").val(data.thuonghieu);
         $("input[name='editSlSP']").val(data.soluongton);
         $("select[name='editActive']").val(data.active);
-        $("textarea[name='editctSP']").val(data.mota);
+        // $("textarea[name='editctSP']").val(data.mota);
+        editEditor.setData(data.mota, function () {
+            this.checkDirty();
+        });
     }
-</script>
-<%--edit product--%>
-<script>
+
     function onEdit(element) {
         var firstColumn = $(element).parents("tr").children().first();
         var pid = firstColumn.text();
@@ -416,7 +444,8 @@
         var hangSP = $("input[name='editHangSP']").val();
         var slSP = $("input[name='editSlSP']").val();
         var active = $("select[name='editActive'] option:selected").val();
-        var ctSP = $("textarea[name='editctSP']").val();
+        // var ctSP = $("textarea[name='editctSP']").val();
+        var ctSP = editEditor.getData();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/product/update",
@@ -437,6 +466,7 @@
                 reloadTable();
                 closeModal();
                 clearValue();
+                editEditor.setData("");
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật sản phẩm thất bại do sai dữ liệu đầu vào", "error");
