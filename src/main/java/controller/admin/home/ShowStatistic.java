@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 import java.util.TreeMap;
 
 @WebServlet(name = "ShowStatistic", value = "/admin/stats")
@@ -25,7 +24,6 @@ public class ShowStatistic extends HttpServlet {
         TreeMap<String, Float> turnoverByMonth = OrderDAO.getInstance().getTurnoverByMonth();
 
         Object[] a = new Object[]{sumPriceByOrder, totalCustomer, totalOrder, turnoverByMonth};
-
 
         PrintWriter writer = response.getWriter();
         Gson gson = new Gson();

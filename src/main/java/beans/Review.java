@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Review implements Serializable {
 
+    private int id;
     private String id_sanpham;
     private String username;
     private int rating;
@@ -67,5 +68,13 @@ public class Review implements Serializable {
 
     public void setStars(String stars) {
         this.stars = stars;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

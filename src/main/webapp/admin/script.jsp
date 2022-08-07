@@ -15,6 +15,7 @@
 <script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
 <script src="assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="assets/js/lib/data-table/datatables-init.js"></script>
+<script src="assets/js/lib/jquery.nice-select.min.js"></script>
 
 <script>
     function showEditModal() {
@@ -38,5 +39,6 @@
 
     function clearValue() {
         $('input').val("");
+        $("textarea").val("");
     }
 </script>

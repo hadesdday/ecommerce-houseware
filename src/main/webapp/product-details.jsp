@@ -73,7 +73,7 @@
                         <div class="product-info">
                             <h2>${product.ten_sp}</h2>
                             <span class="product-details-ref">
-                                  <a href="${pageContext.request.contextPath}/ProductList?category=${product.ma_loaisp}">
+                                  <a href="${pageContext.request.contextPath}/ProductList?category=${product.ma_loaisp}&pageN=1">
                                       ${categoryName}</a>
                             </span>
                             <div class="rating-box pt-20">
@@ -312,7 +312,7 @@
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
                                                         <h5 class="manufacturer">
-                                                            <a href="${pageContext.request.contextPath}/ProductList?category=${si.getMa_loaisp()}">${si.getMa_loaisp()}</a>
+                                                            <a href="${pageContext.request.contextPath}/ProductList?category=${si.getMa_loaisp()}&pageN=1">${si.getMa_loaisp()}</a>
                                                         </h5>
                                                         <div class="rating-box">
                                                             <ul class="rating">
@@ -357,7 +357,7 @@
         </div>
     </section>
     <div class="li-comment-section">
-        <h3>${comments.size()} bình luận</h3>
+        <h3>${comments.size()+requestScope.remainComments.size()} bình luận</h3>
         <ul>
             <c:forEach var="cmt" items="${comments}">
                 <li class="comment">
@@ -365,7 +365,6 @@
                         <img loading="lazy" src="images/product-details/user.png" alt="User">
                     </div>
                     <div class="comment-body pl-15">
-                            <%--                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>--%>
                         <h5 class="comment-author pt-15">${cmt.getUsername()}</h5>
                         <div class="comment-post-date">
                                 ${cmt.createdAt}
@@ -397,32 +396,6 @@
                     </c:forEach>
                 </div>
             </c:if>
-            <%--            <li class="comment-children">--%>
-            <%--                <div class="author-avatar pt-15">--%>
-            <%--                    <img loading="lazy" src="images/product-details/admin.png" alt="Admin">--%>
-            <%--                </div>--%>
-            <%--                <div class="comment-body pl-15">--%>
-            <%--                    <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>--%>
-            <%--                    <h5 class="comment-author pt-15">admin</h5>--%>
-            <%--                    <div class="comment-post-date">--%>
-            <%--                        20 nov, 2018 at 9:30pm--%>
-            <%--                    </div>--%>
-            <%--                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci optio ex,--%>
-            <%--                        laboriosam facilis non pariatur itaque illo sunt?</p>--%>
-            <%--                </div>--%>
-            <%--            </li>--%>
-            <%--            <li>--%>
-            <%--                <div class="author-avatar pt-15">--%>
-            <%--                    <img loading="lazy" src="images/product-details/admin.png" alt="Admin">--%>
-            <%--                </div>--%>
-            <%--                <div class="comment-body pl-15">--%>
-            <%--                    <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>--%>
-            <%--                    <h5 class="comment-author pt-15">admin</h5>--%>
-            <%--                    <div class="comment-post-date">--%>
-            <%--                        20 nov, 2018 at 9:30pm--%>
-            <%--                    </div>--%>
-            <%--                </div>--%>
-            <%--            </li>--%>
         </ul>
     </div>
     <!-- Begin Footer Area -->
@@ -432,7 +405,7 @@
 <script>
     <c:if test="${requestScope.remainComments.size() > 0}">
     $("#view__more-comments").click(() => {
-        $("#view__more-comments").remove();
+        $("#view__more-comments").parent().remove();
         $("#remain__comments").removeClass("d-none");
     });
     </c:if>

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ViewProductDetails", value = "/ProductDetails")
@@ -38,7 +37,7 @@ public class ViewProductDetails extends HttpServlet {
                     starElm += "<i class=\"fa fa-star-o cl__star\"></i>";
                 }
                 for (int k = 1; k <= 5 - rating; k++) {
-                    starElm += "<i class=\"fa fa-star-o cl-non__star\"></i></li>";
+                    starElm += "<i class=\"fa fa-star-o cl-non__star\"></i>";
                 }
                 r.setStars(starElm);
             }
@@ -65,11 +64,11 @@ public class ViewProductDetails extends HttpServlet {
         String starItem = "";
 
         for (int j = 1; j <= avgRating; j++) {
-            starItem += "<li><i class=\"fa fa-star-o\"></i></li>";
+            starItem += "<li><i class=\"fa fa-star-o\"></i>";
         }
 
         for (int k = 1; k <= 5 - avgRating; k++) {
-            starItem += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
+            starItem += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i>";
         }
 
         p.setAvgRating(starItem);
@@ -80,11 +79,11 @@ public class ViewProductDetails extends HttpServlet {
             String starElm = "";
 
             for (int j = 1; j <= avgRate; j++) {
-                starElm += "<li><i class=\"fa fa-star-o\"></i></li>";
+                starElm += "<li><i class=\"fa fa-star-o\"></i>";
             }
 
             for (int k = 1; k <= 5 - avgRate; k++) {
-                starElm += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
+                starElm += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i>";
             }
 
             sp.setAvgRating(starElm);

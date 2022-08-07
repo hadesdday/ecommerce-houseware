@@ -130,48 +130,50 @@
                                 </div>
                                 <jsp:useBean id="allProducts" scope="request" type="java.util.List"/>
                                 <div class="paginatoin-area">
-                                    <div class="row paging">
-                                        <div class="col-lg-6 col-md-6 pt-xs-15">
-                                            <p>
-                                                Đang
-                                                hiện <%=(((int) request.getAttribute("page")) * 5 - 4 + "-" + (((int) request.getAttribute("page")) * 5 > allProducts.size() ? allProducts.size() : ((int) request.getAttribute("page")) * 5))%>
-                                                trong <%=allProducts.size()%> sản phẩm</p>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <ul class="pagination-box pt-xs-20 pb-xs-15">
-                                                <li><a href="<%=
+                                    <c:if test="${products.size()>0}">
+                                        <div class="row paging">
+                                            <div class="col-lg-6 col-md-6 pt-xs-15">
+                                                <p>
+                                                    Đang
+                                                    hiện <%=(((int) request.getAttribute("page")) * 5 - 4 + "-" + (((int) request.getAttribute("page")) * 5 > allProducts.size() ? allProducts.size() : ((int) request.getAttribute("page")) * 5))%>
+                                                    trong <%=allProducts.size()%> sản phẩm</p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <ul class="pagination-box pt-xs-20 pb-xs-15">
+                                                    <li><a href="<%=
                                             "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")>1?(int)request.getAttribute("page")-1:1)+"&branch="+request.getParameter("branch")+"&search="+request.getParameter("search")+"&price="+request.getParameter("price")
                                             %>" class="Previous"><i class="fa fa-chevron-left"></i>
-                                                    Trở Về</a>
-                                                </li>
+                                                        Trở Về</a>
+                                                    </li>
 
-                                                <% int productCount = allProducts.size();
-                                                    int pageCount = (int) Math.round(productCount / 5);
-                                                    if (productCount % 5 != 0)
-                                                        pageCount++;
-                                                    if (request.getAttribute("page") == null)
-                                                        request.setAttribute("page", 1);
-                                                    for (int i = 0; i < pageCount; i++) {
-                                                %>
+                                                    <% int productCount = allProducts.size();
+                                                        int pageCount = (int) Math.round(productCount / 5);
+                                                        if (productCount % 5 != 0)
+                                                            pageCount++;
+                                                        if (request.getAttribute("page") == null)
+                                                            request.setAttribute("page", 1);
+                                                        for (int i = 0; i < pageCount; i++) {
+                                                    %>
 
-                                                <li class="<%=((int)request.getAttribute("page")==(i+1)?"active":"") %>">
-                                                    <a
-                                                            href="<%=
+                                                    <li class="<%=((int)request.getAttribute("page")==(i+1)?"active":"") %>">
+                                                        <a
+                                                                href="<%=
                                             "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)+"&branch="+(request.getParameter("branch")==null?"":request.getParameter("branch"))+"&search="+request.getParameter("search")+"&price="+(request.getParameter("price")==null?"":request.getParameter("price"))
                                             %>"><%=(i + 1)%>
-                                                    </a></li>
-                                                <%}%>
-                                                <li>
-                                                    <a
-                                                            href="
+                                                        </a></li>
+                                                    <%}%>
+                                                    <li>
+                                                        <a
+                                                                href="
 <%="/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&search="+request.getParameter("search")+"&price="+request.getParameter("price")
                                             %>"
-                                                            class="Next">Tiếp Theo<i
-                                                            class="fa fa-chevron-right"></i></a>
-                                                </li>
-                                            </ul>
+                                                                class="Next">Tiếp Theo<i
+                                                                class="fa fa-chevron-right"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

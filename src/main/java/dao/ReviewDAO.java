@@ -1,7 +1,6 @@
 package dao;
 
 import beans.Review;
-import beans.Sale;
 import db.DbConnector;
 
 import java.util.List;
@@ -59,13 +58,11 @@ public class ReviewDAO {
         }
     }
 
-    public Review getReview(String pid, int rating, String username) {
+    public Review getReview(int id) {
         try {
             List<Review> list = DbConnector.get().withHandle(h ->
-                    h.createQuery("select * from review where id_sanpham = ? and rating = ? and username = ?")
-                            .bind(0, pid)
-                            .bind(1, rating)
-                            .bind(2, username)
+                    h.createQuery("select * from review where id=?")
+                            .bind(0, id)
                             .mapToBean(Review.class).stream().collect(Collectors.toList())
             );
             return list.get(0);
@@ -103,13 +100,11 @@ public class ReviewDAO {
         }
     }
 
-    public boolean deleteReview(String pid, int rating, String username) {
+    public boolean deleteReview(int id) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("delete from review where id_sanpham = ? and rating = ? and username = ?")
-                            .bind(0, pid)
-                            .bind(1, rating)
-                            .bind(2, username)
+                    h.createUpdate("delete from review where id =?")
+                            .bind(0, id)
                             .execute()
             );
             return rowAffected == 1;
@@ -121,17 +116,31 @@ public class ReviewDAO {
     public boolean editReview(Review r) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("update review set content = ?,rating = ? where id_sanpham = ? and rating = ? and username = ?")
+                    h.createUpdate("update review set content = ?,rating = ? where id = ?")
                             .bind(0, r.getContent())
                             .bind(1, r.getRating())
-                            .bind(2, r.getId_sanpham())
-                            .bind(3, r.getRating())
-                            .bind(4, r.getUsername())
+                            .bind(2, r.getId())
                             .execute()
             );
             return rowAffected == 1;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public int addReviewAndReturnKey(Review r) {
+        try {
+            int key = (int) DbConnector.get().withHandle(h ->
+                    h.createUpdate("insert into review(id_sanpham, username, rating, content) values(?,?,?,?)")
+                            .bind(0, r.getId_sanpham())
+                            .bind(1, r.getUsername())
+                            .bind(2, r.getRating())
+                            .bind(3, r.getContent())
+                            .executeAndReturnGeneratedKeys("id").mapTo(Integer.class).one()
+            );
+            return key;
+        } catch (Exception e) {
+            return -1;
         }
     }
 }

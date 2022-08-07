@@ -1,15 +1,15 @@
 package controller.admin.review;
 
-import beans.Product;
 import beans.Review;
 import com.google.gson.Gson;
 import properties.AssetsProperties;
-import services.ProductServices;
 import services.ReviewServices;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -17,11 +17,9 @@ import java.io.PrintWriter;
 public class EditReview extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String pid = request.getParameter("pid");
-        String username = request.getParameter("username");
-        int rating = Integer.parseInt(request.getParameter("rating"));
+        int rid = Integer.parseInt(request.getParameter("rid"));
 
-        Review r = ReviewServices.getInstance().getReview(pid, rating, username);
+        Review r = ReviewServices.getInstance().getReview(rid);
         PrintWriter writer = response.getWriter();
         Gson gson = new Gson();
 
@@ -40,15 +38,17 @@ public class EditReview extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String pid = request.getParameter("pid");
-        String username = request.getParameter("username");
+        int rid = Integer.parseInt(request.getParameter("rid"));
         int rating = Integer.parseInt(request.getParameter("rating"));
         String content = request.getParameter("content");
 
         boolean isErr = false;
-        Review r = new Review(pid, username, rating, content);
+        Review r = new Review();
+        r.setId(rid);
+        r.setRating(rating);
+        r.setContent(content);
 
-        if (pid.isEmpty() || username.isEmpty() || rating < 0) isErr = true;
+        if (rid < 0 || rating < 0) isErr = true;
 
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);

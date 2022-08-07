@@ -5,7 +5,6 @@ import beans.Product;
 import dao.ProductDAO;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductServices {
     private static ProductServices instance;

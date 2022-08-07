@@ -1,6 +1,5 @@
 package dao;
 
-import beans.Product;
 import beans.Sale;
 import db.DbConnector;
 

@@ -1,13 +1,9 @@
 package dao;
 
 import beans.Customer;
-import beans.EmailMessage;
 import beans.User;
 import db.DbConnector;
-import helper.GenerateToken;
 import helper.MD5Hashing;
-import properties.AssetsProperties;
-import services.EmailServices;
 
 import java.sql.Types;
 import java.util.List;

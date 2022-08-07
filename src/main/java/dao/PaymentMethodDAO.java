@@ -1,7 +1,6 @@
 package dao;
 
 import beans.PaymentMethod;
-import beans.Sale;
 import db.DbConnector;
 
 import java.util.List;
