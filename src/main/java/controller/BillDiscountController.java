@@ -23,8 +23,13 @@ public class BillDiscountController extends HttpServlet {
         if (cart == null)
             cart = Cart.getInstance();
         double rate = ProductServices.getInstance().discountCodeRate(discountCode);
-        session.setAttribute("rate",rate);
-        cart.setRate(rate);
-
+        if (rate == 0) {
+            response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
+        } else {
+            session.setAttribute("rate", rate);
+            session.setAttribute("discountCode", discountCode);
+            cart.setRate(rate);
+            session.setAttribute("cart", cart);
+        }
     }
 }

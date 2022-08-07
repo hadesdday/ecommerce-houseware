@@ -39,6 +39,11 @@
     <!--Checkout Area Strat-->
     <div class="checkout-area pt-60 pb-30">
         <div class="container">
+            <div id="overlay">
+                <div id="overlay__elm">
+                    <img src="images/loading_overlay.gif" alt="404">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="coupon-accordion">
@@ -71,12 +76,12 @@
                         <h3>Có mã giảm giá? <span id="showcoupon">Nhấn vào đây để nhập mã giảm giá</span></h3>
                         <div id="checkout_coupon" class="coupon-checkout-content">
                             <div class="coupon-info">
-                                <form action="#">
-                                    <p class="checkout-coupon">
-                                        <input placeholder="Mã giảm giá" type="text">
-                                        <input value="Áp dụng" type="submit">
-                                    </p>
-                                </form>
+
+                                <p class="checkout-coupon">
+                                    <input name="coupon_code" placeholder="Mã giảm giá" type="text">
+                                    <input value="Áp dụng" type="submit" id="coupon">
+                                </p>
+
                             </div>
                         </div>
                         <!--Accordion End-->
@@ -84,232 +89,235 @@
                 </div>
             </div>
             <div class="row">
-<%--                <form method="post" action="/houseware_nlu_war_exploded/CompleteCheckout" id="checkout-form">--%>
-                    <div class="col-lg-6 col-12">
+                <%--                <form method="post" action="/houseware_nlu_war_exploded/CompleteCheckout" id="checkout-form">--%>
+                <div class="col-lg-6 col-12">
 
-                        <input type="hidden" name="fieldHidden" value="formOne">
-                        <div class="checkbox-form">
-                            <h3>Thông tin khách hàng</h3>
-                            <div class="row">
-                                <c:if test="${sessionScope.authenticated==1}">
-                                    <jsp:useBean id="customer" scope="session" type="beans.Customer"/>
-                                </c:if>
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <%--@declare id="error"--%><label>Họ và Tên <span class="required">*</span></label>
-                                        <input placeholder="" type="text" id="fullname-checkout" name="fullname"
-                                        <c:if test="${sessionScope.authenticated==1}">
-                                               value="${customer.getTen_kh()}"
-                                        </c:if>>
-<%--                                        <label for="error" class="error__label">Vui lòng nhập đúng họ tên--%>
-<%--                                        </label>--%>
-                                    </div>
+                    <input type="hidden" name="fieldHidden" value="formOne">
+                    <div class="checkbox-form">
+                        <h3>Thông tin khách hàng</h3>
+                        <div class="row">
+                            <c:if test="${sessionScope.authenticated==1}">
+                                <jsp:useBean id="customer" scope="session" type="beans.Customer"/>
+                            </c:if>
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <%--@declare id="error"--%><label>Họ và Tên <span class="required">*</span></label>
+                                    <input placeholder="" type="text" id="fullname-checkout" name="fullname"
+                                    <c:if test="${sessionScope.authenticated==1}">
+                                           value="${customer.getTen_kh()}"
+                                    </c:if>>
+                                    <%--                                        <label for="error" class="error__label">Vui lòng nhập đúng họ tên--%>
+                                    <%--                                        </label>--%>
                                 </div>
+                            </div>
 
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Địa chỉ <span class="required">*</span></label>
-                                        <input placeholder="" type="text" id="address-checkout" name="address"
-                                        <c:if test="${sessionScope.authenticated==1}">
-                                               value="${customer.getDiachi()}"
-                                        </c:if>>
-<%--                                        <label for="error" class="error__label">Vui lòng nhập địa chỉ giao hàng--%>
-<%--                                        </label>--%>
-                                    </div>
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label>Địa chỉ <span class="required">*</span></label>
+                                    <input placeholder="" type="text" id="address-checkout" name="address"
+                                    <c:if test="${sessionScope.authenticated==1}">
+                                           value="${customer.getDiachi()}"
+                                    </c:if>>
+                                    <%--                                        <label for="error" class="error__label">Vui lòng nhập địa chỉ giao hàng--%>
+                                    <%--                                        </label>--%>
                                 </div>
+                            </div>
 
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="country-select clearfix">--%>
-                                <%--                                        <label>Tỉnh / Thành phố<span class="required">*</span></label>--%>
-                                <%--                                        <select class="select-box wide" name="provinces" required="">--%>
-                                <%--                                            <option value="">Tỉnh / Thành Phố</option>--%>
-                                <%--                                        </select>--%>
-                                <%--                                        <input class="billing_address_1" name="" type="hidden" value="">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="col-md-12">--%>
-                                <%--                                    <div class="country-select clearfix">--%>
-                                <%--                                        <label>Quận / Huyện <span class="required">*</span></label>--%>
-                                <%--                                        <select class="select-box wide" name="district" required="">--%>
-                                <%--                                            <option value="">Quận / Huyện</option>--%>
-                                <%--                                        </select>--%>
-                                <%--                                        <input class="billing_address_2" name="" type="hidden" value="">--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
+                            <%--                                <div class="col-md-12">--%>
+                            <%--                                    <div class="country-select clearfix">--%>
+                            <%--                                        <label>Tỉnh / Thành phố<span class="required">*</span></label>--%>
+                            <%--                                        <select class="select-box wide" name="provinces" required="">--%>
+                            <%--                                            <option value="">Tỉnh / Thành Phố</option>--%>
+                            <%--                                        </select>--%>
+                            <%--                                        <input class="billing_address_1" name="" type="hidden" value="">--%>
+                            <%--                                    </div>--%>
+                            <%--                                </div>--%>
+                            <%--                                <div class="col-md-12">--%>
+                            <%--                                    <div class="country-select clearfix">--%>
+                            <%--                                        <label>Quận / Huyện <span class="required">*</span></label>--%>
+                            <%--                                        <select class="select-box wide" name="district" required="">--%>
+                            <%--                                            <option value="">Quận / Huyện</option>--%>
+                            <%--                                        </select>--%>
+                            <%--                                        <input class="billing_address_2" name="" type="hidden" value="">--%>
+                            <%--                                    </div>--%>
+                            <%--                                </div>--%>
 
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Địa chỉ Email <span class="required">*</span></label>
-                                        <input placeholder="" type="email" id="email-checkout__reg" name="email"
-                                        <c:if test="${sessionScope.authenticated==1}">
-                                               value="${customer.getEmail()}"
-                                        </c:if>>
-<%--                                        <label for="error" class="error__label"> Vui lòng nhập đúng email--%>
-<%--                                        </label>--%>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label>Địa chỉ Email <span class="required">*</span></label>
+                                    <input placeholder="" type="email" id="email-checkout__reg" name="email"
+                                    <c:if test="${sessionScope.authenticated==1}">
+                                           value="${customer.getEmail()}"
+                                    </c:if>>
+                                    <%--                                        <label for="error" class="error__label"> Vui lòng nhập đúng email--%>
+                                    <%--                                        </label>--%>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Số điện thoại <span class="required">*</span></label>
-                                        <input type="text" id="phone-checkout" name="phone"
-                                        <c:if test="${sessionScope.authenticated==1}">
-                                               value="${customer.getSodt()}"
-                                        </c:if>>
-<%--                                        <label for="error" class="error__label"> Vui lòng nhập đúng số điện thoại--%>
-<%--                                        </label>--%>
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="checkout-form-list">
+                                    <label>Số điện thoại <span class="required">*</span></label>
+                                    <input type="text" id="phone-checkout" name="phone"
+                                    <c:if test="${sessionScope.authenticated==1}">
+                                           value="${customer.getSodt()}"
+                                    </c:if>>
+                                    <%--                                        <label for="error" class="error__label"> Vui lòng nhập đúng số điện thoại--%>
+                                    <%--                                        </label>--%>
                                 </div>
+                            </div>
 
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label name="luuy">Yêu cầu khi giao hàng(không bắt buộc) </label>
-                                        <input placeholder="" type="text">
-                                    </div>
+                            <div class="col-md-12">
+                                <div class="checkout-form-list">
+                                    <label name="luuy">Yêu cầu khi giao hàng(không bắt buộc) </label>
+                                    <input placeholder="" type="text">
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-                    <div class="col-lg-6 col-12">
 
-                        <div class="your-order">
-                            <h3>Hóa đơn của bạn</h3>
-                            <div class="your-order-table table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th class="cart-product-name">Sản phẩm</th>
-                                        <th class="cart-product-total">Giá sản phẩm</th>
+
+                </div>
+                <div class="col-lg-6 col-12">
+
+                    <div class="your-order">
+                        <h3>Hóa đơn của bạn</h3>
+                        <div class="your-order-table table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="cart-product-name">Sản phẩm</th>
+                                    <th class="cart-product-total">Giá sản phẩm</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:set var="list" value="${cart.products}"/>
+                                <c:forEach items="${list}" var="item">
+                                    <tr class="cart_item">
+                                        <td class="cart-product-name"> ${item.ten_sp}<strong
+                                                class="product-quantity">
+                                            ×
+                                                ${item.quantitySold}</strong></td>
+                                        <td class="cart-product-total"><span
+                                                class="amount">${item.total()} VNĐ</span>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:set var="list" value="${cart.products}"/>
-                                    <c:forEach items="${list}" var="item">
-                                        <tr class="cart_item">
-                                            <td class="cart-product-name"> ${item.ten_sp}<strong
-                                                    class="product-quantity">
-                                                ×
-                                                    ${item.quantitySold}</strong></td>
-                                            <td class="cart-product-total"><span
-                                                    class="amount">${item.total()} VNĐ</span>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                    <tfoot>
+                                </c:forEach>
+                                </tbody>
+                                <tfoot class="total">
 
-                                    <tr class="order-total">
-                                        <th>Tổng tiền</th>
-                                        <td><strong><span
-                                                class="amount" id="bill_amount">${cart.total()*(1-cart.rate)}</span>VND</strong></td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="payment-method">
-                                <div class="payment-accordion">
-                                    <div id="accordion">
-                                        <jsp:useBean id="paymentMethodList2" scope="request" type="java.util.List"/>
-                                        <c:forEach items="${paymentMethodList2}" var="item">
-                                            <div class="card">
-                                                <div class="card-header" id="#payment-${item.mapttt}">
-                                                    <input type="radio" name="payment" value="${item.mapttt}"
-                                                           id="${item.mapttt}"
-                                                           class="checkbox-payment1">
-                                                    <label for="${item.mapttt}">
-                                                        <h5 class="panel-title collapsed" data-toggle="collapse"
-                                                            data-target="#collapse${item.mapttt}" aria-expanded="true"
-                                                            aria-controls="collapse${item.mapttt}">
-                                                                ${item.tenpttt}
-                                                        </h5>
+                                <tr class="order-total">
 
-                                                    </label>
-                                                </div>
-                                                <div id="collapse${item.mapttt}" class="collapse "
-                                                     data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <p>${item.mota}</p>
-                                                    </div>
+                                    <th>Tổng tiền</th>
+                                    <td><strong><span
+                                            class="amount"
+                                            id="bill_amount">${Math.round(cart.total()*(1-cart.rate)*10)/10}</span>VND</strong>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="payment-method">
+                            <div class="payment-accordion">
+                                <div id="accordion">
+                                    <jsp:useBean id="paymentMethodList2" scope="request" type="java.util.List"/>
+                                    <c:forEach items="${paymentMethodList2}" var="item">
+                                        <div class="card">
+                                            <div class="card-header" id="#payment-${item.mapttt}">
+                                                <input type="radio" name="payment" value="${item.mapttt}"
+                                                       id="${item.mapttt}"
+                                                       class="checkbox-payment1">
+                                                <label for="${item.mapttt}">
+                                                    <h5 class="panel-title collapsed" data-toggle="collapse"
+                                                        data-target="#collapse${item.mapttt}" aria-expanded="true"
+                                                        aria-controls="collapse${item.mapttt}">
+                                                            ${item.tenpttt}
+                                                    </h5>
+
+                                                </label>
+                                            </div>
+                                            <div id="collapse${item.mapttt}" class="collapse "
+                                                 data-parent="#accordion">
+                                                <div class="card-body">
+                                                    <p>${item.mota}</p>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                        </c:forEach>
-                                        <%--                                        <div class="card">--%>
-                                        <%--                                            <div class="card-header" id="#payment-2">--%>
-                                        <%--                                                <input type="radio" name="payment" value="COD" id="cod"--%>
-                                        <%--                                                       class="checkbox-payment1">--%>
-                                        <%--                                                <label for="cod">--%>
-                                        <%--                                                    <h5 class="panel-title collapsed" data-toggle="collapse"--%>
-                                        <%--                                                        data-target="#collapseTwo" aria-expanded="false"--%>
-                                        <%--                                                        aria-controls="collapseTwo">--%>
-                                        <%--                                                        Thanh toán khi nhận hàng--%>
-                                        <%--                                                    </h5>--%>
+                                    </c:forEach>
+                                    <%--                                        <div class="card">--%>
+                                    <%--                                            <div class="card-header" id="#payment-2">--%>
+                                    <%--                                                <input type="radio" name="payment" value="COD" id="cod"--%>
+                                    <%--                                                       class="checkbox-payment1">--%>
+                                    <%--                                                <label for="cod">--%>
+                                    <%--                                                    <h5 class="panel-title collapsed" data-toggle="collapse"--%>
+                                    <%--                                                        data-target="#collapseTwo" aria-expanded="false"--%>
+                                    <%--                                                        aria-controls="collapseTwo">--%>
+                                    <%--                                                        Thanh toán khi nhận hàng--%>
+                                    <%--                                                    </h5>--%>
 
-                                        <%--                                                </label>--%>
-                                        <%--                                            </div>--%>
-                                        <%--                                            <div id="collapseTwo" class="collapse" data-parent="#accordion">--%>
-                                        <%--                                                <div class="card-body">--%>
-                                        <%--                                                    <p>Bạn sẽ thanh toán cho nhân viên giao hàng.</p>--%>
-                                        <%--                                                </div>--%>
-                                        <%--                                            </div>--%>
-                                        <%--                                        </div>--%>
-                                        <%--                                        <div class="card">--%>
-                                        <%--                                            <div class="card-header" id="#payment-3">--%>
-                                        <%--                                                <input type="radio" name="payment" value="PP" id="paypal"--%>
-                                        <%--                                                       class="checkbox-payment">--%>
-                                        <%--                                                <label for="paypal" data-toggle="collapse"--%>
-                                        <%--                                                       data-target="#collapsePaypal" aria-expanded="true"--%>
-                                        <%--                                                       aria-controls="collapsePaypal">--%>
-                                        <%--                                                    <i><img loading="lazy" class="payment-image"--%>
-                                        <%--                                                            src="images/payment/paypal.png"></i>--%>
-                                        <%--                                                </label>--%>
+                                    <%--                                                </label>--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                            <div id="collapseTwo" class="collapse" data-parent="#accordion">--%>
+                                    <%--                                                <div class="card-body">--%>
+                                    <%--                                                    <p>Bạn sẽ thanh toán cho nhân viên giao hàng.</p>--%>
+                                    <%--                                                </div>--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </div>--%>
+                                    <%--                                        <div class="card">--%>
+                                    <%--                                            <div class="card-header" id="#payment-3">--%>
+                                    <%--                                                <input type="radio" name="payment" value="PP" id="paypal"--%>
+                                    <%--                                                       class="checkbox-payment">--%>
+                                    <%--                                                <label for="paypal" data-toggle="collapse"--%>
+                                    <%--                                                       data-target="#collapsePaypal" aria-expanded="true"--%>
+                                    <%--                                                       aria-controls="collapsePaypal">--%>
+                                    <%--                                                    <i><img loading="lazy" class="payment-image"--%>
+                                    <%--                                                            src="images/payment/paypal.png"></i>--%>
+                                    <%--                                                </label>--%>
 
-                                        <%--                                            </div>--%>
-                                        <%--                                            <div id="collapsePaypal" class="collapse" data-parent="#accordion">--%>
-                                        <%--                                                <div class="card-body">--%>
-                                        <%--                                                    <p>thanh toán qua paypal</p>--%>
-                                        <%--                                                </div>--%>
-                                        <%--                                            </div>--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                            <div id="collapsePaypal" class="collapse" data-parent="#accordion">--%>
+                                    <%--                                                <div class="card-body">--%>
+                                    <%--                                                    <p>thanh toán qua paypal</p>--%>
+                                    <%--                                                </div>--%>
+                                    <%--                                            </div>--%>
 
-                                        <%--                                        </div>--%>
-                                        <%--                                        <div class="card">--%>
-                                        <%--                                            <div class="card-header" id="#payment-4">--%>
+                                    <%--                                        </div>--%>
+                                    <%--                                        <div class="card">--%>
+                                    <%--                                            <div class="card-header" id="#payment-4">--%>
 
-                                        <%--                                                <input type="radio" name="payment" value="MOMO" id="momo"--%>
-                                        <%--                                                       class="checkbox-payment">--%>
-                                        <%--                                                <label for="momo" class="momo" data-toggle="collapse"--%>
-                                        <%--                                                       data-target="#collapseMomo" aria-expanded="true"--%>
-                                        <%--                                                       aria-controls="collapseMomo">--%>
-                                        <%--                                                    <i><img loading="lazy" class="payment-image"--%>
-                                        <%--                                                            src="images/payment/momo.png"></i>--%>
-                                        <%--                                                </label>--%>
-                                        <%--                                            </div>--%>
+                                    <%--                                                <input type="radio" name="payment" value="MOMO" id="momo"--%>
+                                    <%--                                                       class="checkbox-payment">--%>
+                                    <%--                                                <label for="momo" class="momo" data-toggle="collapse"--%>
+                                    <%--                                                       data-target="#collapseMomo" aria-expanded="true"--%>
+                                    <%--                                                       aria-controls="collapseMomo">--%>
+                                    <%--                                                    <i><img loading="lazy" class="payment-image"--%>
+                                    <%--                                                            src="images/payment/momo.png"></i>--%>
+                                    <%--                                                </label>--%>
+                                    <%--                                            </div>--%>
 
-                                        <%--                                            <div id="collapseMomo" class="collapse" data-parent="#accordion">--%>
-                                        <%--                                                <div class="card-body">--%>
-                                        <%--                                                    <div class="qr-code"><img src="images/payment/qr.png"></div>--%>
-                                        <%--                                                    <div class="momo-instrument"><b>Bước 1:</b> Mở ứng dụng MoMo để--%>
-                                        <%--                                                        thanh--%>
-                                        <%--                                                        toán<br>--%>
-                                        <%--                                                        <b>Bước 2:</b> Chọn "Thanh Toán" và quét mã QR tại hướng dẫn này<br>--%>
-                                        <%--                                                        <b>Bước 3: </b>Hoàn thành các bước thanh toán theo hướng dẫn và--%>
-                                        <%--                                                        đợi--%>
-                                        <%--                                                        shop xử lý trong giây lát--%>
-                                        <%--                                                    </div>--%>
-                                        <%--                                                </div>--%>
-                                        <%--                                            </div>--%>
-                                        <%--                                        </div>--%>
-                                    </div>
-                                    <div class="order-button-payment">
-                                        <input value="checkout" type="submit" id="checkout-button">
-                                    </div>
+                                    <%--                                            <div id="collapseMomo" class="collapse" data-parent="#accordion">--%>
+                                    <%--                                                <div class="card-body">--%>
+                                    <%--                                                    <div class="qr-code"><img src="images/payment/qr.png"></div>--%>
+                                    <%--                                                    <div class="momo-instrument"><b>Bước 1:</b> Mở ứng dụng MoMo để--%>
+                                    <%--                                                        thanh--%>
+                                    <%--                                                        toán<br>--%>
+                                    <%--                                                        <b>Bước 2:</b> Chọn "Thanh Toán" và quét mã QR tại hướng dẫn này<br>--%>
+                                    <%--                                                        <b>Bước 3: </b>Hoàn thành các bước thanh toán theo hướng dẫn và--%>
+                                    <%--                                                        đợi--%>
+                                    <%--                                                        shop xử lý trong giây lát--%>
+                                    <%--                                                    </div>--%>
+                                    <%--                                                </div>--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </div>--%>
+                                </div>
+                                <div class="order-button-payment">
+                                    <input value="checkout" type="submit" id="checkout-button">
                                 </div>
                             </div>
                         </div>
-
                     </div>
-<%--                </form>--%>
+
+                </div>
+                <%--                </form>--%>
             </div>
         </div>
     </div>
@@ -579,38 +587,56 @@
         var address = $("input[name='address']").val();
         var email = $("input[name='email']").val();
         var phone = $("input[name='phone']").val();
-        var price = $("#bill_amount").text();;
+        var price = $("#bill_amount").text();
+        ;
         var payment = $("input[name=payment]:checked").val();
-        alert(name)
-        alert(address)
-        alert(email)
-        alert(phone)
-        alert(price)
-        alert(payment)
-
-
+        $("#overlay").css("display", "block");
         $.ajax({
             url: "${pageContext.request.contextPath}/CompleteCheckout",
             method: "POST",
             data: {
-                fullname:fullname,
-                address:address,
-                email:email,
-                phone:phone,
-                price:price,
-                payment:payment
+                fullname: fullname,
+                address: address,
+                email: email,
+                phone: phone,
+                price: price,
+                payment: payment
             },
             success: (data) => {
                 alert("Thành công")
+                $("#overlay").css("display", "none");
                 // swal("Thành công", "Cập nhật phương thức thanh toán thành công", "success");
                 // editRow.eq(1).text(name);
                 window.location.replace("${pageContext.request.contextPath}/success-checkout.jsp");
             },
             error: (data) => {
-                if (data.status === 406)
+                $("#overlay").css("display", "none");
+                if (data.status === 406) {
+
                     alert("Thất bại Thông tin đã nhập chưa chính xác vui lòng kiểm tra lại");
-                else if (data.status === 409)
+                } else if (data.status === 409)
                     alert("Thất bại Giỏ hàng đang trống");
+
+                // swal("Thất bại", "Cập nhật phương thức thanh toán thất bại do sai dữ liệu đầu vào", "error");
+            }
+        });
+    });
+    $("#coupon").click(() => {
+        var coupon_code = $("input[name='coupon_code']").val();
+        alert(coupon_code)
+        $.ajax({
+            url: "${pageContext.request.contextPath}/BillDiscountController",
+            method: "POST",
+            data: {
+                coupon_code: coupon_code,
+            },
+            success: (data) => {
+                $('.total').load(" .order-total")
+                alert("Thành công")
+            },
+            error: (data) => {
+                if (data.status === 406)
+                    alert("Thất bại Coupon không tồn tại");
 
                 // swal("Thất bại", "Cập nhật phương thức thanh toán thất bại do sai dữ liệu đầu vào", "error");
             }
