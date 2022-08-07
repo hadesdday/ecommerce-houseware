@@ -2,8 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:useBean id="categoryList" scope="request" type="java.util.List"/>
-
 <%@include file="header.jsp" %>
 <title>Quản Lý Loại Sản Phẩm | NLU</title>
 
@@ -43,25 +41,30 @@
                     </div>
                 </div>
 
-                <div id="editModal" class="custom-modal">
-                    <div class="custom-modal-content">
-                        <div class="custom-modal-header">
-                            <span class="custom-close">&times;</span>
-                            <h2>Sửa thông tin sản phẩm</h2>
-                        </div>
-                        <div class="custom-modal-body">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="editmaLoaiSP" hidden>
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Sửa thông tin loại sản phẩm</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
                             </div>
+                            <div class="modal-body">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editmaLoaiSP" disabled>
+                                </div>
 
-                            <label>Tên loại sản phẩm</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="edittenLoai">
+                                <label>Tên loại sản phẩm</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="edittenLoai">
+                                </div>
                             </div>
-                        </div>
-                        <div class="custom-modal-footer">
-                            <button type="button" class="btn btn-secondary close-btn">Hủy</button>
-                            <button type="submit" class="btn btn-primary" id="editAction">Lưu</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="editAction">Lưu</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,35 +94,16 @@
                         <div class="card">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
-                                           class="table table-striped table-bordered">
+                                    <table id="product__type--table"
+                                           class="table table-striped table-bordered" width="100%">
                                         <thead>
                                         <tr>
-                                            <th>Mã loại sản phẩm</th>
-                                            <th>Tên loại sản phẩm</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Hành động</th>
+                                            <th width="30%">Mã loại sản phẩm</th>
+                                            <th width="30%">Tên loại sản phẩm</th>
+                                            <th width="30%">Ngày tạo</th>
+                                            <th width="10%">Hành động</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <c:forEach items="${categoryList}" var="item">
-                                            <tr>
-                                                <td>${item.ma_loaisp}</td>
-                                                <td>${item.ten_loaisp}</td>
-                                                <td>${item.createdAt}</td>
-                                                <td>
-                                                    <a class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" cid="${item.ma_loaisp}">
-                                                        <i class="ti-pencil text-white"></i>
-                                                    </a>
-                                                    <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" cid="${item.ma_loaisp}">
-                                                        <i class="ti-trash text-white"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -148,10 +132,73 @@
 <%@include file="script.jsp" %>
 
 <script>
+    $(document).ready(function () {
+        $("#product__type--table").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "http://localhost:8080/houseware_nlu_war_exploded/admin/assets/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "http://localhost:8080/houseware_nlu_war_exploded/admin/category",
+                "dataSrc": ""
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "width": "30%",
+                },
+                {
+                    "targets": 1,
+                    "width": "30%",
+                },
+                {
+                    "targets": 2,
+                    "width": "30%",
+                },
+                {
+                    "targets": 3,
+                    "searchable": false,
+                    "width": "10%",
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)' data-toggle='modal' data-target='#editModal'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" data-toggle="modal" data-target="#deleteModal">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                {"data": "ma_loaisp"},
+                {"data": "ten_loaisp"},
+                {"data": "createdAt"},
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#product__type--table").DataTable().ajax.reload(null, false);
+        setFixedSize();
+    }
+
+    function setFixedSize() {
+        $("#product__type--table").css("width", "100%");
+        $("#product__type--table").DataTable().columns.adjust().draw();
+    }
+</script>
+
+
+<script>
     $("#addAction").click(() => {
         var maLoai = $("input[name='maLoaiSP']").val();
         var tenLoai = $("input[name='tenLoai']").val();
-
         $.ajax({
             url: "${pageContext.request.contextPath}/category/add",
             method: "POST",
@@ -160,24 +207,8 @@
                 tenLoai: tenLoai
             },
             success: function (data, textStatus, xhr) {
-                var today = new Date();
-                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                var dateTime = date + ' ' + time;
-
                 swal("Thành công", "Thêm loại sản phẩm mới thành công", "success");
-                var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' cid='" + maLoai + "'>"
-                    + "<i class='ti-pencil text-white'></i></a>";
-                var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" cid="' + maLoai + '">' +
-                    "<i class='ti-trash text-white'></i></a>";
-                $('#bootstrap-data-table-export').DataTable().row.add(
-                    [
-                        maLoai,
-                        tenLoai,
-                        dateTime,
-                        editElm + "\n" + delElm
-                    ]
-                ).draw(false);
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -192,22 +223,20 @@
 </script>
 
 <script>
-    var tr;
-
     function onDelete(elm) {
-        var cid = $(elm).attr('cid');
-        tr = $(elm).parents("tr");
-        $("input[name='cidDelete']").val(cid);
+        var firstColumn = $(elm).parents("tr").children().first();
+        var id = firstColumn.text();
+        $("input[name='cidDelete']").val(id);
         showDeleteModal();
+        setFixedSize();
     }
 
     $(".delAct").first().click(() => {
         onDelete($(".delAct").first());
+        setFixedSize();
     });
-
     $("#confirmDelAct").click(() => {
         var maLoai = $("input[name='cidDelete']").val();
-
         $.ajax({
             url: "${pageContext.request.contextPath}/category/delete",
             method: "POST",
@@ -216,8 +245,7 @@
             },
             success: function (data) {
                 swal("Thành công", "Xóa loại sản phẩm thành công", "success")
-                tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -237,20 +265,19 @@
 </script>
 
 <script>
-    var editRow;
-
     function onEdit(element) {
-        editRow = $(element).parents("tr").children();
-        var cid = $(element).attr('cid');
+        var firstColumn = $(element).parents("tr").children().first();
+        var id = firstColumn.text();
         $.ajax({
             url: "${pageContext.request.contextPath}/category/edit",
             method: "GET",
             data: {
-                maLoai: cid
+                maLoai: id
             },
             success: function (data) {
                 setEditModalValue(data);
                 showEditModal();
+                setFixedSize();
             },
             error: function (data) {
                 swal("Thất bại", "Không tìm thấy loại sản phẩm", "error");
@@ -261,7 +288,6 @@
     $("#editAction").click(() => {
         var maLoai = $("input[name='editmaLoaiSP']").val();
         var tenLoai = $("input[name='edittenLoai']").val();
-
         $.ajax({
             url: "${pageContext.request.contextPath}/category/edit",
             method: "POST",
@@ -271,9 +297,10 @@
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật loại sản phẩm thành công", "success");
+                reloadTable();
                 closeModal();
                 clearValue();
-                editRow.eq(1).text(tenLoai);
+                setFixedSize();
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật loại sản phẩm thất bại do sai dữ liệu đầu vào", "error");

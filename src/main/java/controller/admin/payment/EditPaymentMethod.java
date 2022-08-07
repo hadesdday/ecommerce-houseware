@@ -39,12 +39,13 @@ public class EditPaymentMethod extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String name = request.getParameter("name");
+        String description = request.getParameter("description");
 
         boolean isErr = false;
 
         if (id.isEmpty() || name.isEmpty()) isErr = true;
 
-        PaymentMethod p = new PaymentMethod(id, name);
+        PaymentMethod p = new PaymentMethod(id, name,description);
 
         if (isErr) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);

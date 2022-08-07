@@ -37,7 +37,7 @@
                     <a href="${pageContext.request.contextPath}/admin/customer"><i class="ti-user"></i>Khách hàng</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/category"><i class="ti-user"></i>Loại sản phẩm</a>
+                    <a href="${pageContext.request.contextPath}/admin/loai-sp.jsp"><i class="ti-user"></i>Loại sản phẩm</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/sale"><i class="ti-star"></i>Khuyến mãi</a>

@@ -87,9 +87,9 @@
     modal.style.display = "block";
   };
 
-  deleteAct.onclick = function () {
-    modalDelete.style.display = "block";
-  };
+  // deleteAct.onclick = function () {
+  //   modalDelete.style.display = "block";
+  // };
 
   iconClose.onclick = function () {
     modal.style.display = "none";

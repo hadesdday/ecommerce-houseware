@@ -36,6 +36,11 @@
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="methodName">
                             </div>
+
+                            <label>Mô tả</label>
+                            <div class="input-group mb-3">
+                                <textarea name="description" rows="15" cols="95%" class="text__details"></textarea>
+                            </div>
                         </div>
                         <div class="custom-modal-footer">
                             <button type="button" class="btn btn-secondary close-btn">Hủy</button>
@@ -59,6 +64,11 @@
                             <label>Tên phương thức thanh toán</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="editmethodName">
+                            </div>
+
+                            <label>Mô tả</label>
+                            <div class="input-group mb-3">
+                                <textarea name="editdescription" rows="15" cols="95%" class="text__details"></textarea>
                             </div>
                         </div>
                         <div class="custom-modal-footer">
@@ -99,6 +109,7 @@
                                         <tr>
                                             <th>Mã phương thức thanh toán</th>
                                             <th>Tên phương thức thanh toán</th>
+                                            <th>Mô tả</th>
                                             <th>Ngày tạo</th>
                                             <th>Hành động</th>
                                         </tr>
@@ -108,6 +119,7 @@
                                             <tr>
                                                 <td>${item.mapttt}</td>
                                                 <td>${item.tenpttt}</td>
+                                                <td>${item.mota}</td>
                                                 <td>${item.createdAt}</td>
                                                 <td>
                                                     <a class="btn rounded bg-warning" id="editBtn"
@@ -154,13 +166,15 @@
     $("#addAction").click(() => {
         var id = $("input[name='methodId']").val();
         var name = $("input[name='methodName']").val();
+        var description = $("textarea[name='description']").val();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/payment-method/add",
             method: "POST",
             data: {
                 id: id,
-                name: name
+                name: name,
+                description: description
             },
             success: function (data, textStatus, xhr) {
                 var today = new Date();
@@ -177,6 +191,7 @@
                     [
                         id,
                         name,
+                        description,
                         dateTime,
                         editElm + "\n" + delElm
                     ]
@@ -236,6 +251,7 @@
     function setEditModalValue(data) {
         $("input[name='editmethodId']").val(data.mapttt);
         $("input[name='editmethodName']").val(data.tenpttt);
+        $("textarea[name='editdescription']").val(data.mota);
     }
 </script>
 
@@ -264,19 +280,22 @@
     $("#editAction").click(() => {
         var id = $("input[name='editmethodId']").val();
         var name = $("input[name='editmethodName']").val();
+        var description = $("textarea[name='editdescription']").val();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/payment-method/edit",
             method: "POST",
             data: {
                 id: id,
-                name: name
+                name: name,
+                description: description
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật phương thức thanh toán thành công", "success");
                 closeModal();
                 clearValue();
                 editRow.eq(1).text(name);
+                editRow.eq(2).text(description);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật phương thức thanh toán thất bại do sai dữ liệu đầu vào", "error");

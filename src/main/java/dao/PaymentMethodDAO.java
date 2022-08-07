@@ -46,9 +46,10 @@ public class PaymentMethodDAO {
     public boolean addPaymentMethod(PaymentMethod p) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("insert into thanhtoan(mapttt, tenpttt) values(?,?)")
+                    h.createUpdate("insert into thanhtoan(mapttt, tenpttt,mota) values(?,?,?)")
                             .bind(0, p.getMapttt())
                             .bind(1, p.getTenpttt())
+                            .bind(2, p.getMota())
                             .execute()
             );
             return rowAffected == 1;
@@ -73,9 +74,10 @@ public class PaymentMethodDAO {
     public boolean editPaymentMethod(PaymentMethod p) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("update thanhtoan set tenpttt = ? where mapttt = ?")
+                    h.createUpdate("update thanhtoan set tenpttt = ?,mota =? where mapttt = ?")
                             .bind(0, p.getTenpttt())
-                            .bind(1, p.getMapttt())
+                            .bind(1, p.getMota())
+                            .bind(2, p.getMapttt())
                             .execute()
             );
             return rowAffected == 1;
