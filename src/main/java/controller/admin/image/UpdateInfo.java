@@ -40,11 +40,13 @@ public class UpdateInfo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String maSP = request.getParameter("maSP");
+        String url = request.getParameter("url");
         Image i = new Image();
         i.setID_ANH(id);
         i.setID_SANPHAM(maSP);
+        i.setLINK_ANH(url);
 
-        if (id.isEmpty() || maSP.isEmpty()) {
+        if (id.isEmpty() || maSP.isEmpty() || url.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             if (FileServices.getInstance().updateInfor(i)) {
