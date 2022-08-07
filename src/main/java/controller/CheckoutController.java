@@ -1,7 +1,8 @@
 package controller;
 
-import beans.Cart;
-import beans.Product;
+import beans.*;
+import services.CheckoutService;
+import services.PaymentMethodServices;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,24 +11,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "CheckoutController", value = "/Checkout")
 public class CheckoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
+        List<PaymentMethod> paymentMethodList = PaymentMethodServices.getInstance().getPaymentMethod();
+        for(PaymentMethod pm:paymentMethodList){
+            System.out.println(pm.getTenpttt());
+        }
+
         Cart cart =(Cart) session.getAttribute("cart");
         if(cart==null) {
             cart = Cart.getInstance();
             session.setAttribute("cart",cart);
         }
-        request.setAttribute("cart",cart);
-//        int authenticated= (int) session.getAttribute("authenticated");
-//        if(authenticated==1){
-//            User user = (User) session.getAttribute("user");
-//            KhachHang khachHang= CheckoutService.getInstance().signinedCustomer(user.getIdkhachang());
-//            session.setAttribute("khachhang",khachHang);
-//        }
+//        request.setAttribute("cart",cart);
+        request.setAttribute("paymentMethodList2", paymentMethodList);
+        int authenticated=  session.getAttribute("authenticated")==null?0:(int)session.getAttribute("authenticated");
+        System.out.println(authenticated);
+        if(authenticated==1){
+            User user = (User) session.getAttribute("user");
+            System.out.println(user.getId_khachhang());
+            Customer c= (Customer)  session.getAttribute("customer");
+            System.out.println(c.getTen_kh());
+//            session.setAttribute("khachhang",c);
+        }
         request.getRequestDispatcher("/Checkout.jsp").forward(request,response);
     }
 

@@ -24,4 +24,5 @@ public class CheckoutService {
     public Customer signinedCustomer(int idkhachhang){
         return  CheckoutDao.getInstance().signinedCustomer(idkhachhang);
     }
+
 }

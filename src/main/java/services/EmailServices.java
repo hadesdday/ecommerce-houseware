@@ -104,14 +104,14 @@ public class EmailServices {
             // Setting the Subject and Content Type
             msg.setSubject(MimeUtility.encodeText(emailMessageDTO.getSubject(), "utf-8", "B"));
             // Set message MIME type
-            switch (emailMessageDTO.getMessageType()) {
-                case EmailMessage.HTML_MSG:
+//            switch (emailMessageDTO.getMessageType()) {
+//                case EmailMessage.HTML_MSG:
                     msg.setContent(emailMessageDTO.getMessage(), "text/html");
-                    break;
-                case EmailMessage.TEXT_MSG:
-                    msg.setContent(emailMessageDTO.getMessage(), "text/plain;charset=UTF-8");
-                    break;
-            }
+//                    break;
+//                case EmailMessage.TEXT_MSG:
+//                    msg.setContent(emailMessageDTO.getMessage(), "text/plain;charset=UTF-8");
+//                    break;
+//            }
             // Send the mail
             Transport.send(msg);
 
