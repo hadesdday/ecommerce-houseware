@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String email = (String) request.getAttribute("email");
-%>
+<%--<%--%>
+<%--    String email = (String) request.getAttribute("email");--%>
+<%--%>--%>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -74,23 +74,24 @@
                             <ul class="ht-menu">
                                 <!-- Begin Setting Area -->
                                 <li>
-                                    <c:if test="${sessionScope.user == null}">
-                                        <div>
-                                            <span class="mr-3"><a href="register.jsp">Đăng Ký</a></span>
-                                            <span class="mr-3"><a href="login.jsp">Đăng Nhập</a></span>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user != null}">
-                                        <div class="ht-setting-trigger">
-                                            <span>Chào, ${sessionScope.user.fullname}</span></div>
-                                        <div class="setting ht-setting">
-                                            <ul class="ht-setting-list">
-                                                <li><a href="#">My Account</a></li>
-                                                <li><a href="#">Checkout</a></li>
-                                                <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-                                            </ul>
-                                        </div>
-                                    </c:if>
+<%--                                    <c:if test="${sessionScope.authenticated==0}">--%>
+<%--                                        <div>--%>
+<%--                                            <span class="mr-3"><a href="register.jsp">Đăng Ký</a></span>--%>
+<%--                                            <span class="mr-3"><a href="login.jsp">Đăng Nhập</a></span>--%>
+<%--                                        </div>--%>
+<%--                                    </c:if>--%>
+<%--                                    <c:if test="${sessionScope.authenticated==1}">--%>
+<%--                                        <div class="ht-setting-trigger">--%>
+<%--&lt;%&ndash;                                            <span>Chào, ${sessionScope.user.username}</span></div>&ndash;%&gt;--%>
+<%--                                            <span>chào</span>--%>
+<%--                                        <div class="setting ht-setting">--%>
+<%--                                            <ul class="ht-setting-list">--%>
+<%--                                                <li><a href="#">My Account</a></li>--%>
+<%--                                                <li><a href="#">Checkout</a></li>--%>
+<%--                                                <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>--%>
+<%--                                            </ul>--%>
+<%--                                        </div>--%>
+<%--                                    </c:if>--%>
                                 </li>
                             </ul>
                         </div>

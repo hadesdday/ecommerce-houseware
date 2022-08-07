@@ -42,6 +42,7 @@ public class CheckoutDao {
 
         for (Product p : cart.getProducts()) {
             Integer finalId_hoadon = id_hoadon;
+            System.out.println(finalId_hoadon+"  "+p.getId_sanpham()+" "+p.getQuantitySold());
             DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO chitiethoadon (id_hoadon,id_sanpham,soluong) VALUES(?,?,?)")
                     .bind(0, finalId_hoadon)
                     .bind(1, p.getId_sanpham())
@@ -64,11 +65,12 @@ public class CheckoutDao {
     }
 
     public Customer signinedCustomer(int idkhachhang) {
-        List<Customer> userList = DbConnector.get().withHandle(h -> h.createQuery("SELECT * FROM KhachHang WHERE ID_KhachHang=?")
+        List<Customer> userList = DbConnector.get().withHandle(h -> h.createQuery("SELECT ten_kh,diachi,sodt,email FROM KhachHang WHERE ID_KhachHang=?")
                 .bind(0, idkhachhang)
                 .mapToBean(Customer.class).stream().collect(Collectors.toList()));
         if (userList.size() != 1) return null;
         else return userList.get(0);
     }
+
 
 }
