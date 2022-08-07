@@ -142,10 +142,10 @@
             ],
             "buttons": ["copy", "csv", "excel", "pdf", "print"],
             "language": {
-                "url": "http://localhost:8080/houseware_nlu_war_exploded/admin/assets/js/lib/data-table/vi.json"
+                "url": "${pageContext.request.contextPath}/admin/assets/js/lib/data-table/vi.json"
             },
             "ajax": {
-                "url": "http://localhost:8080/houseware_nlu_war_exploded/admin/category",
+                "url": "${pageContext.request.contextPath}/admin/category",
                 "dataSrc": ""
             },
             "columnDefs": [

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@include file="header.jsp" %>
 <title>Quản lý người dùng | NLU</title>
 <div class="content-wrap">
@@ -68,7 +67,7 @@
                     </div>
                 </div>
 
-                <!-- modal sua thong tin hoa don -->
+
                 <div id="editModal" class="custom-modal">
                     <div class="custom-modal-content">
                         <div class="custom-modal-header">
@@ -141,8 +140,8 @@
                         <div class="card">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
-                                           class="table table-striped table-bordered">
+                                    <table id="user__table"
+                                           class="table table-striped table-bordered" width="100%">
                                         <thead>
                                         <tr>
                                             <th>
@@ -163,38 +162,6 @@
                                             <th>Hành động</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <jsp:useBean id="users" scope="request" type="java.util.List"/>
-                                        <c:forEach items="${users}" var="item">
-                                            <tr>
-                                                <td>
-                                                        ${item.username}
-                                                </td>
-                                                <td>
-                                                        ${item.id_khachhang}
-                                                </td>
-                                                <td>
-                                                        ${item.email}
-                                                </td>
-                                                <td>
-                                                        ${item.role}
-                                                </td>
-                                                <td>
-                                                        ${item.active}
-                                                </td>
-                                                <td>
-                                                    <a class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" uid="${item.username}">
-                                                        <i class="ti-pencil text-white"></i>
-                                                    </a>
-                                                    <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" uid="${item.username}">
-                                                        <i class="ti-trash text-white"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -225,6 +192,59 @@
 
 <script>
     $(document).ready(function () {
+        $("#user__table").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "${pageContext.request.contextPath}/admin/assets/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "${pageContext.request.contextPath}/admin/user",
+                "dataSrc": ""
+            },
+            "columnDefs": [
+                {
+                    "targets": 5,
+                    "searchable": false,
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                {"data": "username"},
+                {"data": "id_khachhang"},
+                {"data": "email"},
+                {"data": "role"},
+                {"data": "active"},
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#user__table").DataTable().ajax.reload(null, false);
+        setFixedSize();
+    }
+
+    function setFixedSize() {
+        $("#user__table").css("width", "100%");
+        $("#user__table").DataTable().columns.adjust().draw();
+    }
+</script>
+
+
+<script>
+    $(document).ready(function () {
         $("#addUser").click(function () {
             var username = $("input[name='username']").val();
             var cid = $("input[name='cid']").val();
@@ -246,21 +266,7 @@
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm user mới thành công", "success");
-                    var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' uid='" + username + "'>"
-                        + "<i class='ti-pencil text-white'></i></a>";
-                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" uid="' + username + '">' +
-                        "<i class='ti-trash text-white'></i></a>";
-
-                    $('#bootstrap-data-table-export').DataTable().row.add(
-                        [
-                            username,
-                            cid,
-                            email,
-                            role,
-                            active,
-                            editElm + "\n" + delElm
-                        ]
-                    ).draw(false);
+                    reloadTable();
                     clearValue();
                     closeModal();
                 },
@@ -278,11 +284,9 @@
 </script>
 
 <script>
-    var tr;
-
     function onDelete(elm) {
-        var uid = $(elm).attr('uid');
-        tr = $(elm).parents("tr");
+        var firstColumn = $(elm).parents("tr").children().first();
+        var uid = firstColumn.text();
         $("input[name='uidDelete']").val(uid);
         showDeleteModal();
     }
@@ -302,8 +306,7 @@
             },
             success: function (data) {
                 swal("Thành công", "Xóa user thành công", "success")
-                tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -315,8 +318,6 @@
 </script>
 
 <script>
-    var editRow;
-
     function setEditModalValue(data) {
         $("input[name='editusername']").val(data.username);
         $("input[name='editcid']").val(data.id_khachhang);
@@ -325,9 +326,9 @@
         $("select[name='editactive']").val(data.active);
     }
 
-    function onEdit(element) {
-        editRow = $(element).parents("tr").children();
-        var uid = $(element).attr('uid');
+    function onEdit(elm) {
+        var firstColumn = $(elm).parents("tr").children().first();
+        var uid = firstColumn.text();
         $.ajax({
             url: "${pageContext.request.contextPath}/user/edit",
             method: "GET",
@@ -361,11 +362,9 @@
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật user thành công", "success");
+                reloadTable();
                 closeModal();
                 clearValue();
-                editRow.eq(2).text(email);
-                editRow.eq(3).text(role);
-                editRow.eq(4).text(active);
             },
             error: (data) => {
                 if (data.status === 409)

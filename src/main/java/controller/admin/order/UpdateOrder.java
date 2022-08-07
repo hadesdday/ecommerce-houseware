@@ -44,7 +44,8 @@ public class UpdateOrder extends HttpServlet {
         double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
         String status = request.getParameter("status");
 
-        Order newOrder = new Order(maHD, maKH, coupon, paymentMethod, totalPrice, status);
+        Order newOrder = new Order(maKH, coupon, paymentMethod, totalPrice, status);
+        newOrder.setID_HOADON(maHD);
 
         boolean isError = false;
         if (maHD < 1) isError = true;

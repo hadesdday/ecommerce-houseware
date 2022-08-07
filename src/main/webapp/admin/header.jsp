@@ -22,32 +22,32 @@
                 </li>
                 <li class="label">Quản Lý</li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/product"><i class="ti-desktop"></i> Sản phẩm</a>
+                    <a href="${pageContext.request.contextPath}/admin/sanpham.jsp"><i class="ti-desktop"></i> Sản phẩm</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/image"><i class="ti-clipboard"></i>Hình ảnh</a>
+                    <a href="${pageContext.request.contextPath}/admin/hinhanh.jsp"><i class="ti-clipboard"></i>Hình ảnh</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/order"><i class="ti-bag"></i> Hóa đơn</a>
+                    <a href="${pageContext.request.contextPath}/admin/hoadon.jsp"><i class="ti-bag"></i> Hóa đơn</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/user"><i class="ti-user"></i>Người dùng</a>
+                    <a href="${pageContext.request.contextPath}/admin/user.jsp"><i class="ti-user"></i>Người dùng</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/customer"><i class="ti-user"></i>Khách hàng</a>
+                    <a href="${pageContext.request.contextPath}/admin/khachhang.jsp"><i class="ti-user"></i>Khách hàng</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/loai-sp.jsp"><i class="ti-user"></i>Loại sản phẩm</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/sale"><i class="ti-star"></i>Khuyến mãi</a>
+                    <a href="${pageContext.request.contextPath}/admin/khuyenmai.jsp"><i class="ti-star"></i>Khuyến mãi</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/review"><i class="ti-star"></i>Đánh giá sản
+                    <a href="${pageContext.request.contextPath}/admin/review.jsp"><i class="ti-star"></i>Đánh giá sản
                         phẩm</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/payment-method"><i class="ti-clipboard"></i>Phương
+                    <a href="${pageContext.request.contextPath}/admin/payment-method.jsp"><i class="ti-clipboard"></i>Phương
                         thức thanh toán</a>
                 </li>
             </ul>

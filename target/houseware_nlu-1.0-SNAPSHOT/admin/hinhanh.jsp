@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp" %>
 
 <title>Quản lý hình ảnh | NLU</title>
@@ -51,7 +49,7 @@
                     </div>
                 </div>
 
-                <!-- modal sua thong tin hoa don -->
+
                 <div id="editModal" class="custom-modal">
                     <div class="custom-modal-content">
                         <div class="custom-modal-header">
@@ -102,8 +100,8 @@
                         <div class="card">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
-                                           class="table table-striped table-bordered">
+                                    <table id="image__table"
+                                           class="table table-striped table-bordered" width="100%">
                                         <thead>
                                         <tr>
                                             <th>
@@ -115,37 +113,9 @@
                                             <th>
                                                 Mã sản phẩm
                                             </th>
-                                            <th>Hành động</th>
+                                            <th width="10%">Hành động</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <jsp:useBean id="imageList" scope="request" type="java.util.List"/>
-                                        <c:forEach items="${imageList}" var="item">
-                                            <tr>
-                                                <td>
-                                                        ${item.ID_ANH}
-                                                </td>
-                                                <td>
-                                                    <img src="${pageContext.request.contextPath}/img/${item.LINK_ANH}"
-                                                         width="50px"
-                                                         height="50px"/>
-                                                </td>
-                                                <td>
-                                                        ${item.ID_SANPHAM}
-                                                </td>
-                                                <td>
-                                                    <a class=" btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" iid=${item.ID_ANH}>
-                                                        <i class="ti-pencil text-white"></i>
-                                                    </a>
-                                                    <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" iid=${item.ID_ANH}>
-                                                        <i class="ti-trash text-white"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -172,10 +142,67 @@
 </div>
 <!-- Common -->
 <%@include file="footer.jsp" %>
+
+<script>
+    $(document).ready(function () {
+        $("#image__table").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "${pageContext.request.contextPath}/admin/assets/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "${pageContext.request.contextPath}/admin/image",
+                "dataSrc": ""
+            },
+            "columnDefs": [
+                {
+                    "targets": 1,
+                    "render": function (data) {
+                        return '<img src="${pageContext.request.contextPath}/img/' + data + '"width="50px" height="50px"/>';
+                    }
+                },
+                {
+                    "targets": 3,
+                    "searchable": false,
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                {"data": "ID_ANH"},
+                {"data": "LINK_ANH"},
+                {"data": "ID_SANPHAM"},
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#image__table").DataTable().ajax.reload(null, false);
+        setFixedSize();
+    }
+
+    function setFixedSize() {
+        $("#image__table").css("width", "100%");
+        $("#image__table").DataTable().columns.adjust().draw();
+    }
+</script>
+
 <script>
     $("#uploadSubmit").click(() => {
         var form = document.getElementById("uploadForm");
-        if (document.getElementById("fileName").files.length == 0) {
+        if (document.getElementById("fileName").files.length === 0) {
             toastr.error('Hình ảnh chưa được upload', 'Thất bại')
         } else {
             $.ajax({
@@ -211,21 +238,7 @@
             },
             success: function (data, textStatus, xhr) {
                 swal("Thành công", "Thêm hình ảnh mới thành công", "success");
-                var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' iid='" + id + "'>"
-                    + "<i class='ti-pencil text-white'></i></a>";
-                var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" iid="' + id + '">' +
-                    "<i class='ti-trash text-white'></i></a>";
-
-                const imageElm = '<img src="${pageContext.request.contextPath}/img/' + url + '"width="50px" height="50px"/>';
-
-                $('#bootstrap-data-table-export').DataTable().row.add(
-                    [
-                        id,
-                        imageElm,
-                        maSP,
-                        editElm + "\n" + delElm
-                    ]
-                ).draw(false);
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -240,11 +253,9 @@
 </script>
 
 <script>
-    var tr;
-
     function onDelete(elm) {
-        var iid = $(elm).attr('iid');
-        tr = $(elm).parents("tr");
+        var firstColumn = $(elm).parents("tr").children().first();
+        var iid = firstColumn.text();
         $("input[name='iidDelete']").val(iid);
 
         $.ajax({
@@ -277,8 +288,7 @@
             },
             success: function (data) {
                 swal("Thành công", "Xóa hình ảnh thành công", "success")
-                tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -296,11 +306,9 @@
         $("input[name='eMaSP']").val(data.ID_SANPHAM);
     }
 
-    var editRow;
-
     function onEdit(element) {
-        editRow = $(element).parents("tr").children();
-        var iid = $(element).attr('iid');
+        var firstColumn = $(element).parents("tr").children().first();
+        var iid = firstColumn.text();
         $.ajax({
             url: "${pageContext.request.contextPath}/image/update",
             method: "GET",
@@ -330,9 +338,9 @@
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật thành công", "success");
+                reloadTable();
                 closeModal();
                 clearValue();
-                editRow.eq(2).text(maSP);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật thất bại", "error");

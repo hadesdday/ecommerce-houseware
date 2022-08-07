@@ -145,4 +145,5 @@
   closeBtn2.onclick = function () {
     modalDelete.style.display = "none";
   };
+
 })(jQuery);
