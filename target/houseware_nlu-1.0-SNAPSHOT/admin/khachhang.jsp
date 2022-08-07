@@ -1,9 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<jsp:useBean id="customerList" scope="request" type="java.util.List"/>
-<jsp:useBean id="latestCustomer" scope="request" type="beans.Customer"/>
 
 <%@include file="header.jsp" %>
 <title>Quản lý khách hàng | NLU</title>
@@ -18,7 +13,6 @@
             <div class="row d-flex justify-content-center">
 
                 <button id="addBtn" type="button" class="btn btn-primary">Thêm khách hàng</button>
-                <!--modal them khach hang-->
 
                 <div id="addModal" class="custom-modal">
                     <div class="custom-modal-content">
@@ -27,12 +21,6 @@
                             <h2>Thêm thông tin khách hàng</h2>
                         </div>
                         <div class="custom-modal-body">
-                            <%--                            <label>Mã khách hàng</label>--%>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="maKH" hidden
-                                       value="<%=latestCustomer.getId_khachhang()+1%>">
-                            </div>
-
                             <label>Tên khách hàng</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="tenKH">
@@ -45,7 +33,7 @@
 
                             <label>Số điện thoại</label>
                             <div class="input-group mb-3">
-                                <input type="tel" class="form-control" name="sdt">
+                                <input type="tel" class="form-control" name="sdt" maxlength="10">
                             </div>
 
                             <label>Email</label>
@@ -60,7 +48,6 @@
                     </div>
                 </div>
 
-                <!-- modal sua thong tin khach hang -->
                 <div id="editModal" class="custom-modal">
                     <div class="custom-modal-content">
                         <div class="custom-modal-header">
@@ -68,7 +55,6 @@
                             <h2>Sửa thông tin khách hàng</h2>
                         </div>
                         <div class="custom-modal-body">
-                            <%--                            <label>Mã khách hàng</label>--%>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="editmaKH" hidden>
                             </div>
@@ -85,7 +71,7 @@
 
                             <label>Số điện thoại</label>
                             <div class="input-group mb-3">
-                                <input type="tel" class="form-control" name="editsdt">
+                                <input type="tel" class="form-control" name="editsdt" maxlength="10">
                             </div>
 
                             <label>Email</label>
@@ -125,39 +111,18 @@
                         <div class="card">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
-                                           class="table table-striped table-bordered">
+                                    <table id="customer__table"
+                                           class="table table-striped table-bordered" width="100%">
                                         <thead>
                                         <tr>
-                                            <th>Mã khách hàng</th>
-                                            <th>Tên khách hàng</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Số điện thoại</th>
-                                            <th>Email</th>
-                                            <th>Hành động</th>
+                                            <th width="15%">Mã khách hàng</th>
+                                            <th width="15%">Tên khách hàng</th>
+                                            <th width="15%">Địa chỉ</th>
+                                            <th width="15%">Số điện thoại</th>
+                                            <th width="15%">Email</th>
+                                            <th width="10%">Hành động</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <c:forEach items="${customerList}" var="item">
-                                            <tr>
-                                                <td>${item.id_khachhang}</td>
-                                                <td>${item.ten_kh}</td>
-                                                <td>${item.diachi}</td>
-                                                <td>${item.sodt}</td>
-                                                <td>${item.email}</td>
-                                                <td>
-                                                    <a class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" cid="${item.id_khachhang}">
-                                                        <i class="ti-pencil text-white"></i>
-                                                    </a>
-                                                    <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" cid="${item.id_khachhang}">
-                                                        <i class="ti-trash text-white"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -181,8 +146,59 @@
 <%@include file="script.jsp" %>
 
 <script>
+    $(document).ready(function () {
+        $("#customer__table").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "${pageContext.request.contextPath}/admin/assets/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "${pageContext.request.contextPath}/admin/customer",
+                "dataSrc": ""
+            },
+            "columnDefs": [
+                {
+                    "targets": 5,
+                    "searchable": false,
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                {"data": "id_khachhang"},
+                {"data": "ten_kh"},
+                {"data": "diachi"},
+                {"data": "sodt"},
+                {"data": "email"},
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#customer__table").DataTable().ajax.reload(null, false);
+        setFixedSize();
+    }
+
+    function setFixedSize() {
+        $("#customer__table").css("width", "100%");
+        $("#customer__table").DataTable().columns.adjust().draw();
+    }
+</script>
+
+<script>
     $("#addAction").click(() => {
-        var maKH = $("input[name='maKH']").val();
         var tenKH = $("input[name='tenKH']").val();
         var diachi = $("input[name='diachi']").val();
         var sdt = $("input[name='sdt']").val();
@@ -199,23 +215,8 @@
             },
             success: function (data, textStatus, xhr) {
                 swal("Thành công", "Thêm khách hàng mới thành công", "success");
-                var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' cid='" + maKH + "'>"
-                    + "<i class='ti-pencil text-white'></i></a>";
-                var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" cid="' + maKH + '">' +
-                    "<i class='ti-trash text-white'></i></a>";
-
-                $('#bootstrap-data-table-export').DataTable().row.add(
-                    [
-                        maKH,
-                        tenKH,
-                        diachi,
-                        sdt,
-                        email,
-                        editElm + "\n" + delElm
-                    ]
-                ).draw(false);
+                reloadTable();
                 clearValue();
-                $("input[name='maKH']").val(Number(maKH) + 1);
                 closeModal();
             },
             error: function (data, textStatus, xhr) {
@@ -233,8 +234,8 @@
     var tr;
 
     function onDelete(elm) {
-        var cid = $(elm).attr('cid');
-        tr = $(elm).parents("tr");
+        var firstColumn = $(elm).parents("tr").children().first();
+        var cid = Number(firstColumn.text());
         $("input[name='cidDelete']").val(cid);
         showDeleteModal();
     }
@@ -253,12 +254,8 @@
                 maKH: maKH
             },
             success: function (data) {
-                var t = $("input[name='maKH']").val();
                 swal("Thành công", "Xóa khách hàng thành công", "success")
-                tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
-                clearValue();
-                $("input[name='maKH']").val(t);
+                reloadTable();
                 closeModal();
             },
             error: function (data) {
@@ -283,11 +280,9 @@
 </script>
 
 <script>
-    var editRow;
-
     function onEdit(element) {
-        editRow = $(element).parents("tr").children();
-        var cid = $(element).attr('cid');
+        var firstColumn = $(element).parents("tr").children().first();
+        var cid = Number(firstColumn.text());
         $.ajax({
             url: "${pageContext.request.contextPath}/customer/update",
             method: "GET",
@@ -322,15 +317,10 @@
                 email: email
             },
             success: (data) => {
-                var t = $("input[name='maKH']").val();
                 swal("Thành công", "Cập nhật khách hàng thành công", "success");
+                reloadTable();
                 closeModal();
                 clearValue();
-                $("input[name='maKH']").val(t);
-                editRow.eq(1).text(tenKH);
-                editRow.eq(2).text(diachi);
-                editRow.eq(3).text(sdt);
-                editRow.eq(4).text(email);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật khách hàng thất bại do sai dữ liệu đầu vào", "error");
