@@ -40,7 +40,7 @@
 
                             <label>Nội dung</label>
                             <div class="input-group mb-3">
-                                <textarea name="content" rows="15" cols="95%" class="text__details"></textarea>
+                                <div id="add__editor"></div>
                             </div>
 
 
@@ -82,7 +82,7 @@
 
                             <label>Nội dung</label>
                             <div class="input-group mb-3">
-                                <textarea name="editcontent" rows="15" cols="95%" class="text__details"></textarea>
+                                <div id="edit__editor"></div>
                             </div>
                         </div>
                         <div class="custom-modal-footer">
@@ -156,8 +156,11 @@
 </div>
 <!-- Common -->
 <%@include file="script.jsp" %>
-
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 <script>
+    var addEditor;
+    var editEditor;
+
     $(document).ready(function () {
         $("#review__table").DataTable({
             "responsive": true,
@@ -175,6 +178,12 @@
                 "dataSrc": ""
             },
             "columnDefs": [
+                {
+                    "targets": 4,
+                    "render": function (data) {
+                        return data.slice(0, 100) + "...";
+                    }
+                },
                 {
                     "targets": 5,
                     "searchable": false,
@@ -196,6 +205,32 @@
                 {"data": "content"},
             ],
         });
+
+
+        ClassicEditor
+            .create(document.querySelector('#add__editor'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                defaultLanguage: 'vi'
+            })
+            .then(editor => {
+                window.editor = editor;
+                addEditor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#edit__editor'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+                editEditor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
     });
 
     function reloadTable() {
@@ -207,16 +242,13 @@
         $("#review__table").css("width", "100%");
         $("#review__table").DataTable().columns.adjust().draw();
     }
-</script>
 
-
-<script>
     $(document).ready(function () {
         $("#addReview").click(function () {
             var pid = $("input[name='productId']").val();
             var username = $("input[name='username']").val();
             var rating = $("input[name='rating']").val();
-            var content = $("textarea[name='content']").val();
+            var content = addEditor.getData();
 
             $.ajax({
                 url: "${pageContext.request.contextPath}/review/add",
@@ -232,6 +264,7 @@
                     reloadTable();
                     clearValue();
                     closeModal();
+                    addEditor.setData("");
                 },
                 error: function (data, textStatus, xhr) {
                     if (data.status === 400 || data.status === 404 || data.status === 500)
@@ -242,10 +275,6 @@
             })
         })
     })
-</script>
-
-<script>
-    var tr;
 
     function onDelete(elm) {
         var firstColumn = $(elm).parents("tr").children().first();
@@ -282,20 +311,17 @@
             }
         })
     })
-</script>
 
-
-<script>
     function setEditModalValue(data) {
         $("input[name='editRid']").val(data.id);
         $("input[name='editproductId']").val(data.id_sanpham);
         $("input[name='editusername']").val(data.username);
         $("input[name='editrating']").val(data.rating);
-        $("textarea[name='editcontent']").val(data.content);
+        editEditor.setData(data.content, function () {
+            this.checkDirty();
+        });
     }
-</script>
 
-<script>
     function onEdit(element) {
         var firstColumn = $(element).parents("tr").children().first();
         var rid = firstColumn.text();
@@ -319,7 +345,7 @@
     $("#editAction").click(() => {
         var rid = $("input[name='editRid']").val();
         var rating = $("input[name='editrating']").val();
-        var content = $("textarea[name='editcontent']").val();
+        var content = editEditor.getData();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/review/edit",
@@ -334,6 +360,7 @@
                 reloadTable();
                 closeModal();
                 clearValue();
+                editEditor.setData("");
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật đánh giá thất bại do sai dữ liệu đầu vào", "error");

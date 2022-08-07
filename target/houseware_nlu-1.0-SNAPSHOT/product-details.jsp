@@ -242,12 +242,8 @@
                                                                                 </select>
                                                                             </span>
                                                                         </p>
-                                                                        <p class="feedback-form">
-                                                                            <label for="feedback">Nội dung</label>
-                                                                            <textarea id="feedback" name="comment"
-                                                                                      cols="45" rows="8"
-                                                                                      aria-required="true"></textarea>
-                                                                        </p>
+                                                                        <label>Nội dung</label>
+                                                                        <div id="comment__area"></div>
                                                                         <div class="feedback-input">
                                                                             <div class="feedback-btn pb-15">
                                                                                 <a href="#" class="close"
@@ -402,6 +398,7 @@
     <%@include file="client-footer.jsp" %>
 </div>
 <%@include file="libraries.jsp" %>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 <script>
     <c:if test="${requestScope.remainComments.size() > 0}">
     $("#view__more-comments").click(() => {
@@ -409,12 +406,28 @@
         $("#remain__comments").removeClass("d-none");
     });
     </c:if>
-</script>
-<script>
+    var commentArea;
+    $(document).ready(function () {
+        ClassicEditor
+            .create(document.querySelector('#comment__area'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                defaultLanguage: 'vi'
+            })
+            .then(editor => {
+                window.editor = editor;
+                commentArea = editor;
+                console.log("worked");
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    });
+
     $("#submit-comment").click(() => {
         var rating = $("select[name='star-rating'] option:selected").val();
         var pid = "${product.id_sanpham}";
-        var content = $("textarea[name='comment']").val();
+        // var content = $("textarea[name='comment']").val();
+        var content = commentArea.getData();
         var username = "${sessionScope.get("user").getUsername()}";
         var currentUrl = window.location.href;
 
@@ -438,7 +451,7 @@
                 let contentElm = '<p>' + content + '</p></div></li>';
                 let finalElm = elm + usernameElm + commentDateElm + contentElm;
                 $(".comment").last().after(finalElm);
-                $("textarea[name='comment']").val("");
+                commentArea.setData("");
                 $(".close").click();
             },
             error: function (data, textStatus, xhr) {
