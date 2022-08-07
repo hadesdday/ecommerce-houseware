@@ -5421,7 +5421,7 @@ h6.h1 {
     border-top: 1px solid #f1f1f1;
 }
 
-#uploadSubmit {
+.upload__submit {
     padding: 10px 20px;
     background: #e6e6e8;
     margin: 15px 0;
@@ -5431,7 +5431,7 @@ h6.h1 {
     transition: all ease-in-out 0.2s;
 }
 
-#uploadSubmit:hover {
+.upload__submit:hover {
     transform: translateY(5px);
     box-shadow: 0 2px #c5c5c9;
 }

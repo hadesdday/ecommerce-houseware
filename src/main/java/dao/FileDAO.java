@@ -84,9 +84,10 @@ public class FileDAO {
     public boolean updateInfor(Image i) {
         try {
             int rowAffected = DbConnector.get().withHandle(h ->
-                    h.createUpdate("UPDATE hinhanh SET ID_SANPHAM = ? WHERE ID_ANH = ?")
+                    h.createUpdate("UPDATE hinhanh SET ID_SANPHAM = ?,link_anh = ? WHERE ID_ANH = ?")
                             .bind(0, i.getID_SANPHAM())
-                            .bind(1, i.getID_ANH())
+                            .bind(1, i.getLINK_ANH())
+                            .bind(2, i.getID_ANH())
                             .execute()
             );
             return rowAffected == 1;

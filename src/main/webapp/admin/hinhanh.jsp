@@ -28,13 +28,16 @@
                             </div>
 
                             <label>Hình ảnh</label>
-                            <form action="${pageContext.request.contextPath}/UploadFile" method="post"
-                                  enctype="multipart/form-data" id="uploadForm" class="uploadForm">
-                                <input type="file" name="fileName" id="fileName">
-                                <input type="hidden" name="filePath">
-                                <br>
-                                <button type="button" id="uploadSubmit">Upload</button>
-                            </form>
+                            <div class="form-group">
+                                <form action="${pageContext.request.contextPath}/UploadFile" method="post"
+                                      enctype="multipart/form-data" id="uploadForm" class="uploadForm">
+                                    <input type="file" name="fileName" id="fileName">
+                                    <input type="hidden" name="filePath">
+                                    <br>
+                                    <button type="button" class="upload__submit" id="uploadSubmit">Upload</button>
+                                </form>
+                                <img src="" alt="404" id="img__add" width="50px" height="50px"/>
+                            </div>
 
                             <label>Mã sản phẩm</label>
                             <div class="input-group mb-3">
@@ -57,8 +60,21 @@
                             <h2>Sửa thông tin hình ảnh</h2>
                         </div>
                         <div class="custom-modal-body">
+                            <label>Mã ảnh</label>
                             <div class="input-group mb-3">
-                                <input type="hidden" class="form-control" name="eid">
+                                <input type="text" class="form-control" name="eid" disabled>
+                            </div>
+                            <%--form edit--%>
+                            <label>Hình ảnh</label>
+                            <div class="form-group">
+                                <form action="${pageContext.request.contextPath}/UploadFile" method="post"
+                                      enctype="multipart/form-data" id="uploadUpdateForm" class="uploadForm">
+                                    <input type="file" name="fileName" id="updateFileName">
+                                    <input type="hidden" name="updateFilePath">
+                                    <br>
+                                    <button type="button" class="upload__submit" id="updateUploadSubmit">Upload</button>
+                                </form>
+                                <img src="" alt="404" id="update__img" width="50px" height="50px">
                             </div>
 
                             <label>Mã sản phẩm</label>
@@ -213,6 +229,29 @@
                 contentType: false,
                 success: function (data) {
                     $("input[name='filePath']").val(data);
+                    $("img[id='img__add']").attr("src", "${pageContext.request.contextPath}/img/" + data);
+                    toastr.success('Upload hình ảnh thành công', 'Thành công')
+                },
+                error: function (data) {
+                    toastr.error('Upload hình ảnh thất bại', 'Thất bại')
+                }
+            });
+        }
+    });
+    $("#updateUploadSubmit").click(() => {
+        var form = document.getElementById("uploadUpdateForm");
+        if (document.getElementById("updateFileName").files.length === 0) {
+            toastr.error('Hình ảnh chưa được upload', 'Thất bại')
+        } else {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/UploadFile",
+                type: 'POST',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $("input[name='updateFilePath']").val(data);
+                    $("img[id='update__img']").attr("src", "${pageContext.request.contextPath}/img/" + data);
                     toastr.success('Upload hình ảnh thành công', 'Thành công')
                 },
                 error: function (data) {
@@ -304,6 +343,8 @@
     function setEditModalValue(data) {
         $("input[name='eid']").val(data.ID_ANH);
         $("input[name='eMaSP']").val(data.ID_SANPHAM);
+        $("input[name='updateFilePath']").val(data.LINK_ANH);
+        $("img[id='update__img']").attr("src", "${pageContext.request.contextPath}/img/" + data.LINK_ANH);
     }
 
     function onEdit(element) {
@@ -328,13 +369,15 @@
     $("#editAction").click(() => {
         var id = $("input[name='eid']").val();
         var maSP = $("input[name='eMaSP']").val();
+        var url = $("input[name='updateFilePath']").val();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/image/update",
             method: "POST",
             data: {
                 id: id,
-                maSP: maSP
+                maSP: maSP,
+                url: url
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật thành công", "success");
