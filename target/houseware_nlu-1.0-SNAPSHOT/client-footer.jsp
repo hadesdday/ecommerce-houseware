@@ -75,7 +75,9 @@
                     <!-- Begin Footer Logo Area -->
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-logo">
-                            <img loading="lazy" src="images/menu/logo/1.jpg" alt="Footer Logo">
+                            <img loading="lazy"
+                                 src="https://raw.githubusercontent.com/hadesdday/a/main/logo_transparent.png" alt=""
+                                 width="190" height="45" style="object-fit: cover">
                             <p class="info">
                                 Chúng tôi có sản phẩm tốt nhất cho ngôi nhà của bạn.
                             </p>
@@ -87,11 +89,11 @@
                             </li>
                             <li>
                                 <span>Số điện thoại: </span>
-                                <a href="#">012345678</a>
+                                <a href="tel:09876554321">0987654321</a>
                             </li>
                             <li>
                                 <span>Email: </span>
-                                <a href="">info@gmail.com</a>
+                                <a href="mailto:devwebchichoo@gmail.com">devwebchichoo@gmail.com</a>
                             </li>
                         </ul>
                     </div>
@@ -101,9 +103,9 @@
                         <div class="footer-block">
                             <h3 class="footer-block-title">Sản phẩm</h3>
                             <ul>
-                                <li><a href="san-pham-giam-gia.html">Giảm giá</a></li>
-                                <li><a href="san-pham-mua-nhieu.html">Sản phẩm mua nhiều</a></li>
-                                <li><a href="san-pham-noi-bat.html">Sản phẩm nổi bật</a></li>
+                                <li><a href="${pageContext.request.contextPath}/#giam-gia">Giảm giá</a></li>
+                                <li><a href="${pageContext.request.contextPath}/#mua-nhieu">Sản phẩm mua nhiều</a></li>
+                                <li><a href="${pageContext.request.contextPath}/#noi-bat">Sản phẩm nổi bật</a></li>
                             </ul>
                         </div>
                     </div>
@@ -113,7 +115,6 @@
                         <div class="footer-block">
                             <h3 class="footer-block-title">Về công ty</h3>
                             <ul>
-
                                 <li><a href="faq.jsp">FAQs</a></li>
                                 <li><a href="about-us.jsp">Về chúng tôi</a></li>
                                 <li><a href="contact.jsp">Liên hệ</a></li>
@@ -124,49 +125,37 @@
                     <!-- Begin Footer Block Area -->
                     <div class="col-lg-4">
                         <div class="footer-block">
-                            <h3 class="footer-block-title">Follow Us</h3>
+                            <h3 class="footer-block-title">Theo dõi chúng tôi tại</h3>
                             <ul class="social-link">
                                 <li class="twitter">
                                     <a href="https://twitter.com/" data-toggle="tooltip" target="_blank"
                                        title="Twitter">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="rss">
-                                    <a href="https://rss.com/" data-toggle="tooltip" target="_blank"
-                                       title="RSS">
-                                        <i class="fa fa-rss"></i>
-                                    </a>
-                                </li>
-                                <li class="google-plus">
-                                    <a href="https://www.plus.google.com/discover" data-toggle="tooltip"
-                                       target="_blank" title="Google +">
-                                        <i class="fa fa-google-plus"></i>
+                                        <i class="fa fa-twitter" style="margin-top:10px"></i>
                                     </a>
                                 </li>
                                 <li class="facebook">
                                     <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank"
                                        title="Facebook">
-                                        <i class="fa fa-facebook"></i>
+                                        <i class="fa fa-facebook" style="margin-top:10px"></i>
                                     </a>
                                 </li>
                                 <li class="youtube">
                                     <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank"
                                        title="Youtube">
-                                        <i class="fa fa-youtube"></i>
+                                        <i class="fa fa-youtube" style="margin-top:10px"></i>
                                     </a>
                                 </li>
                                 <li class="instagram">
                                     <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank"
                                        title="Instagram">
-                                        <i class="fa fa-instagram"></i>
+                                        <i class="fa fa-instagram" style="margin-top:10px"></i>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <!-- Begin Footer Newsletter Area -->
                         <div class="footer-newsletter">
-                            <h4>Đăng kí để nhận thêm nhiều ưu đãi</h4>
+                            <h4>Đăng kí để nhận thêm nhiều ưu đãi hơn</h4>
                             <form action="#" method="post" id="mc-embedded-subscribe-form"
                                   name="mc-embedded-subscribe-form" class="footer-subscribe-form validate"
                                   target="_blank" novalidate>
@@ -201,7 +190,7 @@
                     <!-- Footer Payment Area End Here -->
                     <!-- Begin Copyright Area -->
                     <div class="copyright text-center pt-25">
-                        <span>© 2021 Group 24. Tất cả các quyền được bảo lưu.</span>
+                        <span>© 2022 Group 23. Tất cả các quyền được bảo lưu.</span>
                     </div>
                     <!-- Copyright Area End Here -->
                 </div>

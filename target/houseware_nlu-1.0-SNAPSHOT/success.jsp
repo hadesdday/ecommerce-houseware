@@ -54,9 +54,10 @@
                                     </div>
                                     <div class="col-md-12">
                                         <p class="text-center">Bạn đã đăng ký tài khoản thành công</p>
+                                        <p class="text-center">Email kích hoạt tài khoản đã được gửi đến email của bạn.</p>
                                         <p class="text-center">Vui lòng kiểm tra trong thư rác nếu như không tìm thấy
                                             trong
-                                            hộp thư đến</p>
+                                            hộp thư đến.</p>
                                     </div>
                                 </c:if>
                                 <c:if test="${requestScope.activeSuccess}">
