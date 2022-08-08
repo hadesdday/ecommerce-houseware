@@ -6894,3 +6894,7 @@ input[class="checkbox-payment"] {
 .cl__star {
     color: #fed700 !important;
 }
+
+select {
+    display: none;
+}

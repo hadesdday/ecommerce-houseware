@@ -106,7 +106,7 @@ public class EmailServices {
             // Set message MIME type
 //            switch (emailMessageDTO.getMessageType()) {
 //                case EmailMessage.HTML_MSG:
-                    msg.setContent(emailMessageDTO.getMessage(), "text/html");
+                    msg.setContent(emailMessageDTO.getMessage(), "text/html; charset=UTF-8");
 //                    break;
 //                case EmailMessage.TEXT_MSG:
 //                    msg.setContent(emailMessageDTO.getMessage(), "text/plain;charset=UTF-8");

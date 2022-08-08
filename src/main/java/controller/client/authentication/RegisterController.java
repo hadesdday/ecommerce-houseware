@@ -3,6 +3,7 @@ package controller.client.authentication;
 import beans.Customer;
 import beans.EmailMessage;
 import beans.User;
+import helper.GenerateEmail;
 import helper.GenerateToken;
 import org.omg.CORBA.portable.ApplicationException;
 import properties.AssetsProperties;
@@ -69,14 +70,7 @@ public class RegisterController extends HttpServlet {
                     EmailMessage emailbean = new EmailMessage();
                     emailbean.setTo(email);
                     emailbean.setSubject("Kích hoạt tài khoản HouseWareNLU");
-                    emailbean.setMessage("Chào bạn\n" + "Cảm ơn bạn đã đăng ký tài khoản tại HouseWareNLU.Để truy cập tài khoản của bạn, hãy làm theo các bước sau đây:"
-                            + "\n" + "1) Kích hoạt tài khoản của bạn bằng cách nhấn vào đường link sau đây : " + url + "\n" +
-                            "2) Nhấn vào liên kết đăng nhập được hiển thị bên góc phải bên trên cùng để truy cập tài khoản của bạn.\n" +
-                            "3) Tận hưởng thôi!\n" +
-                            "Trân trọng,\n" +
-                            "Đội ngũ HouseWareNLU\n" +
-                            AssetsProperties.getBaseURL()
-                    );
+                    emailbean.setMessage(GenerateEmail.getActiveEmail(url));
                     try {
                         EmailServices.sendMail(emailbean);
                     } catch (ApplicationException e) {

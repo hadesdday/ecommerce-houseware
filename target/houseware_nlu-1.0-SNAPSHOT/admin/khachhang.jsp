@@ -173,7 +173,8 @@
                             "<i class='ti-trash text-white'></i></a>";
                         var actions = editElm + delElm;
                         return actions;
-                    }
+                    },
+                    "sortable": false
                 },
             ],
             "columns": [
@@ -231,11 +232,9 @@
 </script>
 
 <script>
-    var tr;
-
     function onDelete(elm) {
         var firstColumn = $(elm).parents("tr").children().first();
-        var cid = Number(firstColumn.text());
+        var cid = firstColumn.text();
         $("input[name='cidDelete']").val(cid);
         showDeleteModal();
     }

@@ -38,9 +38,7 @@
                                         <ul class="ht-setting-list">
                                             <li><a href="${pageContext.request.contextPath}/change-password.jsp">Đổi
                                                 mật khẩu</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/my-account.jsp">My
-                                                Account</a></li>
-                                            <li><a href="#">Checkout</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/my-account.jsp">Tài khoản của tôi</a></li>
                                             <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
                                         </ul>
                                     </div>
@@ -62,7 +60,7 @@
                 <div class="col-lg-3">
                     <div class="logo pb-sm-30 pb-xs-30">
                         <a href="${pageContext.request.contextPath}/">
-                            <img loading="lazy" src="images/menu/logo/1.jpg" alt="">
+                            <img loading="lazy" src="https://raw.githubusercontent.com/hadesdday/a/main/logo_transparent.png" alt="" width="190" height="45" style="object-fit: cover">
                         </a>
                     </div>
                 </div>
@@ -99,13 +97,6 @@
                     <!-- Begin Header Middle Right Area -->
                     <div class="header-middle-right">
                         <ul class="hm-menu">
-                            <!-- Begin Header Middle Wishlist Area -->
-                            <li class="hm-wishlist">
-                                <a href="wishlist.html">
-                                    <span class="cart-item-count wishlist-item-count">0</span>
-                                    <i class="fa fa-heart-o"></i>
-                                </a>
-                            </li>
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
                             <li class="hm-minicart">
