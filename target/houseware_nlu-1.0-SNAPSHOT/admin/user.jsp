@@ -218,7 +218,8 @@
                             "<i class='ti-trash text-white'></i></a>";
                         var actions = editElm + delElm;
                         return actions;
-                    }
+                    },
+                    "sortable": false
                 },
             ],
             "columns": [

@@ -181,7 +181,8 @@
                     "targets": 1,
                     "render": function (data) {
                         return '<img src="${pageContext.request.contextPath}/img/' + data + '"width="50px" height="50px"/>';
-                    }
+                    },
+                    "sortable": false
                 },
                 {
                     "targets": 3,
@@ -193,7 +194,8 @@
                             "<i class='ti-trash text-white'></i></a>";
                         var actions = editElm + delElm;
                         return actions;
-                    }
+                    },
+                    "sortable": false
                 },
             ],
             "columns": [

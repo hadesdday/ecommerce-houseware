@@ -37,12 +37,6 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="paymentMethod">
                                     <option selected hidden disabled value="0">Chọn phương thức thanh toán</option>
-                                    <option value="BANK">Chuyển khoản ngân hàng</option>
-                                    <option value="COD">Thanh toán khi nhận hàng</option>
-                                    <option value="MOMO">Thanh toán qua ví điện tử momo
-                                    </option>
-                                    <option value="PAYPAL">Thanh toán qua ví điện tử paypal
-                                    </option>
                                 </select>
                             </div>
 
@@ -102,12 +96,6 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editpaymentMethod">
                                     <option selected hidden disabled value="0">Chọn phương thức thanh toán</option>
-                                    <option value="BANK">Chuyển khoản ngân hàng</option>
-                                    <option value="COD">Thanh toán khi nhận hàng</option>
-                                    <option value="MOMO">Thanh toán qua ví điện tử momo
-                                    </option>
-                                    <option value="PAYPAL">Thanh toán qua ví điện tử paypal
-                                    </option>
                                 </select>
                             </div>
 
@@ -238,7 +226,8 @@
                             "<i class='ti-trash text-white'></i></a>";
                         var actions = editElm + delElm;
                         return actions;
-                    }
+                    },
+                    "sortable": false
                 },
             ],
             "columns": [
@@ -251,6 +240,31 @@
                 {"data": "createdAt"},
             ],
         });
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/admin/payment-method",
+            method: "get",
+            success: function (data, textStatus, xhr) {
+                var lastEdit = $("select[name='editpaymentMethod'] option").last();
+                var lastAdd = $("select[name='paymentMethod'] option").last();
+                data.map((x) => {
+                    lastEdit.after("<option value='" + x["mapttt"] + "'>" + x["tenpttt"] + "</option>");
+                });
+                data.map((x) => {
+                    lastAdd.after("<option value='" + x["mapttt"] + "'>" + x["tenpttt"] + "</option>");
+                });
+
+                $('select').niceSelect();
+
+                $('select').on('change', function () {
+                    $('select').niceSelect('update');
+                })
+            },
+            error: function (data, textStatus, xhr) {
+                console.log("error while fetch payment method");
+                console.log(textStatus);
+            }
+        })
     });
 
     function reloadTable() {
@@ -348,6 +362,7 @@
         $("select[name='editpaymentMethod']").val(data.MAPTTT);
         $("input[name='edittotalPrice']").val(data.TRIGIA);
         $("select[name='editstatus']").val(data.TRANGTHAI);
+        $('select').niceSelect('update');
     }
 </script>
 

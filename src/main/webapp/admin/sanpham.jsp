@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="header.jsp" %>
@@ -55,9 +56,20 @@
                                 <input type="text" class="form-control" name="hangSP">
                             </div>
 
+                            <label>Hình ảnh sản phẩm</label>
+                            <div class="form-group">
+                                <form action="${pageContext.request.contextPath}/UploadFile" method="post"
+                                      enctype="multipart/form-data" id="uploadForm" class="uploadForm">
+                                    <input type="file" name="fileName" id="fileName">
+                                    <input type="hidden" name="filePath">
+                                    <br>
+                                    <button type="button" class="upload__submit" id="uploadSubmit">Upload</button>
+                                </form>
+                                <img src="" alt="404" id="img__add" width="50px" height="50px"/>
+                            </div>
+
                             <label>Thông tin sản phẩm</label>
                             <div class="input group mb-3">
-                                <%--                                <textarea name="ctSP" rows="15" cols="95%" class="text__details"></textarea>--%>
                                 <div id="add__editor"></div>
                             </div>
 
@@ -122,7 +134,6 @@
 
                             <label>Thông tin sản phẩm</label>
                             <div class="input group mb-3">
-                                <%--                                <textarea name="editctSP" rows="15" cols="95%" class="text__details"></textarea>--%>
                                 <div id="edit__editor"></div>
                             </div>
 
@@ -245,6 +256,12 @@
                     }
                 },
                 {
+                    "targets": 8,
+                    "render": function (data) {
+                        return data.slice(0, 50) + "...";
+                    }
+                },
+                {
                     "targets": 9,
                     "searchable": false,
                     "render": function (data, type, row) {
@@ -254,7 +271,8 @@
                             "<i class='ti-trash text-white'></i></a>";
                         var actions = editElm + delElm;
                         return actions;
-                    }
+                    },
+                    "sortable": false
                 },
             ],
             "columns": [
@@ -285,7 +303,6 @@
 
         ClassicEditor
             .create(document.querySelector('#edit__editor'), {
-                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
             })
             .then(editor => {
                 window.editor = editor;
@@ -308,6 +325,12 @@
             data.map((x) => {
                 lastAdd.after("<option value='" + x["ma_loaisp"] + "'>" + x["ten_loaisp"] + "</option>");
             });
+
+            $('select').niceSelect();
+
+            $('select').on('change', function () {
+                $('select').niceSelect('update');
+            })
         },
         error: function (data, textStatus, xhr) {
             console.log("error while fetch product category");
@@ -325,6 +348,29 @@
         $("#products__table").DataTable().columns.adjust().draw();
     }
 
+    $("#uploadSubmit").click(() => {
+        var form = document.getElementById("uploadForm");
+        if (document.getElementById("fileName").files.length === 0) {
+            toastr.error('Hình ảnh chưa được upload', 'Thất bại')
+        } else {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/UploadFile",
+                type: 'POST',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $("input[name='filePath']").val(data);
+                    $("img[id='img__add']").attr("src", "${pageContext.request.contextPath}/img/" + data);
+                    toastr.success('Upload hình ảnh thành công', 'Thành công')
+                },
+                error: function (data) {
+                    toastr.error('Upload hình ảnh thất bại', 'Thất bại')
+                }
+            });
+        }
+    });
+
     $(document).ready(function () {
         $("#add-product").click(function () {
             var maSP = $("input[name='maSP']").val();
@@ -335,8 +381,9 @@
             var hangSP = $("input[name='hangSP']").val();
             var slSP = $("input[name='slSP']").val();
             var active = $("select[name='active'] option:selected").val()
-            // var ctSP = $("textarea[name='ctSP']").val();
+            var url = $("input[name='filePath']").val();
             var ctSP = addEditor.getData();
+
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/add",
                 method: "POST",
@@ -349,7 +396,8 @@
                     hangSP: hangSP,
                     slSP: slSP,
                     active: active,
-                    ctSP: ctSP
+                    ctSP: ctSP,
+                    imageURL: url
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm sản phẩm mới thành công", "success");
@@ -410,10 +458,10 @@
         $("input[name='editHangSP']").val(data.thuonghieu);
         $("input[name='editSlSP']").val(data.soluongton);
         $("select[name='editActive']").val(data.active);
-        // $("textarea[name='editctSP']").val(data.mota);
         editEditor.setData(data.mota, function () {
             this.checkDirty();
         });
+        $('select').niceSelect('update');
     }
 
     function onEdit(element) {
@@ -475,7 +523,7 @@
     });
 </script>
 
-<%--end edit product--%>
+<script src="assets/js/lib/toastr/toastr.min.js"></script>
 <script src="assets/js/lib/sweetalert/sweetalert.min.js"></script>
 <script src="assets/js/lib/data-table/currency.js"></script>
 </body>
