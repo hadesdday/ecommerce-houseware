@@ -24,11 +24,12 @@ public class CheckoutDao {
 
     public Bill checkBill(int authenticated, int idkhachhang, String fullName, String email, String phoneNumber, String address, String ptThanhToan, String maGG, double triGia, Cart cart) {
         Integer id_hoadon = 0;
-        Customer sc = signinedCustomer(idkhachhang);
         if (authenticated == 1) {
+            System.out.println("idkhachhang:"+idkhachhang);
+            Customer sc = signinedCustomer(idkhachhang);
             if (sc == null) return null;
-            else
-                id_hoadon = insertBill(idkhachhang, ptThanhToan, maGG, triGia);
+            else{  System.out.println("auth ok");
+                id_hoadon = insertBill(idkhachhang, ptThanhToan, maGG, triGia);}
         } else {
             DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO KhachHang (Ten_KH,DiaChi,SoDT,Email) VALUES(?,?,?,?)")
                     .bind(0, fullName)
@@ -42,7 +43,7 @@ public class CheckoutDao {
 
         for (Product p : cart.getProducts()) {
             Integer finalId_hoadon = id_hoadon;
-            System.out.println(finalId_hoadon+"  "+p.getId_sanpham()+" "+p.getQuantitySold());
+            System.out.println("Aaaaaaaa"+finalId_hoadon+"  "+p.getId_sanpham()+" "+p.getQuantitySold());
             DbConnector.get().withHandle(h -> h.createUpdate("INSERT INTO chitiethoadon (id_hoadon,id_sanpham,soluong) VALUES(?,?,?)")
                     .bind(0, finalId_hoadon)
                     .bind(1, p.getId_sanpham())
