@@ -84,7 +84,7 @@
                                                     <!-- single-product-wrap start -->
                                                     <div class="single-product-wrap">
                                                         <div class="product-image">
-                                                            <a href="">
+                                                            <a href="${pageContext.request.contextPath}/ProductDetails?pid=${p.getId_sanpham()}">
                                                                 <img src="${pageContext.request.contextPath}/img/${p.getImageMain()}"
                                                                      alt="Li's Product Image">
                                                             </a>
