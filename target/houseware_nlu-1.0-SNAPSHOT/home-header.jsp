@@ -246,36 +246,35 @@
                                 <li class="dropdown-holder"><a>Thương hiệu</a>
                                     <ul class="hb-dropdown">
                                         <li class="sub-dropdown-holder"><a
-                                                href="${pageContext.request.contextPath}/ProductList?category=phillips">Phillips</a>
+                                                href="${pageContext.request.contextPath}/ProductList?category=phillips&pageN=1">Phillips</a>
 
                                         </li>
                                         <li class="sub-dropdown-holder"><a
-                                                href="${pageContext.request.contextPath}/ProductList?category=sunhouse">Sunhouse</a>
+                                                href="${pageContext.request.contextPath}/ProductList?category=sunhouse&pageN=1">Sunhouse</a>
 
                                         </li>
                                         <li class="sub-dropdown-holder"><a
-                                                href="${pageContext.request.contextPath}/ProductList?category=deawon">Deawoo</a>
+                                                href="${pageContext.request.contextPath}/ProductList?category=deawon&pageN=1">Deawoo</a>
 
                                         </li>
                                         <li class="sub-dropdown-holder"><a
-                                                href="${pageContext.request.contextPath}/ProductList?category=panasonic">Panasonic</a>
+                                                href="${pageContext.request.contextPath}/ProductList?category=panasonic&pageN=1">Panasonic</a>
 
                                         </li>
                                         <li class="sub-dropdown-holder"><a
-                                                href="${pageContext.request.contextPath}/ProductList?category=sauce">Sauce</a>
+                                                href="${pageContext.request.contextPath}/ProductList?category=sauce&pageN=1">Sauce</a>
 
                                         </li>
                                         <li class="sub-dropdown-holder"><a
-                                                href="${pageContext.request.contextPath}/ProductList?category=sharp">Sharp</a>
+                                                href="${pageContext.request.contextPath}/ProductList?category=sharp&pageN=1">Sharp</a>
 
                                         </li>
                                         <li class="sub-dropdown-holder"><a
-                                                href="${pageContext.request.contextPath}/ProductList?category=electrolux">Electrolux</a>
+                                                href="${pageContext.request.contextPath}/ProductList?category=electrolux&pageN=1">Electrolux</a>
 
                                         </li>
                                         <li class="sub-dropdown-holder"><a
-                                                href="${pageContext.request.contextPath}/ProductList?category=kangaroo">Kangaroo</a>
-
+                                                href="${pageContext.request.contextPath}/ProductList?category=kangaroo&pageN=1">Kangaroo</a>
                                         </li>
                                     </ul>
                                 </li>
