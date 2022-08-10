@@ -31,12 +31,11 @@ public class IndexController extends HttpServlet {
             for (int k = 1; k <= 5 - avgRating; k++) {
                 starItem += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
             }
-
             products.get(i).setAvgRating(starItem);
         }
 
         for (int i = 0; i < productsDiscount.size(); i++) {
-            String url = ProductServices.getInstance().getMainImageProduct(products.get(i).getId_sanpham());
+            String url = ProductServices.getInstance().getMainImageProduct(productsDiscount.get(i).getId_sanpham());
             productsDiscount.get(i).setImageMain(url);
             int avgRating = ProductServices.getInstance().getAverageRating(productsDiscount.get(i).getId_sanpham());
             String nonStar = "";
@@ -48,7 +47,6 @@ public class IndexController extends HttpServlet {
             for (int k = 1; k <= 5 - avgRating; k++) {
                 nonStar += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
             }
-
             productsDiscount.get(i).setAvgRating(nonStar);
         }
 
