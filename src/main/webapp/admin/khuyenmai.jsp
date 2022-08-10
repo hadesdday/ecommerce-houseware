@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:useBean id="saleList" scope="request" type="java.util.List"/>
 <%@include file="header.jsp" %>
 <title>Quản lý khuyến mãi | NLU</title>
 <div class="content-wrap">
@@ -50,7 +49,7 @@
                     </div>
                 </div>
 
-                <!-- modal sua thong tin hoa don -->
+
                 <div id="editModal" class="custom-modal">
                     <div class="custom-modal-content">
                         <div class="custom-modal-header">
@@ -59,7 +58,7 @@
                         </div>
                         <div class="custom-modal-body">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="editmaKM" hidden>
+                                <input type="text" class="form-control" name="editmaKM" disabled>
                             </div>
 
                             <label>Rate ( tỉ lệ )</label>
@@ -108,35 +107,16 @@
                         <div class="card">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
-                                           class="table table-striped table-bordered">
+                                    <table id="sale__table"
+                                           class="table table-striped table-bordered" width="100%">
                                         <thead>
                                         <tr>
-                                            <th>Mã khuyến mãi</th>
-                                            <th>Rating</th>
-                                            <th>Trạng thái</th>
-                                            <th>Hành động</th>
+                                            <th width="30%">Mã khuyến mãi</th>
+                                            <th width="30%">Rating</th>
+                                            <th width="30%">Trạng thái</th>
+                                            <th width="10%">Hành động</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <c:forEach items="${saleList}" var="item">
-                                            <tr>
-                                                <th>${item.id_km}</th>
-                                                <th>${item.rate * 100} %</th>
-                                                <th>${item.active == 1 ? "Hoạt động" : "Không hoạt động"}</th>
-                                                <td>
-                                                    <a class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" sid="${item.id_km}">
-                                                        <i class="ti-pencil text-white"></i>
-                                                    </a>
-                                                    <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" sid="${item.id_km}">
-                                                        <i class="ti-trash text-white"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -166,6 +146,57 @@
 
 <script>
     $(document).ready(function () {
+        $("#sale__table").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "${pageContext.request.contextPath}/admin/assets/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "${pageContext.request.contextPath}/admin/sale",
+                "dataSrc": ""
+            },
+            "columnDefs": [
+                {
+                    "targets": 3,
+                    "searchable": false,
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    },
+                    "sortable": false
+                },
+            ],
+            "columns": [
+                {"data": "id_km"},
+                {"data": "rate"},
+                {"data": "active"},
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#sale__table").DataTable().ajax.reload(null, false);
+        setFixedSize();
+    }
+
+    function setFixedSize() {
+        $("#sale__table").css("width", "100%");
+        $("#sale__table").DataTable().columns.adjust().draw();
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
         $("#add-sale").click(function () {
             var maKM = $("input[name='maKM']").val();
             var rate = Number($("input[name='rate']").val());
@@ -181,18 +212,7 @@
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm mã khuyến mãi thành công", "success");
-                    var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' sid='" + maKM + "'>"
-                        + "<i class='ti-pencil text-white'></i></a>";
-                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" sid="' + maKM + '">' +
-                        "<i class='ti-trash text-white'></i></a>";
-                    $('#bootstrap-data-table-export').DataTable().row.add(
-                        [
-                            maKM,
-                            rate + " %",
-                            isActive,
-                            editElm + "\n" + delElm
-                        ]
-                    ).draw(false);
+                    reloadTable();
                     clearValue();
                     closeModal();
                 },
@@ -211,8 +231,8 @@
     var tr;
 
     function onDelete(elm) {
-        var sid = $(elm).attr('sid');
-        tr = $(elm).parents("tr");
+        var firstColumn = $(elm).parents("tr").children().first();
+        var sid = firstColumn.text();
         $("input[name='sidDelete']").val(sid);
         showDeleteModal();
     }
@@ -232,8 +252,7 @@
             },
             success: function (data) {
                 swal("Thành công", "Xóa mã khuyến mãi thành công", "success")
-                tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -253,11 +272,9 @@
     }
 </script>
 <script>
-    var editRow;
-
     function onEdit(element) {
-        editRow = $(element).parents("tr").children();
-        var sid = $(element).attr('sid');
+        var firstColumn = $(element).parents("tr").children().first();
+        var sid = firstColumn.text();
         $.ajax({
             url: "${pageContext.request.contextPath}/sale/edit",
             method: "GET",
@@ -290,10 +307,9 @@
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật thông tin mã khuyến mãi thành công", "success");
+                reloadTable();
                 closeModal();
                 clearValue();
-                editRow.eq(1).text(rate + " %");
-                editRow.eq(2).text(isActive);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật thông tin mã khuyến mãi thất bại do sai dữ liệu đầu vào", "error");

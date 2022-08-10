@@ -14,8 +14,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(int ID_HOADON, String ID_KHACHHANG, String ID_MAGG, String MAPTTT, double TRIGIA, String TRANGTHAI) {
-        this.ID_HOADON = ID_HOADON;
+    public Order(String ID_KHACHHANG, String ID_MAGG, String MAPTTT, double TRIGIA, String TRANGTHAI) {
         this.ID_KHACHHANG = ID_KHACHHANG;
         this.ID_MAGG = ID_MAGG;
         this.MAPTTT = MAPTTT;

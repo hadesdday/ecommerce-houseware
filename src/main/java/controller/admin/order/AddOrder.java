@@ -20,17 +20,15 @@ public class AddOrder extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int maHD = Integer.parseInt(request.getParameter("maHD"));
         String maKH = request.getParameter("maKH");
         String coupon = request.getParameter("coupon");
         String paymentMethod = request.getParameter("paymentMethod");
         double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
         String status = request.getParameter("status");
 
-        Order newOrder = new Order(maHD, maKH, coupon, paymentMethod, totalPrice, status);
+        Order newOrder = new Order(maKH, coupon, paymentMethod, totalPrice, status);
 
         boolean isError = false;
-        if (maHD < 1) isError = true;
         if (maKH.trim().length() < 1) isError = true;
         if (paymentMethod.trim().length() < 1) isError = true;
         if (totalPrice < 1) isError = true;

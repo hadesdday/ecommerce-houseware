@@ -6884,6 +6884,7 @@ input[class="checkbox-payment"] {
 #view__more-comments {
     font-size: 120%;
     transition: 0.3s all ease-in-out;
+    cursor: pointer;
 }
 
 #view__more-comments:hover {
@@ -6892,4 +6893,8 @@ input[class="checkbox-payment"] {
 
 .cl__star {
     color: #fed700 !important;
+}
+
+select {
+    display: none;
 }

@@ -28,6 +28,11 @@
         deleteModal.style.display = "block";
     }
 
+    function clearValue() {
+        $('input').val("");
+        $("textarea").val("");
+    }
+
     function closeModal() {
         const modal = document.getElementById("addModal");
         const modalDelete = document.getElementById("confirmDelete");
@@ -35,10 +40,6 @@
         modal.style.display = "none";
         modalDelete.style.display = "none";
         editModal.style.display = "none";
-    }
-
-    function clearValue() {
-        $('input').val("");
-        $("textarea").val("");
+        $(".modal-backdrop").remove();
     }
 </script>

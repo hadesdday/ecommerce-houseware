@@ -17,6 +17,14 @@ public class PaymentMethod implements Serializable {
         this.mota = mota;
     }
 
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
+    }
+
     public String getMapttt() {
         return mapttt;
     }
@@ -39,13 +47,5 @@ public class PaymentMethod implements Serializable {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public String getMota() {
-        return mota;
-    }
-
-    public void setMota(String mota) {
-        this.mota = mota;
     }
 }

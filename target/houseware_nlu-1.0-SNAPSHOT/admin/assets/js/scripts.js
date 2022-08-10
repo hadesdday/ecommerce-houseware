@@ -87,9 +87,9 @@
     modal.style.display = "block";
   };
 
-  deleteAct.onclick = function () {
-    modalDelete.style.display = "block";
-  };
+  // deleteAct.onclick = function () {
+  //   modalDelete.style.display = "block";
+  // };
 
   iconClose.onclick = function () {
     modal.style.display = "none";
@@ -145,4 +145,5 @@
   closeBtn2.onclick = function () {
     modalDelete.style.display = "none";
   };
+
 })(jQuery);

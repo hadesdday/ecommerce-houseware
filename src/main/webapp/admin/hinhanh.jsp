@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp" %>
 
 <title>Quản lý hình ảnh | NLU</title>
@@ -30,13 +28,16 @@
                             </div>
 
                             <label>Hình ảnh</label>
-                            <form action="${pageContext.request.contextPath}/UploadFile" method="post"
-                                  enctype="multipart/form-data" id="uploadForm" class="uploadForm">
-                                <input type="file" name="fileName" id="fileName">
-                                <input type="hidden" name="filePath">
-                                <br>
-                                <button type="button" id="uploadSubmit">Upload</button>
-                            </form>
+                            <div class="form-group">
+                                <form action="${pageContext.request.contextPath}/UploadFile" method="post"
+                                      enctype="multipart/form-data" id="uploadForm" class="uploadForm">
+                                    <input type="file" name="fileName" id="fileName">
+                                    <input type="hidden" name="filePath">
+                                    <br>
+                                    <button type="button" class="upload__submit" id="uploadSubmit">Upload</button>
+                                </form>
+                                <img src="" alt="404" id="img__add" width="50px" height="50px"/>
+                            </div>
 
                             <label>Mã sản phẩm</label>
                             <div class="input-group mb-3">
@@ -51,7 +52,7 @@
                     </div>
                 </div>
 
-                <!-- modal sua thong tin hoa don -->
+
                 <div id="editModal" class="custom-modal">
                     <div class="custom-modal-content">
                         <div class="custom-modal-header">
@@ -59,8 +60,21 @@
                             <h2>Sửa thông tin hình ảnh</h2>
                         </div>
                         <div class="custom-modal-body">
+                            <label>Mã ảnh</label>
                             <div class="input-group mb-3">
-                                <input type="hidden" class="form-control" name="eid">
+                                <input type="text" class="form-control" name="eid" disabled>
+                            </div>
+                            <%--form edit--%>
+                            <label>Hình ảnh</label>
+                            <div class="form-group">
+                                <form action="${pageContext.request.contextPath}/UploadFile" method="post"
+                                      enctype="multipart/form-data" id="uploadUpdateForm" class="uploadForm">
+                                    <input type="file" name="fileName" id="updateFileName">
+                                    <input type="hidden" name="updateFilePath">
+                                    <br>
+                                    <button type="button" class="upload__submit" id="updateUploadSubmit">Upload</button>
+                                </form>
+                                <img src="" alt="404" id="update__img" width="50px" height="50px">
                             </div>
 
                             <label>Mã sản phẩm</label>
@@ -102,8 +116,8 @@
                         <div class="card">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
-                                           class="table table-striped table-bordered">
+                                    <table id="image__table"
+                                           class="table table-striped table-bordered" width="100%">
                                         <thead>
                                         <tr>
                                             <th>
@@ -115,37 +129,9 @@
                                             <th>
                                                 Mã sản phẩm
                                             </th>
-                                            <th>Hành động</th>
+                                            <th width="10%">Hành động</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <jsp:useBean id="imageList" scope="request" type="java.util.List"/>
-                                        <c:forEach items="${imageList}" var="item">
-                                            <tr>
-                                                <td>
-                                                        ${item.ID_ANH}
-                                                </td>
-                                                <td>
-                                                    <img src="${pageContext.request.contextPath}/img/${item.LINK_ANH}"
-                                                         width="50px"
-                                                         height="50px"/>
-                                                </td>
-                                                <td>
-                                                        ${item.ID_SANPHAM}
-                                                </td>
-                                                <td>
-                                                    <a class=" btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" iid=${item.ID_ANH}>
-                                                        <i class="ti-pencil text-white"></i>
-                                                    </a>
-                                                    <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" iid=${item.ID_ANH}>
-                                                        <i class="ti-trash text-white"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -172,10 +158,69 @@
 </div>
 <!-- Common -->
 <%@include file="footer.jsp" %>
+
+<script>
+    $(document).ready(function () {
+        $("#image__table").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "${pageContext.request.contextPath}/admin/assets/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "${pageContext.request.contextPath}/admin/image",
+                "dataSrc": ""
+            },
+            "columnDefs": [
+                {
+                    "targets": 1,
+                    "render": function (data) {
+                        return '<img src="${pageContext.request.contextPath}/img/' + data + '"width="50px" height="50px"/>';
+                    },
+                    "sortable": false
+                },
+                {
+                    "targets": 3,
+                    "searchable": false,
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    },
+                    "sortable": false
+                },
+            ],
+            "columns": [
+                {"data": "ID_ANH"},
+                {"data": "LINK_ANH"},
+                {"data": "ID_SANPHAM"},
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#image__table").DataTable().ajax.reload(null, false);
+        setFixedSize();
+    }
+
+    function setFixedSize() {
+        $("#image__table").css("width", "100%");
+        $("#image__table").DataTable().columns.adjust().draw();
+    }
+</script>
+
 <script>
     $("#uploadSubmit").click(() => {
         var form = document.getElementById("uploadForm");
-        if (document.getElementById("fileName").files.length == 0) {
+        if (document.getElementById("fileName").files.length === 0) {
             toastr.error('Hình ảnh chưa được upload', 'Thất bại')
         } else {
             $.ajax({
@@ -186,6 +231,29 @@
                 contentType: false,
                 success: function (data) {
                     $("input[name='filePath']").val(data);
+                    $("img[id='img__add']").attr("src", "${pageContext.request.contextPath}/img/" + data);
+                    toastr.success('Upload hình ảnh thành công', 'Thành công')
+                },
+                error: function (data) {
+                    toastr.error('Upload hình ảnh thất bại', 'Thất bại')
+                }
+            });
+        }
+    });
+    $("#updateUploadSubmit").click(() => {
+        var form = document.getElementById("uploadUpdateForm");
+        if (document.getElementById("updateFileName").files.length === 0) {
+            toastr.error('Hình ảnh chưa được upload', 'Thất bại')
+        } else {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/UploadFile",
+                type: 'POST',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $("input[name='updateFilePath']").val(data);
+                    $("img[id='update__img']").attr("src", "${pageContext.request.contextPath}/img/" + data);
                     toastr.success('Upload hình ảnh thành công', 'Thành công')
                 },
                 error: function (data) {
@@ -211,21 +279,7 @@
             },
             success: function (data, textStatus, xhr) {
                 swal("Thành công", "Thêm hình ảnh mới thành công", "success");
-                var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' iid='" + id + "'>"
-                    + "<i class='ti-pencil text-white'></i></a>";
-                var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" iid="' + id + '">' +
-                    "<i class='ti-trash text-white'></i></a>";
-
-                const imageElm = '<img src="${pageContext.request.contextPath}/img/' + url + '"width="50px" height="50px"/>';
-
-                $('#bootstrap-data-table-export').DataTable().row.add(
-                    [
-                        id,
-                        imageElm,
-                        maSP,
-                        editElm + "\n" + delElm
-                    ]
-                ).draw(false);
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -240,11 +294,9 @@
 </script>
 
 <script>
-    var tr;
-
     function onDelete(elm) {
-        var iid = $(elm).attr('iid');
-        tr = $(elm).parents("tr");
+        var firstColumn = $(elm).parents("tr").children().first();
+        var iid = firstColumn.text();
         $("input[name='iidDelete']").val(iid);
 
         $.ajax({
@@ -277,8 +329,7 @@
             },
             success: function (data) {
                 swal("Thành công", "Xóa hình ảnh thành công", "success")
-                tr.remove();
-                $('#bootstrap-data-table-export').DataTable().row(tr).remove().draw();
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -294,13 +345,13 @@
     function setEditModalValue(data) {
         $("input[name='eid']").val(data.ID_ANH);
         $("input[name='eMaSP']").val(data.ID_SANPHAM);
+        $("input[name='updateFilePath']").val(data.LINK_ANH);
+        $("img[id='update__img']").attr("src", "${pageContext.request.contextPath}/img/" + data.LINK_ANH);
     }
 
-    var editRow;
-
     function onEdit(element) {
-        editRow = $(element).parents("tr").children();
-        var iid = $(element).attr('iid');
+        var firstColumn = $(element).parents("tr").children().first();
+        var iid = firstColumn.text();
         $.ajax({
             url: "${pageContext.request.contextPath}/image/update",
             method: "GET",
@@ -320,19 +371,21 @@
     $("#editAction").click(() => {
         var id = $("input[name='eid']").val();
         var maSP = $("input[name='eMaSP']").val();
+        var url = $("input[name='updateFilePath']").val();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/image/update",
             method: "POST",
             data: {
                 id: id,
-                maSP: maSP
+                maSP: maSP,
+                url: url
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật thành công", "success");
+                reloadTable();
                 closeModal();
                 clearValue();
-                editRow.eq(2).text(maSP);
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật thất bại", "error");

@@ -1,10 +1,5 @@
-<%@ page import="java.lang.reflect.Array" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<jsp:useBean id="productList" scope="request" type="java.util.List"/>
-<jsp:useBean id="categoryList" scope="request" type="java.util.List"/>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="header.jsp" %>
 
@@ -43,9 +38,6 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="loaiSP">
                                     <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                    <c:forEach var="ct" items="${categoryList}">
-                                        <option value="${ct.getMa_loaisp()}">${ct.getTen_loaisp()}</option>
-                                    </c:forEach>
                                 </select>
                             </div>
 
@@ -64,9 +56,21 @@
                                 <input type="text" class="form-control" name="hangSP">
                             </div>
 
+                            <label>Hình ảnh sản phẩm</label>
+                            <div class="form-group">
+                                <form action="${pageContext.request.contextPath}/UploadFile" method="post"
+                                      enctype="multipart/form-data" id="uploadForm" class="uploadForm">
+                                    <input type="file" name="fileName" id="fileName">
+                                    <input type="hidden" name="filePath">
+                                    <br>
+                                    <button type="button" class="upload__submit" id="uploadSubmit">Upload</button>
+                                </form>
+                                <img src="" alt="404" id="img__add" width="50px" height="50px"/>
+                            </div>
+
                             <label>Thông tin sản phẩm</label>
                             <div class="input group mb-3">
-                                <textarea name="ctSP" rows="15" cols="95%" class="text__details"></textarea>
+                                <div id="add__editor"></div>
                             </div>
 
                             <label>Số lượng tồn kho</label>
@@ -90,7 +94,6 @@
                     </div>
                 </div>
 
-                <!-- modal sua thong tin san pham -->
                 <div id="editModal" class="custom-modal">
                     <div class="custom-modal-content">
                         <div class="custom-modal-header">
@@ -98,7 +101,6 @@
                             <h2>Sửa thông tin sản phẩm</h2>
                         </div>
                         <div class="custom-modal-body">
-                            <%--                            <label>Mã sản phẩm</label>--%>
                             <div class="input-group mb-3">
                                 <input type="hidden" class="form-control" name="editMaSP" disabled>
                             </div>
@@ -112,9 +114,6 @@
                             <div class="input-group mb-3">
                                 <select class="custom-select" name="editLoaiSP">
                                     <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                    <c:forEach var="ct" items="${categoryList}">
-                                        <option value="${ct.getMa_loaisp()}">${ct.getTen_loaisp()}</option>
-                                    </c:forEach>
                                 </select>
                             </div>
 
@@ -135,7 +134,7 @@
 
                             <label>Thông tin sản phẩm</label>
                             <div class="input group mb-3">
-                                <textarea name="editctSP" rows="15" cols="95%" class="text__details"></textarea>
+                                <div id="edit__editor"></div>
                             </div>
 
                             <label>Số lượng tồn kho</label>
@@ -184,8 +183,8 @@
                         <div class="card" style="margin-right: -15px;">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="products-table"
-                                           class="table table-striped table-bordered">
+                                    <table id="products__table"
+                                           class="table table-striped table-bordered" width="100%">
                                         <thead>
                                         <tr>
                                             <th>Mã sản phẩm</th>
@@ -197,34 +196,9 @@
                                             <th>Số lượng</th>
                                             <th>Active</th>
                                             <th>Mô tả</th>
-                                            <th>Hành động</th>
+                                            <th width="10%">Hành động</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <c:forEach items="${productList}" var="item">
-                                            <tr>
-                                                <td>${item.id_sanpham}</td>
-                                                <td>${item.ten_sp}</td>
-                                                <td>${item.ma_loaisp}</td>
-                                                <td>${item.gia} đ</td>
-                                                <td>${item.id_km}</td>
-                                                <td>${item.thuonghieu}</td>
-                                                <td>${item.soluongton}</td>
-                                                <td>${item.active}</td>
-                                                <td>${item.mota}</td>
-                                                <td>
-                                                    <a class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="onEdit(this)" pid="${item.id_sanpham}">
-                                                        <i class="ti-pencil text-white"></i>
-                                                    </a>
-                                                    <a class="btn rounded bg-danger delAct" id="deleteAction"
-                                                       onclick="onDelete(this)" pid="${item.id_sanpham}">
-                                                        <i class="ti-trash text-white"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -253,7 +227,150 @@
 <!-- Common -->
 <%@include file="script.jsp" %>
 <%--add product--%>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 <script>
+    var addEditor;
+    var editEditor;
+
+    $(document).ready(function () {
+        $("#products__table").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "${pageContext.request.contextPath}/admin/assets/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "${pageContext.request.contextPath}/admin/product",
+                "dataSrc": ""
+            },
+            "columnDefs": [
+                {
+                    "targets": 4,
+                    "render": function (data) {
+                        return (data === undefined || data === "") ? "" : data;
+                    }
+                },
+                {
+                    "targets": 8,
+                    "render": function (data) {
+                        return data.slice(0, 50) + "...";
+                    }
+                },
+                {
+                    "targets": 9,
+                    "searchable": false,
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    },
+                    "sortable": false
+                },
+            ],
+            "columns": [
+                {"data": "id_sanpham"},
+                {"data": "ten_sp"},
+                {"data": "ma_loaisp"},
+                {"data": "gia"},
+                {"data": "id_km"},
+                {"data": "thuonghieu"},
+                {"data": "soluongton"},
+                {"data": "active"},
+                {"data": "mota"},
+            ],
+        });
+
+        ClassicEditor
+            .create(document.querySelector('#add__editor'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+                defaultLanguage: 'vi'
+            })
+            .then(editor => {
+                window.editor = editor;
+                addEditor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#edit__editor'), {
+            })
+            .then(editor => {
+                window.editor = editor;
+                editEditor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    });
+
+    $.ajax({
+        url: "${pageContext.request.contextPath}/admin/category",
+        method: "get",
+        success: function (data, textStatus, xhr) {
+            var lastEdit = $("select[name='editLoaiSP'] option").last();
+            var lastAdd = $("select[name='loaiSP'] option").last();
+            data.map((x) => {
+                lastEdit.after("<option value='" + x["ma_loaisp"] + "'>" + x["ten_loaisp"] + "</option>");
+            });
+            data.map((x) => {
+                lastAdd.after("<option value='" + x["ma_loaisp"] + "'>" + x["ten_loaisp"] + "</option>");
+            });
+
+            $('select').niceSelect();
+
+            $('select').on('change', function () {
+                $('select').niceSelect('update');
+            })
+        },
+        error: function (data, textStatus, xhr) {
+            console.log("error while fetch product category");
+            console.log(textStatus);
+        }
+    })
+
+    function reloadTable() {
+        $("#products__table").DataTable().ajax.reload(null, false);
+        setFixedSize();
+    }
+
+    function setFixedSize() {
+        $("#products__table").css("width", "100%");
+        $("#products__table").DataTable().columns.adjust().draw();
+    }
+
+    $("#uploadSubmit").click(() => {
+        var form = document.getElementById("uploadForm");
+        if (document.getElementById("fileName").files.length === 0) {
+            toastr.error('Hình ảnh chưa được upload', 'Thất bại')
+        } else {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/UploadFile",
+                type: 'POST',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $("input[name='filePath']").val(data);
+                    $("img[id='img__add']").attr("src", "${pageContext.request.contextPath}/img/" + data);
+                    toastr.success('Upload hình ảnh thành công', 'Thành công')
+                },
+                error: function (data) {
+                    toastr.error('Upload hình ảnh thất bại', 'Thất bại')
+                }
+            });
+        }
+    });
+
     $(document).ready(function () {
         $("#add-product").click(function () {
             var maSP = $("input[name='maSP']").val();
@@ -264,7 +381,9 @@
             var hangSP = $("input[name='hangSP']").val();
             var slSP = $("input[name='slSP']").val();
             var active = $("select[name='active'] option:selected").val()
-            var ctSP = $("textarea[name='ctSP']").val();
+            var url = $("input[name='filePath']").val();
+            var ctSP = addEditor.getData();
+
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/add",
                 method: "POST",
@@ -277,30 +396,15 @@
                     hangSP: hangSP,
                     slSP: slSP,
                     active: active,
-                    ctSP: ctSP
+                    ctSP: ctSP,
+                    imageURL: url
                 },
                 success: function (data, textStatus, xhr) {
                     swal("Thành công", "Thêm sản phẩm mới thành công", "success");
-                    var editElm = '<a class="btn rounded bg-warning" id="editBtn" ' + "onclick='onEdit(this)' pid='" + maSP + "'>"
-                        + "<i class='ti-pencil text-white'></i></a>";
-                    var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" pid="' + maSP + '">' +
-                        "<i class='ti-trash text-white'></i></a>";
-                    $('#products-table').DataTable().row.add(
-                        [
-                            maSP,
-                            tenSP,
-                            loaiSP,
-                            giaSP + " đ",
-                            kmSP,
-                            hangSP,
-                            slSP,
-                            active,
-                            ctSP,
-                            editElm + "\n" + delElm
-                        ]
-                    ).draw(false);
+                    reloadTable();
                     clearValue();
                     closeModal();
+                    addEditor.setData("");
                 },
                 error: function (data, textStatus, xhr) {
                     if (data.status === 400 || data.status === 404 || data.status === 500)
@@ -311,14 +415,10 @@
             })
         })
     })
-</script>
-<%--end add product--%>
-<script>
-    var tr;
 
     function onDelete(elm) {
-        var pid = $(elm).attr('pid');
-        tr = $(elm).parents("tr");
+        var firstColumn = $(elm).parents("tr").children().first();
+        var pid = firstColumn.text();
         $("input[name='pidDelete']").val(pid);
         showDeleteModal();
     }
@@ -338,8 +438,7 @@
             },
             success: function (data) {
                 swal("Thành công", "Xóa sản phẩm thành công", "success")
-                tr.remove();
-                $('#products-table').DataTable().row(tr).remove().draw();
+                reloadTable();
                 clearValue();
                 closeModal();
             },
@@ -349,10 +448,7 @@
             }
         })
     })
-</script>
-<%--end delete product--%>
 
-<script>
     function setEditModalValue(data) {
         $("input[name='editMaSP']").val(data.id_sanpham);
         $("input[name='editTenSP']").val(data.ten_sp);
@@ -362,16 +458,15 @@
         $("input[name='editHangSP']").val(data.thuonghieu);
         $("input[name='editSlSP']").val(data.soluongton);
         $("select[name='editActive']").val(data.active);
-        $("textarea[name='editctSP']").val(data.mota);
+        editEditor.setData(data.mota, function () {
+            this.checkDirty();
+        });
+        $('select').niceSelect('update');
     }
-</script>
-<%--edit product--%>
-<script>
-    var editRow;
 
     function onEdit(element) {
-        editRow = $(element).parents("tr").children();
-        var pid = $(element).attr('pid');
+        var firstColumn = $(element).parents("tr").children().first();
+        var pid = firstColumn.text();
         $.ajax({
             url: "${pageContext.request.contextPath}/product/update",
             method: "GET",
@@ -397,7 +492,8 @@
         var hangSP = $("input[name='editHangSP']").val();
         var slSP = $("input[name='editSlSP']").val();
         var active = $("select[name='editActive'] option:selected").val();
-        var ctSP = $("textarea[name='editctSP']").val();
+        // var ctSP = $("textarea[name='editctSP']").val();
+        var ctSP = editEditor.getData();
 
         $.ajax({
             url: "${pageContext.request.contextPath}/product/update",
@@ -415,16 +511,10 @@
             },
             success: (data) => {
                 swal("Thành công", "Cập nhật sản phẩm thành công", "success");
+                reloadTable();
                 closeModal();
                 clearValue();
-                editRow.eq(1).text(tenSP);
-                editRow.eq(2).text(loaiSP);
-                editRow.eq(3).text(giaSP + " đ");
-                editRow.eq(4).text(kmSP);
-                editRow.eq(5).text(hangSP);
-                editRow.eq(6).text(slSP);
-                editRow.eq(7).text(active);
-                editRow.eq(8).text(ctSP);
+                editEditor.setData("");
             },
             error: (data) => {
                 swal("Thất bại", "Cập nhật sản phẩm thất bại do sai dữ liệu đầu vào", "error");
@@ -433,7 +523,7 @@
     });
 </script>
 
-<%--end edit product--%>
+<script src="assets/js/lib/toastr/toastr.min.js"></script>
 <script src="assets/js/lib/sweetalert/sweetalert.min.js"></script>
 <script src="assets/js/lib/data-table/currency.js"></script>
 </body>
