@@ -2,10 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="beans.Cart" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.*" %>
 <jsp:useBean id="categoryName" scope="request" type="java.lang.String"/>
 <%--<% String currentURL = "/houseware_nlu_war_exploded/ProductList?category=" + request.getParameter("category") + "&pageN=" + request.getAttribute("page");%>--%>
 <%
@@ -186,7 +183,9 @@
                                 <h2>Lọc sản phẩm</h2>
                             </div>
                             <!-- btn-clear-all start -->
-                            <button class="btn-clear-all mb-sm-30 mb-xs-30" ><a href="/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1">Xóa tất cả</a></button>
+                            <button class="btn-clear-all mb-sm-30 mb-xs-30"><a
+                                    href="/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1">Xóa
+                                tất cả</a></button>
                             <!-- btn-clear-all end -->
                             <!-- filter-sub-area start -->
                             <div class="filter-sub-area">
@@ -194,24 +193,32 @@
                                 <div class="categori-checkbox">
                                     <form action="#">
                                         <% String priceString;
-                                            ArrayList<String> priceArray=new ArrayList<>();
+                                            ArrayList<String> priceArray = new ArrayList<>();
                                             if (request.getParameter("price") != null && request.getParameter("price") != "" && request.getParameter("price") != "null") {
-                                                priceString=request.getParameter("price");
-                                                Collections.addAll(priceArray,priceString.split("-"));
+                                                priceString = request.getParameter("price");
+                                                Collections.addAll(priceArray, priceString.split("-"));
                                             }
                                         %>
 
                                         <ul>
-                                            <li><input type="checkbox" name="price" value="duoi1" <%=priceArray.contains("duoi1")?"checked":""%>><a href="#"></a><1
+                                            <li><input type="checkbox" name="price"
+                                                       value="duoi1" <%=priceArray.contains("duoi1")?"checked":""%>><a
+                                                    href="#"></a><1
                                                 triệu
                                             </li>
-                                            <li><input type="checkbox" name="price" value="1den3" <%=priceArray.contains("1den3")?"checked":""%>><a href="#"></a>1-3
+                                            <li><input type="checkbox" name="price"
+                                                       value="1den3" <%=priceArray.contains("1den3")?"checked":""%>><a
+                                                    href="#"></a>1-3
                                                 triệu
                                             </li>
-                                            <li><input type="checkbox" name="price" value="3den6" <%=priceArray.contains("3den6")?"checked":""%> ><a href="#"></a>3-6
+                                            <li><input type="checkbox" name="price"
+                                                       value="3den6" <%=priceArray.contains("3den6")?"checked":""%> ><a
+                                                    href="#"></a>3-6
                                                 triệu
                                             </li>
-                                            <li><input type="checkbox" name="price" value="tren6" <%=priceArray.contains("tren6")?"checked":""%>><a href="#"></a>>6
+                                            <li><input type="checkbox" name="price"
+                                                       value="tren6" <%=priceArray.contains("tren6")?"checked":""%>><a
+                                                    href="#"></a>>6
                                                 triệu
                                             </li>
                                         </ul>
@@ -225,31 +232,44 @@
                                 <div class="categori-checkbox">
                                     <form action="#">
                                         <% String branchString;
-                                            ArrayList<String> branchArray=new ArrayList<>();
+                                            ArrayList<String> branchArray = new ArrayList<>();
                                             if (request.getParameter("branch") != null && request.getParameter("branch") != "" && request.getParameter("branch") != "null") {
-                                                branchString=request.getParameter("price");
-                                                Collections.addAll(branchArray,branchString.split("-"));
+                                                branchString = request.getParameter("branch");
+                                                Collections.addAll(branchArray, branchString.split("-"));
+                                                for(String g:branchArray){
+                                                    System.out.println("branch:"+g);
+                                                }
                                             }
                                         %>
                                         <ul>
-                                            <li><input type="checkbox" name="branch" value="Philips" <%=branchArray.contains("Philips")?"checked":""%>><a
-                                                    href="#">Philips</a>
+                                            <%--                                            <li><input type="checkbox" name="branch" value="Philips" <%=branchArray.contains("Philips")?"checked":""%>><a--%>
+                                            <%--                                                    href="#">Philips</a>--%>
+                                            <%--                                            </li>--%>
+                                            <%--                                            <li><input type="checkbox" name="branch" value="Sunhouse" <%=branchArray.contains("Philips")?"checked":""%>><a--%>
+                                            <%--                                                    href="#">Sunhouse</a></li>--%>
+                                            <%--                                            <li><input type="checkbox" name="branch" value="Deawoo" <%=branchArray.contains("Deawoo")?"checked":""%>><a--%>
+                                            <%--                                                    href="#">Deawoo</a>--%>
+                                            <%--                                            </li>--%>
+                                            <%--                                            <li><input type="checkbox" name="branch" value="Panasonic" <%=branchArray.contains("Panasonic")?"checked":""%>><a--%>
+                                            <%--                                                    href="#">Panasonic</a></li>--%>
+                                            <%--                                            <li><input type="checkbox" name="branch" value="Sauce" <%=branchArray.contains("Sauce")?"checked":""%>><a href="#">Sauce</a>--%>
+                                            <%--                                            </li>--%>
+                                            <%--                                            <li><input type="checkbox" name="branch" value="Sharp" <%=branchArray.contains("Sharp")?"checked":""%>><a href="#">Sharp</a>--%>
+                                            <%--                                            </li>--%>
+                                            <%--                                            <li><input type="checkbox" name="branch" value="Electrolux" <%=branchArray.contains("Electrolux")?"checked":""%>><a href="#">Electrolux</a>--%>
+                                            <%--                                            </li>--%>
+                                            <%--                                            <li><input type="checkbox" name="branch" value="Kangaroo" <%=branchArray.contains("Kangaroo")?"checked":""%>><a--%>
+                                            <%--                                                    href="#">Kangaroo</a></li>--%>
+                                            <%
+                                                List<String> branchesList= (List<String>) request.getAttribute("branchesList");
+                                              for(String b:branchesList){
+                                            %>
+                                            <li><input type="checkbox" name="branch"
+                                                       value="<%=b%>" <%=branchArray.contains(b)?"checked":""%>>
+                                                <a><%=b%>
+                                                </a>
                                             </li>
-                                            <li><input type="checkbox" name="branch" value="Sunhouse" <%=branchArray.contains("Philips")?"checked":""%>><a
-                                                    href="#">Sunhouse</a></li>
-                                            <li><input type="checkbox" name="branch" value="Deawoo" <%=branchArray.contains("Deawoo")?"checked":""%>><a
-                                                    href="#">Deawoo</a>
-                                            </li>
-                                            <li><input type="checkbox" name="branch" value="Panasonic" <%=branchArray.contains("Panasonic")?"checked":""%>><a
-                                                    href="#">Panasonic</a></li>
-                                            <li><input type="checkbox" name="branch" value="Sauce" <%=branchArray.contains("Sauce")?"checked":""%>><a href="#">Sauce</a>
-                                            </li>
-                                            <li><input type="checkbox" name="branch" value="Sharp" <%=branchArray.contains("Sharp")?"checked":""%>><a href="#">Sharp</a>
-                                            </li>
-                                            <li><input type="checkbox" name="branch" value="Electrolux" <%=branchArray.contains("Electrolux")?"checked":""%>><a href="#">Electrolux</a>
-                                            </li>
-                                            <li><input type="checkbox" name="branch" value="Kangaroo" <%=branchArray.contains("Kangaroo")?"checked":""%>><a
-                                                    href="#">Kangaroo</a></li>
+                                            <%}%>
                                         </ul>
                                     </form>
                                 </div>

@@ -24,6 +24,10 @@ public class ProductServices {
         return ProductDAO.getInstance().getProductByCategory(cat, page, filter);
     }
 
+    public List<String> getListBranch(String cat) {
+        return ProductDAO.getInstance().getListBranch(cat);
+    }
+
     public List<Product> getAllProductByCategory(String cat, String filter) {
         return ProductDAO.getInstance().getAllProductByCategory(cat, filter);
     }
@@ -96,10 +100,11 @@ public class ProductServices {
         return ProductDAO.getInstance().getProductByCategory(cat);
     }
 
-    public List<Product> getProductBySearch(String cat,String search, int page, String filter) {
-        return ProductDAO.getInstance().getProductBySearch(cat,search, page, filter);
+    public List<Product> getProductBySearch(String cat, String search, int page, String filter) {
+        return ProductDAO.getInstance().getProductBySearch(cat, search, page, filter);
     }
-    public List<Product> getProductBySearch(String cat,String search, String filter) {
-        return ProductDAO.getInstance().getProductBySearch(cat,search, filter);
+
+    public List<Product> getProductBySearch(String cat, String search, String filter) {
+        return ProductDAO.getInstance().getProductBySearch(cat, search, filter);
     }
 }

@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 @WebServlet(name = "ProductListController", value = "/ProductList")
 public class ProductListController extends HttpServlet {
@@ -20,15 +18,15 @@ public class ProductListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int page = Integer.parseInt(request.getParameter("pageN"));
         request.setAttribute("page", page);
-        List<Product> productsAll=new ArrayList<>();
-        List<Product> products=new ArrayList<>();
+        List<Product> productsAll = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         String branchs = "";
         String prices = "";
         String priceQuery = "";
         String filterQuery = "";
         String category = "";
         String search = "";
-        Category ct=null;
+        Category ct = null;
         if (request.getParameter("branch") != null && request.getParameter("branch") != "" && request.getParameter("branch") != "null") {
             branchs = request.getParameter("branch");
             branchs = branchs.substring(0, branchs.length() - 1).replace("-", "' or thuonghieu='");
@@ -68,7 +66,7 @@ public class ProductListController extends HttpServlet {
         } else {
             filterQuery = "and (" + branchs + " and " + priceQuery + ")";
         }
-        System.out.println(filterQuery);
+//        System.out.println(filterQuery);
 
         if (request.getParameter("category") != null && request.getParameter("category") != "" && request.getParameter("category") != "null") {
             category = request.getParameter("category");
@@ -76,20 +74,16 @@ public class ProductListController extends HttpServlet {
             productsAll = ProductServices.getInstance().getAllProductByCategory(category, filterQuery);
             ct = ProductServices.getInstance().getCategory(category);
         }
-        if (request.getParameter("search") != null && request.getParameter("search") != "" && request.getParameter("search").compareTo("null")!=0) {
+        if (request.getParameter("search") != null && request.getParameter("search") != "" && request.getParameter("search").compareTo("null") != 0) {
             search = request.getParameter("search");
             System.out.println(search);
-            products = ProductServices.getInstance().getProductBySearch(category,search, page, filterQuery);
-            productsAll = ProductServices.getInstance().getProductBySearch(category,search, filterQuery);
+            products = ProductServices.getInstance().getProductBySearch(category, search, page, filterQuery);
+            productsAll = ProductServices.getInstance().getProductBySearch(category, search, filterQuery);
         }
-        System.out.println("product:"+products.size());
-        System.out.println("productall:"+productsAll.size());
+        System.out.println("product:" + products.size());
+        System.out.println("productall:" + productsAll.size());
         List<Product> emptyList = new ArrayList<>();
         List<Product> emptyList2 = new ArrayList<>();
-
-
-
-
         for (Product sp : products) {
             String sUrl = ProductServices.getInstance().getMainImageProduct(sp.getId_sanpham());
             int avgRate = ProductServices.getInstance().getAverageRating(sp.getId_sanpham());
@@ -110,6 +104,7 @@ public class ProductListController extends HttpServlet {
         for (Product sp : productsAll) {
             String sUrl = ProductServices.getInstance().getMainImageProduct(sp.getId_sanpham());
             int avgRate = ProductServices.getInstance().getAverageRating(sp.getId_sanpham());
+
             String starElm = "";
 
             for (int j = 1; j <= avgRate; j++) {
@@ -123,12 +118,14 @@ public class ProductListController extends HttpServlet {
             sp.setAvgRating(starElm);
             sp.setImageMain(sUrl);
         }
+        List<String> branchesList =ProductServices.getInstance().getListBranch(category);
 
+        request.setAttribute("branchesList", branchesList);
         if (products.size() > 0 && ct != null) {
             request.setAttribute("allProducts", productsAll);
             request.setAttribute("products", products);
             request.setAttribute("categoryName", ct.getTen_loaisp());
-        }else if(products.size() > 0 ){
+        } else if (products.size() > 0) {
             request.setAttribute("allProducts", productsAll);
             request.setAttribute("products", products);
             request.setAttribute("categoryName", "Sản phẩm");
