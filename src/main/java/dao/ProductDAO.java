@@ -20,7 +20,19 @@ public class ProductDAO {
         }
         return instance;
     }
+    public List<String> getListBranch(String cat){
+        try {
+            List<String> re = DbConnector.get().withHandle(h -> h.createQuery("SELECT DISTINCT thuonghieu FROM sanpham where ma_loaisp=?")
+                    .bind(0, cat)
+                    .mapTo(String.class)
+                    .stream().collect(Collectors.toList()));
+            return re;
+        } catch (Exception exception) {
+            System.out.print(exception);
+            return null;
 
+        }
+    }
     public List<Product> getProductByCategory(String cat, int page, String filter) {
         int begin = (page - 1) * 5;
         try {
