@@ -70,22 +70,7 @@
                     <!-- Begin Header Middle Searchbox Area -->
                     <form action="/houseware_nlu_war_exploded/ProductList" class="hm-searchbox">
                         <select name="category" class="nice-select select-search-category">
-<%--                            <option value="0">All</option>--%>
-                            <option value="noi-com">Nồi cơm điện</option>
-                            <option value="20">Máy vắt cam</option>
-                            <option value="22">Máy rửa chén</option>
-                            <option value="23">Máy xay thịt</option>
-                            <option value="24">Máy pha cà phê</option>
-                            <option value="25">Bếp từ hồng ngoại</option>
-                            <option value="26">Lò nướng bánh mì</option>
-                            <option value="27">Bình siêu tốc</option>
-                            <option value="28">Máy xay sinh tố</option>
-                            <option value="18">Nồi chính hãng</option>
-                            <option value="29">Bếp ga &amp; Bếp ga mini</option>
-                            <option value="30">Lò vi sóng</option>
-                            <option value="31">Nồi cơm mini</option>
-                            <option value="32">Dụng cụ nhà bếp</option>
-                            <option value="33">Nồi chiên không dầu</option>
+
 
                         </select>
 

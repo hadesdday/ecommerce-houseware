@@ -454,54 +454,53 @@
                         <div id="home1" class="tab-pane show fade in active">
                             <div class="row">
                                 <div class="product-active owl-carousel">
-                                    <div class="col-lg-12">
-                                        <!-- single-product-wrap start -->
-                                        <div class="single-product-wrap">
-                                            <div class="product-image">
-                                                <a href="product-details.jsp">
-                                                    <img loading="lazy" src="images/product/large-size/2.jpg"
-                                                         alt="Li's Product Image">
-                                                </a>
-                                                <span class="sticker">New</span>
-                                            </div>
-                                            <div class="product_desc">
-                                                <div class="product_desc_info">
-                                                    <div class="product-review">
-                                                        <h5 class="manufacturer">
-                                                            <a href="shop-right-sidebar.html">Graphic Corner</a>
-                                                        </h5>
-                                                        <div class="rating-box">
-                                                            <ul class="rating">
-                                                                <li><i class="fa fa-star-o"></i></li>
-                                                                <li><i class="fa fa-star-o"></i></li>
-                                                                <li><i class="fa fa-star-o"></i></li>
-                                                                <li class="no-star"><i class="fa fa-star-o"></i>
-                                                                </li>
-                                                                <li class="no-star"><i class="fa fa-star-o"></i>
-                                                                </li>
-                                                            </ul>
+                                    <jsp:useBean id="randomProducts" scope="request" type="java.util.List"/>
+                                    <c:forEach var="p" items="${randomProducts}">
+                                        <div class="col-lg-12">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap">
+                                                <div class="product-image">
+                                                    <a href="${pageContext.request.contextPath}/ProductDetails?pid=${p.getId_sanpham()}">
+                                                        <img loading="lazy"
+                                                             src="${pageContext.request.contextPath}/img/${p.getImageMain()}"
+                                                             alt="Li's Product Image">
+                                                    </a>
+                                                    <span class="sticker">New</span>
+                                                </div>
+                                                <div class="product_desc">
+                                                    <div class="product_desc_info">
+                                                        <div class="product-review">
+                                                            <h5 class="manufacturer">
+                                                                <a href="${pageContext.request.contextPath}/ProductList?category=${p.getMa_loaisp()}&pageN=1">${p.getMa_loaisp()}</a>
+                                                            </h5>
+                                                            <div class="rating-box">
+                                                                <ul class="rating">
+                                                                        ${p.getAvgRating()}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <h4><a class="product_name"
+                                                               href="${pageContext.request.contextPath}/ProductDetails?pid=${p.getId_sanpham()}">${p.getTen_sp()}</a>
+                                                        </h4>
+                                                        <div class="price-box">
+                                                            <fmt:setLocale value="vi-VN"/>
+                                                            <span class="new-price">
+                                                    <fmt:formatNumber value="${p.getGia()}" type="currency"/>
+                                                    </span>
                                                         </div>
                                                     </div>
-                                                    <h4><a class="product_name"
-                                                           href="product-details.jsp">Accusantium
-                                                        dolorem1</a></h4>
-                                                    <div class="price-box">
-                                                        <span class="new-price">$46.80</span>
+                                                    <div class="add-actions">
+                                                        <ul class="add-actions-link">
+                                                            <li class="add-cart active" pid="${p.getId_sanpham()}"
+                                                                path="${pageContext.request.contextPath}/AddToCart">Thêm Vào Giỏ
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="add-actions">
-                                                    <ul class="add-actions-link">
-                                                        <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                                        <li><a href="#" title="quick view" class="quick-view-btn"
-                                                               data-toggle="modal"
-                                                               data-target="#exampleModalCenter"><i
-                                                                class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
                                             </div>
+                                            <!-- single-product-wrap end -->
                                         </div>
-                                        <!-- single-product-wrap end -->
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
