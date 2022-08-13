@@ -132,7 +132,7 @@
                                             <div class="col-lg-6 col-md-6 pt-xs-15">
                                                 <p>
                                                     Đang
-                                                    hiện <%=(((int) request.getAttribute("page")) * 5 - 4 + "-" + (((int) request.getAttribute("page")) * 5 > allProducts.size() ? allProducts.size() : ((int) request.getAttribute("page")) * 5))%>
+                                                    hiện <%=(((int) request.getAttribute("page")) * 12-11 + "-" + (((int) request.getAttribute("page")) * 5 > allProducts.size() ? allProducts.size() : ((int) request.getAttribute("page")) * 12))%>
                                                     trong <%=allProducts.size()%> sản phẩm</p>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
@@ -144,8 +144,8 @@
                                                     </li>
 
                                                     <% int productCount = allProducts.size();
-                                                        int pageCount = (int) Math.round(productCount / 5);
-                                                        if (productCount % 5 != 0)
+                                                        int pageCount = (int) Math.round(productCount / 12);
+                                                        if (productCount % 12 != 0)
                                                             pageCount++;
                                                         if (request.getAttribute("page") == null)
                                                             request.setAttribute("page", 1);
@@ -154,15 +154,14 @@
 
                                                     <li class="<%=((int)request.getAttribute("page")==(i+1)?"active":"") %>">
                                                         <a
-                                                                href="<%=
-                                            "/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)+"&branch="+(request.getParameter("branch")==null?"":request.getParameter("branch"))+"&search="+request.getParameter("search")+"&price="+(request.getParameter("price")==null?"":request.getParameter("price"))
+                                                                href="${pageContext.request.contextPath}<%=
+                                            "/ProductList?category="+request.getParameter("category")+"&pageN="+(i+1)+"&branch="+(request.getParameter("branch")==null?"":request.getParameter("branch"))+"&search="+request.getParameter("search")+"&price="+(request.getParameter("price")==null?"":request.getParameter("price"))
                                             %>"><%=(i + 1)%>
                                                         </a></li>
                                                     <%}%>
                                                     <li>
                                                         <a
-                                                                href="
-<%="/houseware_nlu_war_exploded/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&search="+request.getParameter("search")+"&price="+request.getParameter("price")
+                                                                href="${pageContext.request.contextPath}<%="/ProductList?category="+request.getParameter("category")+"&pageN="+((int)request.getAttribute("page")<pageCount?(int)request.getAttribute("page")+1:pageCount)+"&branch="+request.getParameter("branch")+"&search="+request.getParameter("search")+"&price="+request.getParameter("price")
                                             %>"
                                                                 class="Next">Tiếp Theo<i
                                                                 class="fa fa-chevron-right"></i></a>
@@ -184,7 +183,7 @@
                             </div>
                             <!-- btn-clear-all start -->
                             <button class="btn-clear-all mb-sm-30 mb-xs-30"><a
-                                    href="/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1">Xóa
+                                    href="${pageContext.request.contextPath}/ProductList?category=<%=request.getParameter("category")%>&pageN=1">Xóa
                                 tất cả</a></button>
                             <!-- btn-clear-all end -->
                             <!-- filter-sub-area start -->
@@ -236,9 +235,6 @@
                                             if (request.getParameter("branch") != null && request.getParameter("branch") != "" && request.getParameter("branch") != "null") {
                                                 branchString = request.getParameter("branch");
                                                 Collections.addAll(branchArray, branchString.split("-"));
-                                                for(String g:branchArray){
-                                                    System.out.println("branch:"+g);
-                                                }
                                             }
                                         %>
                                         <ul>
@@ -261,8 +257,8 @@
                                             <%--                                            <li><input type="checkbox" name="branch" value="Kangaroo" <%=branchArray.contains("Kangaroo")?"checked":""%>><a--%>
                                             <%--                                                    href="#">Kangaroo</a></li>--%>
                                             <%
-                                                List<String> branchesList= (List<String>) request.getAttribute("branchesList");
-                                              for(String b:branchesList){
+                                                List<String> branchesList = (List<String>) request.getAttribute("branchesList");
+                                                for (String b : branchesList) {
                                             %>
                                             <li><input type="checkbox" name="branch"
                                                        value="<%=b%>" <%=branchArray.contains(b)?"checked":""%>>

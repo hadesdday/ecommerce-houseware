@@ -17,7 +17,7 @@ public class IndexController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = ProductServices.getInstance().getProductByMostSold();
         List<Product> productsDiscount = ProductServices.getInstance().getProductByDiscount();
-
+        List<Product> randomProducts=ProductServices.getInstance().getRandomProduct();
         for (int i = 0; i < products.size(); i++) {
             String url = ProductServices.getInstance().getMainImageProduct(products.get(i).getId_sanpham());
             products.get(i).setImageMain(url);
@@ -49,9 +49,25 @@ public class IndexController extends HttpServlet {
             }
             productsDiscount.get(i).setAvgRating(nonStar);
         }
+        for (int i = 0; i < randomProducts.size(); i++) {
+            String url = ProductServices.getInstance().getMainImageProduct(randomProducts.get(i).getId_sanpham());
+            randomProducts.get(i).setImageMain(url);
+            int avgRating = ProductServices.getInstance().getAverageRating(randomProducts.get(i).getId_sanpham());
+            String nonStar = "";
+
+            for (int j = 1; j <= avgRating; j++) {
+                nonStar += "<li><i class=\"fa fa-star-o\"></i></li>";
+            }
+
+            for (int k = 1; k <= 5 - avgRating; k++) {
+                nonStar += "<li class=\"no-star\"><i class=\"fa fa-star-o\"></i></li>";
+            }
+            randomProducts.get(i).setAvgRating(nonStar);
+        }
 
         request.setAttribute("mostSoldProducts", products);
         request.setAttribute("discountProducts", productsDiscount);
+        request.setAttribute("randomProducts", randomProducts);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

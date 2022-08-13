@@ -781,4 +781,27 @@
             }
         });
     });
-})(jQuery);
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "header", //Tên servlet
+            data: "name=" + name,  //Gán giá trị vào name mục đich để servlet nhận được Parameter
+            dataType: "json",
+            async: true,
+            cache: false,
+            success: function (result) {
+                var listSize = Object.keys(result).length;
+                console.log(result)
+                if (listSize > 0) {
+                    for (let i = 0; i < listSize; i++) {
+
+                    // $(".select-search-category ul").append("<option value='"+result[i].ma_loaisp+"'>"+result[i].ten_loaisp+"</option>")
+                        $(".select-search-category").append(new Option(result[i].ten_loaisp, result[i].ma_loaisp))
+                        $("select").niceSelect("update")
+                    }
+            }
+        }
+    });
+});
+})
+(jQuery);

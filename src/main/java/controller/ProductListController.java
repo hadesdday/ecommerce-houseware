@@ -27,13 +27,12 @@ public class ProductListController extends HttpServlet {
         String category = "";
         String search = "";
         Category ct = null;
-        if (request.getParameter("branch") != null && request.getParameter("branch") != "" && request.getParameter("branch") != "null") {
+        if (request.getParameter("branch") != null && request.getParameter("branch").equals("") && request.getParameter("branch").equals("null")) {
             branchs = request.getParameter("branch");
             branchs = branchs.substring(0, branchs.length() - 1).replace("-", "' or thuonghieu='");
             branchs = "(thuonghieu='" + branchs + "')";
         }
-
-        if (request.getParameter("price") != null & request.getParameter("price") != "" && request.getParameter("price") != "null") {
+        if (request.getParameter("price")!= null && request.getParameter("price").equals("") && request.getParameter("price").equals("null")) {
             prices = request.getParameter("price");
             StringTokenizer st = new StringTokenizer(prices, "-", false);
             while (st.hasMoreTokens()) {
