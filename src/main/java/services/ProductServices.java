@@ -35,7 +35,9 @@ public class ProductServices {
     public List<Product> getProductByMostSold() {
         return ProductDAO.getInstance().getProductByMostSold();
     }
-
+    public List<Product> getRandomProduct(){
+        return ProductDAO.getInstance().getRandomProduct();
+    }
     public double discountCodeRate(String code) {
         return ProductDAO.getInstance().discountCodeRate(code);
     }

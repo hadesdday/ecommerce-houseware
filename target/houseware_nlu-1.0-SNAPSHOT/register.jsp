@@ -74,7 +74,7 @@
 
                             <div class="col-md-12 mb-20">
                                 <label>Số điện thoại</label>
-                                <input class="mb-0 rounded" type="tel" placeholder="Số điện thoại" name="phone"
+                                <input class="mb-0 rounded" type="tel" placeholder="Số điện thoại" name="phone" maxlength="10"
                                 >
                             </div>
 
