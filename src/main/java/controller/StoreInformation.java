@@ -19,7 +19,7 @@ public class StoreInformation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<StoreInformationBean> list = DbConnector.get().withHandle(h ->
-                h.createQuery("select * from store_information").mapToBean(StoreInformationBean.class).stream().collect(Collectors.toList())
+                h.createQuery("select * from thongtincuahang").mapToBean(StoreInformationBean.class).stream().collect(Collectors.toList())
         );
         PrintWriter writer = response.getWriter();
         Gson gson = new Gson();
