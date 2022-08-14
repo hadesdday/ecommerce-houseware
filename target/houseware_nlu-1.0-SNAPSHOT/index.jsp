@@ -166,44 +166,48 @@
                     <div class="slider-area pt-sm-30 pt-xs-30">
                         <div class="slider-active owl-carousel">
                             <!-- Begin Single Slide Area -->
-                            <div class="single-slide align-center-left animation-style-02 bg-4">
-                                <div class="slider-progress"></div>
-                                <div class="slider-content">
-                                    <h5>Giảm Giá Kịch Sàn Lên Đến <span>50% </span> Tuần Này</h5>
-                                    <h2>Mua Ngay Hôm Nay</h2>
-                                    <h3>Giá Chỉ Từ <span>1.000.000đ</span></h3>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>
+
+                            <a href="${pageContext.request.contextPath}/">
+                                <div class="single-slide align-center-left animation-style-02 bg-4">
+                                    <div class="slider-progress"></div>
+                                    <div class="slider-content">
+
+                                        <%--                                    <h5>Giảm Giá Kịch Sàn Lên Đến <span>50% </span> Tuần Này</h5>--%>
+                                        <%--                                    <h2>Mua Ngay Hôm Nay</h2>--%>
+                                        <%--                                    <h3>Giá Chỉ Từ <span>1.000.000đ</span></h3>--%>
+                                        <%--                                    <div class="default-btn slide-btn">--%>
+                                        <%--                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>--%>
+                                        <%--                                    </div>--%>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                             <!-- Single Slide Area End Here -->
-                            <!-- Begin Single Slide Area -->
+                            <!-- Begin Single Slide Area -->  <a href="${pageContext.request.contextPath}/">
                             <div class="single-slide align-center-left animation-style-01 bg-5">
                                 <div class="slider-progress"></div>
                                 <div class="slider-content">
-                                    <h5>Xả Kho Giảm Giá</h5>
-                                    <h2>Giá Cực Sốc</h2>
-                                    <h3>Chỉ Từ <span>1.000.000đ</span></h3>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>
-                                    </div>
+                                    <%--                                    <h5>Xả Kho Giảm Giá</h5>--%>
+                                    <%--                                    <h2>Giá Cực Sốc</h2>--%>
+                                    <%--                                    <h3>Chỉ Từ <span>1.000.000đ</span></h3>--%>
+                                    <%--                                    <div class="default-btn slide-btn">--%>
+                                    <%--                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>--%>
+                                    <%--                                    </div>--%>
                                 </div>
-                            </div>
+                            </div></a>
                             <!-- Single Slide Area End Here -->
-                            <!-- Begin Single Slide Area -->
+                            <!-- Begin Single Slide Area -->  <a href="${pageContext.request.contextPath}/">
                             <div class="single-slide align-center-left animation-style-02 bg-6">
                                 <div class="slider-progress"></div>
                                 <div class="slider-content">
-                                    <h5>Thanh Toán Online Giảm Đến <span>300.000đ</span> Khi Thanh Toán</h5>
-                                    <h2>Thanh Toán Online Tiện Lợi</h2>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>
-                                    </div>
+                                    <%--                                    <h5>Thanh Toán Online Giảm Đến <span>300.000đ</span> Khi Thanh Toán</h5>--%>
+                                    <%--                                    <h2>Thanh Toán Online Tiện Lợi</h2>--%>
+                                    <%--                                    <div class="default-btn slide-btn">--%>
+                                    <%--                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>--%>
+                                    <%--                                    </div>--%>
                                 </div>
                             </div>
                             <!-- Single Slide Area End Here -->
-                        </div>
+                        </div></a>
                     </div>
                 </div>
                 <!-- Slider Area End Here -->
@@ -492,7 +496,8 @@
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
                                                             <li class="add-cart active" pid="${p.getId_sanpham()}"
-                                                                path="${pageContext.request.contextPath}/AddToCart">Thêm Vào Giỏ
+                                                                path="${pageContext.request.contextPath}/AddToCart">Thêm
+                                                                Vào Giỏ
                                                             </li>
                                                         </ul>
                                                     </div>
