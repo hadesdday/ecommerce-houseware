@@ -148,7 +148,7 @@
 
             $("#overlay").css("display", "block");
 
-            message += "\n" + "- IP : " + ip + "\n- Thành phố : " + city;
+            // message += "\n" + "- IP : " + ip + "\n- Thành phố : " + city;
 
             $.ajax({
                 url: "${pageContext.request.contextPath}/Contact",
@@ -157,6 +157,8 @@
                     fullname: fullname,
                     phone: phone,
                     content: message,
+                    ip: ip,
+                    city: city
                 },
                 success: function (data) {
                     $("#overlay").css("display", "none");
