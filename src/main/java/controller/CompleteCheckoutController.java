@@ -40,7 +40,6 @@ public class CompleteCheckoutController extends HttpServlet {
         String pttt = request.getParameter("payment");
 //            String maGG = request.getParameter("maGG");
 
-        System.out.println("pttt:" + pttt);
         Boolean fullnameError = false;
         Boolean addressError = false;
         Boolean emailError = false;
@@ -65,19 +64,16 @@ public class CompleteCheckoutController extends HttpServlet {
             ptttError = true;
         }
         Cart cart = (Cart) session.getAttribute("cart");
-        System.out.println("cart:" + cart.getProducts().size());
 
         if (cart == null || cart.getProducts().size() < 1) {
             response.sendError(HttpServletResponse.SC_CONFLICT);
         } else if (fullnameError || addressError || addressError || phoneError || ptttError) {
-            System.out.println("errorrrrrrr!!!!!!!");
             response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
 //                response.sendRedirect("Checkout");
 //                request.getRequestDispatcher("Checkout.jsp").forward(request,response);
         } else {
 //                session.setAttribute("authenticated", 0);
             int authenticated = session.getAttribute("authenticated") == null ? 0 : (int) session.getAttribute("authenticated");
-            System.out.println("authenticated:"+authenticated);
             if (authenticated == 1) {
                 User user = (User) session.getAttribute("user");
                 Customer c=(Customer) session.getAttribute("customer");
@@ -85,7 +81,6 @@ public class CompleteCheckoutController extends HttpServlet {
             } else {
                 CheckoutService.getInstance().checkBill(0, 0, fullname, email, phone, address, pttt, session.getAttribute("discountCode") == null ? "" : (String) session.getAttribute("discountCode"), Double.parseDouble(trigia), cart);
             }
-            System.out.println("not errorrrrrrr!!!!!!!");
 
 
 
