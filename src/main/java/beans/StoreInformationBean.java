@@ -3,33 +3,33 @@ package beans;
 import java.io.Serializable;
 
 public class StoreInformationBean implements Serializable {
-    private String address;
-    private String phone;
+    private String diachi;
+    private String sdt;
     private String email;
 
     public StoreInformationBean() {
     }
 
-    public StoreInformationBean(String address, String phone, String email) {
-        this.address = address;
-        this.phone = phone;
+    public StoreInformationBean(String diachi, String sdt, String email) {
+        this.diachi = diachi;
+        this.sdt = sdt;
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String setDiachi() {
+        return diachi;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDiachi(String diachi) {
+        this.diachi = diachi;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getSdt() {
+        return sdt;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
     }
 
     public String getEmail() {

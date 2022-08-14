@@ -806,11 +806,11 @@
             url: "StoreInformation",
             type: "GET",
             success: function (data) {
-                $("#store__address").text(data['address']);
+                $("#store__address").text(data['diachi']);
                 $("#store__email").text(data['email']);
                 $("#store__email").attr("href", "mailto:" + data['email']);
-                $("#store__phone").text(data['phone']);
-                $("#store__phone").attr("href", "tel:" + data['phone']);
+                $("#store__phone").text(data['sdt']);
+                $("#store__phone").attr("href", "tel:" + data['sdt']);
             }
         });
 
