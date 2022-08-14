@@ -85,15 +85,15 @@
                         <ul class="des">
                             <li>
                                 <span>Địa chỉ: </span>
-                                Khu Phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh
+                                <p id="store__address">Khu Phố 6, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh</p>
                             </li>
                             <li>
                                 <span>Số điện thoại: </span>
-                                <a href="tel:09876554321">0987654321</a>
+                                <a href="tel:09876554321" id="store__phone">0987654321</a>
                             </li>
                             <li>
                                 <span>Email: </span>
-                                <a href="mailto:devwebchichoo@gmail.com">devwebchichoo@gmail.com</a>
+                                <a href="mailto:devwebchichoo@gmail.com" id="store__email">devwebchichoo@gmail.com</a>
                             </li>
                         </ul>
                     </div>

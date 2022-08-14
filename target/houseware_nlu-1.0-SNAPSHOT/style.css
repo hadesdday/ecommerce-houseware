@@ -3211,9 +3211,9 @@ a.mean-expand,
 /*  2.7 Li's Static Home Banner
 /*----------------------------------------*/
 .li-static-home-image {
-    background-image: url(images/bg-banner/1.jpg);
-    background-size: cover;
-    height: 400px;
+    background-image: url(images/slider/top_selling.png);
+    background-size: 110%;
+    height: 100px;
     background-repeat: no-repeat;
 }
 
