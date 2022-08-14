@@ -1,6 +1,7 @@
 package controller.client;
 
 import beans.EmailMessage;
+import helper.GenerateEmail;
 import org.omg.CORBA.portable.ApplicationException;
 import services.EmailServices;
 
@@ -23,17 +24,13 @@ public class Contact extends HttpServlet {
         String fullname = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String content = request.getParameter("content");
+        String ip = request.getParameter("ip");
+        String city = request.getParameter("city");
 
         EmailMessage emailbean = new EmailMessage();
         emailbean.setTo("devwebchichoo@gmail.com");
         emailbean.setSubject("Tin nhắn mới từ khách hàng");
-        emailbean.setMessage("Một khách hàng đã gửi tin nhắn đến cửa hàng\n"
-                + "Thông tin tin nhắn : \n" +
-                "- Họ và Tên : " + fullname + "\n" +
-                "- Số điện thoại : " + phone + "\n" +
-                "- Nội dung : " + content + "\n" +
-                "- Ngày giờ : " + new Date()
-        );
+        emailbean.setMessage(GenerateEmail.getContactEmail(fullname, phone, content, ip, city, new Date().toString()));
         try {
             EmailServices.sendMail(emailbean);
         } catch (ApplicationException e) {
