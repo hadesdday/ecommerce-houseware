@@ -19,24 +19,17 @@ public class CheckoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
         List<PaymentMethod> paymentMethodList = PaymentMethodServices.getInstance().getPaymentMethod();
-        for(PaymentMethod pm:paymentMethodList){
-            System.out.println(pm.getTenpttt());
-        }
 
         Cart cart =(Cart) session.getAttribute("cart");
         if(cart==null) {
             cart = Cart.getInstance();
             session.setAttribute("cart",cart);
         }
-//        request.setAttribute("cart",cart);
         request.setAttribute("paymentMethodList2", paymentMethodList);
         int authenticated=  session.getAttribute("authenticated")==null?0:(int)session.getAttribute("authenticated");
-        System.out.println(authenticated);
         if(authenticated==1){
             User user = (User) session.getAttribute("user");
-            System.out.println(user.getId_khachhang());
             Customer c= (Customer)  session.getAttribute("customer");
-            System.out.println(c.getTen_kh());
 //            session.setAttribute("khachhang",c);
         }
         request.getRequestDispatcher("/Checkout.jsp").forward(request,response);
@@ -48,9 +41,7 @@ public class CheckoutController extends HttpServlet {
         String id=request.getParameter("id");
         Cart cart=(Cart) session.getAttribute("cart");
         if(cart==null) cart=Cart.getInstance();
-        System.out.print("đasadasdsadasd"+cart.getProducts().size());
         Product remove=cart.remove(id);
-        System.out.print("remove"+remove);
         session.setAttribute("cart",cart);
         if(remove==null) response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
