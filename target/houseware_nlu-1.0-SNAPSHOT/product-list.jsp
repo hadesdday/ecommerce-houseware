@@ -486,7 +486,7 @@
         $('input[type="checkbox"]').click(function () {
             getFilters();
             $.ajax({
-                url: "/houseware_nlu_war_exploded/ProductList",
+                url: "${pageContext.request.contextPath}/ProductList",
                 method: "GET",
                 data: {
                     pageN: 1,
@@ -496,10 +496,10 @@
 
                 },
                 success: function (data) {
-                    $(".shop-product-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .product-list")
+                    $(".shop-product-area").load("${pageContext.request.contextPath}/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .product-list")
 
-                    $(".paginatoin-area").load("/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .paging")
-                    window.history.pushState("", "", "/houseware_nlu_war_exploded/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs);
+                    $(".paginatoin-area").load("${pageContext.request.contextPath}/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .paging")
+                    window.history.pushState("", "", "${pageContext.request.contextPath}/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs);
                 },
                 error: function (data) {
 

@@ -27,12 +27,12 @@ public class ProductListController extends HttpServlet {
         String category = "";
         String search = "";
         Category ct = null;
-        if (request.getParameter("branch") != null && request.getParameter("branch").equals("") && request.getParameter("branch").equals("null")) {
+        if (request.getParameter("branch") != null && !request.getParameter("branch").equals("") && !request.getParameter("branch").equals("null")) {
             branchs = request.getParameter("branch");
             branchs = branchs.substring(0, branchs.length() - 1).replace("-", "' or thuonghieu='");
             branchs = "(thuonghieu='" + branchs + "')";
         }
-        if (request.getParameter("price")!= null && request.getParameter("price").equals("") && request.getParameter("price").equals("null")) {
+        if (request.getParameter("price")!= null && !request.getParameter("price").equals("") && !request.getParameter("price").equals("null")) {
             prices = request.getParameter("price");
             StringTokenizer st = new StringTokenizer(prices, "-", false);
             while (st.hasMoreTokens()) {
@@ -65,7 +65,7 @@ public class ProductListController extends HttpServlet {
         } else {
             filterQuery = "and (" + branchs + " and " + priceQuery + ")";
         }
-//        System.out.println(filterQuery);
+
 
         if (request.getParameter("category") != null && request.getParameter("category") != "" && request.getParameter("category") != "null") {
             category = request.getParameter("category");
@@ -75,12 +75,10 @@ public class ProductListController extends HttpServlet {
         }
         if (request.getParameter("search") != null && request.getParameter("search") != "" && request.getParameter("search").compareTo("null") != 0) {
             search = request.getParameter("search");
-            System.out.println(search);
             products = ProductServices.getInstance().getProductBySearch(category, search, page, filterQuery);
             productsAll = ProductServices.getInstance().getProductBySearch(category, search, filterQuery);
         }
-        System.out.println("product:" + products.size());
-        System.out.println("productall:" + productsAll.size());
+
         List<Product> emptyList = new ArrayList<>();
         List<Product> emptyList2 = new ArrayList<>();
         for (Product sp : products) {
