@@ -75,15 +75,15 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="coupon-all">
-                                <div class="coupon">
-                                    <form method="post"
-                                          action="${pageContext.request.contextPath}/BillDiscountController"
-                                          id="discount-form">
-                                        <input id="coupon_code" class="input-text" name="coupon_code" value=""
-                                               placeholder="Mã khuyến mãi" type="text">
-                                        <input class="button" name="apply_coupon" value="Áp dụng" type="submit">
-                                    </form>
-                                </div>
+<%--                                <div class="coupon">--%>
+<%--                                    <form method="post"--%>
+<%--                                          action="${pageContext.request.contextPath}/BillDiscountController"--%>
+<%--                                          id="discount-form">--%>
+<%--                                        <input id="coupon_code" class="input-text" name="coupon_code" value=""--%>
+<%--                                               placeholder="Mã khuyến mãi" type="text">--%>
+<%--                                        <input class="button" name="apply_coupon" value="Áp dụng" type="submit">--%>
+<%--                                    </form>--%>
+<%--                                </div>--%>
                                 <div class="coupon2">
                                     <form>
                                         <input class="button" name="update_cart" value="cập nhật giỏ hàng"

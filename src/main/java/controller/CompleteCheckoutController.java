@@ -64,7 +64,6 @@ public class CompleteCheckoutController extends HttpServlet {
             ptttError = true;
         }
         Cart cart = (Cart) session.getAttribute("cart");
-
         if (cart == null || cart.getProducts().size() < 1) {
             response.sendError(HttpServletResponse.SC_CONFLICT);
         } else if (fullnameError || addressError || addressError || phoneError || ptttError) {
@@ -95,10 +94,11 @@ public class CompleteCheckoutController extends HttpServlet {
             } catch (ApplicationException e) {
                 e.printStackTrace();
             }
-            response.sendRedirect("success-checkout.jsp");
+
             cart = null;
             session.setAttribute("discountCode", null);
             session.setAttribute("cart", cart);
+            response.sendRedirect("success-checkout.jsp");
         }
 //        }
     }
