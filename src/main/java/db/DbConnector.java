@@ -12,8 +12,8 @@ public class DbConnector {
 
     private static void makeConnect() {
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL("jdbc:mysql://" + getDbHost()  + "/" + getDbName());
-//        dataSource.setURL("jdbc:mysql://" + getDbHost() + ":" + getDbPort() + "/" + getDbName());
+//        dataSource.setURL("jdbc:mysql://" + getDbHost()  + "/" + getDbName());
+        dataSource.setURL("jdbc:mysql://" + getDbHost() + ":" + getDbPort() + "/" + getDbName());
         dataSource.setUser(getUsername());
         dataSource.setPassword(getPassword());
         try {

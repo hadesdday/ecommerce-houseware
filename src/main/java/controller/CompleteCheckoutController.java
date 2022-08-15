@@ -95,10 +95,11 @@ public class CompleteCheckoutController extends HttpServlet {
             } catch (ApplicationException e) {
                 e.printStackTrace();
             }
-            response.sendRedirect("success-checkout.jsp");
+
             cart = null;
             session.setAttribute("discountCode", null);
             session.setAttribute("cart", cart);
+            response.sendRedirect("success-checkout.jsp");
         }
 //        }
     }

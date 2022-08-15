@@ -50,6 +50,11 @@
     <!-- Begin Li's Content Wraper Area -->
     <div class="content-wraper pt-60 pb-60 pt-sm-30 pt-xs-30">
         <div class="container">
+            <div id="overlay">
+                <div id="overlay__elm">
+                    <img src="images/loading_overlay.gif" alt="404">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-9 order-2 order-lg-1 order-sm-1">
                     <!-- Begin Li's Banner Area -->
@@ -484,6 +489,7 @@
 
         getFilters();
         $('input[type="checkbox"]').click(function () {
+            $("#overlay").css("display", "block");
             getFilters();
             $.ajax({
                 url: "${pageContext.request.contextPath}/ProductList",
@@ -496,13 +502,14 @@
 
                 },
                 success: function (data) {
+                    $("#overlay").css("display", "none");
                     $(".shop-product-area").load("${pageContext.request.contextPath}/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .product-list")
 
                     $(".paginatoin-area").load("${pageContext.request.contextPath}/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs + " .paging")
                     window.history.pushState("", "", "${pageContext.request.contextPath}/ProductList?category=<%=request.getParameter("category")%>&pageN=1&price=" + prices + "&branch=" + branchs);
                 },
                 error: function (data) {
-
+                    $("#overlay").css("display", "none");
                 }
             });
 

@@ -603,7 +603,7 @@
                 payment: payment
             },
             success: (data) => {
-                alert("Thành công")
+
                 $("#overlay").css("display", "none");
                 // swal("Thành công", "Cập nhật phương thức thanh toán thành công", "success");
                 // editRow.eq(1).text(name);
@@ -611,12 +611,33 @@
             },
             error: (data) => {
                 $("#overlay").css("display", "none");
+                let errorText=""
                 if (data.status === 406) {
+                    errorText="Thất bại Thông tin đã nhập chưa chính xác vui lòng kiểm tra lại";
+                    // alert("Thất bại Thông tin đã nhập chưa chính xác vui lòng kiểm tra lại");
 
-                    alert("Thất bại Thông tin đã nhập chưa chính xác vui lòng kiểm tra lại");
                 } else if (data.status === 409)
-                    alert("Thất bại Giỏ hàng đang trống");
+                    // alert("Thất bại Giỏ hàng đang trống");
+                    errorText="Thất bại Giỏ hàng đang trống";
+                Command: toastr["error"](errorText)
 
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
                 // swal("Thất bại", "Cập nhật phương thức thanh toán thất bại do sai dữ liệu đầu vào", "error");
             }
         });
