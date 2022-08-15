@@ -795,13 +795,25 @@
                 if (listSize > 0) {
                     for (let i = 0; i < listSize; i++) {
 
-                    // $(".select-search-category ul").append("<option value='"+result[i].ma_loaisp+"'>"+result[i].ten_loaisp+"</option>")
+                        // $(".select-search-category ul").append("<option value='"+result[i].ma_loaisp+"'>"+result[i].ten_loaisp+"</option>")
                         $(".select-search-category").append(new Option(result[i].ten_loaisp, result[i].ma_loaisp))
                         $("select").niceSelect("update")
                     }
+                }
             }
-        }
+        });
+        $.ajax({
+            url: "StoreInformation",
+            type: "GET",
+            success: function (data) {
+                $("#store__address").text(data['diachi']);
+                $("#store__email").text(data['email']);
+                $("#store__email").attr("href", "mailto:" + data['email']);
+                $("#store__phone").text(data['sdt']);
+                $("#store__phone").attr("href", "tel:" + data['sdt']);
+            }
+        });
+
     });
-});
 })
 (jQuery);

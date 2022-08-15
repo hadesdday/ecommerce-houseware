@@ -166,42 +166,48 @@
                     <div class="slider-area pt-sm-30 pt-xs-30">
                         <div class="slider-active owl-carousel">
                             <!-- Begin Single Slide Area -->
-                            <div class="single-slide align-center-left animation-style-02 bg-4">
-                                <div class="slider-progress"></div>
-                                <div class="slider-content">
-                                    <h5>Giảm Giá Kịch Sàn Lên Đến <span>50% </span> Tuần Này</h5>
-                                    <h2>Mua Ngay Hôm Nay</h2>
-                                    <h3>Giá Chỉ Từ <span>1.000.000đ</span></h3>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>
+
+                            <a href="${pageContext.request.contextPath}/">
+                                <div class="single-slide align-center-left animation-style-02 bg-4">
+                                    <div class="slider-progress"></div>
+                                    <div class="slider-content">
+
+                                        <%--                                    <h5>Giảm Giá Kịch Sàn Lên Đến <span>50% </span> Tuần Này</h5>--%>
+                                        <%--                                    <h2>Mua Ngay Hôm Nay</h2>--%>
+                                        <%--                                    <h3>Giá Chỉ Từ <span>1.000.000đ</span></h3>--%>
+                                        <%--                                    <div class="default-btn slide-btn">--%>
+                                        <%--                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>--%>
+                                        <%--                                    </div>--%>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                             <!-- Single Slide Area End Here -->
-                            <!-- Begin Single Slide Area -->
+                            <!-- Begin Single Slide Area --> <a href="${pageContext.request.contextPath}/">
                             <div class="single-slide align-center-left animation-style-01 bg-5">
                                 <div class="slider-progress"></div>
                                 <div class="slider-content">
-                                    <h5>Xả Kho Giảm Giá</h5>
-                                    <h2>Giá Cực Sốc</h2>
-                                    <h3>Chỉ Từ <span>1.000.000đ</span></h3>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>
-                                    </div>
+                                    <%--                                    <h5>Xả Kho Giảm Giá</h5>--%>
+                                    <%--                                    <h2>Giá Cực Sốc</h2>--%>
+                                    <%--                                    <h3>Chỉ Từ <span>1.000.000đ</span></h3>--%>
+                                    <%--                                    <div class="default-btn slide-btn">--%>
+                                    <%--                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>--%>
+                                    <%--                                    </div>--%>
                                 </div>
                             </div>
+                        </a>
                             <!-- Single Slide Area End Here -->
-                            <!-- Begin Single Slide Area -->
+                            <!-- Begin Single Slide Area --> <a href="${pageContext.request.contextPath}/">
                             <div class="single-slide align-center-left animation-style-02 bg-6">
                                 <div class="slider-progress"></div>
                                 <div class="slider-content">
-                                    <h5>Thanh Toán Online Giảm Đến <span>300.000đ</span> Khi Thanh Toán</h5>
-                                    <h2>Thanh Toán Online Tiện Lợi</h2>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>
-                                    </div>
+                                    <%--                                    <h5>Thanh Toán Online Giảm Đến <span>300.000đ</span> Khi Thanh Toán</h5>--%>
+                                    <%--                                    <h2>Thanh Toán Online Tiện Lợi</h2>--%>
+                                    <%--                                    <div class="default-btn slide-btn">--%>
+                                    <%--                                        <a class="links" href="${pageContext.request.contextPath}/">Mua Ngay</a>--%>
+                                    <%--                                    </div>--%>
                                 </div>
                             </div>
+                        </a>
                             <!-- Single Slide Area End Here -->
                         </div>
                     </div>
@@ -324,38 +330,18 @@
     </section>
     <!-- Li's Special Product Area End Here -->
     <!-- Begin Li's Laptops Product | Home V2 Area -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="li-static-home-image"></div>
+            </div>
+        </div>
+    </div>
     <section class="product-area li-laptop-product li-laptop-product-2 pb-45" id="mua-nhieu">
         <div class="container">
             <div class="row">
                 <!-- Begin Li's Section Area -->
                 <div class="col-lg-12">
-                    <div class="li-section-title">
-                        <h2>
-                            <span>Sản phẩm mua nhiều</span>
-                        </h2>
-                    </div>
-                    <div class="li-banner-2 pt-15">
-                        <div class="row">
-                            <!-- Begin Single Banner Area -->
-                            <div class="col-lg-6 col-md-6">
-                                <div class="single-banner">
-                                    <a>
-                                        <img loading="lazy" src="images/banner/bn5.png" alt="Li's Static Banner">
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Single Banner Area End Here -->
-                            <!-- Begin Single Banner Area -->
-                            <div class="col-lg-6 col-md-6">
-                                <div class="single-banner pt-xs-30">
-                                    <a>
-                                        <img loading="lazy" src="images/banner/bn6.png" alt="Li's Static Banner">
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Single Banner Area End Here -->
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="product-active owl-carousel">
                             <jsp:useBean id="mostSoldProducts" scope="request" type="java.util.List"/>
@@ -412,31 +398,6 @@
             </div>
         </div>
     </section>
-    <div class="li-static-home">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Begin Li's Static Home Image Area -->
-                    <div class="li-static-home-image"></div>
-                    <!-- Li's Static Home Image Area End Here -->
-                    <!-- Begin Li's Static Home Content Area -->
-                    <div class="li-static-home-content">
-                        <p>Săn sale mỗi ngày</p>
-                        <h2>Voucher cực xịn</h2>
-                        <h2>Sale khủng mỗi ngày</h2>
-                        <p class="schedule">
-                            Giảm giá lên đến
-                            <span>500.000đ</span>
-                        </p>
-                        <div class="default-btn">
-                            <a href="${pageContext.request.contextPath}/" class="links">Mua Ngay</a>
-                        </div>
-                    </div>
-                    <!-- Li's Static Home Content Area End Here -->
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Li's Static Home Area End Here -->
     <!-- Begin Li's Trending Product | Home V2 Area -->
     <section class="product-area li-trending-product li-trending-product-2 pt-60 pb-45" id="noi-bat">
@@ -492,7 +453,8 @@
                                                     <div class="add-actions">
                                                         <ul class="add-actions-link">
                                                             <li class="add-cart active" pid="${p.getId_sanpham()}"
-                                                                path="${pageContext.request.contextPath}/AddToCart">Thêm Vào Giỏ
+                                                                path="${pageContext.request.contextPath}/AddToCart">Thêm
+                                                                Vào Giỏ
                                                             </li>
                                                         </ul>
                                                     </div>
