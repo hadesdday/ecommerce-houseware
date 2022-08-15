@@ -576,6 +576,7 @@
 <script src="js/jquery.nice-select.min.js"></script>
 <!-- ScrollUp js -->
 <script src="js/scrollUp.min.js"></script>
+<script src="admin/assets/js/lib/toastr/toastr.min.js"></script>
 <!-- Main/Activator js -->
 <script src="js/main.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
@@ -614,11 +615,11 @@
                 let errorText=""
                 if (data.status === 406) {
                     errorText="Thất bại Thông tin đã nhập chưa chính xác vui lòng kiểm tra lại";
-                    // alert("Thất bại Thông tin đã nhập chưa chính xác vui lòng kiểm tra lại");
+                    alert("Thất bại Thông tin đã nhập chưa chính xác vui lòng kiểm tra lại");
 
-                } else if (data.status === 409)
-                    // alert("Thất bại Giỏ hàng đang trống");
-                    errorText="Thất bại Giỏ hàng đang trống";
+                } else if (data.status === 409){
+                    alert("Thất bại Giỏ hàng đang trống");
+                    errorText="Thất bại Giỏ hàng đang trống";}
                 Command: toastr["error"](errorText)
 
                 toastr.options = {
